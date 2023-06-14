@@ -19,7 +19,7 @@ const setUserData = (resultado, navigate) => {
 };
 
 const login = (datos, navigate) => async () => {
-  dispatch({ type: "LOADING_LOGIN" });
+  dispatch({ type: "LOADING_USUARIOS_LOGIN" });
   try {
     const resultado = await API.post("/usuario/login", datos);
     setUserData(resultado, navigate);

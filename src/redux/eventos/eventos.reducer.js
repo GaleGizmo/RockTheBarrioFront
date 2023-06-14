@@ -5,7 +5,7 @@ const INITIAL_STATE = {
 };
 export const eventosReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case "LOADING":
+    case "LOADING_EVENTOS":
       return { ...state, loading: true };
     case "GET_EVENTOS":
       return { ...state, loading: false, eventos: [...action.contenido] };

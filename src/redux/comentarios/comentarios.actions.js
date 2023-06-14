@@ -4,7 +4,7 @@ import store from "../store.js";
 const { dispatch } = store;
 
 const getAllComentarios = () => async () => {
-  dispatch({ type: "LOADING" });
+  dispatch({ type: "LOADING_COMENTARIOS" });
   try {
     const resultado = await API.get("/comentario");
     dispatch({ type: "GET_COMENTARIOS", contenido: resultado.data });
@@ -17,7 +17,7 @@ const getAllComentarios = () => async () => {
 };
 
 const addComentario = (comentarioData, eventId) => async (dispatch) => {
-  dispatch({ type: "LOADING" });
+  dispatch({ type: "LOADING_COMENTARIOS" });
   try {
     await API.post("/comentario", comentarioData);
     // const resultadoGet = await API.get(`/comentario/getbyevent/${eventId}`)
@@ -34,7 +34,7 @@ const addComentario = (comentarioData, eventId) => async (dispatch) => {
 };
 
 const getComentariosByEvent = async (eventId) => {
-  dispatch({ type: "LOADING" });
+  dispatch({ type: "LOADING_COMENTARIOS" });
   try {
     const resultado = await API.get(`/comentario/getbyevent/${eventId}`);
 
@@ -48,7 +48,7 @@ const getComentariosByEvent = async (eventId) => {
 };
 
 const editComentario = (idComentario, comentarioData) => async () => {
-  dispatch({ type: "LOADING" });
+  dispatch({ type: "LOADING_COMENTARIOS" });
   try {
     const resultado = await API.put(
       `/comentario/${idComentario}`,
@@ -67,7 +67,7 @@ const editComentario = (idComentario, comentarioData) => async () => {
 };
 
 const deleteComentario = (idComentario) => async () => {
-  dispatch({ type: "LOADING" });
+  dispatch({ type: "LOADING_COMENTARIOS" });
   try {
     const resultado = await API.delete(`/comentario/${idComentario}`);
 

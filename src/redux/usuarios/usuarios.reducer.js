@@ -7,7 +7,7 @@ const INITIAL_STATE = {
 
 export const usuariosReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case "LOADING_LOGIN":
+    case "LOADING_USUARIOS":
       return { ...state, loading: true };
 
     case "SET_USER":

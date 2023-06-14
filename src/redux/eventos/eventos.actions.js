@@ -4,7 +4,7 @@ import store from "../store.js";
 const { dispatch } = store;
 
 const getAllEventos = () => async () => {
-  dispatch({ type: "LOADING" });
+  dispatch({ type: "LOADING_EVENTOS" });
 
   const resultado = await API.get("/evento");
 
@@ -13,14 +13,14 @@ const getAllEventos = () => async () => {
 
 const getEventoById = (id) => async () => {
   dispatch({ type: "CLEAR_EVENTO" });
-  dispatch({ type: "LOADING" });
+  dispatch({ type: "LOADING_EVENTOS" });
 
   const resultado = await API.get(`/evento/getbyid/${id}`);
   dispatch({ type: "GET_EVENTO", contenido: resultado.data });
 };
 
 const addEvento = (eventoData, navigate, userId) => async () => {
-  dispatch({ type: "LOADING" });
+  dispatch({ type: "LOADING_EVENTOS" });
 
   try {
     const formData = new FormData();
@@ -59,7 +59,7 @@ const addEvento = (eventoData, navigate, userId) => async () => {
 };
 const editEvento = (id, eventoData, navigate) => {
   return async (dispatch) => {
-    dispatch({ type: "LOADING" });
+    dispatch({ type: "LOADING_EVENTOS" });
 
     try {
       const formData = new FormData();
@@ -93,7 +93,7 @@ const editEvento = (id, eventoData, navigate) => {
   };
 };
 const deleteEvento = (eventoId, navigate) => async () => {
-  dispatch({ type: "LOADING" });
+  dispatch({ type: "LOADING_EVENTOS" });
 
   try {
     await API.delete(`/evento/${eventoId}`);

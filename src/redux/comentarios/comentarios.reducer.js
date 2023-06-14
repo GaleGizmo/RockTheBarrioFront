@@ -6,7 +6,7 @@ const INITIAL_STATE = {
 
 export const comentariosReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case "LOADING":
+    case "LOADING_COMENTARIOS":
       return { ...state, loading: true, error: null };
 
     case "GET_COMENTARIOSBYEVENTO":

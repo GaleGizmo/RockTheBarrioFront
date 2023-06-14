@@ -53,12 +53,12 @@ const DetallesEvento = () => {
 
   return (
     <div>
-      {loading && !evento && (
+      {loading ? (
         <div className="div-img">
           <img src="/assets/music.gif" />
         </div>
-      )}
-      {evento ? (
+      ):
+      (
         <>
           <div>
             <div className="divCardDetEv">
@@ -113,11 +113,9 @@ const DetallesEvento = () => {
             </div>
           </div>
         </>
-      ) : (
-        "No hay eventos que mostrar"
       )}
     </div>
-  );
+  )
 };
 
 export default DetallesEvento;
