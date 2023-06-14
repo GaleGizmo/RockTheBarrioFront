@@ -87,6 +87,11 @@
         border: solid black;
         padding-right: 8px;
       }
+      .imagenReg {
+        padding-top: 5px;
+        width: 50%;
+        height: 7vh;
+    }
       .cardReg {
         opacity: 0;
         transform: translateX(-100px);
