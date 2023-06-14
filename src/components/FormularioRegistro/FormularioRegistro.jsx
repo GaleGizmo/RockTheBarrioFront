@@ -70,7 +70,7 @@ const FormularioRegistro = () => {
           <label className="margin-label">Fecha de nacimiento</label>
           <input {...register("birthday")} type="date" className="fechaReg" />
         </div>
-        <div className="div-inputReg">
+        <div className="div-inputReg imgReg">
           <label>Imagen</label>
           <SubirImagen
             register={register}
