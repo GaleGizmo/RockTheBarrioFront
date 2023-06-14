@@ -48,8 +48,11 @@ const Evento = ({ evento }) => {
             <p>
               {esHoy(fechaStart) ? (
                 <p className="gratuito hoy">HOY</p>
-              ) : (
-                fechaStart
+              ) : (<div className="muestra-fecha">
+    <p>{fechaStart.split(",")[1]}</p>
+    <p >{fechaStart.split(",")[2].trim()} h</p>
+    {fechaEnd && <p>- {fechaEnd}</p>}
+  </div>
               )}
               {fechaEnd && `- ${fechaEnd}`}
             </p>

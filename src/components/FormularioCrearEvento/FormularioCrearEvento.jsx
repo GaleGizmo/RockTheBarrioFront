@@ -10,6 +10,22 @@ import Button from "../Button/Button";
 const FormularioCrearEvento = () => {
   const { user } = useSelector((state) => state.usuariosReducer);
   const navigate = useNavigate();
+ 
+  const onSubmit = (data) => {
+    const { day_start, time_start } = data;
+  
+    // Combinar la fecha y la hora en un objeto Date
+    const combinedDate = new Date(`${day_start}T${time_start}`);
+  
+    // Actualizar el valor de "date_start" en los datos a enviar
+    const formData = {
+      ...data,
+      date_start: combinedDate,
+    };
+  
+    // Enviar los datos al backend
+    dispatch(addEvento(formData, navigate, { user: user._id }));
+  };
   const {
     register,
     handleSubmit,
@@ -24,9 +40,7 @@ const FormularioCrearEvento = () => {
     <div className="cardCrearEvento">
       <h1>Crear Evento</h1>
       <form
-        onSubmit={handleSubmit((datos) =>
-          dispatch(addEvento(datos, navigate, { user: user._id }))
-        )}
+        onSubmit={handleSubmit(onSubmit)}
       >
         <div className="div-inputCrearEvento">
           <label>Título</label>
@@ -85,7 +99,13 @@ const FormularioCrearEvento = () => {
           <input
             className="inputCrearEvento"
             type="date"
-            {...register("date_start", { required: true })}
+            {...register("day_start", { required: true })}
+          />
+          <label>Hora de Inicio</label>
+          <input
+            className="inputCrearEvento"
+            type="time"
+            {...register("time_start")}
           />
           {errors.date_start && (
             <span className="error-message">Fecha de Inicio es requerida</span>

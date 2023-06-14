@@ -9,6 +9,7 @@ import {
 } from "../../redux/eventos/eventos.actions";
 import Button from "../../components/Button/Button";
 import NuevoComentario from "../../components/NuevoComentario/NuevoComentario";
+import { formatDate } from "../../shared/formatDate";
 
 const DetallesEvento = () => {
   const dispatch = useDispatch();
@@ -32,18 +33,9 @@ const DetallesEvento = () => {
   };
   console.log(user);
   console.log(evento);
-  const opciones = {
-    weekday: "short",
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  };
-  const fechaStart = evento?.date_start
-    ? new Date(evento.date_start).toLocaleDateString("es-ES", opciones)
-    : "";
-  const fechaEnd = evento?.date_end
-    ? new Date(evento.date_end).toLocaleDateString("es-ES", opciones)
-    : "";
+ 
+  const fechaStart = evento?.date_start ? formatDate(evento.date_start) : null;
+  const fechaEnd = evento?.date_end ? formatDate(evento.date_end) : null;
   let textoBoton = "";
   if (evento?.price && evento?.price > 0) {
     textoBoton = "Comprar";
@@ -53,7 +45,7 @@ const DetallesEvento = () => {
 
   return (
     <div>
-      {loading ? (
+      {!evento ? (
         <div className="div-img">
           <img src="/assets/music.gif" />
         </div>
@@ -72,7 +64,7 @@ const DetallesEvento = () => {
                 ) : (
                   <h3>Precio: {evento.price} €</h3>
                 )}
-                <h3>{fechaStart}</h3>
+                <h3>{fechaStart}h</h3>
                 {fechaEnd && <h3>{fechaEnd}</h3>}
                 {evento.genre && <h3>Género: {evento.genre}</h3>}
                 <p>{evento.content}</p>
