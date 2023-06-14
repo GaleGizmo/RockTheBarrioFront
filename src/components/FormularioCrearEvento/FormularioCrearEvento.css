@@ -1,0 +1,156 @@
+
+@media (min-width: 420px) {
+    .cardCrearEvento {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #fff;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        box-shadow: 10px 10px 10px rgba(237 132 57, 0.452);
+        padding: 20px;
+        margin-bottom: 20px;
+        text-align: center;
+        width: 90%;
+        margin-top: 2%;
+        margin-left: 2.5%;
+        margin-right: 2.5%;
+        background-image:linear-gradient(to bottom, rgb(237 132 57), #fff);
+        border: solid black;
+        padding-right: 6px;
+        height:fit-content
+      }
+      .cardCrearEvento {
+        opacity: 0;
+        transform: translateX(-100px);
+        animation: appearCard 0.5s ease-in-out forwards;
+      }
+      
+      @keyframes appearCard {
+        0% {
+          opacity: 0;
+          transform: translateX(-100px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+      .inputCrearEvento{
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        font-size: large;
+        text-align: center;
+      }
+
+      .fechaCrearEvento{
+        min-height: 46px;
+        margin-top: 7%;
+        width: 94%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .infoCrearEvento{
+        height: 100px;
+        margin-top: 7%;
+        width: 94%;
+        display: flex;
+        flex-direction: column;
+      }
+    
+      .div-inputCrearEvento{
+        height: 30px;
+        margin-top: 7%;
+        width: 94%;
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 10px;
+      }
+      .margin-boton{
+        margin-top: 10%;
+      }
+    
+  }
+  .error-message{
+    color: red;
+    font-weight: 500
+  }
+  .imagen-crear{
+    left: 270px;
+    bottom: 110px;
+  }
+
+  @media (max-width: 420px) {
+    .cardCrearEvento {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #fff;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        box-shadow: 10px 10px 10px rgba(86, 185, 255, 0.452);
+        padding: 20px;
+        margin-bottom: 20px;
+        text-align: center;
+        width: 90%;
+        margin-top: 20%;
+        margin-left: 2.5%;
+        margin-right: 2.5%;
+        background-image:linear-gradient(to bottom, rgb(237 132 57), #fff);
+        border: solid black;
+        padding-right: 8px;
+      }
+      .cardCrearEvento {
+        opacity: 0;
+        transform: translateX(-100px);
+        animation: appearCard 0.5s ease-in-out forwards;
+      }
+      
+      @keyframes appearCard {
+        0% {
+          opacity: 0;
+          transform: translateX(-100px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+      .inputCrearEvento{
+        width: 80%;
+        height: 100%;
+        border-radius: 10px;
+        font-size: large;
+        text-align: center;
+      }
+    
+      .div-inputCrearEvento{
+        height: 30px;
+        margin-top: 7%;
+        width: 94%;
+        display: flex;
+        flex-direction: column;
+      }
+      .margin-boton{
+        margin-top: 5%;
+      }
+      
+      .fechaCrearEvento{
+        height: 46px;
+        margin-top: 7%;
+        width: 94%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .infoCrearEvento{
+        height: 100px;
+        margin-top: 7%;
+        width: 94%;
+        display: flex;
+        flex-direction: column;
+      }
+  }
+

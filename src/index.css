@@ -1,0 +1,12 @@
+body, html{
+    height: 100vw
+}
+
+#root{
+    background-image: url("../public/assets/fondo.jpg");
+    background-color: rgba(0, 0, 0, 0.5);
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vw;
+    background-attachment: fixed;
+}

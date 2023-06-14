@@ -1,0 +1,31 @@
+.boton{
+    background-color: #757575;
+    color: white;
+    cursor: pointer;
+    height: 30px;
+    font-size: x-large;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding-bottom:38px;
+    margin-top:10px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+    
+}
+
+.medium{
+width:200px
+}
+
+.large{
+    width: 350px;
+}
+
+.boton:hover{
+transform: scale(1.1,1.1);
+color: #757575;
+background-color: white;
+font-weight: bold;
+border-color: #757575;
+}
