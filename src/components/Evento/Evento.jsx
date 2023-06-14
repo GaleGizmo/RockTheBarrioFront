@@ -1,6 +1,7 @@
 import React from "react";
 import "./Evento.css";
 import { Link } from "react-router-dom";
+import { esHoy, formatDate } from "../../shared/formatDate";
 
 const Evento = ({ evento }) => {
   const maxLength = 75; // Número máximo de caracteres antes de truncar el contenido del texto
@@ -11,28 +12,12 @@ const Evento = ({ evento }) => {
       : evento.content
     : "";
 
-  const opciones = {
-    weekday: "short",
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  };
+  
   const fechaStart = evento.date_start ? formatDate(evento.date_start) : null;
   const fechaEnd = evento.date_end ? formatDate(evento.date_end) : null;
 
   console.log(evento.date_start, fechaStart);
-  function formatDate(dateString) {
-    const dateObj = new Date(dateString);
-    return dateObj.toLocaleDateString("es-ES", opciones);
-  }
-  function esHoy(fecha) {
-    const fechaActual = new Date();
-    const fechaActualFormateada = fechaActual.toLocaleDateString(
-      "es-ES",
-      opciones
-    );
-    return fecha === fechaActualFormateada;
-  }
+  
 
   return (
     <div className="card">

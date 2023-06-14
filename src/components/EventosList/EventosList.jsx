@@ -13,7 +13,8 @@ const EventosList = () => {
   useEffect(() => {
     dispatch(getAllEventos());
   }, [dispatch]);
-
+const fechaHoy = new Date();
+fechaHoy.setHours(0,0,0,0);
   return (
     <div className="eventos-top">
       {loading ? (
@@ -21,7 +22,7 @@ const EventosList = () => {
           <img src="/assets/music.gif" alt="Cargando..." />
         </div>
       ) : (
-        eventosOrdenados.map((evento) => (
+        eventosOrdenados.filter((evento) => new Date(evento.date_start) >= fechaHoy).map((evento) => (
           <Evento evento={evento} key={evento._id} />
         ))
       )}

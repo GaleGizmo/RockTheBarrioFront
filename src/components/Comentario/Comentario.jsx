@@ -66,7 +66,7 @@ const Comentario = ({ comentario }) => {
     for (let i = 1; i <= value; i++) {
       stars.push(
         <Star20Filled
-          color="yellow"
+          color="orange"
           key={i}
           className={i <= value ? "star active" : "star"}
         />

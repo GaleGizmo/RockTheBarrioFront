@@ -3,7 +3,7 @@
     background-size: cover;
     background-position-y: -55px; */
     background-color:rgb(237 132 57);
-    height: 150px;
+    height: 120px;
     align-items: center;
     padding: 0 20px;
     display: flex;
@@ -59,7 +59,7 @@
         display: flex;
         justify-content: space-around;
       height: auto;
-      height: 160px;
+      height: 160px
     }
   
     .title {
@@ -121,7 +121,7 @@
     .header{
         display: flex;
         justify-content: space-between;
-        height: 160px;
+        height: 120px
     }
     .title-font{
         font-size: 65px;

@@ -23,9 +23,11 @@ function App() {
     dispatch(checkSesion());
     setSesionVerificada(true);
   }, []);
+
+  
   return (
     <>
-      <div>
+      <div className="app">
         <Header />
         {sesionVerificada && <ScrollArriba />}
         {sesionVerificada && (
@@ -67,6 +69,7 @@ function App() {
         )}
         <Footer />
       </div>
+     
     </>
   );
 }

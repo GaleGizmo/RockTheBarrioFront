@@ -17,7 +17,7 @@ const Footer = () => {
       <div className="ant-icons">
         <Tooltip title="GitHub FontEnd">
           <a
-            href="https://github.com/andrea-de-faveri-01/ROCK-THE-BARRIO_FRONT"
+            href="https://github.com/GaleGizmo/RockTheBarrioFront.git"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -70,14 +70,7 @@ const Footer = () => {
           </a>
         </Tooltip>
       </div>
-      <div className="footer-btn-container">
-        <Button
-          className="footer-btn"
-          text="Vuelve arriba"
-          type="medium"
-          onClick={scrollToTop}
-        />
-      </div>
+     
     </div>
   );
 };
