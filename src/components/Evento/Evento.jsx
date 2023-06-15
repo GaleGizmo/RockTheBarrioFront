@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { esHoy, formatDate } from "../../shared/formatDate";
 
 const Evento = ({ evento }) => {
-  const maxLength = 75; // Número máximo de caracteres antes de truncar el contenido del texto
+  const maxLength = 50; // Número máximo de caracteres antes de truncar el contenido del texto
 
   const truncatedContent = evento.content
     ? evento.content.length > maxLength
@@ -44,7 +44,7 @@ const Evento = ({ evento }) => {
         </div>
         <div className="div2">
           {evento.site && <p>{evento.site}</p>}
-          {fechaStart && (
+          {fechaStart && !fechaEnd ? (
             <p>
               {esHoy(fechaStart) ? (
                 <p className="gratuito hoy">HOY</p>
@@ -54,9 +54,10 @@ const Evento = ({ evento }) => {
     {fechaEnd && <p>- {fechaEnd}</p>}
   </div>
               )}
-              {fechaEnd && `- ${fechaEnd}`}
+              
             </p>
-          )}
+          ):(<p>{fechaStart.split(",")[1] }</p>)}
+          {fechaEnd && <p>{fechaEnd.split(",")[1]}</p>}
           {evento.genre && <p>{evento.genre}</p>}
           {evento.price == 0 ? (
             <p className="gratuito">GRATUITO</p>
