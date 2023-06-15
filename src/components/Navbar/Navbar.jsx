@@ -13,7 +13,10 @@ const Navbar = () => {
     <div>
       {user ? (
         <div className="disp">
-          <h3 className="h3">Hola {user.username}</h3>
+        <div className="header-user">
+          <h3 className="h3">Hola, {user.username}</h3>
+          {user.avatar && <img className="header_avatar" src={user.avatar} alt="avatar" />}
+          </div>
           <div className="div-boton">
             <div>
               {user && user.role === 2 && (

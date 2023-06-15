@@ -1,5 +1,5 @@
 .boton{
-    background-color: #757575;
+    background-color: rgb(21, 50, 67);;
     color: white;
     cursor: pointer;
     height: 30px;
@@ -24,7 +24,7 @@ width:200px
 
 .boton:hover{
 transform: scale(1.1,1.1);
-color: #757575;
+color: rgb(21, 50, 67);
 background-color: white;
 font-weight: bold;
 border-color: #757575;
