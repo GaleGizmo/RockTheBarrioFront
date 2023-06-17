@@ -194,6 +194,7 @@
   .card p{
     margin-right: 2%;
     margin-left: 2%;
+    width: max-content;
   }
   .card h1{
     margin-left: 2%;
