@@ -2,6 +2,8 @@ import React from "react";
 import "./Evento.css";
 import { Link } from "react-router-dom";
 import { esHoy, formatDate } from "../../shared/formatDate";
+import {formatDistanceToNow, parseISO} from "date-fns";
+import esLocale from 'date-fns/esm/locale/es/index.js';
 
 const Evento = ({ evento }) => {
   const maxLength = 50; // Número máximo de caracteres antes de truncar el contenido del texto
@@ -12,7 +14,8 @@ const Evento = ({ evento }) => {
   //     : evento.content
   //   : "";
 
-  
+  const fechaEvento=evento.date_start ? parseISO(evento.date_start): null
+  const diasFaltantes = formatDistanceToNow(fechaEvento, { unit: 'day', locale: esLocale });
   const fechaStart = evento.date_start ? formatDate(evento.date_start) : null;
   const fechaEnd = evento.date_end ? formatDate(evento.date_end) : null;
 
@@ -51,13 +54,15 @@ const Evento = ({ evento }) => {
               ) : (<div className="muestra-fecha">
     
     <p >{fechaStart}h</p>
-    {fechaEnd && <p>- {fechaEnd}</p>}
+   
+    {fechaEnd && <span className="fecha-end"> {fechaEnd}</span>}
   </div>
               )}
               
             </p>
           ):(<p>{fechaStart.split(",")[1] }</p>)}
-          {fechaEnd && <p>{fechaEnd.split(",")[1]}</p>}
+          {fechaEnd && <span className="fecha-end">{fechaEnd.split(",")[1]}</span>}
+          <p> Faltan <span className="gratuito">{diasFaltantes} </span></p>
           {evento.genre && <p>{evento.genre}</p>}
           {evento.price == 0 ? (
             <p className="gratuito">GRATUITO</p>

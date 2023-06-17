@@ -30,6 +30,10 @@
   text-align: right;
   
 }
+.fecha-end{
+  margin: 0;
+  font-weight: bold;
+}
 @keyframes appearCard {
   0% {
     opacity: 0;
