@@ -74,12 +74,14 @@
 }
 
 .card a:hover {
-  text-decoration: underline;
+  text-decoration: none;
+  color: rgb(217, 30, 30);
+  
 }
 
 .card a:visited{
   text-decoration: none;
-  color: black;
+  
 }
 
 .border-card {
@@ -97,6 +99,10 @@
   margin: 1%;
   border: solid;
   border-radius:8px;
+}
+.div-image:hover{
+  border-color: rgb(217, 30, 30);
+  box-shadow: 0 0 5px 2px rgba(255, 0, 0, 0.5);
 }
 
 .div {

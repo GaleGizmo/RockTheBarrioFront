@@ -6,11 +6,11 @@ import { esHoy, formatDate } from "../../shared/formatDate";
 const Evento = ({ evento }) => {
   const maxLength = 50; // Número máximo de caracteres antes de truncar el contenido del texto
 
-  const truncatedContent = evento.content
-    ? evento.content.length > maxLength
-      ? evento.content.slice(0, maxLength) + "..."
-      : evento.content
-    : "";
+  // const truncatedContent = evento.content
+  //   ? evento.content.length > maxLength
+  //     ? evento.content.slice(0, maxLength) + "..."
+  //     : evento.content
+  //   : "";
 
   
   const fechaStart = evento.date_start ? formatDate(evento.date_start) : null;
@@ -40,17 +40,17 @@ const Evento = ({ evento }) => {
             <h1>{evento.title}</h1>
           </Link>
           <h2>{evento.subtitle}</h2>
-          <p>{truncatedContent}</p>
+          {/* <p>{truncatedContent}</p> */}
         </div>
         <div className="div2">
           {evento.site && <p>{evento.site}</p>}
           {fechaStart && !fechaEnd ? (
             <p>
-              {esHoy(fechaStart) ? (
+              {esHoy(evento.date_start) ? (
                 <p className="gratuito hoy">HOY</p>
               ) : (<div className="muestra-fecha">
-    <span>{fechaStart.split(",")[1]}</span>
-    <p >{fechaStart.split(",")[2].trim()} h</p>
+    
+    <p >{fechaStart}h</p>
     {fechaEnd && <p>- {fechaEnd}</p>}
   </div>
               )}

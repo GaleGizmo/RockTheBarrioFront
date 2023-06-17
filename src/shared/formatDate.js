@@ -13,15 +13,17 @@ export function formatDate(dateString) {
   
   export function esHoy(fecha) {
     const fechaActual = new Date();
+    const fechaIntroducida= new Date(fecha)
     const opciones = {
       weekday: "short",
       year: "numeric",
       month: "short",
       day: "numeric",
     };
+    const  fechaIntroducidaFormateada=fechaIntroducida.toLocaleDateString("es-Es", opciones)
     const fechaActualFormateada = fechaActual.toLocaleDateString(
       "es-ES",
       opciones
     );
-    return fecha === fechaActualFormateada;
+    return fechaIntroducidaFormateada === fechaActualFormateada;
   }

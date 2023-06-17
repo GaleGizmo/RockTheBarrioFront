@@ -48,7 +48,9 @@
         width: 20%;
     }
     .medium{
-        width: 100px;
+        width: 120px;
+        font-size: 18px;
+    padding-top: 7px;
     }
 }
     @media (min-width: 470px) and (max-width: 852.98px) {
