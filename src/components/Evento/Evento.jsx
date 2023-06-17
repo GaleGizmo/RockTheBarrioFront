@@ -48,7 +48,7 @@ const Evento = ({ evento }) => {
         <div className="div2">
           {evento.site && <p>{evento.site}</p>}
           {fechaStart && !fechaEnd ? (
-            <p>
+            <div>
               {esHoy(evento.date_start) ? (
                 <p className="gratuito hoy">HOY</p>
               ) : (<div className="muestra-fecha">
@@ -59,7 +59,7 @@ const Evento = ({ evento }) => {
   </div>
               )}
               
-            </p>
+            </div>
           ):(<p>{fechaStart.split(",")[1] }</p>)}
           {fechaEnd && <span className="fecha-end">{fechaEnd.split(",")[1]}</span>}
           <p> Faltan <span className="gratuito">{diasFaltantes} </span></p>
