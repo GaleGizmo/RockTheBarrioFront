@@ -16,7 +16,7 @@ const Evento = ({ evento }) => {
   const openMapWindow = () => {
    
     const direccion=encodeURIComponent(evento.site)
-    window.open(`https://www.google.com/maps?q=${direccion}`, '_blank');
+    window.location.href=`https://www.google.com/maps?q=${direccion}`;
   };
   const fechaEvento=evento.date_start ? parseISO(evento.date_start): null
   const diasFaltantes = formatDistanceToNow(fechaEvento, { unit: 'day', locale: esLocale });
