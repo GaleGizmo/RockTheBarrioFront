@@ -1,24 +1,33 @@
-import React, { useEffect, useRef } from 'react';
-import L from 'leaflet';
+import React, { useEffect, useState } from 'react';
+import Map from '../Map/Map';
 
-const MapComponent = () => {
-  const mapRef = useRef(null);
 
-  useEffect(() => {
-    // Inicializar el mapa
-    const map = L.map(mapRef.current).setView([42.88282178490326, -8.539535059983809], 16);
-
-    // Agregar capa de mapa
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
-    }).addTo(map);
-
-    return () => {
-        map.remove();
-      };
-    }, []);
+const MapComponent =  ({ direccion }) => {
+    const [location, setLocation] = useState(null);
   
-    return <div id="map" ref={mapRef} style={{ width: '100%', height: '400px' }}></div>;
+    useEffect(() => {
+      const fetchLocation = async () => {
+        try {
+          const response = await fetch(
+            `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
+              direccion
+            )}&key=${import.meta.env.VITE_APP_GOOGLE_CLOUD_API_KEY}`
+          );
+          const data = await response.json();
+        
+          if (data.results.length > 0) {
+            const { lat, lng } = data.results[0].geometry.location;
+            setLocation({ lat, lng });
+          }
+        } catch (error) {
+          console.log("Error al obtener la ubicación:", error);
+        }
+      };
+  
+      fetchLocation();
+    }, [direccion]);
+  
+    return location && <Map location={location} />;
   };
   
 export default MapComponent;

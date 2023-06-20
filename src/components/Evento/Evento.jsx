@@ -5,7 +5,8 @@ import { esHoy, formatDate } from "../../shared/formatDate";
 import {formatDistanceToNow, parseISO} from "date-fns";
 import esLocale from 'date-fns/esm/locale/es/index.js';
 import MapIcon from "../MapIcon/MapIcon";
-import MapModal from "../MapModal/MapModal";
+
+import MapComponent from "../MapComponent/MapComponent";
 
 const Evento = ({ evento }) => {
   const [showMap, setShowMap] = useState(false);
@@ -13,11 +14,11 @@ const Evento = ({ evento }) => {
   const toggleMap = () => {
     setShowMap(!showMap);
   };
-  const openMapWindow = () => {
+  // const openMapWindow = () => {
    
-    const direccion=encodeURIComponent(evento.site)
-    window.location.href=`https://www.google.com/maps?q=${direccion}`;
-  };
+  //   const direccion=encodeURIComponent(evento.site)
+  //   window.open(`https://www.google.com/maps?q=${direccion}`, '_blank');
+  // };
   const fechaEvento=evento.date_start ? parseISO(evento.date_start): null
   const diasFaltantes = formatDistanceToNow(fechaEvento, { unit: 'day', locale: esLocale });
   const fechaStart = evento.date_start ? formatDate(evento.date_start) : null;
@@ -47,10 +48,10 @@ const Evento = ({ evento }) => {
             <h1>{evento.title}</h1>
           </Link>
           <h2>{evento.subtitle}</h2>
-          {/* <p>{truncatedContent}</p> */}
+         
         </div>
         <div className="div2">
-          {evento.site && <p>{evento.site.split(",")[0]} <MapIcon className="map-icon" onClick={openMapWindow} /></p>}
+          {evento.site && <p>{evento.site.split(",")[0]} <MapIcon className="map-icon" onClick={toggleMap} /></p>}
           
           {fechaStart && !fechaEnd ? (
             <div>
@@ -78,7 +79,7 @@ const Evento = ({ evento }) => {
         </div>
         
       </div>
-      {showMap && <MapModal onClose={toggleMap} />}
+      {showMap && <MapComponent direccion={evento.site}/>}
     </div>
   );
 };
