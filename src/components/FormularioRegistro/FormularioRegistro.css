@@ -17,6 +17,7 @@
         background-image:linear-gradient(to bottom, rgb(237 132 57), #fff);
         border: solid black;
         padding-right: 6px;
+        box-sizing: content-box;
       }
       .cardReg {
         opacity: 0;

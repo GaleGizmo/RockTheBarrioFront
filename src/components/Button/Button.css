@@ -29,3 +29,9 @@ background-color: white;
 font-weight: bold;
 border-color: #757575;
 }
+@media (max-width:420px){
+    .large{
+        width: 75vw;
+        margin: 0 10px 0 5px;
+    }
+}

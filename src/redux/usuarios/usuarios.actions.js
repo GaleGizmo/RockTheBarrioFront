@@ -70,7 +70,7 @@ const checkSesion = () => () => {
 const registerUser = (datos, navigate) => async () => {
   try {
     const formData = new FormData();
-
+    datos.birthday=""
     formData.append("email", datos.email);
     formData.append("username", datos.username);
     formData.append("password", datos.password);
@@ -83,6 +83,7 @@ const registerUser = (datos, navigate) => async () => {
     dispatch({ type: "SET_USER", contenido: resultado.data.user });
     setUserData(resultado, navigate);
   } catch (error) {
+    
     if (error.response && error.response.data && error.response.data.message) {
       dispatch({
         type: "ERROR_USUARIO",
