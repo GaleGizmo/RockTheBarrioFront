@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Evento.css";
 import { Link } from "react-router-dom";
 import { esHoy, formatDate } from "../../shared/formatDate";
@@ -14,19 +14,14 @@ const Evento = ({ evento }) => {
   const toggleMap = () => {
     setShowMap(!showMap);
   };
-  // const openMapWindow = () => {
-   
-  //   const direccion=encodeURIComponent(evento.site)
-  //   window.open(`https://www.google.com/maps?q=${direccion}`, '_blank');
-  // };
+  const isLongTitle = evento.title.length > 10 && !evento.title.includes(" ");
+
   const fechaEvento=evento.date_start ? parseISO(evento.date_start): null
   const diasFaltantes = formatDistanceToNow(fechaEvento, { unit: 'day', locale: esLocale });
   const fechaStart = evento.date_start ? formatDate(evento.date_start) : null;
   const fechaEnd = evento.date_end ? formatDate(evento.date_end) : null;
 
-  console.log(evento.date_start, fechaStart);
   
-
   return (
     <div className="card">
       <div className="border-card">
@@ -45,7 +40,7 @@ const Evento = ({ evento }) => {
 
         <div className="div">
           <Link to={{ pathname: `/${evento._id}`, state: { evento } }}>
-            <h1>{evento.title}</h1>
+          <h1 className={isLongTitle ? "long-title" : ""} >{evento.title}</h1>
           </Link>
           <h2>{evento.subtitle}</h2>
          
