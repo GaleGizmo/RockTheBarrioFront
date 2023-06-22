@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
 import "./Navbar.css";
 import Button from "../Button/Button";
+import {AiOutlinePoweroff} from 'react-icons/ai';
 import { Link } from "react-router-dom";
 import { logout, setUser } from "../../redux/usuarios/usuarios.actions";
 import { useDispatch, useSelector } from "react-redux";
+import SwitchIcon from "../SwitchIcon/SwitchIcon";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -13,9 +15,11 @@ const Navbar = () => {
     <div>
       {user ? (
         <div className="disp">
-        <div className="header-user">
-          <h3 className="h3">Hola, {user.username}</h3>
-          {user.avatar && <img className="header_avatar" src={user.avatar} alt="avatar" />}
+          <div className="header-user">
+            <h3 className="h3">Hola, {user.username}</h3>
+            {user.avatar && (
+              <img className="header_avatar" src={user.avatar} alt="avatar" />
+            )}
           </div>
           <div className="div-boton">
             <div>
@@ -28,8 +32,12 @@ const Navbar = () => {
               )}
             </div>
             <Link to="/">
-              <span>
+              <span className="header-salir">
+             
                 <Button text="Salir" type="medium" onClick={logout} />
+              </span>
+              <span className="icono-salir">
+              <SwitchIcon onClick={logout}/>
               </span>
             </Link>
           </div>

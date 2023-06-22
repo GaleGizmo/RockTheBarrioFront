@@ -17,7 +17,7 @@ const DetallesEvento = () => {
   const navigate = useNavigate();
   const { loading, evento } = useSelector((reducer) => reducer.eventosReducer);
   const { user } = useSelector((reducer) => reducer.usuariosReducer);
-
+  const isLongTitle = evento?.title.length > 10 && !evento.title.includes(" ");
   useEffect(() => {
     dispatch(getEventoById(id));
   }, [id]);
@@ -55,18 +55,18 @@ const DetallesEvento = () => {
           <div>
             <div className="divCardDetEv">
               <div className="cardDetEv">
-                <h1>{evento.title}</h1>
+                <h1 className={isLongTitle ? "long-title" : ""}>{evento.title}</h1>
                 {evento.image && <img src={evento.image} />}
                 <h2>{evento.subtitle}</h2>
-                <h3>Lugar: {evento.site}</h3>
+                <h3><strong>Lugar: </strong>{evento.site}</h3>
                 {evento.price == 0 ? (
-                  <h3>GRATUITO</h3>
+                  <h3 className="gratuitoDetEv">GRATUITO</h3>
                 ) : (
-                  <h3>Precio: {evento.price} €</h3>
+                  <h3><strong>Precio: </strong>{evento.price} €</h3>
                 )}
                 <h3>{fechaStart}h</h3>
                 {fechaEnd && <h3>{fechaEnd}</h3>}
-                {evento.genre && <h3>Género: {evento.genre}</h3>}
+                {evento.genre && <h3><strong>Género:</strong> {evento.genre}</h3>}
                 <p>{evento.content}</p>
                 <div className="margin-boton-info">
                   <Button text={textoBoton} type="medium" onClick={comprar} />

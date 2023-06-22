@@ -31,7 +31,7 @@ border-color: #757575;
 }
 @media (max-width:420px){
     .large{
-        width: 75vw;
+        width: 250px;
         margin: 0 10px 0 5px;
     }
 }

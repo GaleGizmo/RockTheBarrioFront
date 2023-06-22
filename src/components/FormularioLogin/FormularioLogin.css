@@ -7,16 +7,16 @@
         border: 1px solid #e0e0e0;
         border-radius: 8px;
         box-shadow: 10px 10px 10px rgba(rgb(237 132 57), 0.452);
-        padding: 20px;
-        margin-bottom: 20px;
+        padding: 30px;
+        
         text-align: center;
         width: 90%;
         margin-top: 10%;
-        margin-left: 2.5%;
-        margin-right: 2.5%;
+        
         background-image:linear-gradient(to bottom, rgb(237 132 57), #fff);
         border: solid black;
         padding-right: 6px;
+        box-sizing: content-box;
       }
       .cardLogin {
         opacity: 0;
@@ -63,7 +63,7 @@
         border-radius: 8px;
         box-shadow: 10px 10px 10px rgba(86, 185, 255, 0.452);
         padding: 20px;
-        margin-bottom: 20px;
+        
         text-align: center;
         width: 90%;
         margin-top: 20%;
@@ -72,6 +72,7 @@
         background-image:linear-gradient(to bottom, rgb(237 132 57), #fff);
         border: solid black;
         padding-right: 8px;
+        box-sizing: content-box;
       }
       .cardLogin {
         opacity: 0;

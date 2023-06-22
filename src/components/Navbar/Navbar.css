@@ -1,4 +1,14 @@
-
+.icono-salir{
+    display: none;
+    position: fixed;
+    top:1px;
+    right: 5px;
+    color:black
+}
+.icono-salir:hover{
+    cursor: pointer;
+    color: azure;
+}
 
 .top{
     margin-top: 10px;
@@ -48,10 +58,16 @@
     .header_avatar{
         width: 20%;
     }
+    .icono-salir{
+        display: block;
+    }
     .medium{
         width: max-content;
         font-size: 18px;
     padding:0px 5px
+    }
+    .header-salir{
+        display: none;
     }
 }
     @media (min-width: 470px) and (max-width: 852.98px) {
