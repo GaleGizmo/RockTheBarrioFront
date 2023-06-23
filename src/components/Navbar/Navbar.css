@@ -3,7 +3,7 @@
     position: fixed;
     top:1px;
     right: 5px;
-    color:black
+    color:rgb(72, 71, 71)
 }
 .icono-salir:hover{
     cursor: pointer;

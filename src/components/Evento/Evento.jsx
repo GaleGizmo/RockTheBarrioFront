@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, {  useState } from "react";
 import "./Evento.css";
 import { Link } from "react-router-dom";
 import { esHoy, formatDate } from "../../shared/formatDate";
@@ -8,11 +8,13 @@ import MapIcon from "../MapIcon/MapIcon";
 
 import MapComponent from "../MapComponent/MapComponent";
 
+
 const Evento = ({ evento }) => {
   const [showMap, setShowMap] = useState(false);
 
-  const toggleMap = () => {
-    setShowMap(!showMap);
+
+  const handleToggleMap = () => {
+    setShowMap(showMap=>!showMap)
   };
   const isLongTitle = evento.title.length > 10 && !evento.title.includes(" ");
 
@@ -20,7 +22,7 @@ const Evento = ({ evento }) => {
   const diasFaltantes = formatDistanceToNow(fechaEvento, { unit: 'day', locale: esLocale });
   const fechaStart = evento.date_start ? formatDate(evento.date_start) : null;
   const fechaEnd = evento.date_end ? formatDate(evento.date_end) : null;
-
+console.log(evento);
   
   return (
     <div className="card">
@@ -46,7 +48,7 @@ const Evento = ({ evento }) => {
          
         </div>
         <div className="div2">
-          {evento.site && <p>{evento.site.split(",")[0]} <MapIcon className="map-icon" onClick={toggleMap} /></p>}
+          {evento.site && <p>{evento.site.split(",")[0]} <MapIcon showMap={showMap} onClick={handleToggleMap} /></p>}
           
           {fechaStart && !fechaEnd ? (
             <div>

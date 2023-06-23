@@ -104,4 +104,5 @@ const deleteEvento = (eventoId, navigate) => async () => {
   }
 };
 
+
 export { getAllEventos, getEventoById, addEvento, deleteEvento, editEvento };

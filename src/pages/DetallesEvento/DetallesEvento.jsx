@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./DetallesEvento.css";
 import ComentariosList from "../../components/ComentariosList/ComentariosList";
 import { useNavigate, useParams } from "react-router-dom";
@@ -6,10 +6,13 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   deleteEvento,
   getEventoById,
+ 
 } from "../../redux/eventos/eventos.actions";
 import Button from "../../components/Button/Button";
 import NuevoComentario from "../../components/NuevoComentario/NuevoComentario";
 import { formatDate } from "../../shared/formatDate";
+import MapComponent from "../../components/MapComponent/MapComponent";
+import MapIcon from "../../components/MapIcon/MapIcon";
 
 const DetallesEvento = () => {
   const dispatch = useDispatch();
@@ -31,8 +34,12 @@ const DetallesEvento = () => {
   const comprar = () => {
     window.location.href = evento.url;
   };
-  console.log(user);
-  console.log(evento);
+  const [showMap, setShowMap] = useState(false);
+
+
+  const handleToggleMap = () => {
+    setShowMap(showMap=>!showMap)
+  };
  
   const fechaStart = evento?.date_start ? formatDate(evento.date_start) : null;
   const fechaEnd = evento?.date_end ? formatDate(evento.date_end) : null;
@@ -56,9 +63,12 @@ const DetallesEvento = () => {
             <div className="divCardDetEv">
               <div className="cardDetEv">
                 <h1 className={isLongTitle ? "long-title" : ""}>{evento.title}</h1>
-                {evento.image && <img src={evento.image} />}
+                {evento.image ? (<img src={evento.image} alt={evento.title}/>) :( <img
+                src="https://metropoliabierta.elespanol.com/uploads/s1/36/81/72/audience-band-celebration-1190298_9_1200x480.jpeg"
+                alt="Imagen genérica"
+              />)}
                 <h2>{evento.subtitle}</h2>
-                <h3><strong>Lugar: </strong>{evento.site}</h3>
+                <h3><strong>Lugar: </strong>{evento.site}<MapIcon showMap={showMap} onClick={handleToggleMap} /></h3>
                 {evento.price == 0 ? (
                   <h3 className="gratuitoDetEv">GRATUITO</h3>
                 ) : (
@@ -85,7 +95,9 @@ const DetallesEvento = () => {
                     />
                   </div>
                 )}
+                {showMap && <MapComponent direccion={evento.site}/>}
               </div>
+              
             </div>
             <div>
               <div>

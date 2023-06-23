@@ -2,6 +2,8 @@ const INITIAL_STATE = {
   eventos: [],
   loading: false,
   evento: null,
+  error: null,
+ 
 };
 export const eventosReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -37,6 +39,8 @@ export const eventosReducer = (state = INITIAL_STATE, action) => {
           (evento) => evento.id === action.contenido
         ),
       };
+     
+      
     case "CLEAR_EVENTO":
       return { ...state, evento: null };
       break;

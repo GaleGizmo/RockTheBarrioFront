@@ -7,8 +7,9 @@ export function formatDate(dateString) {
       day: "numeric",
       hour: "numeric",
       minute: "numeric",
+      locale: "gl-ES",
     };
-    return dateObj.toLocaleDateString("es-ES", opciones);
+    return dateObj.toLocaleDateString("gl-ES", opciones);
   }
   
   export function esHoy(fecha) {
@@ -19,10 +20,11 @@ export function formatDate(dateString) {
       year: "numeric",
       month: "short",
       day: "numeric",
+      locale: "gl-ES",
     };
-    const  fechaIntroducidaFormateada=fechaIntroducida.toLocaleDateString("es-Es", opciones)
+    const  fechaIntroducidaFormateada=fechaIntroducida.toLocaleDateString("gl-ES", opciones)
     const fechaActualFormateada = fechaActual.toLocaleDateString(
-      "es-ES",
+      "gl-ES",
       opciones
     );
     return fechaIntroducidaFormateada === fechaActualFormateada;
