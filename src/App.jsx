@@ -14,6 +14,7 @@ import EditarEvento from "./pages/EditarEvento/EditarEvento";
 
 import Footer from "./components/Footer/Footer";
 import ScrollArriba from "./components/ScrollArriba/ScrollArriba";
+import PerfilUsuario from "./pages/PerfilUsuario/PerfilUsuario";
 
 function App() {
   const { user } = useSelector((state) => state.usuariosReducer);
@@ -59,6 +60,12 @@ function App() {
                   <Navigate to="/" replace={true} />
                 )
               }
+            />
+            <Route 
+            path="/perfil"
+            element={user ? (<PerfilUsuario/>):(
+                  <Navigate to="/" replace={true} />
+                )}
             />
             <Route
               path="/login"

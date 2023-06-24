@@ -1,140 +1,141 @@
 .header {
-
-    background-color:rgb(241 103 4);
-    height: 120px;
-    align-items: center;
-    padding: 0 20px;
-    display: flex;
-    justify-content: space-between;
-    box-shadow: 10px 10px 10px rgba(197, 158, 28, 0.452);
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1;
-   
-
-  }
-  .link:link {
-    color: black;
-    text-decoration-line: none;
-  }
-  
-  .link:visited {
-    color: black;
-    text-decoration-line: none;
-  }
-  
-  .link:hover {
-    color: black;
-    text-decoration-line: none;
-  }
-  
-  .navbar {
-    margin-bottom:70px;
-    margin-right: 30px;
-  }
-  
-  .boton {
-    margin-right: 15px;
-  }
-  
-  @font-face {
-    font-family: "urban-jungle";
-    src: url("./UrbanJungleDEMO.otf");
-  }
-  
-  .title-font {
-    font-family: "urban-jungle";
-    font-size: 80px;
-    color: rgb(0,0,0,)
-  }
-  .title{
-    margin-top:50px
-  }
-
-  /* Estilos para pantallas extra pequeñas (xs) */
-  @media (min-width: 1px) and (max-width: 469.98px) {
-    .header {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-      
-      height: 120px
-    }
-  
-    .title {
-      margin-top: 0px;
-      text-align: center;
-      font-size: 10px;
-    }
-  
-    .navbar {
-      margin: 0;
-
-    }
-  }
-  .title-font{
-    font-size: 10vw;
-    margin-top: 1.5vh;
-  }
-  
-  /* Estilos para pantallas pequeñas (s) */
-  @media (min-width: 470px) and (max-width: 852.98px) {
-    .header {
-        flex-direction: column;
-        height: auto;
-        height: 160px;
-      }
-    
-      .title {
-        margin-top: 15px;
-        text-align: center;
-      }
-    .navbar{
-        margin-bottom: 80px;
-    }   
-    .title-font{
-        font-size: 50px;
-        margin-bottom: 15px;
-        margin-top: 0px;
-    }
+  background-color: rgb(241 103 4);
+  height: 120px;
+  align-items: center;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 10px 10px 10px rgba(197, 158, 28, 0.452);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+.link:link {
+  color: black;
+  text-decoration-line: none;
 }
 
+.link:visited {
+  color: black;
+  text-decoration-line: none;
+}
 
-  /* Estilos para pantallas medianas (m) */
-  @media (min-width: 853px) and (max-width: 991.98px) {
-    .header{
-        display: flex;
-        justify-content: space-between;
-        height: 160px;
-    }
-    .title-font{
-        font-size: 50px;
-       
-    }
-    .title{
-        margin-top: 30px;
-    }
-    .navbar{
-        margin-bottom: 50px
-    }  }
-  
-  /* Estilos para pantallas grandes (l) */
-  @media (min-width: 992px){
-    .header{
-        display: flex;
-        justify-content: space-between;
-        height: 120px
-    }
-    .title-font{
-      font-size: 50px;
-      width: max-content;
-    }
-    .title{
-        margin-top: 30px;
-    }
-    .navbar{
-        margin-bottom: 50px
-    }
+.link:hover {
+  color: black;
+  text-decoration-line: none;
+}
+
+.navbar {
+  margin-bottom: 70px;
+  margin-right: 30px;
+}
+
+.boton {
+  margin-right: 15px;
+}
+
+@font-face {
+  font-family: "urban-jungle";
+  src: url("./UrbanJungleDEMO.otf");
+}
+
+.title-font {
+  font-family: "urban-jungle";
+  font-size: 80px;
+  color: rgb(0, 0, 0);
+}
+.title {
+  margin-top: 50px;
+}
+
+/* Estilos para pantallas extra pequeñas (xs) */
+@media (min-width: 1px) and (max-width: 469.98px) {
+  .header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  align-items: center  ;
+    
+    height: 120px;
   }
-  
+
+  .title {
+    margin-top: 0px;
+    text-align: center;
+    font-size: 10px;
+  }
+
+  .navbar {
+    padding: 0;
+    margin: 0;
+    align-self: self-end;
+  }
+}
+.title-font {
+  font-size: 10vw;
+  margin-top: .5vh;
+  margin-bottom: 0;
+
+}
+
+/* Estilos para pantallas pequeñas (s) */
+@media (min-width: 470px) and (max-width: 852.98px) {
+  .header {
+    flex-direction: column;
+    height: auto;
+    height: 160px;
+  }
+
+  .title {
+    margin-top: 0px;
+    text-align: center;
+  }
+  .navbar {
+    padding: 0;
+    margin: 0;
+    align-self: self-end;
+  }
+  .title-font {
+    font-size: 50px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+  }
+}
+
+/* Estilos para pantallas medianas (m) */
+@media (min-width: 853px) and (max-width: 991.98px) {
+  .header {
+    display: flex;
+    justify-content: space-between;
+    height: 160px;
+  }
+  .title-font {
+    font-size: 50px;
+  }
+  .title {
+    margin-top: 30px;
+  }
+  .navbar {
+    margin-bottom: 50px;
+  }
+}
+
+/* Estilos para pantallas grandes (l) */
+@media (min-width: 992px) {
+  .header {
+    display: flex;
+    justify-content: space-between;
+    height: 120px;
+  }
+  .title-font {
+    font-size: 50px;
+    width: max-content;
+  }
+  .title {
+    margin-top: 30px;
+  }
+  .navbar {
+    margin-bottom: 50px;
+  }
+}

@@ -16,9 +16,9 @@ const Navbar = () => {
       {user ? (
         <div className="disp">
           <div className="header-user">
-            <h3 className="h3">Ola, {user.username}</h3>
-            {user.avatar && (
-              <img className="header_avatar" src={user.avatar} alt="avatar" />
+            <h3 className="h3">Ola, <Link to="/perfil">{user.username}</Link></h3>
+            {user.avatar && (<div className="avatar-container">
+              <img className="header_avatar" src={user.avatar} alt="avatar" /></div>
             )}
           </div>
           <div className="div-boton">

@@ -1,0 +1,15 @@
+.perfil-container{
+    width: 40%;
+    margin: 10% auto;
+
+}
+.perfil-avatar{
+    width: 40%;
+    margin: auto;
+}
+@media (min-width: 1px) and (max-width: 469.98px) {
+.perfil-container{
+    width: 80%;
+    margin-top:160px;
+}
+}

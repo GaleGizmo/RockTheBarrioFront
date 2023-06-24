@@ -94,5 +94,34 @@ const registerUser = (datos, navigate) => async () => {
     }
   }
 };
+const updateUser = (datos, navigate) => async (dispatch) => {
+  try {
+    const formData = new FormData();
+    datos.birthday=""
+    datos.newsletter=""
+    formData.append("email", datos.email);
+    formData.append("username", datos.username);
+    formData.append("password", datos.password);
+    formData.append("birthday", datos.birthday);
+    formData.append("newsletter", datos.newsletter);
+    if (datos.image[0] !== undefined) {
+      formData.append("avatar", datos.image[0]);
+    }
 
-export { login, logout, setUser, checkSesion, registerUser };
+    const resultado = await APIIMAGES.post("/usuario/update", formData);
+    dispatch({ type: "SET_USER", contenido: resultado.data.user });
+    
+    navigate("/perfil");
+
+  } catch (error) {
+    if (error.response && error.response.data && error.response.data.message) {
+      dispatch({
+        type: "ERROR_USUARIO",
+        contenido: error.response.data.message,
+      });
+    } else {
+      dispatch({ type: "ERROR_USUARIO", contenido: "Error desconocido" });
+    }
+  }
+};
+export { login, logout, setUser, checkSesion, registerUser, updateUser};
