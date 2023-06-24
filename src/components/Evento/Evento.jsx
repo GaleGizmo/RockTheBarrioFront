@@ -48,7 +48,7 @@ console.log(evento);
          
         </div>
         <div className="div2">
-          {evento.site && <p>{evento.site.split(",")[0]} <MapIcon showMap={showMap} onClick={handleToggleMap} /></p>}
+          {evento.site && evento.site!=="Varios" ? (<p>{evento.site.split(",")[0]} <MapIcon showMap={showMap} onClick={handleToggleMap} /></p>):(<p>{evento.site.split(",")[0]}</p>)}
           
           {fechaStart && !fechaEnd ? (
             <div>

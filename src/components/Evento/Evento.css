@@ -171,7 +171,7 @@
   .border-card {
     flex-direction: column;
     height: auto;
-    margin-right:4%
+    margin-right:2%
   }
   
   .div-image {
@@ -195,7 +195,7 @@
     margin-left: 2%;
   }
   .card p{
-    margin-right: 2%;
+    /* margin-right: 2%; */
     margin-left: 2%;
     width: max-content;
   }

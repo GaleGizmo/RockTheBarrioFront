@@ -27,7 +27,7 @@ const EventoEdicion = ({ evento, navigate }) => {
     };
 
     dispatch(editEvento(evento._id, editedEvento, navigate));
-    // navigate(`/detalles-evento/${evento._id}`);
+  
   };
 
   const handleCancel = () => {
