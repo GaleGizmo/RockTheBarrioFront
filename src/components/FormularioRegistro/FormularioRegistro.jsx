@@ -41,30 +41,38 @@ const FormularioRegistro = () => {
             className="inputReg"
           />
           {errors.email && (
-            <span className="error-message">Email es requerido</span>
+            <span className="error-message">Email é requerido</span>
           )}
         </div>
         <div className="div-inputReg">
-          <label className="margin-labelReg">Contraseña</label>
+          <label className="margin-labelReg">Contrasinal</label>
           <input
             {...register("password", { required: true })}
             type="password"
             className="inputReg"
           />
           {errors.password && (
-            <span className="error-message">Password es requerida</span>
+            <span className="error-message">Contrasinal é requerido</span>
           )}
         </div>
 
         <div className="div-inputReg">
           <label className="margin-label">Usuario</label>
           <input
-            {...register("username", { required: true })}
+            {...register("username", { required: "Usuario é requerido",
+              minLength: {
+                value: 2,
+                message: "Mínimo dous caracteres",
+              }, maxLength:{
+                value: 20,
+                message: "Non máis de 20 caracteres",
+              } })}
             className="inputReg"
           />
           {errors.username && (
-            <span className="error-message">Usuario es requerido</span>
+            <span className="error-message">{errors.username.message}</span>
           )}
+          
         </div>
         {/* <div className="div-inputReg">
           <label className="margin-label">Fecha de nacimiento</label>

@@ -11,3 +11,11 @@ body {
   padding-bottom: 100px;
   background-attachment: fixed;
 }
+.div-img{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin:auto;
+  width: 60%
+  
+  }

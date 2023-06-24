@@ -52,7 +52,7 @@ const DetallesEvento = () => {
     <div>
       {!evento ? (
         <div className="div-img">
-          <img src="/assets/music.gif" />
+          <img src="/assets/music.gif" style={{ marginTop: '200px' }} alt="Cargando..." />
         </div>
       ) : (
         <>
@@ -86,7 +86,7 @@ const DetallesEvento = () => {
                   <h3 className="gratuitoDetEv">GRATUITO</h3>
                 ) : (
                   <h3>
-                    <strong>Precio: </strong>
+                    <strong>Prezo: </strong>
                     {evento.price} €
                   </h3>
                 )}
@@ -94,7 +94,7 @@ const DetallesEvento = () => {
                 {fechaEnd && <h3>{fechaEnd}</h3>}
                 {evento.genre && (
                   <h3>
-                    <strong>Género:</strong> {evento.genre}
+                    <strong>Xénero:</strong> {evento.genre}
                   </h3>
                 )}
                 <p>{evento.content}</p>

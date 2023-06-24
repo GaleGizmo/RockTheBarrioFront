@@ -16,7 +16,7 @@ const Navbar = () => {
       {user ? (
         <div className="disp">
           <div className="header-user">
-            <h3 className="h3">Hola, {user.username}</h3>
+            <h3 className="h3">Ola, {user.username}</h3>
             {user.avatar && (
               <img className="header_avatar" src={user.avatar} alt="avatar" />
             )}
@@ -34,7 +34,7 @@ const Navbar = () => {
             <Link to="/">
               <span className="header-salir">
              
-                <Button text="Salir" type="medium" onClick={logout} />
+                <Button text="Saír" type="medium" onClick={logout} />
               </span>
               <span className="icono-salir">
               <SwitchIcon onClick={logout}/>
@@ -51,7 +51,7 @@ const Navbar = () => {
           </Link>
           <Link to="date-de-alta">
             <span>
-              <Button text="Registrarse" type="medium" />
+              <Button text="Rexistrarse" type="medium" />
             </span>
           </Link>
         </>
