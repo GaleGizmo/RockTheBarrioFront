@@ -32,10 +32,10 @@ const Navbar = () => {
               )}
             </div>
             <Link to="/">
-              <span className="header-salir">
+              {/* <span className="header-salir">
              
                 <Button text="Saír" type="medium" onClick={logout} />
-              </span>
+              </span> */}
               <span className="icono-salir">
               <SwitchIcon onClick={logout}/>
               </span>

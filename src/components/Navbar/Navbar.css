@@ -1,8 +1,8 @@
 .icono-salir{
-    display: none;
+    transform: scale(1.5);
     position: fixed;
     top:1px;
-    right: 5px;
+    right: 15px;
     color:rgb(72, 71, 71)
 }
 .icono-salir:hover{
@@ -56,10 +56,11 @@
         align-items: center;
     }
     .header_avatar{
-        width: 20%;
+        width: 15%;
     }
     .icono-salir{
-        display: block;
+        transform: scale(1.2);
+        right: 10px;
     }
     .medium{
         width: max-content;
