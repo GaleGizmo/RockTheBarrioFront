@@ -22,7 +22,7 @@
 }
 
 .link:hover {
-  color: black;
+  color: azure;
   text-decoration-line: none;
 }
 
@@ -44,6 +44,9 @@
   font-family: "urban-jungle";
   font-size: 80px;
   color: rgb(0, 0, 0);
+}
+.title-font:hover{
+  color: rgb(240, 233, 233);
 }
 .title {
   margin-top: 50px;

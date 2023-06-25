@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "./Navbar.css";
 import Button from "../Button/Button";
-import {AiOutlinePoweroff} from 'react-icons/ai';
+import { AiOutlinePoweroff } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { logout, setUser } from "../../redux/usuarios/usuarios.actions";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,9 +16,13 @@ const Navbar = () => {
       {user ? (
         <div className="disp">
           <div className="header-user">
-            <h3 className="h3">Ola, <Link to="/perfil">{user.username}</Link></h3>
-            {user.avatar && (<div className="avatar-container">
-              <img className="header_avatar" src={user.avatar} alt="avatar" /></div>
+            <h3 className="h3">
+              Ola, <Link to="/perfil">{user.username}</Link>
+            </h3>
+            {user.avatar && (
+              <div className="avatar-container">
+                <img className="header_avatar" src={user.avatar} alt="avatar" />
+              </div>
             )}
           </div>
           <div className="div-boton">
@@ -37,23 +41,21 @@ const Navbar = () => {
                 <Button text="Saír" type="medium" onClick={logout} />
               </span> */}
               <span className="icono-salir">
-              <SwitchIcon onClick={logout}/>
+                <SwitchIcon onClick={logout} />
               </span>
             </Link>
           </div>
         </div>
       ) : (
         <>
-          <Link to="/login">
-            <span>
+          <div className="no-logged">
+            <Link to="/login">
               <Button text="Acceder" type="medium" />
-            </span>
-          </Link>
-          <Link to="date-de-alta">
-            <span>
+            </Link>
+            <Link to="date-de-alta">
               <Button text="Rexistrarse" type="medium" />
-            </span>
-          </Link>
+            </Link>{" "}
+          </div>
         </>
       )}
     </div>

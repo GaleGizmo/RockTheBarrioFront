@@ -93,6 +93,9 @@
     .header-salir{
         display: none;
     }
+    .no-logged{
+        margin-bottom: 50px;
+    }
 }
     @media (min-width: 470px) and (max-width: 852.98px) {
 

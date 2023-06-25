@@ -108,7 +108,7 @@ const updateUser = (datos, navigate) => async (dispatch) => {
       formData.append("avatar", datos.image[0]);
     }
 
-    const resultado = await APIIMAGES.post("/usuario/update", formData);
+    const resultado = await APIIMAGES.put(`/usuario/${datos._id}`, formData);
     dispatch({ type: "SET_USER", contenido: resultado.data.user });
     
     navigate("/perfil");

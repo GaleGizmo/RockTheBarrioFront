@@ -12,7 +12,7 @@ const Perfil = ({ userData, onEditClick }) => {
         </div>
       )}
       <div className="margin-botonReg">
-        <Button text="Editar" type="large" onClick={onEditClick} />
+        {/* <Button text="Editar" type="large" onClick={onEditClick} /> */}
       </div>
     </div>
   );
