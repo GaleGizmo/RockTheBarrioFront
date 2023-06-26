@@ -26,6 +26,13 @@ const Comentario = ({ comentario }) => {
   const [editedTitle, setEditedTitle] = useState(comentario.title);
   const [editedContent, setEditedContent] = useState(comentario.content);
   const [editedValue, setEditedValue] = useState(comentario.value);
+  const handleChangeValue = (e) => {
+    const newValue =
+      e.target.value === "Ninguna" ? "" : parseInt(e.target.value);
+
+    setEditedValue(newValue);
+  };
+
   const handleEdit = () => {
     if (editMode) {
       const comentarioData = {
@@ -36,9 +43,6 @@ const Comentario = ({ comentario }) => {
 
       dispatch(editComentario(comentario._id, comentarioData));
 
-      // setEditedTitle(comentarioData.title);
-      // setEditedContent(comentarioData.content);
-      // setEditedValue(comentarioData.value);
       setEditMode(false);
     } else {
       setEditMode(true);
@@ -116,13 +120,17 @@ const Comentario = ({ comentario }) => {
                 value={editedContent}
                 onChange={(e) => setEditedContent(e.target.value)}
               />
-              <input
-                type="number"
-                value={editedValue}
-                min={0}
-                max={5}
-                onChange={(e) => setEditedValue(e.target.value)}
-              />
+              <select
+                value={editedValue ? editedValue.toString() : "Ninguna"}
+                onChange={handleChangeValue}
+              >
+                <option value="Ninguna">Ninguna</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
             </>
           ) : (
             <>
@@ -133,7 +141,7 @@ const Comentario = ({ comentario }) => {
                   </AccordionHeader>
                   <AccordionPanel>
                     {comentario.content && <p>{comentario.content}</p>}
-                    {comentario.value && (
+                    {comentario.value>0 && (
                       <div>
                         <p>{renderStars(comentario.value)}</p>
                       </div>

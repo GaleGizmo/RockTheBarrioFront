@@ -10,24 +10,21 @@ const NuevoComentario = ({ eventoId, user }) => {
   const { register, handleSubmit, reset } = useForm();
   const dispatch = useDispatch();
   const [value, setValue] = useState(0);
-
   const handleChange = (event) => {
-    const newValue = parseInt(event.target.value);
-
-    if (newValue >= 0 && newValue <= 5) {
-      setValue(newValue);
-    }
+    const newValue = event.target.value === "Ninguna" ? 0 : parseInt(event.target.value);
+  
+    setValue(newValue);
   };
 
   const onSubmit = (data) => {
     const comentarioData = {
       title: data.titulo,
       content: data.contenido,
-      value: data.valoracion,
+      value: value,
       event: eventoId,
       user: user._id,
     };
-    console.log(comentarioData);
+    
     dispatch(addComentario(comentarioData, eventoId));
     reset();
   };
@@ -43,16 +40,20 @@ const NuevoComentario = ({ eventoId, user }) => {
               <input type="text" {...register("titulo")} className="inputTit" />
             </div>
             <div className="form-group">
-              <label>Valoración</label>
-              <input
-                type="number"
-                {...register("valoracion")}
-                min={0}
-                max={5}
-                value={value}
+              <label>Valoración </label>
+              <select className="inputVal"
+              {...register("valoracion")}
+                value={value ? value.toString() : "Ninguna"}
+                
                 onChange={handleChange}
-                className="inputVal"
-              />
+              >
+                <option default value="Ninguna">Ninguna</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
             </div>
           </div>
 

@@ -23,7 +23,7 @@ const addComentario = (comentarioData, eventId) => async (dispatch) => {
     // const resultadoGet = await API.get(`/comentario/getbyevent/${eventId}`)
     // console.log(resultadoGet);
     // dispatch({ type: "ADD_COMENTARIO", contenido: resultadoGet.data });
-    console.log(eventId);
+   
     getComentariosByEvent(eventId);
   } catch (error) {
     dispatch({
@@ -47,14 +47,14 @@ const getComentariosByEvent = async (eventId) => {
   }
 };
 
-const editComentario = (idComentario, comentarioData) => async () => {
+const editComentario = (idComentario, comentarioData) => async (dispatch) => {
   dispatch({ type: "LOADING_COMENTARIOS" });
   try {
     const resultado = await API.put(
       `/comentario/${idComentario}`,
       comentarioData
     );
-
+getComentariosByEvent(resultado.data.event)
     console.log(resultado.data);
 
     dispatch({ type: "EDIT_COMENTARIO", contenido: resultado.data });
