@@ -141,14 +141,16 @@ const Comentario = ({ comentario }) => {
                   </AccordionHeader>
                   <AccordionPanel>
                     {comentario.content && <p>{comentario.content}</p>}
-                    {comentario.value>0 && (
-                      <div>
+                    
+                  </AccordionPanel>
+                </AccordionItem>
+                
+              </Accordion>
+              {comentario.value>0 && (
+                      <div className="muestra-valor">
                         <p>{renderStars(comentario.value)}</p>
                       </div>
                     )}
-                  </AccordionPanel>
-                </AccordionItem>
-              </Accordion>
             </>
           )}
           {puedeEditarYBorrar && (

@@ -9,16 +9,17 @@
 .displayFlex{
     display: flex;
     justify-content: center;
+    
 }
 .tit{
     margin-right: 10px;
-    margin-left: 1%;
+    margin-left: 3%;
 }
 .content{
     width:90%;
     height: 100px;
     margin-right: 2%;
-    margin-left: 2%;
+    margin-left: 3%;
     margin-top:2%;
     border:solid 1px
 }
@@ -41,7 +42,7 @@
     height:40%
 }
 .inputTit{
-    margin-left:1%;
+    /* margin-left:1%; */
     margin-top:2%;
     margin-bottom: 2%;
     border:solid 1px;

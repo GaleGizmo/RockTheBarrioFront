@@ -11,7 +11,10 @@
     border-radius: 10px;
 
 }
-
+.muestra-valor{
+    display: flex;
+    justify-content: end;
+}
 .comentario-title-box{
     display: flex;
     align-items: center;

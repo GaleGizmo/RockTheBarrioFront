@@ -39,7 +39,7 @@ const NuevoComentario = ({ eventoId, user }) => {
               <label>Título</label>
               <input type="text" {...register("titulo")} className="inputTit" />
             </div>
-            <div className="form-group">
+            <div className="form-group tit">
               <label>Valoración </label>
               <select className="inputVal"
               {...register("valoracion")}
