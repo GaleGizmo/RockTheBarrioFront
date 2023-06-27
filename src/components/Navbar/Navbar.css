@@ -10,7 +10,11 @@
     cursor: pointer;
     color: azure;
 }
-
+.boton-crear{
+    position: fixed;
+    right: 125px;
+    top: 50px
+}
 .top{
     margin-top: 10px;
 }
@@ -60,6 +64,11 @@
         margin-top: 0;
         margin-bottom: 15px;
         align-items: end;
+    }
+    .boton-crear{
+        position: fixed;
+        left: 5px;
+        top: 70px
     }
     .h3{
         margin-bottom: 0;

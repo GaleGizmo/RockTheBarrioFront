@@ -32,7 +32,7 @@ const NuevoComentario = ({ eventoId, user }) => {
   return (
     <div>
       <div className="nuevo-comentario">
-        <h2 className="h2NC">Danos tu opinión</h2>
+        <h2 className="h2NC">Danos a túa opinión</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="displayFlex">
             <div className="form-group tit">
@@ -47,7 +47,7 @@ const NuevoComentario = ({ eventoId, user }) => {
                 
                 onChange={handleChange}
               >
-                <option default value="Ninguna">Ninguna</option>
+                <option default value="Ningunha">Ningunha</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -58,7 +58,7 @@ const NuevoComentario = ({ eventoId, user }) => {
           </div>
 
           <div className="form-group divContent">
-            <label className="labelCont">Contenido</label>
+            <label className="labelCont">Comentario</label>
             <textarea {...register("contenido")} className="content"></textarea>
           </div>
           <div className="divBoton">

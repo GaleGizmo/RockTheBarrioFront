@@ -124,7 +124,7 @@ const Comentario = ({ comentario }) => {
                 value={editedValue ? editedValue.toString() : "Ninguna"}
                 onChange={handleChangeValue}
               >
-                <option value="Ninguna">Ninguna</option>
+                <option value="Ningunha">Ningunha</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>

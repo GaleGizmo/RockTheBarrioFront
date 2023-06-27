@@ -22,13 +22,13 @@ const ComentariosList = ({ eventoId }) => {
         </div>
       )}
 
-      <h2 className="texto-aviso">COMENTARIOS DEL EVENTO</h2>
+      <h2 className="texto-aviso">COMENTARIOS DO EVENTO</h2>
       {comentarios.length ? (
         comentarios.map((comentario) => {
           return <Comentario comentario={comentario} key={comentario._id} />;
         })
       ) : (
-        <p className="texto-aviso">No hay ningún comentario actualmente</p>
+        <p className="texto-aviso">No hay comentarios actualmente</p>
       )}
     </div>
   );

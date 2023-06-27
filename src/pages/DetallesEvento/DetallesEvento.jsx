@@ -125,7 +125,7 @@ const DetallesEvento = () => {
                     <NuevoComentario eventoId={evento._id} user={user} />
                   ) : (
                     <p className="texto-aviso">
-                      Debes registrarte para poder comentar
+                      Tes que te rexistrar para poder comentar
                     </p>
                   )}
                 </div>

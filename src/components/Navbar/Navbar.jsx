@@ -29,17 +29,14 @@ const Navbar = () => {
             <div>
               {user && user.role === 2 && (
                 <Link to="/crear-evento">
-                  <span>
+                  <span className="boton-crear">
                     <Button text="Crear Evento" type="medium" />
                   </span>
                 </Link>
               )}
             </div>
             <Link to="/">
-              {/* <span className="header-salir">
-             
-                <Button text="Saír" type="medium" onClick={logout} />
-              </span> */}
+            
               <span className="icono-salir">
                 <SwitchIcon onClick={logout} />
               </span>
