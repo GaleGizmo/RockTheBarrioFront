@@ -1,16 +1,23 @@
-img{
+/* img{
     width: 50%;
     height: 50%;
     
+} */
+
+.eventos-list{
+    display: grid;
+    grid-template-columns: 80% 20%;
+    padding: 30px 0;
+    margin-right: 2%;
 }
 
-.eventos-top{
-    padding: 30px 5%;
-}
 @media (max-width:420px){
     .div-img{
         width:100%
     }
-
+.eventos-list{
+    display:block;
+    margin-right: 0;
+}
    
 }

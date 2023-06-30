@@ -28,7 +28,7 @@ const ComentariosList = ({ eventoId }) => {
           return <Comentario comentario={comentario} key={comentario._id} />;
         })
       ) : (
-        <p className="texto-aviso">No hay comentarios actualmente</p>
+        <p className="texto-aviso">Aínda non hai comentarios </p>
       )}
     </div>
   );
