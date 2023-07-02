@@ -13,6 +13,11 @@
 
     
 }
+.small{
+    width:fit-content;
+    font-size: .8rem;
+    padding-bottom: 0;
+}
 
 .medium{
 width:200px
@@ -23,7 +28,7 @@ width:200px
 }
 
 .boton:hover{
-transform: scale(1.1,1.1);
+transform: scale(1.1);
 color: rgb(21, 50, 67);
 background-color: white;
 font-weight: bold;
@@ -33,5 +38,8 @@ border-color: #757575;
     .large{
         width: 250px;
         margin: 0 10px 0 5px;
+    }
+    .medium{
+        width: 100px;
     }
 }
