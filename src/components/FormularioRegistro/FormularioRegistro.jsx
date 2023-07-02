@@ -14,11 +14,20 @@ const FormularioRegistro = () => {
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors },
   } = useForm();
   const { error } = useSelector((state) => state.usuariosReducer);
   const navigate = useNavigate();
 
+  const onSubmit = (datos) => {
+    if (datos.password === datos.confirmPassword) {
+      dispatch(registerUser(datos, navigate));
+    } else {
+      // Manejar el caso en el que las contraseñas no coinciden
+      console.log("Las contraseñas no coinciden");
+    }
+  };
   const passwordRegex =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
@@ -27,9 +36,7 @@ const FormularioRegistro = () => {
       <h1>DATE DE ALTA</h1>
       <p className="error-message">{error}</p>
       <form
-        onSubmit={handleSubmit((datos) =>
-          dispatch(registerUser(datos, navigate))
-        )}
+        onSubmit={handleSubmit((onSubmit) )}
       >
         <div className="div-inputReg">
           <label className="margin-label">E-mail</label>
@@ -55,31 +62,50 @@ const FormularioRegistro = () => {
             <span className="error-message">Contrasinal é requerido</span>
           )}
         </div>
-
+        <div className="div-inputReg">
+          <label className="margin-labelReg">Confirma Contrasinal</label>
+          <input
+            {...register("confirmPassword", {
+              required: true,
+              validate: (value) =>
+                value === getValues("password") ||
+                "Os contrasinais non coinciden",
+            })}
+            type="password"
+            className="inputReg"
+          />
+          {errors.confirmPassword && (
+            <span className="error-message">
+              {errors.confirmPassword.message}
+            </span>
+          )}
+        </div>
         <div className="div-inputReg">
           <label className="margin-label">Usuario</label>
           <input
-            {...register("username", { required: "Usuario é requerido",
+            {...register("username", {
+              required: "Usuario é requerido",
               minLength: {
                 value: 2,
                 message: "Mínimo dous caracteres",
-              }, maxLength:{
+              },
+              maxLength: {
                 value: 20,
                 message: "Non máis de 20 caracteres",
-              } })}
+              },
+            })}
             className="inputReg"
           />
           {errors.username && (
             <span className="error-message">{errors.username.message}</span>
           )}
-          
         </div>
         {/* <div className="div-inputReg">
           <label className="margin-label">Fecha de nacimiento</label>
           <input {...register("birthday")} type="date" className="fechaReg" />
         </div> */}
         <div className="div-inputReg imgReg">
-          <label>Imagen</label>
+          <label>Avatar</label>
           <SubirImagen
             register={register}
             funcion={(e) =>
@@ -90,7 +116,7 @@ const FormularioRegistro = () => {
         </div>
 
         <div className="margin-botonReg">
-          <Button text="Registrarse" type="large" />
+          <Button text="Rexistrarse" type="large" />
         </div>
       </form>
     </div>
