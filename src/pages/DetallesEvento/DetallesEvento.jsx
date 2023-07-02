@@ -38,7 +38,17 @@ const DetallesEvento = () => {
   const handleToggleMap = () => {
     setShowMap((showMap) => !showMap);
   };
+  const [formattedContent, setFormattedContent] = useState("");
 
+  useEffect(() => {
+    if (evento && evento.content) {
+      const sentences = evento.content.split(".");
+      const formattedSentences = sentences.map((sentence, index) => (
+        <p key={index}>{sentence.trim()}</p>
+      ));
+      setFormattedContent(formattedSentences);
+    }
+  }, [evento]);
   const fechaStart = evento?.date_start ? formatDate(evento.date_start) : null;
   const fechaEnd = evento?.date_end ? formatDate(evento.date_end) : null;
   let textoBoton = "";
@@ -97,7 +107,7 @@ const DetallesEvento = () => {
                     <strong>Xénero:</strong> {evento.genre}
                   </h3>
                 )}
-                <p>{evento.content}</p>
+                <p>{formattedContent}</p>
                 <div className="margin-boton-info">
                   <Button text={textoBoton} type="medium" onClick={comprar} />
                 </div>
