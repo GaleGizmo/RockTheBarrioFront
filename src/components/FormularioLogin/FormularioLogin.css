@@ -15,7 +15,7 @@
         
         background-image:linear-gradient(to bottom, rgb(237 132 57), #fff);
         border: solid black;
-        padding-right: 6px;
+        padding-right: 10px;
         box-sizing: content-box;
       }
       .cardLogin {
@@ -45,9 +45,9 @@
       .div-inputLogin{
         height: 30px;
         margin-top: 7%;
-        width: 94%;
+       
       }
-      .margin-boton{
+      .margin-botonLogin{
         margin-top: 10%;
       }
     

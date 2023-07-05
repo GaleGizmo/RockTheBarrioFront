@@ -37,7 +37,7 @@ const FormularioLogin = () => {
             <input
               {...register("password")}
               type="password"
-              placeholder="Contraseña"
+              placeholder="Contrasinal"
               className="inputLogin"
             />
           </label>
