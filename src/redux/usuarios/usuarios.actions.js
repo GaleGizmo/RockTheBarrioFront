@@ -75,6 +75,7 @@ const registerUser = (datos, navigate) => async () => {
     formData.append("username", datos.username);
     formData.append("password", datos.password);
     formData.append("birthday", datos.birthday);
+    formData.append("newsletter", datos.newsletter);
     if (datos.image[0] !== undefined) {
       formData.append("avatar", datos.image[0]);
     }
@@ -98,7 +99,7 @@ const updateUser = (datos, navigate) => async (dispatch) => {
   try {
     const formData = new FormData();
     datos.birthday=""
-    datos.newsletter=""
+    console.log(datos);
     formData.append("email", datos.email);
     formData.append("username", datos.username);
     formData.append("password", datos.password);

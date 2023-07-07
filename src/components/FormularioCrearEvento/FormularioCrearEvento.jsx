@@ -34,7 +34,7 @@ const FormularioCrearEvento = () => {
   const dispatch = useDispatch();
   const [imageFile, setImageFile] = useState();
 
-  console.log(user);
+  
 
   return (
     <div className="cardCrearEvento">

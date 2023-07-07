@@ -1,159 +1,164 @@
 @media (min-width: 420px) {
-    .cardReg {
-        display: flex;
-        
-        flex-direction: column;
-        align-items: center;
-        background-color: #fff;
-        border: 1px solid #e0e0e0;
-        border-radius: 8px;
-        box-shadow: 10px 10px 10px rgba(237 132 57, 0.452);
-        padding: 20px;
-        margin-bottom: 20px;
-        text-align: center;
-        width: 90%;
-        margin-top: 20%;
-        margin-left: 2.5%;
-        margin-right: 2.5%;
-        background-image:linear-gradient(to bottom, rgb(237 132 57), #fff);
-        border: solid black;
-        padding-right: 6px;
-        box-sizing: content-box;
-      }
-      .cardReg {
-        opacity: 0;
-        transform: translateX(-100px);
-        animation: appearCard 0.5s ease-in-out forwards;
-      }
-      .imagenReg {
-        padding-top: 5px;
-        width: 50%;
-        height: 10vh;
-    }
-      
-      @keyframes appearCard {
-        0% {
-          opacity: 0;
-          transform: translateX(-100px);
-        }
-        100% {
-          opacity: 1;
-          transform: translateX(0);
-        }
-      }
-      .inputReg{
-        width: 100%;
-        height: 100%;
-        border-radius: 10px;
-        font-size: large;
-        text-align: center;
-      }
-    
-      .div-inputReg{
-        height: 30px;
-        margin-top: 10%;
-        width: 94%;
-      }
-      .margin-botonReg{
-        margin-top: 5%;
-        padding-top: 120px;
-      }
-      .fechaReg{
-        width: 100%;
-        height: 100%;
-        border-radius: 10px;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-      }
-    
+  .cardReg {
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 10px 10px 10px rgba(237 132 57, 0.452);
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    width: 90%;
+    margin-top: 20%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    background-image: linear-gradient(to bottom, rgb(237 132 57), #fff);
+    border: solid black;
+    padding-right: 6px;
+    box-sizing: content-box;
+  }
+  .cardReg {
+    opacity: 0;
+    transform: translateX(-100px);
+    animation: appearCard 0.5s ease-in-out forwards;
+  }
+  .imagenReg {
+    padding-top: 5px;
+    width: 50%;
+    height: 10vh;
   }
 
-  @media (max-width: 420px) {
-    .cardReg {
-        display: flex;
-        
-        flex-direction: column;
-        align-items: center;
-        background-color: #fff;
-        border: 1px solid #e0e0e0;
-        border-radius: 8px;
-        box-shadow: 10px 10px 10px rgba(237, 132, 57, 0.452);
-        padding: 20px;
-        margin-bottom: 20px;
-        text-align: center;
-        
-        margin-top: 20%;
-        margin-left: 2.5%;
-        margin-right: 2.5%;
-        background-image:linear-gradient(to bottom, rgb(237 132 57), #fff);
-        border: solid black;
-        padding-right: 8px;
-      }
-      .imagenReg {
-        padding-top: 5px;
-        width: 50%;
-        height: fit-content;
+  @keyframes appearCard {
+    0% {
+      opacity: 0;
+      transform: translateX(-100px);
     }
-      .cardReg {
-        opacity: 0;
-        transform: translateX(-100px);
-        animation: appearCard 0.5s ease-in-out forwards;
-      }
-      .imagenReg {
-        padding-top: 10px;
-        width: 50%;
-        
+    100% {
+      opacity: 1;
+      transform: translateX(0);
     }
-  
-      @keyframes appearCard {
-        0% {
-          opacity: 0;
-          transform: translateX(-100px);
-        }
-        100% {
-          opacity: 1;
-          transform: translateX(0);
-        }
-      }
-      .inputReg{
-        width: 80%;
-        height: 100%;
-        border-radius: 10px;
-        font-size: large;
-        text-align: center;
-      }
-    
-      .div-inputReg{
-        height: 30px;
-        margin-top: 15%;
-        width: 94%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-      }
-      .imgReg{
-       
-        margin-top: 25%;
-        
-      }
-      .margin-botonReg{
-        margin-top: 10%;
-        padding-top: 120px;
-      }
-      .fechaReg{
-        width: 81%;
-        height: 100%;
-        border-radius: 10px;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        padding-bottom: 25px;
-        font-size: large;
-      }
+  }
+  .inputReg {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    font-size: large;
+    text-align: center;
+  }
+.checkReg{
+  border-radius: 10px;
+  margin-left: 5px;
+  margin-top: 0;
+ 
+}
+.div-checkReg {
+  height: 30px;
+  margin-top: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+  .div-inputReg {
+    height: 30px;
+    margin-top: 10%;
+    width: 94%;
+  }
+  .margin-botonReg {
+    margin-top: 5%;
+    padding-top: 120px;
+  }
+  .fechaReg {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 420px) {
+  .cardReg {
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 10px 10px 10px rgba(237, 132, 57, 0.452);
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+
+    margin-top: 20%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    background-image: linear-gradient(to bottom, rgb(237 132 57), #fff);
+    border: solid black;
+    padding-right: 8px;
+  }
+  .imagenReg {
+    padding-top: 5px;
+    width: 50%;
+    height: fit-content;
+  }
+  .cardReg {
+    opacity: 0;
+    transform: translateX(-100px);
+    animation: appearCard 0.5s ease-in-out forwards;
+  }
+  .imagenReg {
+    padding-top: 10px;
+    width: 50%;
   }
 
+  @keyframes appearCard {
+    0% {
+      opacity: 0;
+      transform: translateX(-100px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  .inputReg {
+    width: 80%;
+    height: 100%;
+    border-radius: 10px;
+    font-size: large;
+    text-align: center;
+  }
 
-
-
+  .div-inputReg {
+    height: 30px;
+    margin-top: 15%;
+    width: 94%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .imgReg {
+    margin-top: 25%;
+  }
+  .margin-botonReg {
+    margin-top: 10%;
+    padding-top: 120px;
+  }
+  .fechaReg {
+    width: 81%;
+    height: 100%;
+    border-radius: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 25px;
+    font-size: large;
+  }
+}
