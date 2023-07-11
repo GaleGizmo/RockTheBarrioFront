@@ -11,6 +11,11 @@ const getAllEventos = () => async () => {
   dispatch({ type: "GET_EVENTOS", contenido: resultado.data });
 };
 
+const sendEventosSemanales =()=>async()=>{
+  await API.post("/evento/sendeventos/")
+  console.log("eventos enviados");
+}
+
 const getEventoById = (id) => async () => {
   dispatch({ type: "CLEAR_EVENTO" });
   dispatch({ type: "LOADING_EVENTOS" });
@@ -105,4 +110,4 @@ const deleteEvento = (eventoId, navigate) => async () => {
 };
 
 
-export { getAllEventos, getEventoById, addEvento, deleteEvento, editEvento };
+export { getAllEventos, getEventoById, addEvento, deleteEvento, editEvento, sendEventosSemanales };
