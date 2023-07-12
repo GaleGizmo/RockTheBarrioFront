@@ -12,6 +12,7 @@ import NuevoComentario from "../../components/NuevoComentario/NuevoComentario";
 import { formatDate } from "../../shared/formatDate";
 import MapComponent from "../../components/MapComponent/MapComponent";
 import MapIcon from "../../components/MapIcon/MapIcon";
+import { AiFillCloseSquare } from "react-icons/ai";
 
 const DetallesEvento = () => {
   const dispatch = useDispatch();
@@ -39,7 +40,9 @@ const DetallesEvento = () => {
     setShowMap((showMap) => !showMap);
   };
   const [formattedContent, setFormattedContent] = useState("");
-
+  const goHome=()=>{
+    navigate ("/")
+  }
   useEffect(() => {
     if (evento && evento.content) {
       const sentences = evento.content.split(".");
@@ -67,8 +70,11 @@ const DetallesEvento = () => {
       ) : (
         <>
           <div>
+          
             <div className="divCardDetEv">
+            
               <div className="cardDetEv">
+              <AiFillCloseSquare className="close-icon" onClick={goHome}/>
                 <h1 className={isLongTitle ? "long-title" : ""}>
                   {evento.title}
                 </h1>
@@ -107,7 +113,7 @@ const DetallesEvento = () => {
                     <strong>Xénero:</strong> {evento.genre}
                   </h3>
                 )}
-                <p>{formattedContent}</p>
+                <div>{formattedContent}</div>
                 <div className="margin-boton-info">
                   <Button text={textoBoton} type="medium" onClick={comprar} />
                 </div>

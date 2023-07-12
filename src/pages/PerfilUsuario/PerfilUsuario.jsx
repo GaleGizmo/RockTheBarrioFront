@@ -6,6 +6,7 @@ import Button from "../../components/Button/Button";
 import FormularioEdicionUsuario from "../../components/FormularioEdicionUsuario/FormularioEdicionUsuario";
 import "./PerfilUsuario.css";
 import Perfil from "../../components/Perfil/Perfil";
+import  {AiFillCloseSquare } from "react-icons/ai";
 
 const PerfilUsuario = () => {
   const dispatch = useDispatch();
@@ -17,18 +18,22 @@ const PerfilUsuario = () => {
     setIsEditing(true);
   };
   const handleDeleteUser=() => {
-    dispatch(deleteUser(userData.id,navigate))
+    dispatch(deleteUser(userData._id,navigate))
   }
   const handleFormSubmit = (data) => {
     dispatch(updateUser(data, navigate));
     setIsEditing(false);
   };
+  const goHome=()=>{
+    navigate ("/")
+  }
 
   return (
     <>
 
       {!isEditing && (
         <div className="cardReg perfil-container">
+        <AiFillCloseSquare className="close-icon" onClick={goHome}/>
           <h1>PERFIL DE USUARIO</h1>
 
           <Perfil userData={userData} onEditClick={handleEditClick} />

@@ -22,7 +22,7 @@ const Evento = ({ evento }) => {
   const diasFaltantes = formatDistanceToNow(fechaEvento, { unit: 'day', locale: esLocale });
   const fechaStart = evento.date_start ? formatDate(evento.date_start) : null;
   const fechaEnd = evento.date_end ? formatDate(evento.date_end) : null;
-console.log(evento);
+
   
   return (
     <div className="card">

@@ -18,9 +18,9 @@ const Perfil = ({ userData, onEditClick }) => {
           <img className="header_avatar" src={userData.avatar} alt="avatar" />
         </div>
       )}
-      <p>Notificar nuevo evento: {userData.newevent ? (<span className="perfil__user-data">Sí</span>):(<span>No</span>)}</p>
+      <p>Notificar novo evento: {userData.newevent ? (<span className="perfil__user-data">Sí</span>):(<span className="perfil__user-data">No</span>)}</p>
 
-      <p>Newsletter semanal: {userData.newsletter ? (<span className="perfil__user-data">Sí</span>):(<span>No</span>)}</p>
+      <p>Newsletter semanal: {userData.newsletter ? (<span className="perfil__user-data">Sí</span>):(<span className="perfil__user-data">No</span>)}</p>
       {userData.role===2 && (
         <Button text="Newsletter" type="medium" onClick={sendEventos}/>
       )}

@@ -3,6 +3,16 @@
     margin: 10% auto;
 
 }
+.close-icon{
+    position: fixed;
+    right: 5px;
+    top: 5px;
+    transform: scale(1.5);
+}
+.close-icon:hover{
+    color: azure;
+    cursor: pointer;
+}
 .perfil-avatar{
     width: 40%;
     margin: 0 auto 15px;
