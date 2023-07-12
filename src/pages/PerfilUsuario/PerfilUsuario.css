@@ -5,7 +5,7 @@
 }
 .perfil-avatar{
     width: 40%;
-    margin: auto;
+    margin: 0 auto 15px;
 }
 @media (min-width: 1px) and (max-width: 469.98px) {
 .perfil-container{

@@ -76,6 +76,7 @@ const registerUser = (datos, navigate) => async () => {
     formData.append("password", datos.password);
     formData.append("birthday", datos.birthday);
     formData.append("newsletter", datos.newsletter);
+    formData.append("newevent", datos.newevent);
     if (datos.image[0] !== undefined) {
       formData.append("avatar", datos.image[0]);
     }
@@ -105,6 +106,7 @@ const updateUser = (datos, navigate) => async (dispatch) => {
     formData.append("password", datos.password);
     formData.append("birthday", datos.birthday);
     formData.append("newsletter", datos.newsletter);
+    formData.append("newevent", datos.newevent);
     if (datos.image[0] !== undefined) {
       formData.append("avatar", datos.image[0]);
     }
@@ -125,4 +127,24 @@ const updateUser = (datos, navigate) => async (dispatch) => {
     }
   }
 };
-export { login, logout, setUser, checkSesion, registerUser, updateUser};
+
+const deleteUser = (userId, navigate) => async () => {
+  try {
+    await API.delete(`/usuario/${userId}`);
+    dispatch({ type: "LOGOUT" });
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/");
+  } catch (error) {
+    if (error.response && error.response.data && error.response.data.message) {
+      dispatch({
+        type: "ERROR_USUARIO",
+        contenido: error.response.data.message,
+      });
+    } else {
+      dispatch({ type: "ERROR_USUARIO", contenido: "Error desconocido" });
+    }
+  }
+};
+
+export { login, logout, setUser, checkSesion, registerUser, updateUser, deleteUser};

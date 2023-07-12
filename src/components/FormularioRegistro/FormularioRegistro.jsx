@@ -13,6 +13,7 @@ const FormularioRegistro = () => {
   const dispatch = useDispatch();
   const [imageFile, setImageFile] = useState();
   const [newsletter, setNewsletter] = useState(false);
+  const [newEvent, setNewevent] = useState(false)
   const {
     register,
     handleSubmit,
@@ -25,6 +26,7 @@ const FormularioRegistro = () => {
   const onSubmit = (datos) => {
     if (datos.password === datos.confirmPassword) {
       datos.newsletter=newsletter
+      datos.newevent=newEvent
       console.log(datos);
       dispatch(registerUser(datos, navigate));
     } else {
@@ -117,12 +119,21 @@ const FormularioRegistro = () => {
        
         <div className="margin-botonReg">
         <div className="div-checkReg">
-          <label  >Avísame cando se engada un evento</label>
+          <label  >Quero recibir a newsletter semanal</label>
           <input
           className="checkReg"
             type="checkbox"
             checked={newsletter}
             onChange={(e) => setNewsletter(e.target.checked)}
+          />
+        </div>
+        <div className="div-checkReg">
+          <label  >Avísame cando se engada un evento</label>
+          <input
+          className="checkReg"
+            type="checkbox"
+            checked={newEvent}
+            onChange={(e) => setNewevent(e.target.checked)}
           />
         </div>
           <Button text="Rexistrarse" type="large" />
