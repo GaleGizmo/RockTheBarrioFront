@@ -15,6 +15,8 @@ import EditarEvento from "./pages/EditarEvento/EditarEvento";
 import Footer from "./components/Footer/Footer";
 import ScrollArriba from "./components/ScrollArriba/ScrollArriba";
 import PerfilUsuario from "./pages/PerfilUsuario/PerfilUsuario";
+import Terminos from "./pages/Legal/Terminos";
+import Privacidad from "./pages/Legal/Privacidad";
 
 function App() {
   const { user } = useSelector((state) => state.usuariosReducer);
@@ -34,6 +36,8 @@ function App() {
         {sesionVerificada && (
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/terminos" element={<Terminos />} />
+            <Route path="/privacidad" element={<Privacidad />} />
             <Route path="/:id" element={<DetallesEvento />} />
             <Route
               path="editar-evento/:id"

@@ -2,18 +2,16 @@ import React, { useState } from "react";
 import "./FormularioRegistro.css";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { registerUser } from "../../redux/usuarios/usuarios.actions";
 import Button from "../Button/Button";
 import SubirImagen from "../SubirImagen/SubirImagen";
-
-
 
 const FormularioRegistro = () => {
   const dispatch = useDispatch();
   const [imageFile, setImageFile] = useState();
   const [newsletter, setNewsletter] = useState(false);
-  const [newEvent, setNewevent] = useState(false)
+  const [newEvent, setNewevent] = useState(false);
   const {
     register,
     handleSubmit,
@@ -25,8 +23,8 @@ const FormularioRegistro = () => {
 
   const onSubmit = (datos) => {
     if (datos.password === datos.confirmPassword) {
-      datos.newsletter=newsletter
-      datos.newevent=newEvent
+      datos.newsletter = newsletter;
+      datos.newevent = newEvent;
       console.log(datos);
       dispatch(registerUser(datos, navigate));
     } else {
@@ -104,7 +102,6 @@ const FormularioRegistro = () => {
             </span>
           )}
         </div>
-        
 
         <div className="div-inputReg imgReg">
           <label>Avatar</label>
@@ -116,26 +113,55 @@ const FormularioRegistro = () => {
           />
           {imageFile && <img className="imagenReg" src={imageFile} />}
         </div>
-       
+
         <div className="margin-botonReg">
-        <div className="div-checkReg">
-          <label  >Quero recibir a newsletter semanal</label>
-          <input
-          className="checkReg"
-            type="checkbox"
-            checked={newsletter}
-            onChange={(e) => setNewsletter(e.target.checked)}
-          />
-        </div>
-        <div className="div-checkReg">
-          <label  >Avísame cando se engada un evento</label>
-          <input
-          className="checkReg"
-            type="checkbox"
-            checked={newEvent}
-            onChange={(e) => setNewevent(e.target.checked)}
-          />
-        </div>
+          <div className="div-checkReg">
+          <div>
+            <label>Quero recibir a newsletter semanal</label>
+            <input
+              className="checkReg"
+              type="checkbox"
+              checked={newsletter}
+              onChange={(e) => setNewsletter(e.target.checked)}
+            />
+            </div>
+            <div>
+            <label>Avísame cando se engada un evento</label>
+            <input
+              className="checkReg"
+              type="checkbox"
+              checked={newEvent}
+              onChange={(e) => setNewevent(e.target.checked)}
+            />
+            
+            </div>
+             <div>
+            <label>Acepto os {" "}
+        <Link to="/terminos">Termos e Condicións</Link></label>
+            <input
+             {...register("terminos", { required: true })}
+              className="checkReg"
+              type="checkbox"
+              
+            /><p>
+            {errors.terminos && (
+            <span className="error-message">Debes aceptar os Termos e Condicións</span>
+          )}</p>
+          </div>
+             <div>
+            <label>Acepto a <Link to="/privacidad" >Política de Privacidade</Link></label>
+            <input
+             {...register("privacidad", { required: true })}
+              className="checkReg"
+              type="checkbox"
+              
+            /><p>
+            {errors.privacidad && (
+            <span className="error-message">Debes aceptar a Política de Privacidade</span>
+          )}</p>
+            </div>
+          </div>
+
           <Button text="Rexistrarse" type="large" />
         </div>
       </form>
