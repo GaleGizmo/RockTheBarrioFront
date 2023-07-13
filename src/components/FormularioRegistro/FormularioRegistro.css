@@ -1,3 +1,9 @@
+.checkReg{
+  border-radius: 10px;
+  margin-left: 5px;
+  margin-top: 0;
+ 
+}
 @media (min-width: 420px) {
   .cardReg {
     display: flex;
@@ -48,12 +54,7 @@
     font-size: large;
     text-align: center;
   }
-.checkReg{
-  border-radius: 10px;
-  margin-left: 5px;
-  margin-top: 0;
- 
-}
+
 .div-checkReg {
  
   margin-top: 10%;
@@ -83,6 +84,7 @@
 }
 .div-checkReg label{
   padding-bottom: 2px;
+  font-size: .9rem;
 }
 @media (max-width: 420px) {
   .cardReg {
@@ -103,7 +105,7 @@
     margin-right: 2.5%;
     background-image: linear-gradient(to bottom, rgb(237 132 57), #fff);
     border: solid black;
-    padding-right: 8px;
+
   }
   .imagenReg {
     padding-top: 5px;
@@ -141,7 +143,7 @@
   .div-inputReg {
     height: 30px;
     margin-top: 15%;
-    width: 94%;
+   
     display: flex;
     flex-direction: column;
     justify-content: center;

@@ -1,128 +1,132 @@
-.icono-salir{
-    transform: scale(1.5);
-    position: fixed;
-    top:1px;
-    right: 15px;
-    color:rgb(72, 71, 71);
-    filter: drop-shadow(2px 2px 1px rgba(0, 0, 0, 0.5));
+.icono-salir {
+  transform: scale(1.5);
+  position: fixed;
+  top: 1px;
+  right: 15px;
+  color: rgb(72, 71, 71);
+  filter: drop-shadow(2px 2px 1px rgba(0, 0, 0, 0.5));
 }
-.icono-salir:hover{
-    cursor: pointer;
-    color: azure;
+.icono-salir:hover {
+  cursor: pointer;
+  color: azure;
 }
-.boton-crear{
-    position: fixed;
-    right: 125px;
-    top: 50px
+.boton-crear {
+  position: fixed;
+  right: 125px;
+  top: 50px;
 }
-.top{
-    margin-top: 10px;
+.top {
+  margin-top: 10px;
 }
 
-.right{
-    margin-right: 15px;
+.right {
+  margin-right: 15px;
 }
-.disp{
+.disp {
+  display: flex;
+  align-items: center;
+  margin-top: 6%;
+}
+.header-user {
+  display: flex;
+  width: min-content;
+  flex-direction: column;
+  align-items: end;
+  gap: 5px;
+  margin-right: 15px;
+  margin-top: 10px;
+}
+.avatar-container {
+  width: 50px;
+  height: 50px;
+}
+.header_avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid black;
+  filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.5));
+}
+.h3 {
+  width: max-content;
+  margin: 0;
+  font-size: 3vh;
+}
+h3 a {
+  text-decoration: none;
+  font-weight: 600;
+  color: rgb(13, 47, 122);
+}
+.no-logged {
+    
     display: flex;
-    align-items: center;
-    margin-top: 6%;
-}
-.header-user{
-    display: flex;
-    width: min-content;
-    flex-direction: column;
-    align-items: end;
-    gap: 5px;
-    margin-right: 15px;
-    margin-top: 10px;
-}
-.avatar-container{
-    width: 50px;
-    height: 50px;
-}
-.header_avatar{
-    width:100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 1px solid black;
-    filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.5));
-}
-.h3{
-    width: max-content;
-    margin: 0;
-    font-size: 3vh;}
- h3 a {
-    text-decoration: none;
-    font-weight: 600;
-    color:rgb(13, 47, 122) 
- }
+    gap: 15px;
+  }
 @media (min-width: 1px) and (max-width: 469.98px) {
-    .disp{
-        display: flex;
-        flex-direction: column;
-        margin-top: 0;
-        margin-bottom: 15px;
-        align-items: end;
-    }
-    .boton-crear{
-        position: fixed;
-        left: 5px;
-        top: 70px
-    }
-    .h3{
-        margin-bottom: 0;
-        font-size: 2vh;
-    }
-    .header-user{
-        margin: 0;
-        flex-direction: column;
-        justify-content:right;
-        align-items:flex-end;
-    }
-    .header_avatar{
-        width:100%;
-    }
-    .icono-salir{
-        transform: scale(1.2);
-        right: 10px;
-        
-    }
-    .avatar-container{
-        width: 8vw;
-        height: 4vh;
-        max-width: 40px;
-        max-height: 40px ;
-    }
-    .medium{
-        width: max-content;
-        font-size: 18px;
-    padding:0px 5px
-    }
-    .header-salir{
-        display: none;
-    }
-    .no-logged{
-        margin-bottom: 50px;
-        display: flex;
-        justify-content: space-between;
-    }
+  .disp {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0;
+    margin-bottom: 15px;
+    align-items: end;
+  }
+  .boton-crear {
+    position: fixed;
+    left: 5px;
+    top: 70px;
+  }
+  .h3 {
+    margin-bottom: 0;
+    font-size: 2vh;
+  }
+  .header-user {
+    margin: 0;
+    flex-direction: column;
+    justify-content: right;
+    align-items: flex-end;
+  }
+  .header_avatar {
+    width: 100%;
+  }
+  .icono-salir {
+    transform: scale(1.2);
+    right: 10px;
+  }
+  .avatar-container {
+    width: 8vw;
+    height: 4vh;
+    max-width: 40px;
+    max-height: 40px;
+  }
+  .medium {
+    width: max-content;
+    font-size: 18px;
+    padding: 0px 5px;
+  }
+  .header-salir {
+    display: none;
+  }
+  .no-logged {
+    margin-bottom: 50px;
+    display: flex;
+    gap: 5px;
+  }
 }
-    @media (min-width: 470px) and (max-width: 852.98px) {
-
-        .disp{
-            display: flex;
-            flex-direction: column;
-            margin-top: 0;
-            margin-bottom: 15px;
-        }
-        .div-boton{
-            display: flex;
-            margin-bottom: 10px;
-        }
-        .h3{
-            font-size: 25px;
-            margin-bottom: 0;
-            margin-top: 0;
-        }
+@media (min-width: 470px) and (max-width: 852.98px) {
+  .disp {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0;
+    margin-bottom: 15px;
+  }
+  .div-boton {
+    display: flex;
+    margin-bottom: 10px;
+  }
+  .h3 {
+    font-size: 25px;
+    margin-bottom: 0;
+    margin-top: 0;
+  }
 }

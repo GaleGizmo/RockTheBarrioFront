@@ -10,12 +10,12 @@
         padding: 30px;
         
         text-align: center;
-        width: 90%;
+        width: 100%;
         margin-top: 10%;
         
         background-image:linear-gradient(to bottom, rgb(237 132 57), #fff);
         border: solid black;
-        padding-right: 10px;
+        
         box-sizing: content-box;
       }
       .cardLogin {
@@ -58,6 +58,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+       
         background-color: #fff;
         border: 1px solid #e0e0e0;
         border-radius: 8px;
@@ -71,7 +72,7 @@
         margin-right: 2.5%;
         background-image:linear-gradient(to bottom, rgb(237 132 57), #fff);
         border: solid black;
-        padding-right: 8px;
+        
         box-sizing: content-box;
       }
       .cardLogin {
@@ -91,7 +92,7 @@
         }
       }
       .inputLogin{
-        width: 80%;
+        
         height: 100%;
         border-radius: 10px;
         font-size: large;
@@ -101,10 +102,10 @@
       .div-inputLogin{
         height: 30px;
         margin-top: 7%;
-        width: 94%;
+        
       }
       .margin-botonLogin{
-        margin-top: 5%;
+        margin-top: 15%;
       }
       
   }

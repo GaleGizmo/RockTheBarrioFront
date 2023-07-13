@@ -25,7 +25,7 @@ const PerfilUsuario = () => {
     setIsEditing(false);
   };
   const goHome=()=>{
-    navigate ("/")
+    navigate (-1)
   }
 
   return (
