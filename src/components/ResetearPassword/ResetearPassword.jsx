@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { resetPassword } from "../../redux/usuarios/usuarios.actions";
-import Button from "../../components/Button/Button";
+import Button from "../Button/Button";
 import { useNavigate } from "react-router-dom";
 
 
@@ -46,8 +46,8 @@ const ResetearPassword = ({ token }) => {
             <p className="error-message">Os contrasinais non coinciden</p>
           )}
         </div>
-        <div>
-          <Button type="large" text="Restablecer Contrasinal" disabled={isSubmitting} />
+        <div className="margin-botonLogin">
+          <Button type="large" text="Restablecer" disabled={isSubmitting} />
         </div>
       </form>
     </div>

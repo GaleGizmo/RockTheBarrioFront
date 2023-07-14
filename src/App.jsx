@@ -18,7 +18,8 @@ import PerfilUsuario from "./pages/PerfilUsuario/PerfilUsuario";
 import Terminos from "./pages/Legal/Terminos";
 import Privacidad from "./pages/Legal/Privacidad";
 import RecuperarPassword from "./pages/RecuperarPassword/RecuperarPassword";
-import ResetearPassword from "./pages/ResetearPassword/ResetearPassword";
+import ResetearPassword from "./components/ResetearPassword/ResetearPassword";
+import CambiarPassword from "./pages/CambiarPassword/CambiarPassword";
 
 function App() {
   const { user } = useSelector((state) => state.usuariosReducer);
@@ -42,9 +43,8 @@ function App() {
             <Route path="/recuperar-password" element={<RecuperarPassword />} />
             <Route
               path="/reset-password/:token"
-              render={(props) => (
-                <ResetearPassword token={props.match.params.token} />
-              )}
+              element={<CambiarPassword />}
+            
             />
             <Route path="/:id" element={<DetallesEvento />} />
             <Route
