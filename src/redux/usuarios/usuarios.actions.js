@@ -146,5 +146,30 @@ const deleteUser = (userId, navigate) => async () => {
     }
   }
 };
-
-export { login, logout, setUser, checkSesion, registerUser, updateUser, deleteUser};
+const forgotPassword = (email) => async () => {
+  dispatch({ type: "LOADING_USUARIOS" });
+  try {
+    await API.post("/usuario/recuperar-password/", { email });
+    dispatch({ type: "FORGOT_PASSWORD_SUCCESS", contenido: "Se ha enviado un correo electrónico de recuperación de contraseña" });
+  } catch (error) {
+    if (error.response && error.response.data && error.response.data.message) {
+      dispatch({ type: "ERROR_USUARIO", contenido: error.response.data.message });
+    } else {
+      dispatch({ type: "ERROR_USUARIO", contenido: "Error desconocido" });
+    }
+  }
+};
+const resetPassword = (token, password, navigate) => async () => {
+  dispatch({ type: "LOADING_USUARIOS" });
+  try {
+    await API.post("/usuario/reset-password", { token, password });
+    navigate("/login")
+  } catch (error) {
+    if (error.response && error.response.data && error.response.data.message) {
+      dispatch({ type: "ERROR_USUARIO", contenido: error.response.data.message });
+    } else {
+      dispatch({ type: "ERROR_USUARIO", contenido: "Error desconocido" });
+    }
+  }
+};
+export { login, logout, setUser, checkSesion, registerUser, updateUser, resetPassword, forgotPassword, deleteUser};

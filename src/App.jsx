@@ -17,6 +17,8 @@ import ScrollArriba from "./components/ScrollArriba/ScrollArriba";
 import PerfilUsuario from "./pages/PerfilUsuario/PerfilUsuario";
 import Terminos from "./pages/Legal/Terminos";
 import Privacidad from "./pages/Legal/Privacidad";
+import RecuperarPassword from "./pages/RecuperarPassword/RecuperarPassword";
+import ResetearPassword from "./pages/ResetearPassword/ResetearPassword";
 
 function App() {
   const { user } = useSelector((state) => state.usuariosReducer);
@@ -27,7 +29,6 @@ function App() {
     setSesionVerificada(true);
   }, []);
 
-  
   return (
     <>
       <div className="app">
@@ -38,6 +39,13 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/terminos" element={<Terminos />} />
             <Route path="/privacidad" element={<Privacidad />} />
+            <Route path="/recuperar-password" element={<RecuperarPassword />} />
+            <Route
+              path="/reset-password/:token"
+              render={(props) => (
+                <ResetearPassword token={props.match.params.token} />
+              )}
+            />
             <Route path="/:id" element={<DetallesEvento />} />
             <Route
               path="editar-evento/:id"
@@ -65,11 +73,11 @@ function App() {
                 )
               }
             />
-            <Route 
-            path="/perfil"
-            element={user ? (<PerfilUsuario/>):(
-                  <Navigate to="/" replace={true} />
-                )}
+            <Route
+              path="/perfil"
+              element={
+                user ? <PerfilUsuario /> : <Navigate to="/" replace={true} />
+              }
             />
             <Route
               path="/login"
@@ -80,7 +88,6 @@ function App() {
         )}
         <Footer />
       </div>
-     
     </>
   );
 }

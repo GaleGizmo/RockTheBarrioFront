@@ -3,6 +3,7 @@ const INITIAL_STATE = {
   token: null,
   loading: false,
   error: null,
+  successMessage: null,
 };
 
 export const usuariosReducer = (state = INITIAL_STATE, action) => {
@@ -31,7 +32,13 @@ export const usuariosReducer = (state = INITIAL_STATE, action) => {
       };
     case "LOGOUT":
       return { ...state, user: null, token: null };
-
+    case "FORGOT_PASSWORD_SUCCESS":
+      return {
+        ...state,
+        loading: false,
+        successMessage: action.contenido,
+        error: null,
+      };
     default:
       return state;
   }

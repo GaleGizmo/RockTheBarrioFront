@@ -4,14 +4,14 @@ import "./FormularioLogin.css";
 import { login } from "../../redux/usuarios/usuarios.actions";
 import Button from "../Button/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 const FormularioLogin = () => {
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
 
   const { error } = useSelector((state) => state.usuariosReducer);
-
+  
   const navigate = useNavigate();
 
   return (
@@ -19,6 +19,7 @@ const FormularioLogin = () => {
       <div>
         <h1>Iniciar Sesión</h1>
         {error && <p className="error-message">{error}</p>}
+        
       </div>
       <form
         onSubmit={handleSubmit((datos) => dispatch(login(datos, navigate)))}
@@ -44,6 +45,9 @@ const FormularioLogin = () => {
         </div>
         <div className="margin-botonLogin">
           <Button text="Login" type="large" />
+        </div>
+        <div className="margin-link">
+          <Link to="/recuperar-password">Esquezín o contrasinal</Link>
         </div>
       </form>
     </div>
