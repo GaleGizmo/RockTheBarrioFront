@@ -2,6 +2,7 @@
   "name": "rock-the-barrio-front",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://rock-the-barrio-front-one.vercel.app",
   "type": "module",
   "scripts": {
     "dev": "vite",
