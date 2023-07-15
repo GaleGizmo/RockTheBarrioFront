@@ -41,7 +41,7 @@ const DetallesEvento = () => {
   };
   const [formattedContent, setFormattedContent] = useState("");
   const goHome=()=>{
-    navigate (-1)
+    navigate ("/")
   }
   useEffect(() => {
     if (evento && evento.content) {
