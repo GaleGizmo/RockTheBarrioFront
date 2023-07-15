@@ -21,9 +21,14 @@ const EventoEdicion = ({ evento, navigate }) => {
   };
 
   const handleSave = (data) => {
+    const { day_start, time_start } = data;
+  
+    // Combinar la fecha y la hora en un objeto Date
+    const combinedDate = new Date(`${day_start}T${time_start}`);
     const editedEvento = {
       ...evento,
       ...data,
+      date_start:combinedDate
     };
 
     dispatch(editEvento(evento._id, editedEvento, navigate));
@@ -48,10 +53,10 @@ const EventoEdicion = ({ evento, navigate }) => {
             onChange={handleInputChange}
             {...register("title", { required: true })}
           />
-          {errors.title && <span>Título es requerido</span>}
+          {errors.title && <span>Título é requerido</span>}
         </div>
         <div className="div-inputCrearEvento">
-          <label>Subtítulo:</label>
+          <label>Artista:</label>
           <input
             className="inputCrearEvento"
             type="text"
@@ -60,7 +65,7 @@ const EventoEdicion = ({ evento, navigate }) => {
             onChange={handleInputChange}
             {...register("subtitle", { required: true })}
           />
-          {errors.subtitle && <span>Subtítulo es requerido</span>}
+          {errors.subtitle && <span>Artista é requerido</span>}
         </div>
         <div className="div-inputCrearEvento">
           <label>Lugar:</label>
@@ -72,10 +77,10 @@ const EventoEdicion = ({ evento, navigate }) => {
             onChange={handleInputChange}
             {...register("site", { required: true })}
           />
-          {errors.site && <span>Sitio es requerido</span>}
+          {errors.site && <span>Sitio é requerido</span>}
         </div>
         <div className="div-inputCrearEvento">
-          <label>Precio:</label>
+          <label>Prezo:</label>
           <input
             className="inputCrearEvento"
             type="number"
@@ -86,22 +91,34 @@ const EventoEdicion = ({ evento, navigate }) => {
             onChange={handleInputChange}
             {...register("price", { required: true })}
           />
-          {errors.price && <span>Precio es requerido</span>}
+          {errors.price && <span>Precio é requerido</span>}
         </div>
         <div className="fechaCrearEvento">
-          <label>Fecha de inicio:</label>
+          <label>Data de inicio:</label>
           <input
             className="inputCrearEvento"
             type="date"
-            name="date_start"
+            name="day_start"
             defaultValue={evento.date_start.slice(0, 10)}
             onChange={handleInputChange}
-            {...register("date_start", { required: true })}
+            {...register("day_start", { required: true })}
           />
-          {errors.date_start && <span>Fecha de Inicio es requerida</span>}
+          {errors.date_start && <span>Data de Inicio é requerida</span>}
         </div>
         <div className="fechaCrearEvento">
-          <label>Fecha de fin:</label>
+          <label>Hora de inicio:</label>
+          <input
+            className="inputCrearEvento"
+            type="time"
+            name="time_start"
+            defaultValue={evento.date_start.slice(11, 16)}
+            onChange={handleInputChange}
+            {...register("time_start", { required: true })}
+          />
+          {errors.time_start && <span>Hora de inicio es requerida</span>}
+        </div>
+        {evento.date_end && (<div className="fechaCrearEvento">
+          <label>Data de fin:</label>
           <input
             className="inputCrearEvento"
             type="date"
@@ -110,9 +127,9 @@ const EventoEdicion = ({ evento, navigate }) => {
             onChange={handleInputChange}
             {...register("date_end")}
           />
-        </div>
+        </div>)}
         <div className="div-inputCrearEvento">
-          <label>Género:</label>
+          <label>Xénero:</label>
           <input
             className="inputCrearEvento"
             type="text"
@@ -131,10 +148,10 @@ const EventoEdicion = ({ evento, navigate }) => {
             name="content"
             {...register("content", { required: true })}
           ></textarea>
-          {errors.content && <span>Contenido es requerido</span>}
+          {errors.content && <span>Contido é requerido</span>}
         </div>
         <div className="div-inputCrearEvento">
-          <label>Imagen:</label>
+          <label>Imaxe:</label>
           <SubirImagen
             register={register}
             funcion={(e) =>
