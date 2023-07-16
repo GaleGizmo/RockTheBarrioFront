@@ -2,7 +2,7 @@
 .event-list-modal {
     position: fixed;
    
-    width: fit-content;
+    width: max-content;
     
     max-width: 300px;
     background-color: rgb(241 103 4);
