@@ -4,6 +4,7 @@
   margin-top: 0;
  
 }
+
 @media (min-width: 420px) {
   .cardReg {
     display: flex;
@@ -70,8 +71,11 @@
     
   }
   .margin-botonReg {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
     margin-top: 5%;
-    padding-top: 120px;
+    padding-top: 150px;
   }
   .fechaReg {
     width: 100%;
@@ -141,7 +145,7 @@
   }
 
   .div-inputReg {
-    height: 30px;
+    
     margin-top: 15%;
    
     display: flex;
@@ -149,12 +153,13 @@
     justify-content: center;
     align-items: center;
   }
-  .imgReg {
-    margin-top: 25%;
-  }
+ 
   .margin-botonReg {
-    margin-top: 10%;
-    padding-top: 120px;
+    justify-content: center;
+    display: flex;
+    gap: 5px;
+    margin-top: 0;
+    padding-top: 150px;
   }
   .fechaReg {
     width: 81%;

@@ -111,7 +111,7 @@ const FormularioRegistro = () => {
               setImageFile(URL.createObjectURL(e.target.files[0]))
             }
           />
-          {imageFile && <img className="imagenReg" src={imageFile} />}
+          {imageFile && <img className="imagen-formulario avatar" src={imageFile} />}
         </div>
 
         <div className="margin-botonReg">

@@ -120,6 +120,10 @@ const FormularioCrearEvento = () => {
           />
         </div>
         <div className="div-inputCrearEvento">
+          <label>Género</label>
+          <input className="inputCrearEvento" {...register("genre")} />
+        </div>
+        <div className="div-inputCrearEvento">
           <label>URL</label>
           <input className="inputCrearEvento" {...register("url")} />
         </div>
@@ -135,10 +139,7 @@ const FormularioCrearEvento = () => {
             <img className="imagen-formulario imagen-crear" src={imageFile} />
           )}
         </div>
-        <div className="div-inputCrearEvento">
-          <label>Género</label>
-          <input className="inputCrearEvento" {...register("genre")} />
-        </div>
+        
         <div className="margin-boton">
           <Button text="Crear evento" type="large" />
         </div>

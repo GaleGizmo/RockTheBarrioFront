@@ -2,5 +2,16 @@
     width:100px;
     height: 100px;
     position: fixed;
-    right: 20%
+    left: 37%;
+    bottom: 12%
+}
+.avatar{
+    bottom: 30%
+  }
+@media (max-width: 420px){
+    .imagen-formulario{
+       
+        left: 33%;
+        
+    }
 }

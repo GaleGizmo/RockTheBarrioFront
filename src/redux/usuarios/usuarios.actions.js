@@ -99,11 +99,11 @@ const registerUser = (datos, navigate) => async () => {
 const updateUser = (datos, navigate) => async (dispatch) => {
   try {
     const formData = new FormData();
-    datos.birthday=""
-    console.log(datos);
+    datos.birthday="";
+    
     formData.append("email", datos.email);
     formData.append("username", datos.username);
-    formData.append("password", datos.password);
+    // formData.append("password", datos.password);
     formData.append("birthday", datos.birthday);
     formData.append("newsletter", datos.newsletter);
     formData.append("newevent", datos.newevent);

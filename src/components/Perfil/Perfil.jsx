@@ -25,7 +25,7 @@ const Perfil = ({ userData, onEditClick }) => {
         <Button text="Newsletter" type="medium" onClick={sendEventos}/>
       )}
       <div className="margin-botonReg">
-        {/* <Button text="Editar" type="large" onClick={onEditClick} /> */}
+        <Button text="Editar" type="medium" onClick={onEditClick} />
       </div>
     </div>
   );

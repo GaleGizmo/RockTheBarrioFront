@@ -27,8 +27,12 @@ const FormularioEdicionUsuario = ({ userData }) => {
     // Rellena el form con los datos del usuario
     setValue("email", userData.email);
     setValue("username", userData.username);
+    setValue("newevent", userData.newevent);
+    setValue("newsletter", userData.newsletter)
   }, [userData, setValue]);
-
+const handleCancel=()=>{
+  navigate("/")
+}
   const handleFormSubmit = (data) => {
     const editedUser = {
       ...userData,
@@ -40,7 +44,7 @@ const FormularioEdicionUsuario = ({ userData }) => {
 
   return (
     <div className="cardReg perfil-container">
-      <h1>EDITAR DATOS DE USUARIO</h1>
+      <h1>EDITAR DATOS DO USUARIO</h1>
       <p className="error-message">{error}</p>
       <form onSubmit={handleSubmit(handleFormSubmit)}>
         <div className="div-inputReg">
@@ -53,21 +57,21 @@ const FormularioEdicionUsuario = ({ userData }) => {
             className="inputReg"
           />
           {errors.email && (
-            <span className="error-message">Email es requerido</span>
+            <span className="error-message">Email é requerido</span>
           )}
         </div>
         <div className="div-inputReg">
           <label className="margin-label">Usuario</label>
           <input
             {...register("username", {
-              required: "Usuario es requerido",
+              required: "Usuario é requerido",
               minLength: {
                 value: 2,
-                message: "Mínimo dos caracteres",
+                message: "Mínimo dous caracteres",
               },
               maxLength: {
                 value: 20,
-                message: "No más de 20 caracteres",
+                message: "Non máis de 20 caracteres",
               },
             })}
             className="inputReg"
@@ -76,8 +80,28 @@ const FormularioEdicionUsuario = ({ userData }) => {
             <span className="error-message">{errors.username.message}</span>
           )}
         </div>
+        <div className="div-inputReg">
+        <label className="margin-label">Notifica novo evento</label>
+        <input
+            {...register("newevent", { required: true })}
+            type="checkbox"
+            name="newevent"
+            id="newevent"
+            className="inputReg"
+          />
+        </div>
+        <div className="div-inputReg">
+        <label className="margin-label">Newsletter semanal</label>
+        <input
+            {...register("newsletter", { required: true })}
+            type="checkbox"
+            name="newsletter"
+            id="newsletter"
+            className="inputReg"
+          />
+        </div>
         <div className="div-inputReg imgReg">
-          <label>Imagen</label>
+          <label>Imaxe</label>
           <SubirImagen
             register={register}
             funcion={(e) =>
@@ -88,20 +112,21 @@ const FormularioEdicionUsuario = ({ userData }) => {
             <img
               className="imagen-formulario"
               src={userData.avatar}
-              alt="Avatar del usuario"
+              alt="Avatar do usuario"
             />
           )}
           {imageFile && (
             <img
               className="imagen-formulario"
               src={imageFile}
-              alt="Avatar del usuario"
+              alt="Avatar do usuario"
             />
           )}
         </div>
 
         <div className="margin-botonReg">
-          <Button text="Guardar cambios" type="large" />
+        <Button text="Cancelar" type="medium" onClick={handleCancel}/>
+          <Button text="Gardar cambios" type="medium" onClick={handleSubmit} />
         </div>
       </form>
     </div>

@@ -160,7 +160,7 @@ const EventoEdicion = ({ evento, navigate }) => {
           />
           {evento.image && (
             <img
-              className="imagen-formulario"
+              className="imagen-formulario imagen-evento"
               src={evento.image}
               alt="Imagen del evento"
             />

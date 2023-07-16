@@ -4,3 +4,10 @@
     margin: auto;
     height: fit-content;
 }
+@media (max-width: 420px){
+    .editarEvento{
+       
+        width: 85%;
+        
+    }
+}
