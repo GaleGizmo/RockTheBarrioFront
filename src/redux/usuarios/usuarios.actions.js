@@ -150,7 +150,7 @@ const forgotPassword = (email) => async () => {
   dispatch({ type: "LOADING_USUARIOS" });
   try {
     await API.post("/usuario/recuperar-password/", { email });
-    dispatch({ type: "FORGOT_PASSWORD_SUCCESS", contenido: "Se ha enviado un correo electrónico de recuperación de contraseña" });
+    dispatch({ type: "FORGOT_PASSWORD_SUCCESS", contenido: "Enviouse un correo electrónico de recuperación de contrasinal"});
   } catch (error) {
     if (error.response && error.response.data && error.response.data.message) {
       dispatch({ type: "ERROR_USUARIO", contenido: error.response.data.message });
@@ -172,4 +172,19 @@ const resetPassword = (token, password, navigate) => async () => {
     }
   }
 };
-export { login, logout, setUser, checkSesion, registerUser, updateUser, resetPassword, forgotPassword, deleteUser};
+const unsubscribeEmail = (email, unsubscribe, userId, navigate)=> async ()=>{
+  dispatch({ type: "LOADING_USUARIOS" });
+  try {
+    await API.put(`/usuario/reset-password/unsubscribe/${userId}`, { email, unsubscribe });
+    dispatch({ type: "FORGOT_PASSWORD_SUCCESS", contenido: "Axustes de suscripción modificados"});
+
+    navigate("/")
+  } catch (error) {
+    if (error.response && error.response.data && error.response.data.message) {
+      dispatch({ type: "ERROR_USUARIO", contenido: error.response.data.message });
+    } else {
+      dispatch({ type: "ERROR_USUARIO", contenido: "Error desconocido" });
+    }
+  }
+}
+export { login, logout, setUser, checkSesion, registerUser, updateUser, resetPassword, forgotPassword, unsubscribeEmail, deleteUser};

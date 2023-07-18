@@ -47,7 +47,7 @@ const FormularioLogin = () => {
           <Button text="Login" type="large" />
         </div>
         <div className="margin-link">
-          <Link to="/reset-password/init">Esquezín o contrasinal</Link>
+          <Link to="/reset-password/forgot">Esquezín o contrasinal</Link>
         </div>
       </form>
     </div>

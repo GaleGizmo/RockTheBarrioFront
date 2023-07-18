@@ -45,7 +45,7 @@ const DetallesEvento = () => {
   }
   useEffect(() => {
     if (evento && evento.content) {
-      const sentences = evento.content.split(".");
+      const sentences = evento.content.split(/[.:]/);
       const formattedSentences = sentences.map((sentence, index) => (
         <p key={index}>{sentence.trim()}</p>
       ));

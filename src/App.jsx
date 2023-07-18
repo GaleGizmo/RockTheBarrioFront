@@ -17,8 +17,8 @@ import ScrollArriba from "./components/ScrollArriba/ScrollArriba";
 import PerfilUsuario from "./pages/PerfilUsuario/PerfilUsuario";
 import Terminos from "./pages/Legal/Terminos";
 import Privacidad from "./pages/Legal/Privacidad";
-import RecuperarPassword from "./pages/RecuperarPassword/RecuperarPassword";
-import ResetearPassword from "./components/ResetearPassword/ResetearPassword";
+import ConfirmarEmail from "./pages/ConfirmarEmail/ConfirmarEmail";
+
 import CambiarPassword from "./pages/CambiarPassword/CambiarPassword";
 
 function App() {
@@ -40,7 +40,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/terminos" element={<Terminos />} />
             <Route path="/privacidad" element={<Privacidad />} />
-            <Route path="/recuperar-password" element={<RecuperarPassword />} />
+            <Route path="/recuperar-password" element={<ConfirmarEmail />} />
             <Route
               path="/reset-password/:token"
               element={<CambiarPassword />}
