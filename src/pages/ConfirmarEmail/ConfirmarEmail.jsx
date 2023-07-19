@@ -17,7 +17,7 @@ const ConfirmarEmail = ({ token }) => {
 
   const handleSendEmail = async (data) => {
     if (token.includes("unsubscribe")) {
-      console.log(data.email, token, user._id );
+      
       dispatch(unsubscribeEmail(data.email, token, user._id, navigate));
     } else dispatch(forgotPassword(data.email));
   };

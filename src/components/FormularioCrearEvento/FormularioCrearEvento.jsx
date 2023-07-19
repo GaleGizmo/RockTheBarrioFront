@@ -49,7 +49,7 @@ const FormularioCrearEvento = () => {
             {...register("title", { required: true })}
           />
           {errors.title && (
-            <span className="error-message">Título es requerido</span>
+            <span className="error-message">Título é requerido</span>
           )}
         </div>
         <div className="div-inputCrearEvento">
@@ -59,7 +59,7 @@ const FormularioCrearEvento = () => {
             {...register("subtitle", { required: true })}
           />
           {errors.subtitle && (
-            <span className="error-message">Subtítulo es requerido</span>
+            <span className="error-message">Artista é requerido</span>
           )}
         </div>
         <div className="infoCrearEvento">
@@ -69,7 +69,7 @@ const FormularioCrearEvento = () => {
             className="inputCrearEvento"
           />
           {errors.content && (
-            <span className="error-message">Contenido es requerido</span>
+            <span className="error-message">Contido é requerido</span>
           )}
         </div>
 
@@ -80,22 +80,22 @@ const FormularioCrearEvento = () => {
             {...register("site", { required: true })}
           />
           {errors.site && (
-            <span className="error-message">Sitio es requerido</span>
+            <span className="error-message">Lugar é requerido</span>
           )}
         </div>
         <div className="div-inputCrearEvento">
-          <label>Precio</label>
+          <label>Prezo</label>
           <input
             className="inputCrearEvento"
             type="number"
             {...register("price", { required: true })}
           />
           {errors.price && (
-            <span className="error-message">Precio es requerido</span>
+            <span className="error-message">Prezo é requerido</span>
           )}
         </div>
         <div className="fechaCrearEvento">
-          <label>Fecha de Inicio</label>
+          <label>Data de Inicio</label>
           <input
             className="inputCrearEvento"
             type="date"
@@ -108,11 +108,11 @@ const FormularioCrearEvento = () => {
             {...register("time_start")}
           />
           {errors.date_start && (
-            <span className="error-message">Fecha de Inicio es requerida</span>
+            <span className="error-message">Data de Inicio é requerida</span>
           )}
         </div>
         <div className="fechaCrearEvento">
-          <label>Fecha de Fin</label>
+          <label>Data de Fin</label>
           <input
             className="inputCrearEvento"
             type="date"
@@ -120,7 +120,7 @@ const FormularioCrearEvento = () => {
           />
         </div>
         <div className="div-inputCrearEvento">
-          <label>Género</label>
+          <label>Xénero</label>
           <input className="inputCrearEvento" {...register("genre")} />
         </div>
         <div className="div-inputCrearEvento">
@@ -128,7 +128,7 @@ const FormularioCrearEvento = () => {
           <input className="inputCrearEvento" {...register("url")} />
         </div>
         <div className="div-inputCrearEvento">
-          <label>Imagen</label>
+          <label>Imaxe</label>
           <SubirImagen
             register={register}
             funcion={(e) =>
