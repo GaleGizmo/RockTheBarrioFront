@@ -32,7 +32,7 @@
 .divBoton{
     margin-bottom: 1%;
     display: flex;
-    justify-content: end;
+    justify-content: center;
 }
 .inputVal{
     margin-left:1%;

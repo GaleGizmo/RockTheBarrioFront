@@ -24,7 +24,7 @@ const EventoEdicion = ({ evento, navigate }) => {
     const { day_start, time_start } = data;
   
     // Combinar la fecha y la hora en un objeto Date
-    const combinedDate = new Date(`${day_start}T${time_start}`);
+    const combinedDate = new Date(`${day_start}T${time_start}:00+02:00`);
     const editedEvento = {
       ...evento,
       ...data,
