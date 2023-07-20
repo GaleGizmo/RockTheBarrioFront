@@ -71,7 +71,9 @@
     
   }
   .margin-botonReg {
+    
     display: flex;
+    flex-direction: column;
     justify-content: center;
     gap: 10px;
     margin-top: 5%;
@@ -155,6 +157,7 @@
   }
  
   .margin-botonReg {
+    flex-direction: column;
     justify-content: center;
     display: flex;
     gap: 5px;
