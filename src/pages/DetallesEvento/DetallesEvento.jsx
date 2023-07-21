@@ -114,9 +114,9 @@ const DetallesEvento = () => {
                   </h3>
                 )}
                 <div>{formattedContent}</div>
-                <div className="margin-boton-info">
+                {evento.url && (<div className="margin-boton-info">
                   <Button text={textoBoton} type="medium" onClick={comprar} />
-                </div>
+                </div>)}
                 {user?.role === 2 && (
                   <div className="evento-botonesAdmin">
                     <Button
