@@ -6,6 +6,7 @@ import SubirImagen from "../../components/SubirImagen/SubirImagen";
 import Button from "../Button/Button";
 import "./EventoEdicion.css";
 
+
 const EventoEdicion = ({ evento, navigate }) => {
   const dispatch = useDispatch();
   const {
@@ -19,12 +20,23 @@ const EventoEdicion = ({ evento, navigate }) => {
   const handleInputChange = (e) => {
     setValue(e.target.name, e.target.value);
   };
+  const adjustTime = (dateString) => {
+    const date = new Date(dateString);
+    date.setHours(date.getHours() + 2);
+  
+    // Formatear la hora en un string en formato "HH:mm"
+    const formattedTime = date.toISOString().slice(11, 16);
+  
+    return formattedTime;
+  };
 
   const handleSave = (data) => {
     const { day_start, time_start } = data;
   
     // Combinar la fecha y la hora en un objeto Date
-    const combinedDate = new Date(`${day_start}T${time_start}:00+02:00`);
+    const combinedDate = new Date(`${day_start}T${time_start}`);
+   
+   
     const editedEvento = {
       ...evento,
       ...data,
@@ -111,7 +123,7 @@ const EventoEdicion = ({ evento, navigate }) => {
             className="inputCrearEvento"
             type="time"
             name="time_start"
-            defaultValue={evento.date_start.slice(11, 16)}
+            defaultValue={adjustTime(evento.date_start)}
             onChange={handleInputChange}
             {...register("time_start", { required: true })}
           />
