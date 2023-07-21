@@ -9,7 +9,7 @@ import {
 } from "../../redux/eventos/eventos.actions";
 import Button from "../../components/Button/Button";
 import NuevoComentario from "../../components/NuevoComentario/NuevoComentario";
-import { formatDate } from "../../shared/formatDate";
+import { esHoy, formatDate } from "../../shared/formatDate";
 import MapComponent from "../../components/MapComponent/MapComponent";
 import MapIcon from "../../components/MapIcon/MapIcon";
 import { AiFillCloseSquare } from "react-icons/ai";
@@ -106,7 +106,15 @@ const DetallesEvento = () => {
                     {evento.price} €
                   </h3>
                 )}
-                <h3>{fechaStart}h</h3>
+                {esHoy(evento.date_start) ? (
+                <h3 className="gratuitoDetEv ">HOXE <span>{fechaStart.split(",")[2]}h</span></h3>
+              ) : (
+                <div className="muestra-fecha">
+                  <h3>{fechaStart}h</h3>
+
+                  {fechaEnd && <span className="fecha-end"> {fechaEnd}</span>}
+                </div>
+              )}
                 {fechaEnd && <h3>{fechaEnd}</h3>}
                 {evento.genre && (
                   <h3>
