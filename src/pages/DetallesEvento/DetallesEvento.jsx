@@ -45,11 +45,10 @@ const DetallesEvento = () => {
   }
   useEffect(() => {
     if (evento && evento.content) {
-      const sentences = evento.content.split(/[.:]/);
-      const formattedSentences = sentences.map((sentence, index) => (
-        <p key={index}>{sentence.trim()}</p>
-      ));
-      setFormattedContent(formattedSentences);
+      const formattedContent = evento.content.replace(/[:.](?!\s*-)|\./g, (match) =>
+      match === "." ? ".\n" : ": "
+    );
+          setFormattedContent(formattedContent);
     }
   }, [evento]);
   const fechaStart = evento?.date_start ? formatDate(evento.date_start) : null;
@@ -121,7 +120,9 @@ const DetallesEvento = () => {
                     <strong>Xénero:</strong> {evento.genre}
                   </h3>
                 )}
-                <div>{formattedContent}</div>
+                <div>{formattedContent.split('\n').map((sentence, index) => (
+          <p key={index}>{sentence}</p>
+        ))}</div>
                 {evento.url && (<div className="margin-boton-info">
                   <Button text={textoBoton} type="medium" onClick={comprar} />
                 </div>)}
