@@ -39,7 +39,7 @@ const addEvento = (eventoData, navigate, userId) => async () => {
     if (eventoData.date_end) {
       formData.append("date_end", eventoData.date_end);
     }
-
+    formData.append("buy_ticket", eventoData.buy_ticket)
     formData.append("genre", eventoData.genre);
     formData.append("content", eventoData.content);
     formData.append("url", eventoData.url);
@@ -77,7 +77,7 @@ const editEvento = (id, eventoData, navigate) => {
       if (eventoData.date_end) {
         formData.append("date_end", eventoData.date_end);
       }
-
+      formData.append("buy_ticket", eventoData.buy_ticket)
       formData.append("genre", eventoData.genre);
       formData.append("content", eventoData.content);
       formData.append("url", eventoData.url);

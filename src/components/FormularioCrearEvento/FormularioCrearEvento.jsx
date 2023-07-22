@@ -10,7 +10,12 @@ import Button from "../Button/Button";
 const FormularioCrearEvento = () => {
   const { user } = useSelector((state) => state.usuariosReducer);
   const navigate = useNavigate();
- 
+  const [showBuyTicketField, setShowBuyTicketField] = useState(false);
+
+  const handlePriceChange = (event) => {
+    const price = event.target.value;
+    setShowBuyTicketField(parseFloat(price) > 0);
+  };
   const onSubmit = (data) => {
     const { day_start, time_start } = data;
   
@@ -89,11 +94,18 @@ const FormularioCrearEvento = () => {
             className="inputCrearEvento"
             type="number"
             {...register("price", { required: true })}
+            onChange={handlePriceChange}
           />
           {errors.price && (
             <span className="error-message">Prezo é requerido</span>
           )}
         </div>
+        {showBuyTicketField && (
+          <div className="div-inputCrearEvento">
+            <label>URL de compra</label>
+            <input className="inputCrearEvento" {...register("buy_ticket")} />
+          </div>
+        )}
         <div className="fechaCrearEvento">
           <label>Data de Inicio</label>
           <input

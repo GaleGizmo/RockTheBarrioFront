@@ -1,4 +1,4 @@
-.texto-aviso{
+.texto-aviso {
   color: white;
   font-weight: 600;
   background-color: rgba(0, 0, 0, 0.3);
@@ -23,7 +23,7 @@
   margin-top: 12%;
   margin-left: 2.5%;
   margin-right: 2.5%;
-  background-image:linear-gradient(to bottom, rgb(237 132 57), #fff);
+  background-image: linear-gradient(to bottom, rgb(237 132 57), #fff);
   border: solid black;
 }
 .cardDetEv {
@@ -31,9 +31,9 @@
   transform: translateX(-100px);
   animation: appearCard 0.5s ease-in-out forwards;
 }
-.evento-botonesAdmin{
+.evento-botonesAdmin {
   display: flex;
-  gap: 10px
+  gap: 10px;
 }
 @keyframes appearCard {
   0% {
@@ -45,7 +45,26 @@
     transform: translateX(0);
   }
 }
+.detalles_precio {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+.boleto_precio {
+ 
+  transition: drop-shadow 0.3s; /* Agrega una transición suave para el efecto de brillo */
+}
+.boleto_imagen {
+  transition: filter 0.3s;
+  height: fit-content;
 
+}
+
+.boleto_imagen:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0px 0px 7px rgba(255, 254, 254, 0.7));
+  /* filter: url(#brillo_personalizado); */
+}
 .cardDetEv h1 {
   font-size: 4.5vw;
   font-weight: bold;
@@ -54,7 +73,7 @@
   text-align: center;
 }
 
-.cardDetEv h2{
+.cardDetEv h2 {
   margin-top: 1%;
   font-size: 40px;
   margin-bottom: 25px;
@@ -65,7 +84,7 @@
 
 .cardDetEv p {
   font-size: 16px;
-  margin-bottom: 2% ;
+  margin-bottom: 2%;
   margin-top: 2%;
   text-align: center;
   font-weight: bold;
@@ -73,7 +92,7 @@
 
 .cardDetEv img {
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   object-fit: cover;
   max-width: 500px;
 }
@@ -87,7 +106,7 @@
   text-decoration: underline;
 }
 
-.cardDetEv a:visited{
+.cardDetEv a:visited {
   text-decoration: none;
   color: black;
 }
@@ -106,14 +125,13 @@
   width: 100%;
   margin: 1%;
   border: solid;
-  border-radius:8px;
+  border-radius: 8px;
 }
-.divCardDetEv{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-
+.divCardDetEv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 .divDetEv {
   flex-basis: 40%;
@@ -135,49 +153,50 @@
   text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.8);
 }
 
-.centerDetEv{
+.centerDetEv {
   display: flex;
   justify-content: center;
   flex-direction: column;
   margin-top: 10%;
 }
 
-@media (min-width:590px) and (max-width:1040px){
+@media (min-width: 590px) and (max-width: 1040px) {
   .cardDetEv {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #fff;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  box-shadow: 10px 10px 10px rgba(237 132 57, 0.452);
-  padding: 20px;
-  margin-bottom: 10%;
-  text-align: center;
-  width: 100%;
-  margin-top: 12%;
-  margin-left: 2.5%;
-  margin-right: 2.5%;
-  background-image:linear-gradient(to bottom, rgb(237 132 57), #fff);
-  border: solid black;}
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 10px 10px 10px rgba(237 132 57, 0.452);
+    padding: 20px;
+    margin-bottom: 10%;
+    text-align: center;
+    width: 100%;
+    margin-top: 12%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    background-image: linear-gradient(to bottom, rgb(237 132 57), #fff);
+    border: solid black;
+  }
 
-  .margin-boton-info{
+  .margin-boton-info {
     margin-top: 3%;
     margin-bottom: 3%;
   }
-  .evento-botonesAdmin{
-  display: flex;
-  flex-direction: column;
+  .evento-botonesAdmin {
+    display: flex;
+    flex-direction: column;
+  }
+  .divCardDetEv {
+    display: flex;
+    justify-content: center;
+    width: 90%;
+    margin-left: 5%;
+    padding-top: 25%;
+  }
 }
-.divCardDetEv{
-  display: flex;
-  justify-content: center;
-  width: 90%;
-  margin-left: 5%;
-  padding-top: 25%;
-}
-}
-@media (max-width:589px){
+@media (max-width: 589px) {
   .cardDetEv h1 {
     font-size: 50px;
     font-weight: bold;
@@ -185,8 +204,8 @@
     margin-top: 1%;
     text-align: center;
   }
-  .cardDetEv h2{
-  font-size: 28px;
+  .cardDetEv h2 {
+    font-size: 28px;
   }
   .cardDetEv {
     display: flex;
@@ -203,22 +222,26 @@
     margin-top: 25%;
     margin-left: 2.5%;
     margin-right: 2.5%;
-    background-image:linear-gradient(to bottom, rgb(237 132 57), #fff);
-    border: solid black;}
-  
-    .margin-boton-info{
-      margin-top: 3%;
-      margin-bottom: 3%;
-    }
-    .evento-botonesAdmin{
+    background-image: linear-gradient(to bottom, rgb(237 132 57), #fff);
+    border: solid black;
+  }
+
+  .margin-boton-info {
+    margin-top: 3%;
+    margin-bottom: 3%;
+  }
+  .evento-botonesAdmin {
     display: flex;
     flex-direction: column;
   }
-  .divCardDetEv{
+  .divCardDetEv {
     display: flex;
     justify-content: center;
     width: 90%;
     margin-left: 5%;
     padding-top: 25%;
+  }
+  .boleto_imagen {
+    width: 75%;
   }
 }

@@ -6,7 +6,6 @@ import SubirImagen from "../../components/SubirImagen/SubirImagen";
 import Button from "../Button/Button";
 import "./EventoEdicion.css";
 
-
 const EventoEdicion = ({ evento, navigate }) => {
   const dispatch = useDispatch();
   const {
@@ -23,28 +22,26 @@ const EventoEdicion = ({ evento, navigate }) => {
   const adjustTime = (dateString) => {
     const date = new Date(dateString);
     date.setHours(date.getHours() + 2);
-  
+
     // Formatear la hora en un string en formato "HH:mm"
     const formattedTime = date.toISOString().slice(11, 16);
-  
+
     return formattedTime;
   };
 
   const handleSave = (data) => {
     const { day_start, time_start } = data;
-  
+
     // Combinar la fecha y la hora en un objeto Date
     const combinedDate = new Date(`${day_start}T${time_start}`);
-   
-   
+
     const editedEvento = {
       ...evento,
       ...data,
-      date_start:combinedDate
+      date_start: combinedDate,
     };
 
     dispatch(editEvento(evento._id, editedEvento, navigate));
-  
   };
 
   const handleCancel = () => {
@@ -103,7 +100,18 @@ const EventoEdicion = ({ evento, navigate }) => {
             onChange={handleInputChange}
             {...register("price", { required: true })}
           />
-          {errors.price && <span>Precio é requerido</span>}
+          {errors.price && <span>Prezo é requerido</span>}
+        </div>
+        <div className="div-inputCrearEvento">
+          <label>URL de compra</label>
+          <input
+            className="inputCrearEvento"
+            type="text"
+            name="buy_ticket"
+            defaultValue={evento.buy_ticket}
+            onChange={handleInputChange}
+            {...register("buy_ticket")}
+          />
         </div>
         <div className="fechaCrearEvento">
           <label>Data de inicio:</label>
@@ -129,17 +137,19 @@ const EventoEdicion = ({ evento, navigate }) => {
           />
           {errors.time_start && <span>Hora de inicio es requerida</span>}
         </div>
-        {evento.date_end && (<div className="fechaCrearEvento">
-          <label>Data de fin:</label>
-          <input
-            className="inputCrearEvento"
-            type="date"
-            name="date_end"
-            defaultValue={evento.date_end ? evento.date_end.slice(0, 10) : ""}
-            onChange={handleInputChange}
-            {...register("date_end")}
-          />
-        </div>)}
+        {evento.date_end && (
+          <div className="fechaCrearEvento">
+            <label>Data de fin:</label>
+            <input
+              className="inputCrearEvento"
+              type="date"
+              name="date_end"
+              defaultValue={evento.date_end ? evento.date_end.slice(0, 10) : ""}
+              onChange={handleInputChange}
+              {...register("date_end")}
+            />
+          </div>
+        )}
         <div className="div-inputCrearEvento">
           <label>Xénero:</label>
           <input

@@ -40,40 +40,39 @@ const DetallesEvento = () => {
     setShowMap((showMap) => !showMap);
   };
   const [formattedContent, setFormattedContent] = useState("");
-  const goHome=()=>{
-    navigate ("/")
-  }
+  const goHome = () => {
+    navigate("/");
+  };
   useEffect(() => {
     if (evento && evento.content) {
-      const formattedContent = evento.content.replace(/[:.](?!\s*-)|\./g, (match) =>
-      match === "." ? ".\n" : ": "
-    );
-          setFormattedContent(formattedContent);
+      const formattedContent = evento.content.replace(
+        /[:.](?!\s*-)|\./g,
+        (match) => (match === "." ? ".\n" : ": ")
+      );
+      setFormattedContent(formattedContent);
     }
   }, [evento]);
   const fechaStart = evento?.date_start ? formatDate(evento.date_start) : null;
   const fechaEnd = evento?.date_end ? formatDate(evento.date_end) : null;
-  let textoBoton = "";
-  if (evento?.price && evento?.price > 0) {
-    textoBoton = "Comprar";
-  } else {
-    textoBoton = "+Info";
-  }
+ 
+ 
 
   return (
     <div>
       {!evento ? (
         <div className="div-img">
-          <img src="/assets/music.gif" style={{ marginTop: '200px' }} alt="Cargando..." />
+          <img
+            src="/assets/music.gif"
+            style={{ marginTop: "200px" }}
+            alt="Cargando..."
+          />
         </div>
       ) : (
         <>
           <div>
-          
             <div className="divCardDetEv">
-            
               <div className="cardDetEv">
-              <AiFillCloseSquare className="close-icon" onClick={goHome}/>
+                <AiFillCloseSquare className="close-icon" onClick={goHome} />
                 <h1 className={isLongTitle ? "long-title" : ""}>
                   {evento.title}
                 </h1>
@@ -100,32 +99,59 @@ const DetallesEvento = () => {
                 {evento.price == 0 ? (
                   <h3 className="gratuitoDetEv">GRATUITO</h3>
                 ) : (
-                  <h3>
-                    <strong>Prezo: </strong>
-                    {evento.price} €
-                  </h3>
+                  <div className="detalles_precio">
+                    <h3>
+                      <strong>Prezo: </strong>
+                      {evento.price} €
+                    </h3>
+                    <a
+                      className="boleto_precio"
+                      href={evento.buy_ticket}
+                      target="blank"
+                    >
+                      <svg
+                        className="boleto_imagen"
+                        width="40"
+                        height="40"
+                        viewBox="0 0 100 100"
+                      >
+                        <image
+                          href="/assets/boleto2.svg"
+                          width="100"
+                          height="100"
+                        />
+                       
+                      </svg>
+                    </a>
+                  </div>
                 )}
                 {esHoy(evento.date_start) ? (
-                <h3 className="gratuitoDetEv ">HOXE <span>{fechaStart.split(",")[2]}h</span></h3>
-              ) : (
-                <div className="muestra-fecha">
-                  <h3>{fechaStart}h</h3>
+                  <h3 className="gratuitoDetEv ">
+                    HOXE <span>{fechaStart.split(",")[2]}h</span>
+                  </h3>
+                ) : (
+                  <div className="muestra-fecha">
+                    <h3>{fechaStart}h</h3>
 
-                  {fechaEnd && <span className="fecha-end"> {fechaEnd}</span>}
-                </div>
-              )}
+                    {fechaEnd && <span className="fecha-end"> {fechaEnd}</span>}
+                  </div>
+                )}
                 {fechaEnd && <h3>{fechaEnd}</h3>}
                 {evento.genre && (
                   <h3>
                     <strong>Xénero:</strong> {evento.genre}
                   </h3>
                 )}
-                <div>{formattedContent.split('\n').map((sentence, index) => (
-          <p key={index}>{sentence}</p>
-        ))}</div>
-                {evento.url && (<div className="margin-boton-info">
-                  <Button text={textoBoton} type="medium" onClick={comprar} />
-                </div>)}
+                <div>
+                  {formattedContent.split("\n").map((sentence, index) => (
+                    <p key={index}>{sentence}</p>
+                  ))}
+                </div>
+                {evento.url && (
+                  <div className="margin-boton-info">
+                    <Button text="+Info" type="medium" onClick={comprar} />
+                  </div>
+                )}
                 {user?.role === 2 && (
                   <div className="evento-botonesAdmin">
                     <Button
