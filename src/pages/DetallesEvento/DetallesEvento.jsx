@@ -54,8 +54,6 @@ const DetallesEvento = () => {
   }, [evento]);
   const fechaStart = evento?.date_start ? formatDate(evento.date_start) : null;
   const fechaEnd = evento?.date_end ? formatDate(evento.date_end) : null;
- 
- 
 
   return (
     <div>
@@ -76,7 +74,19 @@ const DetallesEvento = () => {
                 <h1 className={isLongTitle ? "long-title" : ""}>
                   {evento.title}
                 </h1>
-                {evento.image ? (
+                {evento.youtubeVideoId ? (
+                  <div className="youtube-video-container">
+                    <iframe
+                      width="560"
+                      height="315"
+                      src={`https://www.youtube.com/embed/${evento.youtubeVideoId}`}
+                      title="YouTube video player"
+                      frameborder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen
+                    ></iframe>
+                  </div>
+                ) : evento.image ? (
                   <img src={evento.image} alt={evento.title} />
                 ) : (
                   <img
@@ -120,7 +130,6 @@ const DetallesEvento = () => {
                           width="100"
                           height="100"
                         />
-                       
                       </svg>
                     </a>
                   </div>
