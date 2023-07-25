@@ -1,5 +1,5 @@
 .boton{
-    background-color: rgb(21, 50, 67);;
+    background-color: var(--secondary-color);;
     color: white;
     cursor: pointer;
     height: 30px;
@@ -28,11 +28,11 @@ width:200px
 }
 
 .boton:hover{
-transform: scale(1.1);
-color: rgb(21, 50, 67);
+transform: scale(1.05);
+color: var(--secondary-color);
 background-color: white;
 font-weight: bold;
-border-color: #757575;
+border-color: var(--terciary-color);
 }
 @media (max-width:420px){
     .large{

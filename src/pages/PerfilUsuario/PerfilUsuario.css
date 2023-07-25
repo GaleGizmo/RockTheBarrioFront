@@ -10,7 +10,7 @@
     transform: scale(1.5);
 }
 .close-icon:hover{
-    color: azure;
+    color: var(--hover-color);
     cursor: pointer;
 }
 .perfil-avatar{

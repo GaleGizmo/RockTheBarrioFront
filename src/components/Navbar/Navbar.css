@@ -3,12 +3,12 @@
   position: fixed;
   top: 1px;
   right: 15px;
-  color: rgb(72, 71, 71);
-  filter: drop-shadow(2px 2px 1px rgba(0, 0, 0, 0.5));
+  color: var(--secondary-color);
+  filter: drop-shadow(2px 2px 1px var(--secondary-shadow));
 }
 .icono-salir:hover {
   cursor: pointer;
-  color: azure;
+  color: var(--hover-color);
 }
 .boton-crear {
   position: fixed;
@@ -56,7 +56,7 @@
 h3 a {
   text-decoration: none;
   font-weight: 600;
-  color: rgb(13, 47, 122);
+  color: var(--link-color)
 }
 .no-logged {
     

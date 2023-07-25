@@ -1,3 +1,15 @@
+:root {
+  --primary-color: #ed8439;
+  --secondary-color: #153243;
+  --secondary-shadow: #153243ab;
+  --terciary-color: #757575;
+  --link-color: #0d2f7a;
+  --icon-color: #124ec6;
+  --event-color: #f16704;
+  --hover-color: #f0e9e9;
+  --text-color: #212529;
+}
+
 body {
   margin: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -11,11 +23,10 @@ body {
   padding-bottom: 100px;
   background-attachment: fixed;
 }
-.div-img{
+.div-img {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin:auto;
-  width: 60%
-  
-  }
+  margin: auto;
+  width: 60%;
+}

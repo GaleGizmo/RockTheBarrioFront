@@ -1,11 +1,10 @@
 .header {
-  background-color: rgb(241 103 4);
+  background-color: var(--primary-color);
   height: 120px;
   align-items: center;
   padding: 0 20px;
   display: flex;
   justify-content: space-between;
-  box-shadow: 2px 2px 10px rgba(241, 103, 4, 0.452);
   position: fixed;
   top: 0;
   width: 100%;
@@ -22,7 +21,7 @@
 }
 
 .link:hover {
-  color: azure;
+  color: var(--hover-color);
   text-decoration-line: none;
 }
 
@@ -44,10 +43,10 @@
 .title-font {
   font-family: "urban-jungle";
   font-size: 80px;
-  color: rgb(0, 0, 0);
+  color: var(--secondary-color)
 }
 .title-font:hover{
-  color: rgb(240, 233, 233);
+  color: var(--hover-color)
 }
 .title {
   margin-top: 50px;

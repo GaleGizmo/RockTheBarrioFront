@@ -5,8 +5,8 @@
     width: max-content;
     
     max-width: 300px;
-    background-color: rgb(241 103 4);
-    background-image: linear-gradient(to bottom, rgb(241 103 4), #fff);
+    background-color: var(--event-color);
+    background-image: linear-gradient(to bottom, var(--event-color), #fff);
     border-radius: 8px;
     border: 2px solid black;
     padding: 7px;
@@ -28,7 +28,7 @@
     text-decoration: none;
   }
   .event-list-modal h3:hover {
-    color:rgb(240, 233, 233);
+    color:var(--hover-color)
   }
   
   

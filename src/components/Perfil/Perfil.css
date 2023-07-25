@@ -1,4 +1,4 @@
 .perfil__user-data{
     font-weight: 600;
-    color: rgb(13, 47, 122)
+    color: var(--link-color);
 }

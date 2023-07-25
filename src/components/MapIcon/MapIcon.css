@@ -1,15 +1,15 @@
 .map-icon{
-  color: rgb(18, 78, 198);
-  filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.5));
+  color: var(--icon-color);
+  filter: drop-shadow(2px 2px 2px var(--secondary-shadow));
 }
 .map-icon__active{
-  color: rgb(240, 233, 233)
+  color: var(--hover-color)
 }
 .map-icon__active:hover{
   cursor:pointer;
 }
 .map-icon:hover{
-    color: rgb(240, 233, 233);
+    color: var(--hover-color)
     cursor:pointer;
     
     
