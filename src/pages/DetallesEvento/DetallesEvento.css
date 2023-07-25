@@ -207,6 +207,7 @@
   .evento-botonesAdmin {
     display: flex;
     flex-direction: column;
+    align-items: center;
   }
   .divCardDetEv {
     display: flex;
@@ -253,6 +254,7 @@
   .evento-botonesAdmin {
     display: flex;
     flex-direction: column;
+    align-items: center;
   }
   .divCardDetEv {
     display: flex;

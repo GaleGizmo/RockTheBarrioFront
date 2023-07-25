@@ -34,7 +34,7 @@
   position: fixed;
   margin-top: 20px;
   color: brown;
-  
+  box-shadow: 5px 5px 4px #15324397;
   
   max-width: 20%;
 }

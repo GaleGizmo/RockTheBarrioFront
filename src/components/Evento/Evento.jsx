@@ -7,6 +7,7 @@ import esLocale from "date-fns/esm/locale/es/index.js";
 import MapIcon from "../MapIcon/MapIcon";
 
 import MapComponent from "../MapComponent/MapComponent";
+import Button from "../Button/Button";
 
 const Evento = ({ evento }) => {
   const [showMap, setShowMap] = useState(false);
@@ -45,8 +46,11 @@ const Evento = ({ evento }) => {
             <h1 className={isLongTitle ? "long-title" : ""}>{evento.title}</h1>
           </Link>
           <h2>{evento.subtitle}</h2>
+          
         </div>
         <div className="div2">
+        <div className="ver-detalles"><Link to={{ pathname: `/${evento._id}`, state: { evento } }}>
+          <Button text="Máis Info" type="small"/></Link></div>
           {evento.site && evento.site !== "Varios" ? (
             <p>
               {evento.site.split(",")[0]}{" "}

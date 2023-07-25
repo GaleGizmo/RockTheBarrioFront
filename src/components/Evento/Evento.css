@@ -8,7 +8,7 @@
   background-color: #fff;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
-  /* box-shadow: 10px 10px 10px rgba(86, 185, 255, 0.452); */
+  box-shadow: 5px 5px 4px #15324397;
   padding: 20px;
   margin-bottom: 20px;
   text-align: center;
@@ -122,6 +122,14 @@
   flex-direction: column;
   align-items: start;
 }
+.ver-detalles{
+/* margin-top: auto; */
+/* padding-bottom: 2%; */
+position: fixed;
+right:152px;
+bottom: 5px;
+
+}
 .gratuito {
   color: red;
   font-weight: bold;
@@ -137,14 +145,15 @@
   text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.8);
 }
 .div2 {
-  flex-basis: 25%;
+  position: relative;
+  flex-basis: 32%;
   flex-grow: 1;
   max-height: 200px;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: end;
-  margin-right: 3%;
+  margin-right: 1%;
 }
 .truncate {
   white-space: nowrap;
@@ -168,7 +177,14 @@
     width: 95%;
 
   }
+  .ver-detalles{
+    position: absolute;
+    margin-left: 2%;
+    right: auto;
+    left: 0;
+    bottom: 0;
     
+    }
   .border-card {
     flex-direction: column;
     height: auto;

@@ -39,6 +39,7 @@ const addEvento = (eventoData, navigate, userId) => async () => {
     if (eventoData.date_end) {
       formData.append("date_end", eventoData.date_end);
     }
+    formData.append("youtubeVideoId", eventoData.youtubeVideoId);
     formData.append("buy_ticket", eventoData.buy_ticket)
     formData.append("genre", eventoData.genre);
     formData.append("content", eventoData.content);
@@ -48,11 +49,7 @@ const addEvento = (eventoData, navigate, userId) => async () => {
     }
     formData.append("user_creator", eventoData.user_creator);
 
-    // APIIMAGES.post("/evento", formData).then((resultado) => {
-    //   dispatch({ type: "ADD_EVENTO", contenido: resultado.data });
-    //   navigate("/");
-    // });
-
+   
     const resultado = await APIIMAGES.post("/evento", formData);
     dispatch({ type: "ADD_EVENTO", contenido: resultado.data });
     navigate("/");
@@ -77,6 +74,7 @@ const editEvento = (id, eventoData, navigate) => {
       if (eventoData.date_end) {
         formData.append("date_end", eventoData.date_end);
       }
+      formData.append("youtubeVideoId", eventoData.youtubeVideoId);
       formData.append("buy_ticket", eventoData.buy_ticket)
       formData.append("genre", eventoData.genre);
       formData.append("content", eventoData.content);

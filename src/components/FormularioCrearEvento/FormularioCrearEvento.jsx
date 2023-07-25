@@ -136,6 +136,10 @@ const FormularioCrearEvento = () => {
           <input className="inputCrearEvento" {...register("genre")} />
         </div>
         <div className="div-inputCrearEvento">
+          <label>YouTube ID</label>
+          <input className="inputCrearEvento" {...register("youtubeVideoId")} />
+        </div>
+        <div className="div-inputCrearEvento">
           <label>URL</label>
           <input className="inputCrearEvento" {...register("url")} />
         </div>
