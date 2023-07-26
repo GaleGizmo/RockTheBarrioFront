@@ -109,18 +109,16 @@ const Comentario = ({ comentario }) => {
         )} */}
 
           {editMode ? (
-            <>
+            <div className="edit-coment">
+            <div className="displayFlex">
               <input
+              className="tit"
                 type="text"
                 value={editedTitle}
                 onChange={(e) => setEditedTitle(e.target.value)}
               />
-              <input
-                type="text"
-                value={editedContent}
-                onChange={(e) => setEditedContent(e.target.value)}
-              />
               <select
+               className="tit"
                 value={editedValue ? editedValue.toString() : "Ninguna"}
                 onChange={handleChangeValue}
               >
@@ -131,7 +129,16 @@ const Comentario = ({ comentario }) => {
                 <option value="4">4</option>
                 <option value="5">5</option>
               </select>
-            </>
+              </div>
+              
+              <textarea
+              className="content"
+                type="text"
+                value={editedContent}
+                onChange={(e) => setEditedContent(e.target.value)}
+              />
+             
+            </div>
           ) : (
             <>
               <Accordion collapsible>
@@ -158,26 +165,26 @@ const Comentario = ({ comentario }) => {
               {editMode ? (
                 <>
                   <Button
-                    type="edit"
-                    text="Guardar"
+                    type="small"
+                    text="Gardar"
                     onClick={() => handleEdit()}
                   />
                   <Button
-                    type="secondary"
+                    type="small"
                     text="Cancelar"
                     onClick={() => handleCancelEdit()}
                   />
                 </>
               ) : (
                 <Button
-                  type="edit"
+                  type="editar"
                   text="Editar"
                   onClick={() => handleEdit()}
                 />
               )}
               <Button
                 type="delete"
-                text={<DeleteTwoTone twoToneColor="#f5222d" />}
+                text={<DeleteTwoTone twoToneColor="#757575" />}
                 onClick={() => handleDelete()}
               />
             </>
