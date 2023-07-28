@@ -8,6 +8,7 @@ import "./EventoEdicion.css";
 
 const EventoEdicion = ({ evento, navigate }) => {
   const dispatch = useDispatch();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const {
     register,
     handleSubmit,
@@ -30,6 +31,7 @@ const EventoEdicion = ({ evento, navigate }) => {
   };
 
   const handleSave = (data) => {
+    setIsSubmitting(true)
     const { day_start, time_start } = data;
 
     // Combinar la fecha y la hora en un objeto Date
@@ -42,6 +44,7 @@ const EventoEdicion = ({ evento, navigate }) => {
     };
 
     dispatch(editEvento(evento._id, editedEvento, navigate));
+    setIsSubmitting(false)
   };
 
   const handleCancel = () => {
@@ -195,8 +198,8 @@ const EventoEdicion = ({ evento, navigate }) => {
             />
           )}
         </div>
-        <div className="margin-boton">
-          <Button type="submit" text="Guardar" />
+        <div className="edit__botons">
+          <Button type="submit" text="Gardar" isSubmitting={isSubmitting} />
           <Button type="button" text="Cancelar" onClick={handleCancel} />
         </div>
       </form>

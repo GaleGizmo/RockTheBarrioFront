@@ -32,7 +32,7 @@ const DetallesEvento = () => {
     navigate(`/editar-evento/${evento._id}`);
   };
   const comprar = () => {
-    window.location.href = evento.url;
+    window.open(evento.url, '_blank');
   };
   const [showMap, setShowMap] = useState(false);
 
@@ -81,9 +81,9 @@ const DetallesEvento = () => {
                       height="315"
                       src={`https://www.youtube.com/embed/${evento.youtubeVideoId}`}
                       title="YouTube video player"
-                      frameborder="0"
+                      frameBorder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowfullscreen
+                      allowFullScreen
                     ></iframe>
                   </div>
                 ) : evento.image ? (

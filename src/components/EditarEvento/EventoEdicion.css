@@ -8,6 +8,10 @@
 .avatar{
     bottom: 30%
   }
+  .edit__botons{
+    display: flex;
+    gap: 10px
+  }
 @media (max-width: 420px){
     .imagen-formulario{
        

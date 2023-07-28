@@ -50,7 +50,7 @@ const Evento = ({ evento }) => {
         </div>
         <div className="div2">
         <div className="ver-detalles"><Link to={{ pathname: `/${evento._id}`, state: { evento } }}>
-          <Button text="Máis Info" type="small"/></Link></div>
+          <Button text="Máis Info" type="small"/> </Link> </div>
           {evento.site && evento.site !== "Varios" ? (
             <p>
               {evento.site.split(",")[0]}{" "}

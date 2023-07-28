@@ -11,25 +11,38 @@ const FormularioCrearEvento = () => {
   const { user } = useSelector((state) => state.usuariosReducer);
   const navigate = useNavigate();
   const [showBuyTicketField, setShowBuyTicketField] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handlePriceChange = (event) => {
     const price = event.target.value;
     setShowBuyTicketField(parseFloat(price) > 0);
   };
+  const handleFormSubmit = async (formData) => {
+    try {
+      dispatch(addEvento(formData, navigate, { user: user._id }));
+      setIsSubmitting(false);
+    } catch (error) {
+      setIsSubmitting(false); 
+      console.error("Error al enviar el evento:", error);
+    }
+  };
+
   const onSubmit = (data) => {
+    setIsSubmitting(true);
     const { day_start, time_start } = data;
-  
+
     // Combinar la fecha y la hora en un objeto Date
     const combinedDate = new Date(`${day_start}T${time_start}`);
-  
+
     // Actualizar el valor de "date_start" en los datos a enviar
-    const formData = {
+    const finalFormData = {
       ...data,
       date_start: combinedDate,
     };
-  
+
     // Enviar los datos al backend
-    dispatch(addEvento(formData, navigate, { user: user._id }));
+
+    handleFormSubmit(finalFormData)
   };
   const {
     register,
@@ -39,14 +52,10 @@ const FormularioCrearEvento = () => {
   const dispatch = useDispatch();
   const [imageFile, setImageFile] = useState();
 
-  
-
   return (
     <div className="cardCrearEvento">
       <h1>Crear Evento</h1>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-      >
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="div-inputCrearEvento">
           <label>Título</label>
           <input
@@ -155,9 +164,14 @@ const FormularioCrearEvento = () => {
             <img className="imagen-formulario imagen-crear" src={imageFile} />
           )}
         </div>
-        
+
         <div className="margin-boton">
-          <Button text="Crear evento" type="large" />
+          <Button
+            text="Crear evento"
+            type="large"
+            isSubmitting={isSubmitting}
+            onClick={handleSubmit}
+          />
         </div>
       </form>
     </div>

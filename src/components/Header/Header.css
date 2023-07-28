@@ -8,7 +8,7 @@
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 1;
+  z-index: 1000;
 }
 .link:link {
   color: black;
@@ -59,7 +59,7 @@
     flex-direction: column;
     justify-content: space-between;
   align-items: center  ;
-    
+    z-index:1000;
     height: 120px;
   }
 
@@ -88,6 +88,7 @@
     flex-direction: column;
     height: auto;
     height: 160px;
+    z-index: 1000;
   }
 
   .title {
@@ -112,6 +113,7 @@
     display: flex;
     justify-content: space-between;
     height: 160px;
+    z-index: 1000;
   }
   .title-font {
     font-size: 50px;
@@ -129,6 +131,7 @@
   .header {
     display: flex;
     justify-content: space-between;
+    z-index: 1000;
     height: 120px;
   }
   .title-font {

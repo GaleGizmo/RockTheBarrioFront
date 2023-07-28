@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Button.css"
 
-const Button = ({text, type, onClick}) => {
+const Button = ({text, type, isSubmitting, onClick}) => {
+  
+ 
   return (
-
-      <button className={`boton ${type}`} onClick={onClick}>{text}</button>
-
+    <button className={`boton ${type}`} onClick={onClick} disabled={isSubmitting}>
+      {text}
+    </button>
   )
 }
 
