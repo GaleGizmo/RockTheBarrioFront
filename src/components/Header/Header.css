@@ -9,11 +9,13 @@
   top: 0;
   width: 100%;
   z-index: 1000;
+  border-bottom: 1px solid var(--secondary-shadow)
 }
 .link:link {
   color: black;
   text-decoration-line: none;
 }
+
 
 .link:visited {
   color: black;
@@ -133,6 +135,7 @@
     justify-content: space-between;
     z-index: 1000;
     height: 120px;
+    
   }
   .title-font {
     font-size: 50px;

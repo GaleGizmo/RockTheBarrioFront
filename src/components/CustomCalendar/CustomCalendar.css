@@ -14,13 +14,13 @@
   position: fixed;
   top: 120px;
   left: 0;
-  z-index: 999;
+  z-index: 1052;
   background-color: var(--secondary-color);
 }
 
 .slide-menu {
   position: fixed;
-  top: 0;
+  top: 120px;
   right: 0;
   bottom: 0;
   left: 0;

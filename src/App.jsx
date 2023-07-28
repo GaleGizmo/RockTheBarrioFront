@@ -20,6 +20,7 @@ import Privacidad from "./pages/Legal/Privacidad";
 import ConfirmarEmail from "./pages/ConfirmarEmail/ConfirmarEmail";
 
 import CambiarPassword from "./pages/CambiarPassword/CambiarPassword";
+import Contacto from "./pages/Contacto/Contacto";
 
 function App() {
   const { user } = useSelector((state) => state.usuariosReducer);
@@ -38,6 +39,7 @@ function App() {
         {sesionVerificada && (
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/contacto" element={<Contacto/>}/>
             <Route path="/terminos" element={<Terminos />} />
             <Route path="/privacidad" element={<Privacidad />} />
             <Route path="/recuperar-password" element={<ConfirmarEmail />} />

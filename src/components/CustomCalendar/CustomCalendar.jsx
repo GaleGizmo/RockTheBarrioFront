@@ -47,7 +47,7 @@ function CustomCalendar({ eventos }) {
       <Button
         className=" menu-toggle custom-toggle d-lg-none"
         onClick={toggleMenu}
-        style={{ top: isMenuOpen ? "0" : "120px" }}
+        
       >
         <FaRegCalendarAlt></FaRegCalendarAlt>
       </Button>

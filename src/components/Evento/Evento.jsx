@@ -42,9 +42,9 @@ const Evento = ({ evento }) => {
         </div>
 
         <div className="div">
-          <Link to={{ pathname: `/${evento._id}`, state: { evento } }}>
+         
             <h1 className={isLongTitle ? "long-title" : ""}>{evento.title}</h1>
-          </Link>
+        
           <h2>{evento.subtitle}</h2>
           
         </div>

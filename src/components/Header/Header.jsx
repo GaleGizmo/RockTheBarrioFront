@@ -11,6 +11,7 @@ const Header = () => {
           <h1 className="title-font">ROC K THE BARRIO</h1>
         </Link>
       </div>
+      
       <div className="navbar">
         <Navbar />
       </div>

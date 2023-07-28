@@ -1,4 +1,41 @@
 .home-margin{
+   
     padding-top: 120px;
     
 }
+.header-listado{
+    position: absolute;
+    left: 40%;
+    top: 70px;
+    z-index: 1000;
+    width: fit-content;
+    
+    text-align: center;
+    border: 2px solid var(--secondary-color);
+    padding: 1px 10px;
+    border-radius: 10px;
+    font-weight: 600;
+    box-shadow: 2px 2px 4px var(--secondary-shadow);
+    background-color: var(--hover-color);
+  }
+  .header-listado h1{
+    font-weight: 700;
+    margin: 0;
+  }
+  @media (max-width:420px) {
+    .header-listado{
+        position: inherit;
+        width: 80%;
+        margin: 0 auto;
+        padding: 1px 1px;
+        
+    }
+    .header-listado h1{
+       font-size: 1.6rem;
+      }
+      .header-listado p{
+        font-size: .65rem;
+        margin: 0;
+      }
+    
+  }
