@@ -19,6 +19,7 @@ const FormularioCrearEvento = () => {
   };
   const handleFormSubmit = async (formData) => {
     try {
+      setIsSubmitting(true)
       dispatch(addEvento(formData, navigate, { user: user._id }));
       setIsSubmitting(false);
     } catch (error) {

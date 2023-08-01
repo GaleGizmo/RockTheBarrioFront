@@ -12,7 +12,7 @@
 
 .custom-toggle.menu-toggle {
   position: fixed;
-  top: 120px;
+  top: 60px;
   left: 0;
   z-index: 1052;
   background-color: var(--secondary-color);
@@ -20,25 +20,28 @@
 
 .slide-menu {
   position: fixed;
-  top: 120px;
+  top: 60px;
+ 
   right: 0;
   bottom: 0;
   left: 0;
   background-color:var(--event-color) !important;
   z-index: 998;
   overflow-y: auto;
-  padding: 20px;
+  padding: 60px 20px;
 }
 
 .calendar {
+  
   position: fixed;
   margin-top: 20px;
   color: brown;
-  box-shadow: 5px 5px 4px rgba(var(--secondary-color),.6);
+  box-shadow: 5px 5px 4px var(--secondary-shadow);
   
   max-width: 20%;
 }
 .react-calendar{
+  
   font-family: inherit;
   border-radius: 0.25rem;
   border-color: black;

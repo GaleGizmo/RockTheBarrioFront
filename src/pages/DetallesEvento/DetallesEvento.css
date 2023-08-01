@@ -20,7 +20,7 @@
   margin-bottom: 10%;
   text-align: center;
   width: 40%;
-  margin-top: 12%;
+  margin-top: 80px;
   margin-left: 2.5%;
   margin-right: 2.5%;
   background-image: linear-gradient(to bottom, rgb(237 132 57), #fff);
@@ -240,7 +240,7 @@
     margin-bottom: 10%;
     text-align: center;
     width: 100%;
-    margin-top: 25%;
+    margin-top: 75px;
     margin-left: 2.5%;
     margin-right: 2.5%;
     background-image: linear-gradient(to bottom, rgb(237 132 57), #fff);
@@ -261,7 +261,7 @@
     justify-content: center;
     width: 90%;
     margin-left: 5%;
-    padding-top: 25%;
+   
   }
   .boleto_imagen {
     width: 65%;

@@ -30,7 +30,7 @@ const Navbar = () => {
               {user && user.role === 2 && (
                 <Link to="/crear-evento">
                   <span className="boton-crear">
-                    <Button text="Crear Evento" type="medium" />
+                    <Button text="+" type="medium" />
                   </span>
                 </Link>
               )}

@@ -1,6 +1,6 @@
 .header {
-  background-color: var(--primary-color);
-  height: 120px;
+  background-color: var(--event-color);
+  height: 60px;
   align-items: center;
   padding: 0 20px;
   display: flex;
@@ -28,15 +28,13 @@
 }
 
 .navbar {
-  margin-bottom: 70px;
+  margin-bottom: 25px;
   margin-right: 30px;
 }
 
-/* .boton {
-  margin-right: 18px;
-  margin-left: 5px;
-} */
-
+.title img{
+  width: 20%;
+}
 @font-face {
   font-family: "urban-jungle";
   src: url("./UrbanJungleDEMO.otf");
@@ -51,24 +49,24 @@
   color: var(--hover-color)
 }
 .title {
-  margin-top: 50px;
+  margin-top: 0;
 }
 
 /* Estilos para pantallas extra pequeñas (xs) */
 @media (min-width: 1px) and (max-width: 469.98px) {
   .header {
     display: flex;
-    flex-direction: column;
+    padding-left: 10px;
     justify-content: space-between;
   align-items: center  ;
     z-index:1000;
-    height: 120px;
+    /* height: 120px; */
   }
 
   .title {
-    margin-top: 0px;
-    text-align: center;
-    font-size: 10px;
+    margin: 0px;
+   width: 50%;
+    
   }
 
   .navbar {
@@ -129,7 +127,7 @@
 }
 
 /* Estilos para pantallas grandes (l) */
-@media (min-width: 992px) {
+/* @media (min-width: 992px) {
   .header {
     display: flex;
     justify-content: space-between;
@@ -147,4 +145,4 @@
   .navbar {
     margin-bottom: 50px;
   }
-}
+} */

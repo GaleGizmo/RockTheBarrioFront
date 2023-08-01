@@ -1,12 +1,12 @@
 .home-margin{
    
-    padding-top: 120px;
+    padding-top: 25px;
     
 }
 .header-listado{
-    position: absolute;
+    position: sticky;
     left: 40%;
-    top: 70px;
+    top: 25px;
     z-index: 1000;
     width: fit-content;
     
@@ -24,14 +24,14 @@
   }
   @media (max-width:420px) {
     .header-listado{
-        position: inherit;
-        width: 80%;
+        left: 10%;
+        width: 75%;
         margin: 0 auto;
         padding: 1px 1px;
-        
+        top: 60px;
     }
     .header-listado h1{
-       font-size: 1.6rem;
+       font-size: 1.4rem;
       }
       .header-listado p{
         font-size: .65rem;
