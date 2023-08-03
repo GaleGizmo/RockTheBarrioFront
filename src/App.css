@@ -30,3 +30,12 @@ body {
   margin: auto;
   width: 60%;
 }
+.error-message{
+  color: red;
+  font-weight: 500
+}
+.success-message{
+  color: green;
+  font-weight: 500;
+  
+}

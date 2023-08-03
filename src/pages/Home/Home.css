@@ -11,12 +11,17 @@
     width: fit-content;
     
     text-align: center;
-    border: 2px solid var(--secondary-color);
-    padding: 1px 10px;
+    border: 5px solid var(--event-color);
+    
     border-radius: 10px;
     font-weight: 600;
-    box-shadow: 2px 2px 4px var(--secondary-shadow);
+    /* box-shadow: 2px 2px 4px var(--secondary-shadow); */
     background-color: var(--hover-color);
+  }
+  .black-border{
+    border: 2px solid var(--secondary-color);
+    padding: 1px 10px;
+    border-radius: 5px;
   }
   .header-listado h1{
     font-weight: 700;
@@ -27,8 +32,9 @@
         left: 10%;
         width: 75%;
         margin: 0 auto;
-        padding: 1px 1px;
+        padding: 0;
         top: 60px;
+        border: 0;
     }
     .header-listado h1{
        font-size: 1.4rem;

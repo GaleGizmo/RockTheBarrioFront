@@ -1,6 +1,6 @@
 .perfil-container{
     width: 40%;
-    margin: 15% auto;
+    margin: 5% auto;
 
 }
 
@@ -30,6 +30,6 @@
 @media (min-width: 1px) and (max-width: 469.98px) {
 .perfil-container{
     width: 80%;
-    margin-top:160px;
+    margin-top:70px;
 }
 }

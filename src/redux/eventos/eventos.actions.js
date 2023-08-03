@@ -11,9 +11,13 @@ const getAllEventos = () => async () => {
   dispatch({ type: "GET_EVENTOS", contenido: resultado.data });
 };
 
-const sendEventosSemanales =()=>async()=>{
-  await API.post("/evento/sendeventos/")
-  console.log("eventos enviados");
+const sendEventosSemanales =()=>async(dispatch)=>{
+  try {
+    await API.post("/evento/sendeventos/");
+    dispatch({ type: "EVENTOS_ENVIADOS", contenido: "Eventos enviados" });
+  } catch (error) {
+    dispatch({ type: "ERROR_EVENTO", contenido: error.message });
+  }
 }
 
 const getEventoById = (id) => async () => {
@@ -106,6 +110,8 @@ const deleteEvento = (eventoId, navigate) => async () => {
     dispatch({ type: "ERROR_EVENTO", contenido: error.message });
   }
 };
+const clearMensajes = () => {
+  return { type: "CLEAR_MENSAJES" };
+};
 
-
-export { getAllEventos, getEventoById, addEvento, deleteEvento, editEvento, sendEventosSemanales };
+export { getAllEventos, getEventoById, addEvento, deleteEvento, editEvento, sendEventosSemanales, clearMensajes };

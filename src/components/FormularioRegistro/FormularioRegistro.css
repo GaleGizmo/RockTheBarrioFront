@@ -19,7 +19,7 @@
     margin-bottom: 20px;
     text-align: center;
     width: 90%;
-    margin-top: 20%;
+   
     margin-left: 2.5%;
     margin-right: 2.5%;
     background-image: linear-gradient(to bottom, rgb(237 132 57), #fff);
@@ -108,8 +108,8 @@
     text-align: center;
 
     margin-top: 20%;
-    margin-left: 2.5%;
-    margin-right: 2.5%;
+    margin-left: 0;
+    margin-right: 0;
     background-image: linear-gradient(to bottom, rgb(237 132 57), #fff);
  
 

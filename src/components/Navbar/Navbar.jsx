@@ -3,6 +3,7 @@ import "./Navbar.css";
 import Button from "../Button/Button";
 import { AiOutlinePoweroff } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import {RiUser3Fill} from "react-icons/ri"
 import { logout, setUser } from "../../redux/usuarios/usuarios.actions";
 import { useDispatch, useSelector } from "react-redux";
 import SwitchIcon from "../SwitchIcon/SwitchIcon";
@@ -45,13 +46,13 @@ const Navbar = () => {
         </div>
       ) : (
         <>
-          <div className="no-logged">
+          <div >
             <Link to="/login">
-              <Button text="Acceder" type="medium" />
+              <RiUser3Fill className="no-logged" />
             </Link>
-            <Link to="date-de-alta">
+            {/* <Link to="date-de-alta">
               <Button text="Rexistrarse" type="medium" />
-            </Link>{" "}
+            </Link>{" "} */}
           </div>
         </>
       )}

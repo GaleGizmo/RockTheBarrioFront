@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { registerUser } from "../../redux/usuarios/usuarios.actions";
 import Button from "../Button/Button";
 import SubirImagen from "../SubirImagen/SubirImagen";
+import { AiFillCloseSquare } from "react-icons/ai";
 
 const FormularioRegistro = () => {
   const dispatch = useDispatch();
@@ -34,9 +35,12 @@ const FormularioRegistro = () => {
   };
   const passwordRegex =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-
+    const handleIcon = () => {
+      navigate(-1);
+    };
   return (
     <div className="cardReg">
+    <AiFillCloseSquare className="close-icon" onClick={handleIcon} />
       <h1>DATE DE ALTA</h1>
       <p className="error-message">{error}</p>
       <form onSubmit={handleSubmit(onSubmit)}>

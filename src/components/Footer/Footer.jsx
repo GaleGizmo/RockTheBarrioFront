@@ -17,8 +17,8 @@ const Footer = () => {
     <>
     <div className="footer-container">
      <Link className="footer-link" to="/contacto"><span>Contacto</span></Link>
-     <Link className="footer-link" to="/privacidad"><span>Privacidade</span></Link>
-     <Link className="footer-link" to="/terminos"><span>Termos e condicións</span></Link>
+     <Link className="footer-link" to="/privacidad"><div class="border-left"></div><span>Privacidade</span></Link>
+     <Link className="footer-link" to="/terminos"><div class="border-left"></div><span>Termos e condicións</span></Link>
      
     </div>
     </>

@@ -3,6 +3,7 @@ const INITIAL_STATE = {
   loading: false,
   evento: null,
   error: null,
+  eventosEnviados:"",
  
 };
 export const eventosReducer = (state = INITIAL_STATE, action) => {
@@ -40,7 +41,11 @@ export const eventosReducer = (state = INITIAL_STATE, action) => {
         ),
       };
      
-      
+    case "EVENTOS_ENVIADOS":
+      return {
+        ...state,
+        eventosEnviados: action.contenido
+      }  
     case "CLEAR_EVENTO":
       return { ...state, evento: null };
       break;
@@ -49,6 +54,12 @@ export const eventosReducer = (state = INITIAL_STATE, action) => {
         ...state,
         loading: false,
         error: action.contenido,
+      };
+      case "CLEAR_MENSAJES":
+      return {
+        ...state,
+        eventosEnviados: "",
+        error: null,
       };
     default:
       return state;

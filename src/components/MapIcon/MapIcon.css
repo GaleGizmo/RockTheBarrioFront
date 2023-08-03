@@ -9,7 +9,7 @@
   cursor:pointer;
 }
 .map-icon:hover{
-    color: var(--hover-color)
+    color: var(--hover-color);
     cursor:pointer;
     
     
