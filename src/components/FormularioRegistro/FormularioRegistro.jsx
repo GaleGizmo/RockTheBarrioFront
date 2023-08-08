@@ -121,7 +121,7 @@ const FormularioRegistro = () => {
         <div className="margin-botonReg">
           <div className="div-checkReg">
           <div>
-            <label>Quero recibir a newsletter semanal</label>
+            <label>Mándame un email cos eventos da semana</label>
             <input
               className="checkReg"
               type="checkbox"

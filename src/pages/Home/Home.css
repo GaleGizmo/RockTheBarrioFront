@@ -5,7 +5,7 @@
 }
 .header-listado{
     position: sticky;
-    left: 40%;
+    margin: 0 auto;
     top: 25px;
     z-index: 1000;
     width: fit-content;

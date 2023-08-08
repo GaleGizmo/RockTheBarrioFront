@@ -13,18 +13,26 @@ import { esHoy, formatDate } from "../../shared/formatDate";
 import MapComponent from "../../components/MapComponent/MapComponent";
 import MapIcon from "../../components/MapIcon/MapIcon";
 import { AiFillCloseSquare } from "react-icons/ai";
+import useFavorites from "../../shared/useFavorites";
+import { BiCalendarHeart } from "react-icons/bi";
+import Favorito from "../../components/Favorito/Favorito";
 
 const DetallesEvento = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
+  useEffect(() => {
+    dispatch(getEventoById(id));
+  }, [id]);
   const navigate = useNavigate();
   const { loading, evento } = useSelector((reducer) => reducer.eventosReducer);
   const { user } = useSelector((reducer) => reducer.usuariosReducer);
   const isLongTitle = evento?.title.length > 10 && !evento.title.includes(" ");
-  useEffect(() => {
-    dispatch(getEventoById(id));
-  }, [id]);
-
+  
+  const { isFavorite, handleFavorites, showFavorite } = useFavorites(
+    evento ? user?.favorites.includes(evento._id) : false,
+  evento ? evento._id : null,
+  user ? user._id : null
+  );
   const eliminarEvento = () => {
     dispatch(deleteEvento(evento._id, navigate));
   };
@@ -159,6 +167,15 @@ const DetallesEvento = () => {
                 {evento.url && (
                   <div className="margin-boton-info">
                     <Button text="+Info" type="medium" onClick={comprar} />
+                    {user && (
+              <BiCalendarHeart
+                className={isFavorite ? " favorito favorito-detalle favorito__yes" : "favorito favorito-detalle"}
+                onClick={handleFavorites}
+              />
+            )}
+            {showFavorite && (
+              <Favorito evento={evento._id} favoriteStatus={isFavorite} />
+            )}
                   </div>
                 )}
                 {user?.role === 2 && (

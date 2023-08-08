@@ -187,4 +187,22 @@ const unsubscribeEmail = (email, unsubscribe, userId, navigate)=> async ()=>{
     }
   }
 }
-export { login, logout, setUser, checkSesion, registerUser, updateUser, resetPassword, forgotPassword, unsubscribeEmail, deleteUser};
+const addToFavorites=(eventId, userId, add)=> async()=>{
+  dispatch({ type: "LOADING_USUARIOS" });
+  
+  try {
+    await API.patch(`/usuario/add-favorite`, { eventId, userId, add });
+    const user = JSON.parse(localStorage.getItem("user"));
+    const updatedUser = { ...user, favorites: add ? [...user.favorites, eventId] : user.favorites.filter(id => id !== eventId) };
+    dispatch({ type: "SET_USER", contenido: updatedUser });
+    localStorage.setItem("user", JSON.stringify(updatedUser));
+
+      } catch (error) {
+    if (error.response && error.response.data && error.response.data.message) {
+      dispatch({ type: "ERROR_USUARIO", contenido: error.response.data.message });
+    } else {
+      dispatch({ type: "ERROR_USUARIO", contenido: "Error desconocido" });
+    }
+  }
+}
+export { login, logout, setUser, checkSesion, registerUser, updateUser, resetPassword, forgotPassword, unsubscribeEmail, deleteUser, addToFavorites};

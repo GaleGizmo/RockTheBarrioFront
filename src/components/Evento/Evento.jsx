@@ -1,20 +1,32 @@
 import React, { useState } from "react";
 import "./Evento.css";
+import { BiCalendarHeart } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { esHoy, formatDate } from "../../shared/formatDate";
 import { formatDistanceToNow, parseISO } from "date-fns";
 import esLocale from "date-fns/esm/locale/es/index.js";
 import MapIcon from "../MapIcon/MapIcon";
+import Favorito from "../Favorito/Favorito";
 
 import MapComponent from "../MapComponent/MapComponent";
 import Button from "../Button/Button";
+import { useDispatch } from "react-redux";
+import { addToFavorites } from "../../redux/usuarios/usuarios.actions";
+import useFavorites from "../../shared/useFavorites";
 
-const Evento = ({ evento }) => {
+const Evento = ({ evento, user }) => {
   const [showMap, setShowMap] = useState(false);
+
+  const { isFavorite, handleFavorites, showFavorite } = useFavorites(
+    evento ? user?.favorites.includes(evento._id) : false,
+    evento ? evento._id : null,
+    user ? user._id : null
+  );
 
   const handleToggleMap = () => {
     setShowMap((showMap) => !showMap);
   };
+ 
   const isLongTitle = evento.title.length > 10 && !evento.title.includes(" ");
 
   const fechaEvento = evento.date_start ? parseISO(evento.date_start) : null;
@@ -42,15 +54,25 @@ const Evento = ({ evento }) => {
         </div>
 
         <div className="div">
-         
-            <h1 className={isLongTitle ? "long-title" : ""}>{evento.title}</h1>
-        
+          <h1 className={isLongTitle ? "long-title" : ""}>{evento.title}</h1>
+
           <h2>{evento.subtitle}</h2>
-          
         </div>
         <div className="div2">
-        <div className="ver-detalles"><Link to={{ pathname: `/${evento._id}`, state: { evento } }}>
-          <Button text="Máis Info" type="small"/> </Link> </div>
+          <div className="ver-detalles">
+            <Link to={{ pathname: `/${evento._id}`, state: { evento } }}>
+              <Button text="Máis Info" type="small" />{" "}
+            </Link>
+            {user && (
+              <BiCalendarHeart
+                className={isFavorite ? " favorito favorito__yes" : "favorito"}
+                onClick={handleFavorites}
+              />
+            )}
+            {showFavorite && (
+              <Favorito evento={evento._id} favoriteStatus={isFavorite} />
+            )}
+          </div>
           {evento.site && evento.site !== "Varios" ? (
             <p>
               {evento.site.split(",")[0]}{" "}

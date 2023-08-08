@@ -10,6 +10,7 @@ import CustomCalendar from "../CustomCalendar/CustomCalendar";
 
 const EventosList = () => {
   const dispatch = useDispatch();
+  const {user}=useSelector((reducer)=>reducer.usuariosReducer)
   const { loading, eventos } = useSelector((reducer) => reducer.eventosReducer);
   const eventosOrdenados = [...eventos].sort(
     (a, b) => new Date(a.date_start) - new Date(b.date_start)
@@ -29,7 +30,7 @@ const EventosList = () => {
       ) : (
         eventosOrdenados
           .filter((evento) => new Date(evento.date_start) >= fechaHoy)
-          .map((evento) => <Evento evento={evento} key={evento._id} />)
+          .map((evento) => <Evento user={user} evento={evento} key={evento._id} />)
           
       )}</div>
       <div >
