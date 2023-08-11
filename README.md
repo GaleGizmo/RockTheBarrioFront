@@ -2,25 +2,29 @@
 
 ## Características principales
 
-Nuestra aplicación es una plataforma en línea que conecta artistas locales con la comudidad. Permite a los usuarios descubrir, registrar y comentar conciertos y eventos.
+Esta aplicación es una plataforma en línea que recopila los eventos musicales de Santiago de Compostela. Permite a los usuarios descubrir, registrar y comentar los conciertos incluidos en la aplicación.
 
 ### Página de inicio
 
-La página de inicio muestra un listado completo de eventos y conciertos en el barrio del usuario, con detalles como fecha, lugar y nombre del artista o banda. Los usuarios pueden explorar y elegir entre diversas opciones.
+La página de inicio muestra un listado completo de eventos y conciertos en el barrio del usuario, con detalles como fecha, lugar y nombre del artista o banda. Los usuarios pueden ver el lugar del evento en Google Maps y añadir cada evento a una lista de favoritos.
 
 ### Página de registro de usuarios
 
-Para acceder a todas las funciones, los usuarios deben registrarse proporcionando información básica en la página de registro. Una vez registrados, ya tienen iniciada la sesión y pueden disfrutar de todas las características disponibles.
+Para acceder a todas las funciones, los usuarios deben registrarse proporcionando información básica en la página de registro. Una vez registrados, los usuarios podrán:
+        -Añadir eventos a su lista de favoritos, lo que les permite recibir un email cuando se aceque la fecha del evento.
+        -Añadir comentarios a los eventos.
+        -Recibir cada lunes un email con el listado de eventos semanal.
+        -Recibir un email cada vez que se añada un nuevo evento.
 
 ### Página de un evento específico y comentarios de los usuarios
 
-Cuando seleccionan un evento específico, son redirigidos a una página dedicada a ese evento, donde encuentran detalles adicionales como información sobre los artistas, precios de entradas, descripciones y más. Los usuarios registrados pueden dejar comentarios, reseñas y valoraciones.
+Cuando seleccionan un evento específico, son redirigidos a una página dedicada a ese evento, donde encuentran detalles adicionales como videos de youtubee del artista, enlace a la compra de entradas si procede, descripción detallada del evento y enlaces a urls relacionadas con el evento o el artista. Los usuarios registrados pueden dejar comentarios, reseñas y valoraciones.
 
 ### Página de creación de conciertos administrada por el admin
 
 La página de creación de eventos es exclusiva para el administrador, quien puede agregar nuevos conciertos ingresando información relevante. También puede editar o eliminar eventos existentes según sea necesario.
 
-En resumen, nuestra aplicación brinda a los usuarios la oportunidad de descubrir y participar en las actividades sociales locales. Desde la página de inicio hasta la de registro, eventos específicos y creación de eventos, ofrecemos una experiencia completa para los amantes de la música y la cultura local. 
+En resumen, esta aplicación brinda a los usuarios la oportunidad de descubrir y participar en las actividades musicales locales. Desde la página de inicio hasta la de registro, eventos específicos y creación de eventos, ofrece una experiencia completa para los amantes de la música y la cultura local. 
 
 
 ## Despliegue
@@ -29,7 +33,7 @@ En resumen, nuestra aplicación brinda a los usuarios la oportunidad de descubri
 
 [ROCK-THE-BARRIO.VERCEL](https://rock-the-barrio-front.vercel.app)
 
-[ROCK-THE-BARRIO.NETLIFY](https://luxury-malasada-9471f1.netlify.app/)
+
 
 
 ## Uso
