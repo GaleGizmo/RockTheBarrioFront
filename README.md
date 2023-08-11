@@ -31,7 +31,7 @@ En resumen, esta aplicación brinda a los usuarios la oportunidad de descubrir y
 
 ### Para probar la Pre-alpha de la aplicación utiliza uno de los siguientes enlaces: 
 
-[ROCK-THE-BARRIO.VERCEL](https://rock-the-barrio-front.vercel.app)
+[ROCK-THE-BARRIO.VERCEL](https://rock-the-barrio-front-one.vercel.app)
 
 
 
