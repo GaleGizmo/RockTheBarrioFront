@@ -26,7 +26,7 @@
   margin-bottom: 5px;
   margin-left: 10px;
   transform: scale(2.2);
-  color: var(--secondary-color);
+  color: var(--icon-color);
 }
 .favorito-detalle{
     margin-bottom: 10px;
@@ -36,12 +36,16 @@
 .favorito__yes {
   color: red;
 }
+
 .favorito:hover {
   cursor: pointer;
-
+  filter:brightness(2);
+  filter:contrast(2);
   transform: scale(2.4);
 }
 .favorito-detalle:hover{
+  filter:brightness(2);
+  filter:contrast(2);
     transform: scale(3.5);
 }
 @media (max-width:420px){

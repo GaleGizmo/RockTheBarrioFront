@@ -20,19 +20,21 @@ import Favorito from "../../components/Favorito/Favorito";
 const DetallesEvento = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
+  const { loading, evento } = useSelector((reducer) => reducer.eventosReducer);
+  const { user } = useSelector((reducer) => reducer.usuariosReducer);
+  const { isFavorite, handleFavorites, showFavorite } = useFavorites(
+    evento ? user?.favorites.includes(id) : false,
+    evento ? evento._id : null,
+    user ? user._id : null
+  );
+  
   useEffect(() => {
     dispatch(getEventoById(id));
   }, [id]);
   const navigate = useNavigate();
-  const { loading, evento } = useSelector((reducer) => reducer.eventosReducer);
-  const { user } = useSelector((reducer) => reducer.usuariosReducer);
-  const isLongTitle = evento?.title.length > 10 && !evento.title.includes(" ");
-  
-  const { isFavorite, handleFavorites, showFavorite } = useFavorites(
-    evento ? user?.favorites.includes(evento._id) : false,
-  evento ? evento._id : null,
-  user ? user._id : null
-  );
+ 
+  const isLongTitle = evento && evento.title && evento.title.length > 10 && !evento.title.includes(" ");
+
   const eliminarEvento = () => {
     dispatch(deleteEvento(evento._id, navigate));
   };
@@ -40,7 +42,7 @@ const DetallesEvento = () => {
     navigate(`/editar-evento/${evento._id}`);
   };
   const comprar = () => {
-    window.open(evento.url, '_blank');
+    window.open(evento.url, "_blank");
   };
   const [showMap, setShowMap] = useState(false);
 
@@ -62,6 +64,8 @@ const DetallesEvento = () => {
   }, [evento]);
   const fechaStart = evento?.date_start ? formatDate(evento.date_start) : null;
   const fechaEnd = evento?.date_end ? formatDate(evento.date_end) : null;
+
+  
 
   return (
     <div>
@@ -167,15 +171,22 @@ const DetallesEvento = () => {
                 {evento.url && (
                   <div className="margin-boton-info">
                     <Button text="+Info" type="medium" onClick={comprar} />
-                    {user && (
-              <BiCalendarHeart
-                className={isFavorite ? " favorito favorito-detalle favorito__yes" : "favorito favorito-detalle"}
-                onClick={handleFavorites}
-              />
-            )}
-            {showFavorite && (
-              <Favorito evento={evento._id} favoriteStatus={isFavorite} />
-            )}
+                    {user  && (
+                      <BiCalendarHeart
+                        className={
+                          isFavorite
+                            ? " favorito favorito-detalle favorito__yes"
+                            : "favorito favorito-detalle"
+                        }
+                        onClick={handleFavorites}
+                      />
+                    )}
+                    {showFavorite && (
+                      <Favorito
+                        evento={evento._id}
+                        favoriteStatus={isFavorite}
+                      />
+                    )}
                   </div>
                 )}
                 {user?.role === 2 && (

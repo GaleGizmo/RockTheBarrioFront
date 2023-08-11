@@ -9,13 +9,13 @@ const INITIAL_STATE = {
 export const eventosReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case "LOADING_EVENTOS":
-      return { ...state, loading: true };
+      return { ...state, loading: true, error:null };
     case "GET_EVENTOS":
       return { ...state, loading: false, eventos: [...action.contenido] };
     case "GET_EVENTO":
       return { ...state, loading: false, evento: action.contenido };
     case "ADD_EVENTO":
-      return { ...state, eventos: [...state.eventos, action.contenido] };
+      return { ...state, loading: false, eventos: [...state.eventos, action.contenido] };
     case "EDIT_EVENTO":
       return {
         ...state,
@@ -36,6 +36,7 @@ export const eventosReducer = (state = INITIAL_STATE, action) => {
     case "GET_EVENTOBYID":
       return {
         ...state,
+        loading: false,
         evento: state.eventos.filter(
           (evento) => evento.id === action.contenido
         ),
@@ -44,6 +45,7 @@ export const eventosReducer = (state = INITIAL_STATE, action) => {
     case "EVENTOS_ENVIADOS":
       return {
         ...state,
+        loading: false,
         eventosEnviados: action.contenido
       }  
     case "CLEAR_EVENTO":

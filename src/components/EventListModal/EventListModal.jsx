@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./EventListModal.css"
-import Button from "../Button/Button";
+
+import { AiFillCloseSquare } from "react-icons/ai";
 
 const EventListModal = ({ events, onClose, position }) => {
   const { top, left } = position;
@@ -15,6 +16,7 @@ const EventListModal = ({ events, onClose, position }) => {
   } 
   return (
     <div className="event-list-modal" style={modalStyles}>
+    <AiFillCloseSquare className="close-icon" onClick={onClose} />
       <h2>Eventos nesta data:</h2>
       {events.map((evento) => (
         <div key={evento._id}>
@@ -23,7 +25,7 @@ const EventListModal = ({ events, onClose, position }) => {
          
         </div>
       ))}
-      <Button text="Pechar" type="small" onClick={onClose}/>
+      {/* <Button text="Pechar" type="small" onClick={onClose}/> */}
       {/* <button onClick={onClose}>Pechar</button> */}
     </div>
   );

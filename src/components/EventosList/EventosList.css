@@ -6,14 +6,20 @@
 
 .eventos-list{
     display: grid;
-    grid-template-columns: 80% 20%;
+    grid-template-columns: minmax(auto, 1270px) 20%;
     padding: 30px 0;
-    margin-right: 2%;
+    
+}
+.div-lateral{
+width: fit-content;
+
 }
 .eventos{
     display: flex;
     flex-direction: column;
     
+    
+    align-items: center;
 }
 @media (max-width:420px){
     .div-img{

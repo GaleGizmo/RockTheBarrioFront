@@ -1,17 +1,15 @@
 import React, { useState } from "react";
 import "./Evento.css";
-import { BiCalendarHeart } from "react-icons/bi";
+import { BiCalendarHeart} from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { esHoy, formatDate } from "../../shared/formatDate";
 import { formatDistanceToNow, parseISO } from "date-fns";
 import esLocale from "date-fns/esm/locale/es/index.js";
 import MapIcon from "../MapIcon/MapIcon";
 import Favorito from "../Favorito/Favorito";
-
+import {BsInfoCircleFill} from "react-icons/bs"
 import MapComponent from "../MapComponent/MapComponent";
-import Button from "../Button/Button";
-import { useDispatch } from "react-redux";
-import { addToFavorites } from "../../redux/usuarios/usuarios.actions";
+
 import useFavorites from "../../shared/useFavorites";
 
 const Evento = ({ evento, user }) => {
@@ -36,7 +34,7 @@ const Evento = ({ evento, user }) => {
   });
   const fechaStart = evento.date_start ? formatDate(evento.date_start) : null;
   const fechaEnd = evento.date_end ? formatDate(evento.date_end) : null;
-
+  
   return (
     <div className="card">
       <div className="border-card">
@@ -60,8 +58,9 @@ const Evento = ({ evento, user }) => {
         </div>
         <div className="div2">
           <div className="ver-detalles">
-            <Link to={{ pathname: `/${evento._id}`, state: { evento } }}>
-              <Button text="Máis Info" type="small" />{" "}
+            <Link to={{ pathname: `/${evento._id}` }}>
+             
+              <BsInfoCircleFill className="mas-info"  />
             </Link>
             {user && (
               <BiCalendarHeart

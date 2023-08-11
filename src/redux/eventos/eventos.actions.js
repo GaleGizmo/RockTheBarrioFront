@@ -20,12 +20,18 @@ const sendEventosSemanales =()=>async(dispatch)=>{
   }
 }
 
-const getEventoById = (id) => async () => {
+const getEventoById = (id) => async (dispatch) => {
+  
   dispatch({ type: "CLEAR_EVENTO" });
   dispatch({ type: "LOADING_EVENTOS" });
-
-  const resultado = await API.get(`/evento/getbyid/${id}`);
+try {
+  const resultado = await API.get(`/evento/getbyid/${id}` );
+  
   dispatch({ type: "GET_EVENTO", contenido: resultado.data });
+} catch(error){
+  dispatch({ type: "ERROR_EVENTO", contenido: error.message });
+}
+  
 };
 
 const addEvento = (eventoData, navigate, userId) => async () => {
