@@ -6,30 +6,47 @@ Esta aplicación es una plataforma en línea que recopila los eventos musicales 
 
 ### Página de inicio
 
-La página de inicio muestra un listado completo de eventos y conciertos en el barrio del usuario, con detalles como fecha, lugar y nombre del artista o banda. Los usuarios pueden ver el lugar del evento en Google Maps y añadir cada evento a una lista de favoritos.
+La página de inicio muestra un listado completo de eventos y conciertos en el área de Santiago, ordenados temporalmente, con información como fecha, lugar y nombre del artista o banda. Los usuarios pueden ver el lugar del evento en Google Maps y añadir cada evento a una lista de favoritos. 
+Esta página muestra a su vez un calendario desde el que se puede acceder a los eventos de un día específico.
+
+### Página de un evento específico y comentarios de los usuarios
+
+Cuando selecciona un evento específico mediante el botón de Info, el usuario es redirigido a una página dedicada a ese evento, donde hay detalles adicionales como videos de youtube del artista, enlace a la compra de entradas (si procede), descripción detallada del evento y enlaces a urls relacionadas con el evento o el artista. Los usuarios registrados pueden crear y editar comentarios, reseñas y valoraciones.
+
+
+### Página de login
+
+En esta página el usuario puede loguearse o, en caso de no estar registrado, acceder a la página de registro de usuarios. En caso de no recordar la contraseña, el usuario tiene la opción de recuperarla mediante un enlace.
 
 ### Página de registro de usuarios
 
 Para acceder a todas las funciones, los usuarios deben registrarse proporcionando información básica en la página de registro. Una vez registrados, los usuarios podrán:
+
         -Añadir eventos a su lista de favoritos, lo que les permite recibir un email cuando se aceque la fecha del evento.
+        
         -Añadir comentarios a los eventos.
+        
         -Recibir cada lunes un email con el listado de eventos semanal.
+        
         -Recibir un email cada vez que se añada un nuevo evento.
 
-### Página de un evento específico y comentarios de los usuarios
+### Página de edición de datos del usuario
 
-Cuando seleccionan un evento específico, son redirigidos a una página dedicada a ese evento, donde encuentran detalles adicionales como videos de youtubee del artista, enlace a la compra de entradas si procede, descripción detallada del evento y enlaces a urls relacionadas con el evento o el artista. Los usuarios registrados pueden dejar comentarios, reseñas y valoraciones.
+En esta página el usuario puede modificar su email y nombre de usuario, así como las preferencias de notificaciones de eventos.
 
 ### Página de creación de conciertos administrada por el admin
 
 La página de creación de eventos es exclusiva para el administrador, quien puede agregar nuevos conciertos ingresando información relevante. También puede editar o eliminar eventos existentes según sea necesario.
 
+
+
 En resumen, esta aplicación brinda a los usuarios la oportunidad de descubrir y participar en las actividades musicales locales. Desde la página de inicio hasta la de registro, eventos específicos y creación de eventos, ofrece una experiencia completa para los amantes de la música y la cultura local. 
+
 
 
 ## Despliegue
 
-### Para probar la Pre-alpha de la aplicación utiliza uno de los siguientes enlaces: 
+### Para probar la beta de la aplicación utiliza el siguiente enlace: 
 
 [ROCK-THE-BARRIO.VERCEL](https://rock-the-barrio-front-one.vercel.app)
 
@@ -38,11 +55,11 @@ En resumen, esta aplicación brinda a los usuarios la oportunidad de descubrir y
 
 ## Uso
 
-Visita le "Home page" y date de alta con el aposito enlace para probar las funciones permitidas a los usuarios registrados
+Visita la "Home page" y date de alta para probar las funciones permitidas a los usuarios registrados
 
 ## Tecnologías utilizadas
 
-Para el desarrollo de este proyecto el equipo a utilizado las siguientes herramientas, frameworks y librerias:
+Para el desarrollo de este proyecto se han utilizado las siguientes herramientas, frameworks y librerias:
 
 ### NODE.js
 ### REACT.js
@@ -58,28 +75,31 @@ Para el desarrollo de este proyecto el equipo a utilizado las siguientes herrami
 ##### react-redux
 ##### mongoDB
 ##### vercel
-##### netlify
-##### figma
+##### cron
+##### react-icons
+##### react-google-maps
+##### react-calendar
+##### date-fsn
 ##### git
 ##### github
-##### discord
+
 
         
-## Dificultades encontradas
 
-A pesar del tiempo limitado disponible para este proyecto, lograr que la aplicación funcionara de manera efectiva con Redux y el BackEnd fue un logro significativo. El desarrollo de la funcionalidad responsive también implicó una dedicación considerable para garantizar una experiencia fluida en diferentes dispositivos y pantallas. Además, asegurarnos de que todo el proceso de fusión de ramas, como la rama de desarrollo y la rama principal (main), se realizara sin problemas, requirió una cuidadosa planificación y coordinación entre el equipo de desarrollo.
 
 ## Próximas mejoras y funcionalidades futuras
 
-Dado el tiempo limitado disponible tuvimos que renunciar a algunas mejoras adicionales que inicialmente habríamos deseado implementar:
-
 Un Buscador.
-
-Un calendario de los eventos.
 
 Categorias de eventos y generos musicales.
 
-## Equipo
+
+## Desarrollo
+
+El código de esta aplicación está desarrollado a partir del proyecto final del curso de FSD de Upgrade-Ub, cuyo código se puede ver aquí:
+[ROCK-THE-BARRIO.VERCEL](https://rock-the-barrio-front.vercel.app)
+
+Participamos en dicho proyecto:
 
 #### JuanMiguel
 
