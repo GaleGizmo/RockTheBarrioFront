@@ -90,7 +90,7 @@ Para el desarrollo de este proyecto se han utilizado las siguientes herramientas
 ## Próximas mejoras y funcionalidades futuras
 
 Un Buscador.
-
+Responsive para tabletas.
 Categorias de eventos y generos musicales.
 
 
