@@ -11,10 +11,12 @@ import {BsInfoCircleFill} from "react-icons/bs"
 import MapComponent from "../MapComponent/MapComponent";
 
 import useFavorites from "../../shared/useFavorites";
+import { useDispatch } from "react-redux";
+import {  setEvento } from "../../redux/eventos/eventos.actions";
 
 const Evento = ({ evento, user }) => {
   const [showMap, setShowMap] = useState(false);
-
+const dispatch=useDispatch()
   const { isFavorite, handleFavorites, showFavorite } = useFavorites(
     evento ? user?.favorites.includes(evento._id) : false,
     evento ? evento._id : null,
@@ -24,7 +26,9 @@ const Evento = ({ evento, user }) => {
   const handleToggleMap = () => {
     setShowMap((showMap) => !showMap);
   };
- 
+ const getEvento =() =>{
+  dispatch(setEvento(evento))
+ }
   const isLongTitle = evento.title.length > 10 && !evento.title.includes(" ");
 
   const fechaEvento = evento.date_start ? parseISO(evento.date_start) : null;
@@ -39,7 +43,7 @@ const Evento = ({ evento, user }) => {
     <div className="card">
       <div className="border-card">
         <div className="div-image">
-          <Link to={{ pathname: `/${evento._id}`, state: { evento } }}>
+         
             {evento.image ? (
               <img src={evento.image} alt={evento.title} />
             ) : (
@@ -48,7 +52,7 @@ const Evento = ({ evento, user }) => {
                 alt="Imagen nula"
               />
             )}
-          </Link>
+          
         </div>
 
         <div className="div">
@@ -60,7 +64,7 @@ const Evento = ({ evento, user }) => {
           <div className="ver-detalles">
             <Link to={{ pathname: `/${evento._id}` }}>
              
-              <BsInfoCircleFill className="mas-info"  />
+              <BsInfoCircleFill className="mas-info" onClick={getEvento} />
             </Link>
             {user && (
               <BiCalendarHeart
