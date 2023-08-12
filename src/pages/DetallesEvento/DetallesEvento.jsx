@@ -28,9 +28,9 @@ const DetallesEvento = () => {
     user ? user._id : null
   );
   
-  useEffect(() => {
-    dispatch(getEventoById(id));
-  }, [id]);
+  // useEffect(() => {
+  //   dispatch(getEventoById(id));
+  // }, [id]);
   const navigate = useNavigate();
  
   const isLongTitle = evento && evento.title && evento.title.length > 10 && !evento.title.includes(" ");

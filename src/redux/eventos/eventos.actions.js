@@ -120,4 +120,7 @@ const clearMensajes = () => {
   return { type: "CLEAR_MENSAJES" };
 };
 
-export { getAllEventos, getEventoById, addEvento, deleteEvento, editEvento, sendEventosSemanales, clearMensajes };
+const setEvento =(eventoData)=>{
+  dispatch({ type: "GET_EVENTO", contenido: eventoData });
+}
+export { getAllEventos, getEventoById, addEvento, deleteEvento, editEvento, sendEventosSemanales, clearMensajes, setEvento };

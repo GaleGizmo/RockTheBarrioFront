@@ -109,10 +109,10 @@
   border: solid;
   border-radius:8px;
 }
-.div-image:hover{
+/* .div-image:hover{
   border-color: var(--hover-color);
   box-shadow: 0 0 5px 2px var(--terciary-color);
-}
+} */
 
 .div {
   flex-basis: 40%;
