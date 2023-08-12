@@ -1,7 +1,7 @@
 import React from "react";
 import "./Home.css";
 import EventosList from "../../components/EventosList/EventosList";
-import { BsInfoCircle, BsInfoCircleFill } from "react-icons/bs";
+import { BsInfoCircleFill } from "react-icons/bs";
 
 const Home = () => {
   return (

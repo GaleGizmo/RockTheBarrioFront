@@ -55,6 +55,10 @@ background-color: white;
 font-weight: bold;
 border-color: var(--terciary-color);
 }
+.event-list-modal .boton:hover{
+    transform: none;
+    font-weight: 400;
+}
 @media (max-width:420px){
     .large{
         width: 250px;
