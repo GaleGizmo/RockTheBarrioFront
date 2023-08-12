@@ -21,8 +21,8 @@ const EventListModal = ({ events, onClose, position }) => {
   } 
   return (
     <div className="event-list-modal" style={modalStyles}>
-    <AiFillCloseSquare className="close-icon" onClick={onClose} />
-      <h2>Eventos nesta data:</h2>
+    
+      <h2><strong>Eventos nesta data:</strong></h2>
       {events.map((evento) => (
         <div key={evento._id}>
         <Link to={`/${evento._id}`}> <Button text={evento.title} type="small evento-calendar" onClick={() => getEvento(evento)}/></Link>
@@ -30,8 +30,7 @@ const EventListModal = ({ events, onClose, position }) => {
          
         </div>
       ))}
-      {/* <Button text="Pechar" type="small" onClick={onClose}/> */}
-      {/* <button onClick={onClose}>Pechar</button> */}
+      
     </div>
   );
 };

@@ -6,7 +6,7 @@
 
 .calendar-container {
   position: relative;
-  width: 100%;
+  
   z-index: 999;
 }
 
@@ -34,13 +34,13 @@
 .calendar {
   
   position: fixed;
-  margin-top: 25px;
+  margin-top: 20px;
   margin-left: auto;
   margin-right: auto;
   color: brown;
   box-shadow: 5px 5px 4px var(--secondary-shadow);
   
-  max-width: 20%;
+  /* max-width: 20%; */
 }
 .react-calendar{
   
@@ -48,7 +48,7 @@
   border-radius: 0.25rem;
   border-color: black;
   border-width: 3px;
-  width: 100%;
+  width: 95%;
   
 }
 @media (min-width: 1550px) {
@@ -62,4 +62,10 @@
   .slide-menu {
     display: none;
   }
+}
+@media (max-width: 420px) {
+.react-calendar
+{
+  width: 100%;
+}
 }

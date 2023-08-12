@@ -5,7 +5,7 @@ import { BsInfoCircleFill } from "react-icons/bs";
 
 const Home = () => {
   return (
-    <div className="home-margin">
+    <div className="home">
       <div className="header-listado">
       <div className="black-border">
         <h1>LISTADO DE EVENTOS</h1>
