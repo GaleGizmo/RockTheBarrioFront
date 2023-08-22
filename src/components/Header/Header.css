@@ -79,7 +79,7 @@
 }
 
 /* Estilos para pantallas pequeñas (s) */
-@media (min-width: 470px) and (max-width: 852.98px) {
+/* @media (min-width: 470px) and (max-width: 852.98px) {
   .header {
     flex-direction: column;
     height: auto;
@@ -97,10 +97,10 @@
     margin-bottom: 0px;
     margin-top: 0px;
   }
-}
+} */
 
 /* Estilos para pantallas medianas (m) */
-@media (min-width: 853px) and (max-width: 991.98px) {
+/* @media (min-width: 853px) and (max-width: 991.98px) {
   .header {
     display: flex;
     justify-content: space-between;
@@ -114,7 +114,7 @@
     margin-top: 30px;
   }
  
-}
+} */
 
 /* Estilos para pantallas grandes (l) */
 /* @media (min-width: 992px) {

@@ -106,7 +106,7 @@ const DetallesEvento = () => {
                     alt="Imagen genérica"
                   />
                 )}
-                <h2>{evento.subtitle}</h2>
+                <h2>{evento.artist}</h2>
                 <h3>
                   <strong>Lugar: </strong>
                   {evento.site && evento.site !== "Varios" ? (

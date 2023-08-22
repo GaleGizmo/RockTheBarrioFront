@@ -1,22 +1,22 @@
 import React, { useState } from "react";
 import "./Evento.css";
-import { BiCalendarHeart} from "react-icons/bi";
+import { BiCalendarHeart } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { esHoy, formatDate } from "../../shared/formatDate";
 import { formatDistanceToNow, parseISO } from "date-fns";
 import esLocale from "date-fns/esm/locale/es/index.js";
 import MapIcon from "../MapIcon/MapIcon";
 import Favorito from "../Favorito/Favorito";
-import {BsInfoCircleFill} from "react-icons/bs"
+import { BsInfoCircleFill } from "react-icons/bs";
 import MapComponent from "../MapComponent/MapComponent";
 
 import useFavorites from "../../shared/useFavorites";
 import { useDispatch } from "react-redux";
-import {  setEvento } from "../../redux/eventos/eventos.actions";
+import { setEvento } from "../../redux/eventos/eventos.actions";
 
 const Evento = ({ evento, user }) => {
   const [showMap, setShowMap] = useState(false);
-const dispatch=useDispatch()
+  const dispatch = useDispatch();
   const { isFavorite, handleFavorites, showFavorite } = useFavorites(
     evento ? user?.favorites.includes(evento._id) : false,
     evento ? evento._id : null,
@@ -26,9 +26,9 @@ const dispatch=useDispatch()
   const handleToggleMap = () => {
     setShowMap((showMap) => !showMap);
   };
- const getEvento =() =>{
-  dispatch(setEvento(evento))
- }
+  const getEvento = () => {
+    dispatch(setEvento(evento));
+  };
   const isLongTitle = evento.title.length > 10 && !evento.title.includes(" ");
 
   const fechaEvento = evento.date_start ? parseISO(evento.date_start) : null;
@@ -38,32 +38,29 @@ const dispatch=useDispatch()
   });
   const fechaStart = evento.date_start ? formatDate(evento.date_start) : null;
   const fechaEnd = evento.date_end ? formatDate(evento.date_end) : null;
-  
+
   return (
     <div className="card">
       <div className="border-card">
         <div className="div-image">
-         
-            {evento.image ? (
-              <img src={evento.image} alt={evento.title} />
-            ) : (
-              <img
-                src="https://metropoliabierta.elespanol.com/uploads/s1/36/81/72/audience-band-celebration-1190298_9_1200x480.jpeg"
-                alt="Imagen nula"
-              />
-            )}
-          
+          {evento.image ? (
+            <img src={evento.image} alt={evento.title} />
+          ) : (
+            <img
+              src="https://metropoliabierta.elespanol.com/uploads/s1/36/81/72/audience-band-celebration-1190298_9_1200x480.jpeg"
+              alt="Imagen nula"
+            />
+          )}
         </div>
 
         <div className="div">
           <h1 className={isLongTitle ? "long-title" : ""}>{evento.title}</h1>
 
-          <h2>{evento.subtitle}</h2>
+          <h2>{evento.artist}</h2>
         </div>
         <div className="div2">
           <div className="ver-detalles">
             <Link to={{ pathname: `/${evento._id}` }}>
-             
               <BsInfoCircleFill className="mas-info" onClick={getEvento} />
             </Link>
             {user && (

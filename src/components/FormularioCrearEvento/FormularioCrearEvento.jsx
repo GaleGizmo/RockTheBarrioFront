@@ -71,9 +71,9 @@ const FormularioCrearEvento = () => {
           <label>Artista/s</label>
           <input
             className="inputCrearEvento"
-            {...register("subtitle", { required: true })}
+            {...register("artist", { required: true })}
           />
-          {errors.subtitle && (
+          {errors.artist && (
             <span className="error-message">Artista é requerido</span>
           )}
         </div>

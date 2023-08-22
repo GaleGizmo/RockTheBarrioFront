@@ -34,3 +34,11 @@ display: inline;
 }
    
 }
+
+@media (min-width: 420px) and (max-width: 1014px){
+    .eventos-list{
+        display:block;
+        margin-right: 0;
+        margin-top: 20px;
+    }
+}

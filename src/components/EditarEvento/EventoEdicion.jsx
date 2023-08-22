@@ -42,7 +42,7 @@ const EventoEdicion = ({ evento, navigate }) => {
       ...data,
       date_start: combinedDate,
     };
-
+console.log(editedEvento);
     dispatch(editEvento(evento._id, editedEvento, navigate));
     setIsSubmitting(false)
   };
@@ -72,12 +72,12 @@ const EventoEdicion = ({ evento, navigate }) => {
           <input
             className="inputCrearEvento"
             type="text"
-            name="subtitle"
-            defaultValue={evento.subtitle}
+            name="artist"
+            defaultValue={evento.artist}
             onChange={handleInputChange}
-            {...register("subtitle", { required: true })}
+            {...register("artist", { required: true })}
           />
-          {errors.subtitle && <span>Artista é requerido</span>}
+          {errors.artist && <span>Artista é requerido</span>}
         </div>
         <div className="div-inputCrearEvento">
           <label>Lugar:</label>

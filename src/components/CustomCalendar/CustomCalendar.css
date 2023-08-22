@@ -48,14 +48,13 @@
   border-radius: 0.25rem;
   border-color: black;
   border-width: 3px;
-  width: 95%;
+  /* width: 95%; */
   
 }
-@media (min-width: 1550px) {
-  .calendar {
-    
-    width: 90%;
-  }
+@media (max-width: 1650px) {
+ .react-calendar{
+  width: 95%
+ }
   .menu-toggle {
     display: none;
   }
