@@ -5,7 +5,7 @@ import { addToFavorites } from '../redux/usuarios/usuarios.actions';
 
 
 const useFavorites = (initialIsFavorite, eventId, userId) => {
-  console.log(initialIsFavorite);
+  
   const [isFavorite, setIsFavorite] = useState(initialIsFavorite);
   const [showFavorite, setShowFavorite] = useState(false);
   const dispatch = useDispatch();

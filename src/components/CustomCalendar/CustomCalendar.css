@@ -55,12 +55,12 @@
  .react-calendar{
   width: 95%
  }
-  .menu-toggle {
+  /* .menu-toggle {
     display: none;
-  }
-  .slide-menu {
+  } */
+  /* .slide-menu {
     display: none;
-  }
+  } */
 }
 @media (max-width: 420px) {
 .react-calendar
