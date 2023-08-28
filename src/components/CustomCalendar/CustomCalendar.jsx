@@ -59,27 +59,40 @@ function CustomCalendar({ eventos }) {
   const toggleModal = () => {
     setModalOpen(!isModalOpen);
   };
-
+  const [selectedDateForModal, setSelectedDateForModal] = useState(null);
   const handleTileClick = (date, event) => {
     const clickedDate = date.toDateString();
-    const eventsForDate = eventos
-      .filter(
-        (evento) => new Date(evento.date_start).toDateString() === clickedDate
-      )
-      .sort(
-        (a, b) =>
-          new Date(a.date_start).getTime() - new Date(b.date_start).getTime()
-      );
-    if (eventsForDate && eventsForDate.length > 0) {
-      setSelectedDate(date);
-      setSelectedEvents(eventsForDate);
-      const { clientX, clientY } = event;
-      setModalPosition({ top: clientY, left: clientX });
-      
+    if (selectedDateForModal && selectedDateForModal.toDateString() === clickedDate) {
+      // Si se hace clic nuevamente en la misma fecha, cierra el modal
+      setSelectedDateForModal(null);
       setModalOpen(false);
-      
-      setTimeout(() => setModalOpen(true), 0);
-    } else setModalOpen(false);
+    } else {
+      // Si se hace clic en una fecha diferente, abre el modal
+      const eventsForDate = eventos
+        .filter(
+          (evento) => new Date(evento.date_start).toDateString() === clickedDate
+        )
+        .sort(
+          (a, b) =>
+            new Date(a.date_start).getTime() - new Date(b.date_start).getTime()
+        );
+
+      if (eventsForDate && eventsForDate.length > 0) {
+        setSelectedDate(date);
+        setSelectedDateForModal(date);
+        setSelectedEvents(eventsForDate);
+
+        const { clientX, clientY } = event;
+        setModalPosition({ top: clientY, left: clientX });
+        
+        setModalOpen(false);
+        
+        setTimeout(() => setModalOpen(true), 0);
+      } else {
+        setSelectedDateForModal(null);
+        setModalOpen(false);
+      }
+    }
   };
 
   return (
@@ -104,11 +117,26 @@ function CustomCalendar({ eventos }) {
           isMenuOpen ? "menu-open" : ""
         }`}
       >
+        <div className="legend">
+        <div className="legend-item">
+          <div className="legend-dot legend-event"></div>
+          <div className="legend-label">Día con evento(s)</div>
+        </div>
+        <div className="legend-item">
+          <div className="legend-dot legend-selected"></div>
+          <div className="legend-label">Día seleccionado</div>
+        </div>
+        <div className="legend-item">
+          <div className="legend-dot legend-actual"></div>
+          <div className="legend-label">Día actual</div>
+        </div>
+      </div>
         <Calendar
           tileContent={tileContent}
           tileClassName={tileClassName}
           onClickDay={(date, event) => handleTileClick(date, event)}
         />
+      
       </div>
       {isModalOpen && (
         <EventListModal
@@ -117,6 +145,7 @@ function CustomCalendar({ eventos }) {
           position={modalPosition}
         />
       )}
+      
     </div>
   );
 }
