@@ -14,7 +14,7 @@ import MapComponent from "../../components/MapComponent/MapComponent";
 import MapIcon from "../../components/MapIcon/MapIcon";
 import { AiFillCloseSquare } from "react-icons/ai";
 import useFavorites from "../../shared/useFavorites";
-import { BiCalendarHeart } from "react-icons/bi";
+import { BiCalendarAlt, BiCalendarHeart } from "react-icons/bi";
 import Favorito from "../../components/Favorito/Favorito";
 
 const DetallesEvento = () => {
@@ -119,7 +119,7 @@ const DetallesEvento = () => {
                   )}
                 </h3>
                 {evento.price == 0 ? (
-                  <h3 className="gratuitoDetEv">GRATUITO</h3>
+                  <h3 className="gratuito">GRATUITO</h3>
                 ) : (
                   <div className="detalles_precio">
                     <h3>
@@ -147,7 +147,7 @@ const DetallesEvento = () => {
                   </div>
                 )}
                 {esHoy(evento.date_start) ? (
-                  <h3 className="gratuitoDetEv ">
+                  <h3 className="gratuito ">
                     HOXE <span>{fechaStart.split(",")[2]}h</span>
                   </h3>
                 ) : (
@@ -171,16 +171,15 @@ const DetallesEvento = () => {
                 {evento.url && (
                   <div className="margin-boton-info">
                     <Button text="+Info" type="medium" onClick={comprar} />
-                    {user  && (
-                      <BiCalendarHeart
-                        className={
-                          isFavorite
-                            ? " favorito favorito-detalle favorito__yes"
-                            : "favorito favorito-detalle"
-                        }
-                        onClick={handleFavorites}
-                      />
-                    )}
+                    {user && (
+              <span onClick={handleFavorites}>
+                {isFavorite ? (
+                  <BiCalendarHeart className="favorito favorito-detalle" />
+                ) : (
+                  <BiCalendarAlt className="favorito favorito-detalle" />
+                )}
+              </span>
+            )}
                     {showFavorite && (
                       <Favorito
                         evento={evento._id}

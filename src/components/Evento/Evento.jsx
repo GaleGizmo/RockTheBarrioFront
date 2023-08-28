@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Evento.css";
-import { BiCalendarHeart } from "react-icons/bi";
+import { BiCalendarHeart, BiCalendarAlt } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { esHoy, formatDate } from "../../shared/formatDate";
 import { formatDistanceToNow, parseISO } from "date-fns";
@@ -64,10 +64,13 @@ const Evento = ({ evento, user }) => {
               <BsInfoCircleFill className="mas-info" onClick={getEvento} />
             </Link>
             {user && (
-              <BiCalendarHeart
-                className={isFavorite ? " favorito favorito__yes" : "favorito"}
-                onClick={handleFavorites}
-              />
+              <span onClick={handleFavorites}>
+                {isFavorite ? (
+                  <BiCalendarHeart className="favorito" />
+                ) : (
+                  <BiCalendarAlt className="favorito" />
+                )}
+              </span>
             )}
             {showFavorite && (
               <Favorito evento={evento._id} favoriteStatus={isFavorite} />

@@ -43,7 +43,7 @@ const ConfirmarEmail = ({ token }) => {
         {token === "unsubscribenewsletter" && (
           <p>
             Ao premer en <strong>Confirmar</strong> deixarás de recibir os
-            emails semanais
+            eventos semanais
           </p>
         )}
         {token === "unsubscribenewevent" && (

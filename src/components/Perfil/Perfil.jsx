@@ -17,7 +17,7 @@ const Perfil = ({ userData, onEditClick }) => {
       )}
       <p>Notificar novo evento: {userData.newevent ? (<span className="perfil__user-data">Sí</span>):(<span className="perfil__user-data">No</span>)}</p>
 
-      <p>Newsletter semanal: {userData.newsletter ? (<span className="perfil__user-data">Sí</span>):(<span className="perfil__user-data">No</span>)}</p>
+      <p>Mandar eventos da semana: {userData.newsletter ? (<span className="perfil__user-data">Sí</span>):(<span className="perfil__user-data">No</span>)}</p>
      
       <div className="margin-botonReg">
         <Button text="Editar Datos" type="medium" onClick={onEditClick} />

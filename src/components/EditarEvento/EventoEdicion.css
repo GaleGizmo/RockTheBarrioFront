@@ -3,7 +3,7 @@
     height: 100px;
     position: fixed;
     left: 37%;
-    bottom: 12%
+    bottom: 9%
 }
 .avatar{
     bottom: 30%
@@ -14,7 +14,7 @@
   }
 @media (max-width: 420px){
     .imagen-formulario{
-       
+       bottom: 12%;
         left: 33%;
         
     }

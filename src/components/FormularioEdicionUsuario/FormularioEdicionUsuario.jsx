@@ -91,7 +91,7 @@ const handleCancel=()=>{
           />
         </div>
         <div className="div-inputReg">
-        <label className="margin-label">Newsletter semanal</label>
+        <label className="margin-label">Manda eventos da semana</label>
         <input
             {...register("newsletter", { required: true })}
             type="checkbox"
@@ -117,7 +117,7 @@ const handleCancel=()=>{
           )}
           {imageFile && (
             <img
-              className="imagen-formulario"
+              className="imagen-avatar"
               src={imageFile}
               alt="Avatar do usuario"
             />

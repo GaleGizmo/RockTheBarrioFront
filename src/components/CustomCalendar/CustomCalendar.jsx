@@ -8,17 +8,30 @@ import { FaRegCalendarAlt } from "react-icons/fa";
 import EventListModal from "../EventListModal/EventListModal";
 
 function CustomCalendar({ eventos }) {
+  const eventDates = new Set(
+    eventos.map((evento) => new Date(evento.date_start).toDateString())
+  );
+
   const tileContent = ({ date }) => {
-    const eventDates = eventos.map((evento) =>
-      new Date(evento.date_start).toDateString()
-    );
     const currentDate = date.toDateString();
-    return eventDates.includes(currentDate) ? "event-day" : null;
+    if (eventDates.has(currentDate)) {
+      return <span>•</span>;
+    } else {
+      return null;
+    }
   };
+
+  const tileClassName = ({ date }) => {
+    const currentDate = date.toDateString();
+    return eventDates.has(currentDate) ? "event-day" : null;
+  };
+
   const [isMenuOpen, setMenuOpen] = useState(false);
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
-    if (isModalOpen){setModalOpen(false)}
+    if (isModalOpen) {
+      setModalOpen(false);
+    }
   };
 
   const [selectedDate, setSelectedDate] = useState(null);
@@ -32,14 +45,20 @@ function CustomCalendar({ eventos }) {
 
   const handleTileClick = (date, event) => {
     const clickedDate = date.toDateString();
-    const eventsForDate = eventos.filter(
-      (evento) => new Date(evento.date_start).toDateString() === clickedDate
-    );
+    const eventsForDate = eventos
+      .filter(
+        (evento) => new Date(evento.date_start).toDateString() === clickedDate
+      )
+      .sort(
+        (a, b) =>
+          new Date(a.date_start).getTime() - new Date(b.date_start).getTime()
+      );
+      if (eventsForDate && eventsForDate.length>0){
     setSelectedDate(date);
     setSelectedEvents(eventsForDate);
     const { clientX, clientY } = event;
     setModalPosition({ top: clientY, left: clientX });
-    toggleModal();
+    toggleModal();}
   };
 
   return (
@@ -47,13 +66,16 @@ function CustomCalendar({ eventos }) {
       <Button
         className=" menu-toggle custom-toggle d-lg-none"
         onClick={toggleMenu}
-        
       >
         <FaRegCalendarAlt></FaRegCalendarAlt>
       </Button>
       <Collapse in={isMenuOpen} className="d-lg-none">
         <div className="slide-menu">
-          <Calendar tileClassName={tileContent} onClickDay={(date, event) => handleTileClick(date, event)} />
+          <Calendar
+            tileContent={tileContent}
+            tileClassName={tileClassName}
+            onClickDay={(date, event) => handleTileClick(date, event)}
+          />
         </div>
       </Collapse>
       <div
@@ -61,10 +83,18 @@ function CustomCalendar({ eventos }) {
           isMenuOpen ? "menu-open" : ""
         }`}
       >
-        <Calendar tileClassName={tileContent} onClickDay={(date, event) => handleTileClick(date, event)} />
+        <Calendar
+          tileContent={tileContent}
+          tileClassName={tileClassName}
+          onClickDay={(date, event) => handleTileClick(date, event)}
+        />
       </div>
       {isModalOpen && (
-        <EventListModal events={selectedEvents} onClose={toggleModal} position={modalPosition} />
+        <EventListModal
+          events={selectedEvents}
+          onClose={toggleModal}
+          position={modalPosition}
+        />
       )}
     </div>
   );
