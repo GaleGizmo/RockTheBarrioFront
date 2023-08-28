@@ -51,6 +51,33 @@
   /* width: 95%; */
   
 }
+.react-calendar__tile--now {
+  border-radius: 50%;
+  color: rgb(0,0,0);
+  position: relative;
+  background: white
+}
+
+.react-calendar__tile--now::before {
+  content: '';
+  position: absolute;
+  top: 15%; 
+  left: 15%; 
+  width: 70%; 
+  height: 70%; 
+  background: var(--secondary-shadow);
+  border-radius: 50%;}
+  .react-calendar__tile--active {
+    background-color: none; /* Cambia el color de fondo de las celdas activas */
+    color: #ffffff; /* Cambia el color del texto en las celdas activas */
+  }
+  
+  .react-calendar__tile--inactive {
+    background-color: white;
+    opacity: 0.5; /* Reduce la opacidad de las celdas inactivas */
+    cursor: not-allowed; /* Cambia el cursor cuando se pasa sobre las celdas inactivas */
+  }
+  
 @media (max-width: 1650px) {
  .react-calendar{
   width: 95%
@@ -62,6 +89,7 @@
     display: none;
   } */
 }
+
 @media (max-width: 420px) {
 .react-calendar
 {

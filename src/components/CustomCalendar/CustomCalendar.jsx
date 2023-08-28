@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "./CustomCalendar.css";
-import { useNavigate } from "react-router-dom";
+
 import { Button, Collapse } from "react-bootstrap";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import EventListModal from "../EventListModal/EventListModal";
@@ -21,9 +21,26 @@ function CustomCalendar({ eventos }) {
     }
   };
 
-  const tileClassName = ({ date }) => {
+  const tileClassName = ({ date, view }) => {
     const currentDate = date.toDateString();
-    return eventDates.has(currentDate) ? "event-day" : null;
+    const isActive = selectedDate && selectedDate.toDateString() === currentDate;
+    const hasEvent = eventDates.has(currentDate);
+  
+    let classNames = "";
+  
+    if (isActive) {
+      classNames += "react-calendar__tile--active ";
+    }
+  
+    if (hasEvent) {
+      classNames += "event-day ";
+    }
+  
+    if (view === "month" && !hasEvent) {
+      classNames += "react-calendar__tile--inactive ";
+    }
+  
+    return classNames.trim();
   };
 
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -53,12 +70,16 @@ function CustomCalendar({ eventos }) {
         (a, b) =>
           new Date(a.date_start).getTime() - new Date(b.date_start).getTime()
       );
-      if (eventsForDate && eventsForDate.length>0){
-    setSelectedDate(date);
-    setSelectedEvents(eventsForDate);
-    const { clientX, clientY } = event;
-    setModalPosition({ top: clientY, left: clientX });
-    toggleModal();}
+    if (eventsForDate && eventsForDate.length > 0) {
+      setSelectedDate(date);
+      setSelectedEvents(eventsForDate);
+      const { clientX, clientY } = event;
+      setModalPosition({ top: clientY, left: clientX });
+      
+      setModalOpen(false);
+      
+      setTimeout(() => setModalOpen(true), 0);
+    } else setModalOpen(false);
   };
 
   return (
