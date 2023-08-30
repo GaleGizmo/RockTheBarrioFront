@@ -10,20 +10,30 @@ import Button from "../Button/Button";
 const FormularioCrearEvento = () => {
   const { user } = useSelector((state) => state.usuariosReducer);
   const navigate = useNavigate();
+  const [priceError, setPriceError] = useState(false);
+
   const [showBuyTicketField, setShowBuyTicketField] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handlePriceChange = (event) => {
     const price = event.target.value;
-    setShowBuyTicketField(parseFloat(price) > 0);
+    const floatPrice = parseFloat(price);
+    if (!isNaN(floatPrice)) {
+      setShowBuyTicketField(floatPrice > 0);
+      setPriceError(false);
+      clearErrors("price");
+    } else {
+      setPriceError(true);
+    }
   };
+
   const handleFormSubmit = async (formData) => {
     try {
-      setIsSubmitting(true)
+      setIsSubmitting(true);
       dispatch(addEvento(formData, navigate, { user: user._id }));
       setIsSubmitting(false);
     } catch (error) {
-      setIsSubmitting(false); 
+      setIsSubmitting(false);
       console.error("Error al enviar el evento:", error);
     }
   };
@@ -43,12 +53,12 @@ const FormularioCrearEvento = () => {
 
     // Enviar los datos al backend
 
-    handleFormSubmit(finalFormData)
+    handleFormSubmit(finalFormData);
   };
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }, clearErrors
   } = useForm();
   const dispatch = useDispatch();
   const [imageFile, setImageFile] = useState();
@@ -102,12 +112,25 @@ const FormularioCrearEvento = () => {
           <label>Prezo</label>
           <input
             className="inputCrearEvento"
-            type="number"
-            {...register("price", { required: true })}
+            type="text"
+            {...register("price", {
+              required: true,
+              pattern: {
+          value: /^\d+(\.\d{1,2})?$/,
+          message: "Máximo dous decimáis permitidos." 
+        }
+            })}
             onChange={handlePriceChange}
           />
           {errors.price && (
-            <span className="error-message">Prezo é requerido</span>
+            <span className="error-message">
+            {errors.price.message}
+            </span>
+          )}
+          {priceError && (
+            <span className="error-message">
+              Por favor, introduce un número válido
+            </span>
           )}
         </div>
         {showBuyTicketField && (
@@ -123,14 +146,17 @@ const FormularioCrearEvento = () => {
             type="date"
             {...register("day_start", { required: true })}
           />
+          {errors.day_start && (
+            <span className="error-message">Data de Inicio é requerida</span>
+          )}
           <label>Hora de Inicio</label>
           <input
             className="inputCrearEvento"
             type="time"
-            {...register("time_start")}
+            {...register("time_start", { required: true })}
           />
-          {errors.date_start && (
-            <span className="error-message">Data de Inicio é requerida</span>
+          {errors.time_start && (
+            <span className="error-message">Hora de Inicio é requerida</span>
           )}
         </div>
         <div className="fechaCrearEvento">

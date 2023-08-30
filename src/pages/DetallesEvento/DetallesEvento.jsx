@@ -163,7 +163,7 @@ const DetallesEvento = () => {
                     <strong>Xénero:</strong> {evento.genre}
                   </h3>
                 )}
-                <div>
+                <div className="evento_contenido">
                   {formattedContent.split("\n").map((sentence, index) => (
                     <p key={index}>{sentence}</p>
                   ))}

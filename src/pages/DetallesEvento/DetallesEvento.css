@@ -174,6 +174,14 @@
   flex-direction: column;
   margin-top: 10%;
 }
+.evento_contenido{
+  border: 2px solid var(--secondary-color);
+  border-radius: 10px;
+  padding: 5px 10px;
+  margin: 10px 20px;
+  background-color: var(--hover-color);
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.4);
+}
 
 @media (min-width: 590px) and (max-width: 1040px) {
   .cardDetEv {
@@ -263,5 +271,8 @@
   }
   .detalles_precio{
     gap: 3px
+  }
+  .evento_contenido{
+    margin: 10px 5px
   }
 }
