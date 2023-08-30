@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
 import "./Navbar.css";
 import Button from "../Button/Button";
-import { AiOutlinePoweroff } from "react-icons/ai";
+
 import { Link } from "react-router-dom";
-import {RiUser3Fill} from "react-icons/ri"
-import { logout, setUser } from "../../redux/usuarios/usuarios.actions";
+import { RiUser3Fill } from "react-icons/ri";
+import { logout } from "../../redux/usuarios/usuarios.actions";
 import { useDispatch, useSelector } from "react-redux";
 import SwitchIcon from "../SwitchIcon/SwitchIcon";
 
 const Navbar = () => {
-  const dispatch = useDispatch();
+
   const { user } = useSelector((state) => state.usuariosReducer);
 
   return (
@@ -20,9 +20,21 @@ const Navbar = () => {
             <h3 className="h3">
               Ola, <Link to="/perfil">{user.username}</Link>
             </h3>
-            {user.avatar && (
+            {user.avatar ? (
               <div className="avatar-container">
-                <img className="header_avatar" src={user.avatar} alt="avatar" />
+                <Link to="/perfil">
+                  <img
+                    className="header_avatar"
+                    src={user.avatar}
+                    alt="avatar"
+                  />
+                </Link>
+              </div>
+            ) : (
+              <div className="avatar-container">
+                <Link to="/perfil">
+                  <RiUser3Fill className="header_noavatar" />
+                </Link>
               </div>
             )}
           </div>
@@ -37,7 +49,6 @@ const Navbar = () => {
               )}
             </div>
             <Link to="/">
-            
               <span className="icono-salir">
                 <SwitchIcon onClick={logout} />
               </span>
@@ -46,13 +57,11 @@ const Navbar = () => {
         </div>
       ) : (
         <>
-          <div >
+          <div>
             <Link to="/login">
               <RiUser3Fill className="no-logged" />
             </Link>
-            {/* <Link to="date-de-alta">
-              <Button text="Rexistrarse" type="medium" />
-            </Link>{" "} */}
+          
           </div>
         </>
       )}
