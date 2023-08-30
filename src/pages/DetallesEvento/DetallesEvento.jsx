@@ -126,7 +126,7 @@ const DetallesEvento = () => {
                       <strong>Prezo: </strong>
                       {evento.price} €
                     </h3>
-                    <a
+                    {evento.buy_ticket && <a
                       className="boleto_precio"
                       href={evento.buy_ticket}
                       target="blank"
@@ -143,7 +143,7 @@ const DetallesEvento = () => {
                           height="100"
                         />
                       </svg>
-                    </a>
+                    </a>}
                   </div>
                 )}
                 {esHoy(evento.date_start) ? (
