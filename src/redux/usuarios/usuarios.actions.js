@@ -58,7 +58,7 @@ const checkSesion = () => () => {
         type: "LOGIN",
         contenido: {
           user: JSON.parse(userJson),
-          token: tokenJson.replaceAll('"', ""),
+          token: tokenJson,
         },
       });
     }
@@ -82,7 +82,7 @@ const registerUser = (datos, navigate) => async () => {
     }
 
     const resultado = await APIIMAGES.post("/usuario/register", formData);
-    dispatch({ type: "SET_USER", contenido: resultado.data.user });
+    // dispatch({ type: "SET_USER", contenido: resultado.data.user });
     setUserData(resultado, navigate);
   } catch (error) {
     
