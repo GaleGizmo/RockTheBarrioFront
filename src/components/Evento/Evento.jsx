@@ -18,7 +18,7 @@ const Evento = ({ evento, user }) => {
   const [showMap, setShowMap] = useState(false);
   const dispatch = useDispatch();
   const { isFavorite, handleFavorites, showFavorite } = useFavorites(
-    user ? user.favorites.includes(evento._id) : false,
+    user?.favorites?.includes(evento._id) || false,
     evento ? evento._id : null,
     user ? user._id : null
   );
