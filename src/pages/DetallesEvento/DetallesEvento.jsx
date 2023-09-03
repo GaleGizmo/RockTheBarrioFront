@@ -20,17 +20,23 @@ import Favorito from "../../components/Favorito/Favorito";
 const DetallesEvento = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
+
   const { loading, evento } = useSelector((reducer) => reducer.eventosReducer);
+  useEffect(() => {
+    if (!evento || evento._id !== id) {
+      dispatch(getEventoById(id));
+    }
+  }, [dispatch, id, evento]);
   const { user } = useSelector((reducer) => reducer.usuariosReducer);
   const { isFavorite, handleFavorites, showFavorite } = useFavorites(
     evento ? user?.favorites.includes(id) : false,
     evento ? evento._id : null,
     user ? user._id : null
   );
-  
-  // useEffect(() => {
+    // useEffect(() => {
   //   dispatch(getEventoById(id));
   // }, [id]);
+ 
   const navigate = useNavigate();
  
   const isLongTitle = evento && evento.title && evento.title.length > 10 && !evento.title.includes(" ");
