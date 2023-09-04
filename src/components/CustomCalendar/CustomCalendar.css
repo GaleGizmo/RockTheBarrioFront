@@ -37,7 +37,7 @@
   margin-left: auto;
   margin-right: auto;
   color: brown;
-  box-shadow: 5px 5px 4px var(--secondary-shadow);
+ 
 
   /* max-width: 20%; */
 }
@@ -46,6 +46,7 @@
   border-radius: 0.25rem;
   border-color: black;
   border-width: 3px;
+  box-shadow: 5px 5px 4px var(--secondary-shadow);
   /* width: 95%; */
 }
 .react-calendar__tile--now {

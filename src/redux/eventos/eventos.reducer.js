@@ -3,26 +3,32 @@ const INITIAL_STATE = {
   loading: false,
   evento: null,
   error: null,
-  eventosEnviados:"",
- 
+  eventosEnviados: "",
 };
 export const eventosReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case "LOADING_EVENTOS":
-      return { ...state, loading: true, error:null };
+      return { ...state, loading: true, error: null };
     case "GET_EVENTOS":
       return { ...state, loading: false, eventos: [...action.contenido] };
     case "GET_EVENTO":
       return { ...state, loading: false, evento: action.contenido };
     case "ADD_EVENTO":
-      return { ...state, loading: false, eventos: [...state.eventos, action.contenido] };
+      return {
+        ...state,
+        loading: false,
+        eventos: [...state.eventos, action.contenido],
+      };
     case "EDIT_EVENTO":
       return {
         ...state,
         eventos: state.eventos.map((evento) =>
           evento._id === action.id ? { ...evento, ...action.datos } : evento
         ),
-        evento: { ...state.evento, ...action.datos },
+        evento:
+          state.evento._id === action.id
+            ? { ...state.evento, ...action.datos }
+            : state.evento,
         loading: false,
         error: null,
       };
@@ -41,13 +47,13 @@ export const eventosReducer = (state = INITIAL_STATE, action) => {
           (evento) => evento.id === action.contenido
         ),
       };
-     
+
     case "EVENTOS_ENVIADOS":
       return {
         ...state,
         loading: false,
-        eventosEnviados: action.contenido
-      }  
+        eventosEnviados: action.contenido,
+      };
     case "CLEAR_EVENTO":
       return { ...state, evento: null };
       break;
@@ -57,7 +63,7 @@ export const eventosReducer = (state = INITIAL_STATE, action) => {
         loading: false,
         error: action.contenido,
       };
-      case "CLEAR_MENSAJES":
+    case "CLEAR_MENSAJES":
       return {
         ...state,
         eventosEnviados: "",

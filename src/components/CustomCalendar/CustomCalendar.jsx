@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
+
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "./CustomCalendar.css";
@@ -8,8 +9,12 @@ import { FaRegCalendarAlt } from "react-icons/fa";
 import EventListModal from "../EventListModal/EventListModal";
 
 function CustomCalendar({ eventos }) {
-  const eventDates = new Set(
-    eventos.map((evento) => new Date(evento.date_start).toDateString())
+  const eventDates = useMemo(
+    () =>
+      new Set(
+        eventos.map((evento) => new Date(evento.date_start).toDateString())
+      ),
+    [eventos]
   );
 
   const tileContent = ({ date }) => {
@@ -23,23 +28,24 @@ function CustomCalendar({ eventos }) {
 
   const tileClassName = ({ date, view }) => {
     const currentDate = date.toDateString();
-    const isActive = selectedDate && selectedDate.toDateString() === currentDate;
+    const isActive =
+      selectedDate && selectedDate.toDateString() === currentDate;
     const hasEvent = eventDates.has(currentDate);
-  
+
     let classNames = "";
-  
+
     if (isActive) {
       classNames += "react-calendar__tile--active ";
     }
-  
+
     if (hasEvent) {
       classNames += "event-day ";
     }
-  
+
     if (view === "month" && !hasEvent) {
       classNames += "react-calendar__tile--inactive ";
     }
-  
+
     return classNames.trim();
   };
 
@@ -60,9 +66,13 @@ function CustomCalendar({ eventos }) {
     setModalOpen(!isModalOpen);
   };
   const [selectedDateForModal, setSelectedDateForModal] = useState(null);
+  
   const handleTileClick = (date, event) => {
     const clickedDate = date.toDateString();
-    if (selectedDateForModal && selectedDateForModal.toDateString() === clickedDate) {
+    if (
+      selectedDateForModal &&
+      selectedDateForModal.toDateString() === clickedDate
+    ) {
       // Si se hace clic nuevamente en la misma fecha, cierra el modal
       setSelectedDateForModal(null);
       setModalOpen(false);
@@ -84,9 +94,9 @@ function CustomCalendar({ eventos }) {
 
         const { clientX, clientY } = event;
         setModalPosition({ top: clientY, left: clientX });
-        
+
         setModalOpen(false);
-        
+
         setTimeout(() => setModalOpen(true), 0);
       } else {
         setSelectedDateForModal(null);
@@ -106,6 +116,7 @@ function CustomCalendar({ eventos }) {
       <Collapse in={isMenuOpen} className="d-lg-none">
         <div className="slide-menu">
           <Calendar
+            locale="gl"
             tileContent={tileContent}
             tileClassName={tileClassName}
             onClickDay={(date, event) => handleTileClick(date, event)}
@@ -118,25 +129,25 @@ function CustomCalendar({ eventos }) {
         }`}
       >
         <div className="legend">
-        <div className="legend-item">
-          <div className="legend-dot legend-event"></div>
-          <div className="legend-label">Día con evento(s)</div>
+          <div className="legend-item">
+            <div className="legend-dot legend-event"></div>
+            <div className="legend-label">Día con evento(s)</div>
+          </div>
+          <div className="legend-item">
+            <div className="legend-dot legend-selected"></div>
+            <div className="legend-label">Día seleccionado</div>
+          </div>
+          <div className="legend-item">
+            <div className="legend-dot legend-actual"></div>
+            <div className="legend-label">Día actual</div>
+          </div>
         </div>
-        <div className="legend-item">
-          <div className="legend-dot legend-selected"></div>
-          <div className="legend-label">Día seleccionado</div>
-        </div>
-        <div className="legend-item">
-          <div className="legend-dot legend-actual"></div>
-          <div className="legend-label">Día actual</div>
-        </div>
-      </div>
         <Calendar
+          locale="gl"
           tileContent={tileContent}
           tileClassName={tileClassName}
           onClickDay={(date, event) => handleTileClick(date, event)}
         />
-      
       </div>
       {isModalOpen && (
         <EventListModal
@@ -145,7 +156,6 @@ function CustomCalendar({ eventos }) {
           position={modalPosition}
         />
       )}
-      
     </div>
   );
 }

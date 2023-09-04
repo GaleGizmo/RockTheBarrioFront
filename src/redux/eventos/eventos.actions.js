@@ -11,27 +11,25 @@ const getAllEventos = () => async () => {
   dispatch({ type: "GET_EVENTOS", contenido: resultado.data });
 };
 
-const sendEventosSemanales =()=>async(dispatch)=>{
+const sendEventosSemanales = () => async (dispatch) => {
   try {
     await API.post("/evento/sendeventos/");
     dispatch({ type: "EVENTOS_ENVIADOS", contenido: "Eventos enviados" });
   } catch (error) {
     dispatch({ type: "ERROR_EVENTO", contenido: error.message });
   }
-}
+};
 
 const getEventoById = (id) => async (dispatch) => {
-  
   dispatch({ type: "CLEAR_EVENTO" });
   dispatch({ type: "LOADING_EVENTOS" });
-try {
-  const resultado = await API.get(`/evento/getbyid/${id}` );
-  
-  dispatch({ type: "GET_EVENTO", contenido: resultado.data });
-} catch(error){
-  dispatch({ type: "ERROR_EVENTO", contenido: error.message });
-}
-  
+  try {
+    const resultado = await API.get(`/evento/getbyid/${id}`);
+
+    dispatch({ type: "GET_EVENTO", contenido: resultado.data });
+  } catch (error) {
+    dispatch({ type: "ERROR_EVENTO", contenido: error.message });
+  }
 };
 
 const createFormData = (eventoData) => {
@@ -45,11 +43,11 @@ const createFormData = (eventoData) => {
   if (eventoData.date_end) {
     formData.append("date_end", eventoData.date_end);
   }
-  if (eventoData.youtubeVideoId){
+  if (eventoData.youtubeVideoId) {
     formData.append("youtubeVideoId", eventoData.youtubeVideoId);
   }
-  
-  formData.append("buy_ticket", eventoData.buy_ticket)
+
+  formData.append("buy_ticket", eventoData.buy_ticket);
   formData.append("genre", eventoData.genre);
   formData.append("content", eventoData.content);
   formData.append("url", eventoData.url);
@@ -112,7 +110,16 @@ const clearMensajes = () => {
   return { type: "CLEAR_MENSAJES" };
 };
 
-const setEvento =(eventoData)=> (dispatch)=> {
+const setEvento = (eventoData) => (dispatch) => {
   dispatch({ type: "GET_EVENTO", contenido: eventoData });
-}
-export { getAllEventos, getEventoById, addEvento, deleteEvento, editEvento, sendEventosSemanales, clearMensajes, setEvento };
+};
+export {
+  getAllEventos,
+  getEventoById,
+  addEvento,
+  deleteEvento,
+  editEvento,
+  sendEventosSemanales,
+  clearMensajes,
+  setEvento,
+};

@@ -42,7 +42,7 @@ const EventoEdicion = ({ evento, navigate }) => {
       ...data,
       date_start: combinedDate,
     };
-console.log(editedEvento);
+
     dispatch(editEvento(evento._id, editedEvento, navigate));
     setIsSubmitting(false)
   };
@@ -163,6 +163,18 @@ console.log(editedEvento);
             onChange={handleInputChange}
             {...register("genre")}
           />
+        </div>
+        <div className="div-inputCrearEvento">
+          <label>YouTube ID:</label>
+          <input
+            className="inputCrearEvento"
+            type="text"
+            name="youtubeVideoId"
+            defaultValue={evento.youtubeVideoId}
+            onChange={handleInputChange}
+            {...register("youtubeVideoId")}
+          />
+          
         </div>
         <div className="infoCrearEvento">
           <label>Información:</label>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { Link } from "react-router-dom";
 import "./EventListModal.css"
 
@@ -7,7 +7,7 @@ import { setEvento } from "../../redux/eventos/eventos.actions";
 import Button from "../Button/Button";
 import { useDispatch } from "react-redux";
 
-const EventListModal = ({ events, onClose, position }) => {
+const EventListModal = memo(({ events, onClose, position }) => {
   const { top, left } = position;
   const dispatch=useDispatch()
   const getEvento =(evento) =>{
@@ -33,6 +33,6 @@ const EventListModal = ({ events, onClose, position }) => {
       
     </div>
   );
-};
+});
 
 export default EventListModal;
