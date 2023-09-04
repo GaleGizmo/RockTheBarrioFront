@@ -20,7 +20,7 @@
     transform: scale(1.5);
 }
 .close-icon:hover{
-    color: var(--hover-color);
+    color: var(--terciary-color);
     cursor: pointer;
 }
 .perfil-avatar{
