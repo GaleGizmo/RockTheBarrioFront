@@ -36,15 +36,15 @@ export const eventosReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         eventos: state.eventos.filter(
-          (evento) => evento.id !== action.contenido
+          (evento) => evento._id !== action.contenido
         ),
       };
     case "GET_EVENTOBYID":
       return {
         ...state,
         loading: false,
-        evento: state.eventos.filter(
-          (evento) => evento.id === action.contenido
+        evento: state.eventos.find(
+          (evento) => evento._id === action.contenido
         ),
       };
 

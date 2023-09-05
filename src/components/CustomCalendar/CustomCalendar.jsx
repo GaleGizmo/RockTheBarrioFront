@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-
+import galician from '../../shared/galician.js'
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "./CustomCalendar.css";
@@ -66,7 +66,7 @@ function CustomCalendar({ eventos }) {
     setModalOpen(!isModalOpen);
   };
   const [selectedDateForModal, setSelectedDateForModal] = useState(null);
-  
+
   const handleTileClick = (date, event) => {
     const clickedDate = date.toDateString();
     if (
@@ -116,7 +116,7 @@ function CustomCalendar({ eventos }) {
       <Collapse in={isMenuOpen} className="d-lg-none">
         <div className="slide-menu">
           <Calendar
-            locale="gl"
+            locale={galician}
             tileContent={tileContent}
             tileClassName={tileClassName}
             onClickDay={(date, event) => handleTileClick(date, event)}
@@ -143,7 +143,7 @@ function CustomCalendar({ eventos }) {
           </div>
         </div>
         <Calendar
-          locale="gl"
+          locale={galician}
           tileContent={tileContent}
           tileClassName={tileClassName}
           onClickDay={(date, event) => handleTileClick(date, event)}

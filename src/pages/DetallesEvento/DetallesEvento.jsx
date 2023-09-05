@@ -27,6 +27,7 @@ const DetallesEvento = () => {
       dispatch(getEventoById(id));
     }
   }, [dispatch, id, evento]);
+  console.log(evento);
   const { user } = useSelector((reducer) => reducer.usuariosReducer);
   const { isFavorite, handleFavorites, showFavorite } = useFavorites(
     user?.favorites?.includes(evento?._id) || false,

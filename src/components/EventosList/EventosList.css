@@ -13,7 +13,8 @@
     
 }
 .div-lateral{
-display: inline;
+display: flex;
+flex-direction: column;
 
 
 }

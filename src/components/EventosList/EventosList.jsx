@@ -2,10 +2,10 @@ import React, { useEffect } from "react";
 import { getAllEventos } from "../../redux/eventos/eventos.actions";
 import { useDispatch, useSelector } from "react-redux";
 import Evento from "../Evento/Evento";
-import Calendar from "react-calendar";
+
 import "react-calendar/dist/Calendar.css";
 import "./EventosList.css";
-import { FaCalendar } from "react-icons/fa";
+
 import CustomCalendar from "../CustomCalendar/CustomCalendar";
 
 const EventosList = () => {
@@ -15,6 +15,11 @@ const EventosList = () => {
   const eventosOrdenados = [...eventos].sort(
     (a, b) => new Date(a.date_start) - new Date(b.date_start)
   );
+  const eventosParaCalendario = eventosOrdenados.map((evento) => ({
+    _id: evento._id,
+    title: evento.title,
+    date_start: evento.date_start,
+  }));
   useEffect(() => {
     dispatch(getAllEventos());
   }, [dispatch]);
@@ -36,7 +41,8 @@ const EventosList = () => {
         )}
       </div>
       <div className="div-lateral">
-        <CustomCalendar eventos={eventos} />
+        <CustomCalendar eventos={eventosParaCalendario} />
+
       </div>
     </div>
   );

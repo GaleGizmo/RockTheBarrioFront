@@ -27,7 +27,7 @@ const Evento = ({ evento, user }) => {
     setShowMap((showMap) => !showMap);
   };
   const getEvento = () => {
-    dispatch(setEvento(evento));
+    dispatch(setEvento(evento._id));
   };
   const isLongTitle = evento.title.length > 10 && !evento.title.includes(" ");
 

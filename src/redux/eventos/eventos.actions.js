@@ -110,8 +110,8 @@ const clearMensajes = () => {
   return { type: "CLEAR_MENSAJES" };
 };
 
-const setEvento = (eventoData) => (dispatch) => {
-  dispatch({ type: "GET_EVENTO", contenido: eventoData });
+const setEvento = (eventoId) => (dispatch) => {
+  dispatch({ type: "GET_EVENTOBYID", contenido: eventoId });
 };
 export {
   getAllEventos,
