@@ -16,6 +16,8 @@ import { AiFillCloseSquare } from "react-icons/ai";
 import useFavorites from "../../shared/useFavorites";
 import { BiCalendarAlt, BiCalendarHeart } from "react-icons/bi";
 import Favorito from "../../components/Favorito/Favorito";
+import { format, parseISO } from "date-fns";
+import { gl } from "date-fns/locale";
 
 const DetallesEvento = () => {
   const dispatch = useDispatch();
@@ -69,7 +71,12 @@ const DetallesEvento = () => {
       setFormattedContent(formattedContent);
     }
   }, [evento]);
-  const fechaStart = evento?.date_start ? formatDate(evento.date_start) : null;
+  const parsedDate = parseISO(evento.date_start);
+  const fechaStart = evento.date_start
+    ? format(parsedDate, "EEEE, dd MMMM, yyyy, HH:mm", {
+        locale: gl,
+      })
+    : null;
   const fechaEnd = evento?.date_end ? formatDate(evento.date_end) : null;
 
   
@@ -155,7 +162,7 @@ const DetallesEvento = () => {
                 )}
                 {esHoy(evento.date_start) ? (
                   <h3 className="gratuito ">
-                    HOXE <span>{fechaStart.split(",")[2]}h</span>
+                    HOXE <span>{fechaStart.split(",")[3]}h</span>
                   </h3>
                 ) : (
                   <div className="muestra-fecha">

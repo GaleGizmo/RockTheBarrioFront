@@ -275,4 +275,7 @@
   .evento_contenido{
     margin: 10px 5px
   }
+  h3{
+    font-size: calc(.8rem + .9vw);
+  }
 }

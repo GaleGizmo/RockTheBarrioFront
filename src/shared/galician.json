@@ -1,5 +1,5 @@
 
-export default {"calendar.monthNames": [
+{"monthNames": [
     "Xaneiro",
     "Febreiro",
     "Marzo",
@@ -13,7 +13,7 @@ export default {"calendar.monthNames": [
     "Novembro",
     "Decembro"
   ],
-  "calendar.dayNames": [
+  "dayNames": [
     "Domingo",
     "Luns",
     "Martes",
@@ -22,5 +22,5 @@ export default {"calendar.monthNames": [
     "Venres",
     "Sábado"
   ]
-  };
+  }
   

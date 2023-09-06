@@ -1,9 +1,9 @@
 import React, { useMemo, useState } from "react";
-import galician from '../../shared/galician.js'
+
+import galicianTranslations from "../../shared/galician.json";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "./CustomCalendar.css";
-
 import { Button, Collapse } from "react-bootstrap";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import EventListModal from "../EventListModal/EventListModal";
@@ -17,6 +17,10 @@ function CustomCalendar({ eventos }) {
     [eventos]
   );
 
+  const defaultLocale = "gl";
+  const messages = {
+    [defaultLocale]: galicianTranslations,
+  };
   const tileContent = ({ date }) => {
     const currentDate = date.toDateString();
     if (eventDates.has(currentDate)) {
@@ -116,7 +120,14 @@ function CustomCalendar({ eventos }) {
       <Collapse in={isMenuOpen} className="d-lg-none">
         <div className="slide-menu">
           <Calendar
-            locale={galician}
+            formatMonthYear={(locale, date) =>
+              `${
+                galicianTranslations.monthNames[date.getMonth()]
+              } ${date.getFullYear()}`
+            }
+            formatShortWeekday={(locale, date) =>
+              galicianTranslations.dayNames[date.getDay()].substring(0, 3)
+            }
             tileContent={tileContent}
             tileClassName={tileClassName}
             onClickDay={(date, event) => handleTileClick(date, event)}
@@ -143,7 +154,14 @@ function CustomCalendar({ eventos }) {
           </div>
         </div>
         <Calendar
-          locale={galician}
+          formatMonthYear={(locale, date) =>
+            `${
+              galicianTranslations.monthNames[date.getMonth()]
+            } ${date.getFullYear()}`
+          }
+          formatShortWeekday={(locale, date) =>
+            galicianTranslations.dayNames[date.getDay()].substring(0, 3)
+          }
           tileContent={tileContent}
           tileClassName={tileClassName}
           onClickDay={(date, event) => handleTileClick(date, event)}

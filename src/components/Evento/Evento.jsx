@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import "./Evento.css";
 import { BiCalendarHeart, BiCalendarAlt } from "react-icons/bi";
 import { Link } from "react-router-dom";
+
 import { esHoy, formatDate } from "../../shared/formatDate";
-import { formatDistanceToNow, parseISO } from "date-fns";
-import esLocale from "date-fns/esm/locale/es/index.js";
+import { format, formatDistanceToNow, parseISO } from "date-fns";
+import { gl } from "date-fns/locale";
 import MapIcon from "../MapIcon/MapIcon";
 import Favorito from "../Favorito/Favorito";
 import { BsInfoCircleFill } from "react-icons/bs";
 import MapComponent from "../MapComponent/MapComponent";
-
 import useFavorites from "../../shared/useFavorites";
 import { useDispatch } from "react-redux";
 import { setEvento } from "../../redux/eventos/eventos.actions";
@@ -30,14 +30,22 @@ const Evento = ({ evento, user }) => {
     dispatch(setEvento(evento._id));
   };
   const isLongTitle = evento.title.length > 10 && !evento.title.includes(" ");
-
-  const fechaEvento = evento.date_start ? parseISO(evento.date_start) : null;
+  const parsedDate = parseISO(evento.date_start);
+  const fechaEvento = evento.date_start ? parsedDate : null;
   const diasFaltantes = formatDistanceToNow(fechaEvento, {
     unit: "day",
-    locale: esLocale,
+    locale: gl,
   });
-  const fechaStart = evento.date_start ? formatDate(evento.date_start) : null;
-  const fechaEnd = evento.date_end ? formatDate(evento.date_end) : null;
+  const fechaStart = evento.date_start
+    ? format(parsedDate, "EEE, dd MMM, yyyy, HH:mm", {
+        locale: gl,
+      })
+    : null;
+  // const fechaEnd = evento.date_end
+  //   ? format(parseISO(evento.date_end), "EEE, dd MMM, yyyy, HH:mm", {
+  //       locale: gl,
+  //     })
+  //   : null;
 
   return (
     <div className="card">
@@ -85,23 +93,16 @@ const Evento = ({ evento, user }) => {
             <p>{evento.site.split(",")[0]}</p>
           )}
 
-          {fechaStart && !fechaEnd ? (
+          {fechaStart && (
             <div>
               {esHoy(evento.date_start) ? (
                 <p className="gratuito hoy">HOXE</p>
               ) : (
                 <div className="muestra-fecha">
                   <p>{fechaStart}h</p>
-
-                  {fechaEnd && <span className="fecha-end"> {fechaEnd}</span>}
                 </div>
               )}
             </div>
-          ) : (
-            <p>{fechaStart.split(",")[1]}</p>
-          )}
-          {fechaEnd && (
-            <span className="fecha-end">{fechaEnd.split(",")[1]}</span>
           )}
           <p>
             {" "}
