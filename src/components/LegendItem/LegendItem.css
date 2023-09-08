@@ -1,0 +1,26 @@
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    font-weight: 600;
+  }
+  
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 5px;
+  }
+  .legend-selected{
+    background-color: blue;
+  }
+  .legend-actual{
+   background-color: var(--secondary-shadow)
+  }
+  .legend-event{
+    background-color: var(--event-color);
+  }
+  .legend-label {
+    color: white;
+    font-size: 14px;
+  }

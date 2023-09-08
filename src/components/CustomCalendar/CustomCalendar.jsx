@@ -1,5 +1,4 @@
 import React, { useMemo, useState } from "react";
-
 import galicianTranslations from "../../shared/galician.json";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
@@ -7,6 +6,8 @@ import "./CustomCalendar.css";
 import { Button, Collapse } from "react-bootstrap";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import EventListModal from "../EventListModal/EventListModal";
+
+import Legend from "../Legend/Legend";
 
 function CustomCalendar({ eventos }) {
   const eventDates = useMemo(
@@ -17,10 +18,7 @@ function CustomCalendar({ eventos }) {
     [eventos]
   );
 
-  const defaultLocale = "gl";
-  const messages = {
-    [defaultLocale]: galicianTranslations,
-  };
+
   const tileContent = ({ date }) => {
     const currentDate = date.toDateString();
     if (eventDates.has(currentDate)) {
@@ -108,6 +106,11 @@ function CustomCalendar({ eventos }) {
       }
     }
   };
+  const formatMonthYear = (locale, date) =>
+    `${galicianTranslations.monthNames[date.getMonth()]} ${date.getFullYear()}`;
+
+  const formatShortWeekday = (locale, date) =>
+    galicianTranslations.dayNames[date.getDay()].substring(0, 3);
 
   return (
     <div className="calendar-container">
@@ -120,18 +123,13 @@ function CustomCalendar({ eventos }) {
       <Collapse in={isMenuOpen} className="d-lg-none">
         <div className="slide-menu">
           <Calendar
-            formatMonthYear={(locale, date) =>
-              `${
-                galicianTranslations.monthNames[date.getMonth()]
-              } ${date.getFullYear()}`
-            }
-            formatShortWeekday={(locale, date) =>
-              galicianTranslations.dayNames[date.getDay()].substring(0, 3)
-            }
+            formatMonthYear={formatMonthYear}
+            formatShortWeekday={formatShortWeekday}
             tileContent={tileContent}
             tileClassName={tileClassName}
             onClickDay={(date, event) => handleTileClick(date, event)}
           />
+          <Legend/>
         </div>
       </Collapse>
       <div
@@ -139,29 +137,10 @@ function CustomCalendar({ eventos }) {
           isMenuOpen ? "menu-open" : ""
         }`}
       >
-        <div className="legend">
-          <div className="legend-item">
-            <div className="legend-dot legend-event"></div>
-            <div className="legend-label">Día con evento(s)</div>
-          </div>
-          <div className="legend-item">
-            <div className="legend-dot legend-selected"></div>
-            <div className="legend-label">Día seleccionado</div>
-          </div>
-          <div className="legend-item">
-            <div className="legend-dot legend-actual"></div>
-            <div className="legend-label">Día actual</div>
-          </div>
-        </div>
+        <Legend/>
         <Calendar
-          formatMonthYear={(locale, date) =>
-            `${
-              galicianTranslations.monthNames[date.getMonth()]
-            } ${date.getFullYear()}`
-          }
-          formatShortWeekday={(locale, date) =>
-            galicianTranslations.dayNames[date.getDay()].substring(0, 3)
-          }
+          formatMonthYear={formatMonthYear}
+          formatShortWeekday={formatShortWeekday}
           tileContent={tileContent}
           tileClassName={tileClassName}
           onClickDay={(date, event) => handleTileClick(date, event)}
