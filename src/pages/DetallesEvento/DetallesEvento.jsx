@@ -16,7 +16,7 @@ import { AiFillCloseSquare } from "react-icons/ai";
 import useFavorites from "../../shared/useFavorites";
 import { BiCalendarAlt, BiCalendarHeart } from "react-icons/bi";
 import Favorito from "../../components/Favorito/Favorito";
-import { format, parseISO } from "date-fns";
+import { format, formatDistanceToNow, parseISO } from "date-fns";
 import { gl } from "date-fns/locale";
 
 const DetallesEvento = () => {
@@ -71,9 +71,13 @@ const DetallesEvento = () => {
       setFormattedContent(formattedContent);
     }
   }, [evento]);
-  const parsedDate = parseISO(evento.date_start);
+  const fechaEvento = evento.date_start ? parseISO(evento.date_start) : null;
+  const diasFaltantes = formatDistanceToNow(fechaEvento, {
+    unit: "day",
+    locale: gl,
+  });
   const fechaStart = evento.date_start
-    ? format(parsedDate, "EEEE, dd MMMM, yyyy, HH:mm", {
+    ? format(fechaEvento, "EEEE, dd MMMM, yyyy, HH:mm", {
         locale: gl,
       })
     : null;
@@ -172,6 +176,10 @@ const DetallesEvento = () => {
                   </div>
                 )}
                 {fechaEnd && <h3>{fechaEnd}</h3>}
+                <p >
+            {" "}
+            Faltan <span className="gratuito">{diasFaltantes} </span>
+          </p>
                 {evento.genre && (
                   <h3>
                     <strong>Xénero:</strong> {evento.genre}

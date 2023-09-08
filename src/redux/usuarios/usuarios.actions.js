@@ -70,7 +70,7 @@ const checkSesion = () => () => {
 const registerUser = (datos, navigate) => async () => {
   try {
     const formData = new FormData();
-    datos.birthday=""
+    datos.birthday = "";
     formData.append("email", datos.email);
     formData.append("username", datos.username);
     formData.append("password", datos.password);
@@ -85,7 +85,6 @@ const registerUser = (datos, navigate) => async () => {
     // dispatch({ type: "SET_USER", contenido: resultado.data.user });
     setUserData(resultado, navigate);
   } catch (error) {
-    
     if (error.response && error.response.data && error.response.data.message) {
       dispatch({
         type: "ERROR_USUARIO",
@@ -99,8 +98,8 @@ const registerUser = (datos, navigate) => async () => {
 const updateUser = (datos, navigate) => async (dispatch) => {
   try {
     const formData = new FormData();
-    datos.birthday="";
-    
+    datos.birthday = "";
+
     formData.append("email", datos.email);
     formData.append("username", datos.username);
     // formData.append("password", datos.password);
@@ -113,9 +112,8 @@ const updateUser = (datos, navigate) => async (dispatch) => {
 
     const resultado = await APIIMAGES.put(`/usuario/${datos._id}`, formData);
     dispatch({ type: "SET_USER", contenido: resultado.data.user });
-    
-    navigate("/perfil");
 
+    navigate("/perfil");
   } catch (error) {
     if (error.response && error.response.data && error.response.data.message) {
       dispatch({
@@ -150,10 +148,17 @@ const forgotPassword = (email) => async () => {
   dispatch({ type: "LOADING_USUARIOS" });
   try {
     await API.post("/usuario/recuperar-password/", { email });
-    dispatch({ type: "FORGOT_PASSWORD_SUCCESS", contenido: "Enviouse un correo electrónico de recuperación de contrasinal"});
+    dispatch({
+      type: "FORGOT_PASSWORD_SUCCESS",
+      contenido:
+        "Enviouse un correo electrónico de recuperación de contrasinal",
+    });
   } catch (error) {
     if (error.response && error.response.data && error.response.data.message) {
-      dispatch({ type: "ERROR_USUARIO", contenido: error.response.data.message });
+      dispatch({
+        type: "ERROR_USUARIO",
+        contenido: error.response.data.message,
+      });
     } else {
       dispatch({ type: "ERROR_USUARIO", contenido: "Error desconocido" });
     }
@@ -163,46 +168,82 @@ const resetPassword = (token, password, navigate) => async () => {
   dispatch({ type: "LOADING_USUARIOS" });
   try {
     await API.post("/usuario/reset-password", { token, password });
-    navigate("/login")
+    navigate("/login");
   } catch (error) {
     if (error.response && error.response.data && error.response.data.message) {
-      dispatch({ type: "ERROR_USUARIO", contenido: error.response.data.message });
+      dispatch({
+        type: "ERROR_USUARIO",
+        contenido: error.response.data.message,
+      });
     } else {
       dispatch({ type: "ERROR_USUARIO", contenido: "Error desconocido" });
     }
   }
 };
-const unsubscribeEmail = (email, unsubscribe, userId, navigate)=> async ()=>{
+const unsubscribeEmail = (email, unsubscribe, userId, navigate) => async () => {
   dispatch({ type: "LOADING_USUARIOS" });
   try {
-    await API.put(`/usuario/reset-password/unsubscribe/${userId}`, { email, unsubscribe });
-    dispatch({ type: "FORGOT_PASSWORD_SUCCESS", contenido: "Axustes de suscripción modificados"});
+    await API.put(`/usuario/reset-password/unsubscribe/${userId}`, {
+      email,
+      unsubscribe,
+    });
+    dispatch({
+      type: "FORGOT_PASSWORD_SUCCESS",
+      contenido: "Axustes de suscripción modificados",
+    });
 
-    navigate("/")
+    navigate("/");
   } catch (error) {
     if (error.response && error.response.data && error.response.data.message) {
-      dispatch({ type: "ERROR_USUARIO", contenido: error.response.data.message });
+      dispatch({
+        type: "ERROR_USUARIO",
+        contenido: error.response.data.message,
+      });
     } else {
       dispatch({ type: "ERROR_USUARIO", contenido: "Error desconocido" });
     }
   }
-}
-const addToFavorites=(eventId, userId, add)=> async()=>{
+};
+const addToFavorites = (eventId, userId, add) => async () => {
   dispatch({ type: "LOADING_USUARIOS" });
-  
+
   try {
     await API.patch(`/usuario/add-favorite`, { eventId, userId, add });
     const user = JSON.parse(localStorage.getItem("user"));
-    const updatedUser = { ...user, favorites: add ? [...user.favorites, eventId] : user.favorites.filter(id => id !== eventId) };
+    const updatedUser = {
+      ...user,
+      favorites: add
+        ? [...user.favorites, eventId]
+        : user.favorites.filter((id) => id !== eventId),
+    };
     dispatch({ type: "SET_USER", contenido: updatedUser });
     localStorage.setItem("user", JSON.stringify(updatedUser));
-
-      } catch (error) {
+  } catch (error) {
     if (error.response && error.response.data && error.response.data.message) {
-      dispatch({ type: "ERROR_USUARIO", contenido: error.response.data.message });
+      dispatch({
+        type: "ERROR_USUARIO",
+        contenido: error.response.data.message,
+      });
     } else {
       dispatch({ type: "ERROR_USUARIO", contenido: "Error desconocido" });
     }
   }
+};
+const clearError = () =>()=> {
+  dispatch({ type: "CLEAR_ERROR" });
 }
-export { login, logout, setUser, checkSesion, registerUser, updateUser, resetPassword, forgotPassword, unsubscribeEmail, deleteUser, addToFavorites};
+
+export {
+  login,
+  logout,
+  setUser,
+  checkSesion,
+  registerUser,
+  updateUser,
+  resetPassword,
+  forgotPassword,
+  unsubscribeEmail,
+  deleteUser,
+  addToFavorites,
+  clearError,
+};

@@ -39,6 +39,11 @@ export const usuariosReducer = (state = INITIAL_STATE, action) => {
         successMessage: action.contenido,
         error: null,
       };
+      case 'CLEAR_ERROR':
+      return {
+        ...state,
+        error: null
+      };
     default:
       return state;
   }

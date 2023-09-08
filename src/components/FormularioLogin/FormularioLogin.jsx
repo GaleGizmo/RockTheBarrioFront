@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import "./FormularioLogin.css";
-import { login } from "../../redux/usuarios/usuarios.actions";
+import { login, clearError } from "../../redux/usuarios/usuarios.actions";
 import Button from "../Button/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { AiFillCloseSquare } from "react-icons/ai";
 
 const FormularioLogin = () => {
+  
   const dispatch = useDispatch();
+  useEffect(()=>{
+    dispatch(clearError())
+  },[])
   const { register, handleSubmit } = useForm();
 
   const { error } = useSelector((state) => state.usuariosReducer);

@@ -3,7 +3,7 @@ import "./Evento.css";
 import { BiCalendarHeart, BiCalendarAlt } from "react-icons/bi";
 import { Link } from "react-router-dom";
 
-import { esHoy, formatDate } from "../../shared/formatDate";
+import { esHoy } from "../../shared/formatDate";
 import { format, formatDistanceToNow, parseISO } from "date-fns";
 import { gl } from "date-fns/locale";
 import MapIcon from "../MapIcon/MapIcon";
@@ -30,14 +30,14 @@ const Evento = ({ evento, user }) => {
     dispatch(setEvento(evento._id));
   };
   const isLongTitle = evento.title.length > 10 && !evento.title.includes(" ");
-  const parsedDate = parseISO(evento.date_start);
-  const fechaEvento = evento.date_start ? parsedDate : null;
+
+  const fechaEvento = evento.date_start ? parseISO(evento.date_start) : null;
   const diasFaltantes = formatDistanceToNow(fechaEvento, {
     unit: "day",
     locale: gl,
   });
   const fechaStart = evento.date_start
-    ? format(parsedDate, "EEE, dd MMM, yyyy, HH:mm", {
+    ? format(fechaEvento, "EEE, dd MMM, yyyy, HH:mm", {
         locale: gl,
       })
     : null;
@@ -104,11 +104,11 @@ const Evento = ({ evento, user }) => {
               )}
             </div>
           )}
-          <p>
+          <p className="dias-faltantes">
             {" "}
             Faltan <span className="gratuito">{diasFaltantes} </span>
           </p>
-          {evento.genre && <p>{evento.genre}</p>}
+          {evento.genre && <p className="evento-genre">{evento.genre}</p>}
           {evento.price == 0 ? (
             <p className="gratuito">GRATUITO</p>
           ) : (
