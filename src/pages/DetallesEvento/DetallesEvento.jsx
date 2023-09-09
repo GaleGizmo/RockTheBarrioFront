@@ -71,12 +71,12 @@ const DetallesEvento = () => {
       setFormattedContent(formattedContent);
     }
   }, [evento]);
-  const fechaEvento = evento.date_start ? parseISO(evento.date_start) : null;
-  const diasFaltantes = formatDistanceToNow(fechaEvento, {
+  const fechaEvento = evento && evento.date_start ? parseISO(evento.date_start) : null;
+  const diasFaltantes = fechaEvento ? formatDistanceToNow(fechaEvento, {
     unit: "day",
     locale: gl,
-  });
-  const fechaStart = evento.date_start
+  }): null;
+  const fechaStart = fechaEvento
     ? format(fechaEvento, "EEEE, dd MMMM, yyyy, HH:mm", {
         locale: gl,
       })
