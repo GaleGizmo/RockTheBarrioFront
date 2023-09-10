@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import galicianTranslations from "../../shared/galician.json";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
@@ -17,7 +17,20 @@ function CustomCalendar({ eventos }) {
       ),
     [eventos]
   );
+  const modalContentRef = useRef();
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (modalContentRef.current && !modalContentRef.current.contains(event.target)) {
+        setModalOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const tileContent = ({ date }) => {
     const currentDate = date.toDateString();
@@ -71,41 +84,43 @@ function CustomCalendar({ eventos }) {
 
   const handleTileClick = (date, event) => {
     const clickedDate = date.toDateString();
+  
+    // Si se hace clic nuevamente en la misma fecha, cierra el modal
     if (
       selectedDateForModal &&
       selectedDateForModal.toDateString() === clickedDate
     ) {
-      // Si se hace clic nuevamente en la misma fecha, cierra el modal
-      setSelectedDateForModal(null);
       setModalOpen(false);
+      setSelectedDateForModal(null);
+      return;
+    }
+  
+    // Si se hace clic en una fecha diferente, busca eventos para esa fecha
+    const eventsForDate = eventos
+      .filter(
+        (evento) => new Date(evento.date_start).toDateString() === clickedDate
+      )
+      .sort(
+        (a, b) =>
+          new Date(a.date_start).getTime() - new Date(b.date_start).getTime()
+      );
+  
+    // Si hay eventos para la fecha, abre el modal
+    if (eventsForDate && eventsForDate.length > 0) {
+      setSelectedDate(date);
+      setSelectedDateForModal(date);
+      setSelectedEvents(eventsForDate);
+  
+      const { clientX, clientY } = event;
+      setModalPosition({ top: clientY, left: clientX });
+  
+      setModalOpen(true);
     } else {
-      // Si se hace clic en una fecha diferente, abre el modal
-      const eventsForDate = eventos
-        .filter(
-          (evento) => new Date(evento.date_start).toDateString() === clickedDate
-        )
-        .sort(
-          (a, b) =>
-            new Date(a.date_start).getTime() - new Date(b.date_start).getTime()
-        );
-
-      if (eventsForDate && eventsForDate.length > 0) {
-        setSelectedDate(date);
-        setSelectedDateForModal(date);
-        setSelectedEvents(eventsForDate);
-
-        const { clientX, clientY } = event;
-        setModalPosition({ top: clientY, left: clientX });
-
-        setModalOpen(false);
-
-        setTimeout(() => setModalOpen(true), 0);
-      } else {
-        setSelectedDateForModal(null);
-        setModalOpen(false);
-      }
+      // Si no hay eventos para la fecha, cierra el modal
+      setModalOpen(false);
     }
   };
+  
   const formatMonthYear = (locale, date) =>
     `${galicianTranslations.monthNames[date.getMonth()]} ${date.getFullYear()}`;
 
@@ -147,11 +162,13 @@ function CustomCalendar({ eventos }) {
         />
       </div>
       {isModalOpen && (
+        <div ref={modalContentRef}>
         <EventListModal
           events={selectedEvents}
           onClose={toggleModal}
           position={modalPosition}
         />
+        </div>
       )}
     </div>
   );
