@@ -2,6 +2,8 @@
     width:100px;
     height: 100px;
     position: fixed;
-    left: 37%;
-    bottom: 20%
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 15vh;
+    
 }

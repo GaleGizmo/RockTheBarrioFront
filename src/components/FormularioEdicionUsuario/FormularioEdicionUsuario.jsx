@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { updateUser } from "../../redux/usuarios/usuarios.actions";
 import Button from "../Button/Button";
 import SubirImagen from "../SubirImagen/SubirImagen";
+import "./FormularioEdicionUsuario.css"
 
 
 const FormularioEdicionUsuario = ({ userData }) => {
@@ -110,7 +111,7 @@ const handleCancel=()=>{
           />
          {userData.avatar && (
             <img
-              className="imagen-formulario"
+              className="imagen-avatar"
               src={userData.avatar}
               alt="Avatar do usuario"
             />

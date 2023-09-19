@@ -24,7 +24,6 @@
   margin-left: 2.5%;
   margin-right: 2.5%;
   /* background-image: linear-gradient(to bottom, rgb(237 132 57), #fff); */
-  
 }
 .cardDetEv {
   opacity: 0;
@@ -47,7 +46,7 @@
 }
 .youtube-video-container {
   border: 2px solid black;
-  border-radius: 10px;;
+  border-radius: 10px;
   position: relative;
   overflow: hidden;
   width: 100%;
@@ -67,14 +66,12 @@
   gap: 5px;
 }
 .boleto_precio {
- 
   transition: drop-shadow 0.3s; /* Agrega una transición suave para el efecto de brillo */
 }
 .boleto_imagen {
   width: 75%;
   transition: filter 0.3s;
   height: fit-content;
-
 }
 .muestra-fecha h3 {
   margin: 0;
@@ -85,11 +82,13 @@
   /* filter: url(#brillo_personalizado); */
 }
 .cardDetEv h1 {
+  color: var(--secondary-color);
   font-size: 4.5vw;
   font-weight: bold;
   margin-bottom: 5px;
   margin-top: 1%;
   text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .cardDetEv h2 {
@@ -100,8 +99,8 @@
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   transition: text-shadow 0.3s ease-in-out;
 }
-.cardDetEv h3{
-  font-size: calc(1.2rem + .4vw);
+.cardDetEv h3 {
+  font-size: calc(1.2rem + 0.4vw);
 }
 
 .cardDetEv p {
@@ -168,7 +167,6 @@
   align-items: start;
 }
 
-
 .gratuito:hover {
   text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.8);
 }
@@ -179,7 +177,7 @@
   flex-direction: column;
   margin-top: 10%;
 }
-.evento_contenido{
+.evento_contenido {
   border: 2px solid var(--secondary-color);
   border-radius: 10px;
   padding: 5px 10px;
@@ -236,8 +234,8 @@
   .cardDetEv h2 {
     font-size: 28px;
   }
-  .cardDetEv h3{
-    font-size: calc(.8rem + .9vw);
+  .cardDetEv h3 {
+    font-size: calc(0.8rem + 0.9vw);
     margin-bottom: 0;
   }
   .cardDetEv {
@@ -255,9 +253,8 @@
     margin-top: 75px;
     margin-left: 2.5%;
     margin-right: 2.5%;
-    gap: 5px
+    gap: 5px;
     /* background-image: linear-gradient(to bottom, rgb(237 132 57), #fff); */
-   
   }
 
   .margin-boton-info {
@@ -274,19 +271,18 @@
     justify-content: center;
     width: 90%;
     margin-left: 5%;
-   
   }
   .boleto_imagen {
     width: 65%;
   }
-  .detalles_precio{
+  .detalles_precio {
     gap: 3px;
     align-items: center;
   }
-  .evento_contenido{
-    margin: 10px 5px
+  .evento_contenido {
+    margin: 10px 5px;
   }
-  h3{
-    font-size: calc(.8rem + .9vw);
+  h3 {
+    font-size: calc(0.8rem + 0.9vw);
   }
 }

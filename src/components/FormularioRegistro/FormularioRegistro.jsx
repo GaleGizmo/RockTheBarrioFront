@@ -11,7 +11,7 @@ import { AiFillCloseSquare } from "react-icons/ai";
 const FormularioRegistro = () => {
   const dispatch = useDispatch();
   const [imageFile, setImageFile] = useState();
-  const [newsletter, setNewsletter] = useState(false);
+  const [newsletter, setNewsletter] = useState(true);
   const [newEvent, setNewevent] = useState(false);
   const {
     register,
@@ -125,6 +125,7 @@ const FormularioRegistro = () => {
             <input
               className="checkReg"
               type="checkbox"
+             
               checked={newsletter}
               onChange={(e) => setNewsletter(e.target.checked)}
             />
