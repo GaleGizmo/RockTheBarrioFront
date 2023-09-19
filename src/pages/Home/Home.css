@@ -34,7 +34,7 @@
   }
   @media (max-width:1015px) {
     .header-listado{
-        
+        display: none;
        
         margin: 0 auto;
         padding: 0;

@@ -22,7 +22,7 @@ import { gl } from "date-fns/locale";
 const DetallesEvento = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
-
+  const [formattedContent, setFormattedContent] = useState("");
   const { loading, evento } = useSelector((reducer) => reducer.eventosReducer);
   useEffect(() => {
     if (!evento || evento._id !== id) {
@@ -58,7 +58,7 @@ const DetallesEvento = () => {
   const handleToggleMap = () => {
     setShowMap((showMap) => !showMap);
   };
-  const [formattedContent, setFormattedContent] = useState("");
+ 
   const goHome = () => {
     navigate("/");
   };
@@ -66,7 +66,7 @@ const DetallesEvento = () => {
     if (evento && evento.content) {
       const formattedContent = evento.content.replace(
         /[:.](?!\s*-)|\./g,
-        (match) => (match === "." ? ".\n" : ": ")
+        (match) => (match === "." ? ".\n" : ":")
       );
       setFormattedContent(formattedContent);
     }

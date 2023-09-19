@@ -1,12 +1,18 @@
-.estilo-modal{
-    background-image: linear-gradient(to bottom, var(--primary-color), #fff);
-    border: 2px solid var(--secondary-color);
-    box-shadow: 5px 5px 5px var(--secondary-shadow);
+.estilo-modal {
+  background-image: linear-gradient(to bottom, var(--primary-color), #fff);
+  border: 2px solid var(--secondary-color);
+  box-shadow: 5px 5px 5px var(--secondary-shadow);
 }
-.modal-header{
-   
-    border-bottom: 2px solid var(--secondary-color)
-}
-.modal-body{
-    border-bottom: 2px solid var(--secondary-color)
+
+.custom-header {
+    border-bottom: 2px solid var(--secondary-color);
+    justify-content: center;
+  }
+  
+  .custom-title {
+    text-align: center;
+  }
+  
+.modal-body {
+  border-bottom: 2px solid var(--secondary-color);
 }

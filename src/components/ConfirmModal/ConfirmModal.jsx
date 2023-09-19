@@ -14,17 +14,9 @@ const ConfirmModal = ({ show, onCancel, onConfirm }) => {
       >
         <div className="modal-dialog modal-dialog-centered ">
           <div className="modal-content estilo-modal">
-            <div className="modal-header ">
-              <h5 className="modal-title">Confirmar Borrado</h5>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
-                onClick={onCancel}
-              >
-                {/* <span aria-hidden="true">&times;</span> */}
-              </button>
+            <div className="modal-header custom-header" >
+              <h5 className="modal-title" >Confirmar Borrado</h5>
+             
             </div>
             <div className="modal-body text-center">
              <p> Seguro que desexas borrar a túa conta?</p>
