@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Button from "../../components/Button/Button";
 
 import "./Perfil.css"
+import { Link } from "react-router-dom";
 
 const Perfil = ({ userData, onEditClick }) => {
 
@@ -18,7 +19,15 @@ const Perfil = ({ userData, onEditClick }) => {
       <p>Notificar novo evento: {userData.newevent ? (<span className="perfil__user-data">Sí</span>):(<span className="perfil__user-data">No</span>)}</p>
 
       <p>Mandar eventos da semana: {userData.newsletter ? (<span className="perfil__user-data">Sí</span>):(<span className="perfil__user-data">No</span>)}</p>
-     
+      <div>
+              {userData && userData.role === 2 && (
+                <Link to="/crear-evento">
+                  <span className="boton-crear">
+                    <Button text="Crear evento" type="medium" />
+                  </span>
+                </Link>
+              )}
+            </div>
       <div className="margin-botonReg">
         <Button text="Editar Datos" type="medium" onClick={onEditClick} />
       </div>

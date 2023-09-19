@@ -17,9 +17,7 @@
   color: var(--hover-color);
 }
 .boton-crear {
-  position: fixed;
-  right: 5px;
-  top: 20px;
+  margin: 20px
 }
 .top {
   margin-top: 10px;
@@ -95,10 +93,7 @@ h3 a {
     margin-bottom: 5px;
     align-items: end;
   }
-  .boton-crear {
-    position: fixed;
-    
-  }
+ 
   .h3 {
     margin-bottom: 0;
     font-size: 2vh;

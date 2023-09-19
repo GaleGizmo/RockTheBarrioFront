@@ -8,16 +8,27 @@ import { useDispatch } from "react-redux";
 
 const EventListModal = memo(({ events, onClose, position }) => {
   const { top, left } = position;
+  
   const dispatch = useDispatch();
   const getEvento = (id) => {
     dispatch(setEvento(id));
   };
   const modalToLeft = left > window.innerWidth / 2;
+  const modalToUp = top > window.innerHeight * (2/3);
   const modalStyles = {
-    top: `${top}px`,
+    top: `${top+10}px`,
     left: `${left}px`,
-    ...(modalToLeft && { transform: "translateX(-100%)" }),
-  };
+      };
+  if (modalToLeft && modalToUp) {
+    modalStyles.top= `${top-10}px`
+    modalStyles.transform = "translateX(-100%) translateY(-100%)";
+  } else if (modalToLeft) {
+    modalStyles.transform = "translateX(-100%)";
+  } else if (modalToUp) {
+    modalStyles.top= `${top-10}px`
+    modalStyles.transform = "translateY(-100%)";
+  }
+
   return (
     <div className="event-list-modal" style={modalStyles}>
       <h2>
