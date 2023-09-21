@@ -36,13 +36,17 @@ const DetallesEvento = () => {
     evento ? evento._id : null,
     user ? user._id : null
   );
-    // useEffect(() => {
+  // useEffect(() => {
   //   dispatch(getEventoById(id));
   // }, [id]);
- 
+
   const navigate = useNavigate();
- 
-  const isLongTitle = evento && evento.title && evento.title.length > 10 && !evento.title.includes(" ");
+
+  const isLongTitle =
+    evento &&
+    evento.title &&
+    evento.title.length > 10 &&
+    !evento.title.includes(" ");
 
   const eliminarEvento = () => {
     dispatch(deleteEvento(evento._id, navigate));
@@ -58,7 +62,7 @@ const DetallesEvento = () => {
   const handleToggleMap = () => {
     setShowMap((showMap) => !showMap);
   };
- 
+
   const goHome = () => {
     navigate("/");
   };
@@ -71,19 +75,20 @@ const DetallesEvento = () => {
       setFormattedContent(formattedContent);
     }
   }, [evento]);
-  const fechaEvento = evento && evento.date_start ? parseISO(evento.date_start) : null;
-  const diasFaltantes = fechaEvento ? formatDistanceToNow(fechaEvento, {
-    unit: "day",
-    locale: gl,
-  }): null;
+  const fechaEvento =
+    evento && evento.date_start ? parseISO(evento.date_start) : null;
+  const diasFaltantes = fechaEvento
+    ? formatDistanceToNow(fechaEvento, {
+        unit: "day",
+        locale: gl,
+      })
+    : null;
   const fechaStart = fechaEvento
     ? format(fechaEvento, "EEEE, dd MMMM, yyyy, HH:mm", {
         locale: gl,
       })
     : null;
   const fechaEnd = evento?.date_end ? formatDate(evento.date_end) : null;
-
-  
 
   return (
     <div>
@@ -97,7 +102,7 @@ const DetallesEvento = () => {
         </div>
       ) : (
         <>
-          <div>
+          <div className="detalles-container">
             <div className="divCardDetEv">
               <div className="cardDetEv">
                 <AiFillCloseSquare className="close-icon" onClick={goHome} />
@@ -144,24 +149,26 @@ const DetallesEvento = () => {
                       <strong>Prezo: </strong>
                       {evento.price} €
                     </h3>
-                    {evento.buy_ticket && <a
-                      className="boleto_precio"
-                      href={evento.buy_ticket}
-                      target="blank"
-                    >
-                      <svg
-                        className="boleto_imagen"
-                        width="40"
-                        height="40"
-                        viewBox="0 0 100 100"
+                    {evento.buy_ticket && (
+                      <a
+                        className="boleto_precio"
+                        href={evento.buy_ticket}
+                        target="blank"
                       >
-                        <image
-                          href="/assets/boleto2.svg"
-                          width="100"
-                          height="100"
-                        />
-                      </svg>
-                    </a>}
+                        <svg
+                          className="boleto_imagen"
+                          width="40"
+                          height="40"
+                          viewBox="0 0 100 100"
+                        >
+                          <image
+                            href="/assets/boleto2.svg"
+                            width="100"
+                            height="100"
+                          />
+                        </svg>
+                      </a>
+                    )}
                   </div>
                 )}
                 {esHoy(evento.date_start) ? (
@@ -176,10 +183,10 @@ const DetallesEvento = () => {
                   </div>
                 )}
                 {fechaEnd && <h3>{fechaEnd}</h3>}
-                <p >
-            {" "}
-            Faltan <span className="gratuito">{diasFaltantes} </span>
-          </p>
+                <p>
+                  {" "}
+                  Faltan <span className="gratuito">{diasFaltantes} </span>
+                </p>
                 {evento.genre && (
                   <h3>
                     <strong>Xénero:</strong> {evento.genre}
@@ -194,14 +201,14 @@ const DetallesEvento = () => {
                   <div className="margin-boton-info">
                     <Button text="+Info" type="medium" onClick={comprar} />
                     {user && (
-              <span onClick={handleFavorites}>
-                {isFavorite ? (
-                  <BiCalendarHeart className="favorito favorito-detalle" />
-                ) : (
-                  <BiCalendarAlt className="favorito favorito-detalle" />
-                )}
-              </span>
-            )}
+                      <span onClick={handleFavorites}>
+                        {isFavorite ? (
+                          <BiCalendarHeart className="favorito favorito-detalle" />
+                        ) : (
+                          <BiCalendarAlt className="favorito favorito-detalle" />
+                        )}
+                      </span>
+                    )}
                     {showFavorite && (
                       <Favorito
                         evento={evento._id}
@@ -227,9 +234,9 @@ const DetallesEvento = () => {
                 {showMap && <MapComponent direccion={evento.site} />}
               </div>
             </div>
-            <div>
-              <div>
-                <div>
+            <div className="detalle-comentarios">
+              <div className="divCardDetEv">
+                <div className="nuevocomentario-wrapper">
                   {user ? (
                     <NuevoComentario eventoId={evento._id} user={user} />
                   ) : (
@@ -237,9 +244,10 @@ const DetallesEvento = () => {
                       Tes que te rexistrar para poder comentar
                     </p>
                   )}
+                  <h2 className="texto-aviso">COMENTARIOS DO EVENTO</h2>
                 </div>
-                <div className="divCardDetEv">
-                  {evento ? <ComentariosList eventoId={evento._id} /> : null}
+                <div className="comentarioslist-wrapper">
+                  {evento ? <ComentariosList eventoId={evento._id} hayUser={user} /> : null}
                 </div>
               </div>
             </div>

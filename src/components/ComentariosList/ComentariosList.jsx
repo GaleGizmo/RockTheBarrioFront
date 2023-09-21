@@ -5,24 +5,27 @@ import Comentario from "../Comentario/Comentario";
 
 import "./ComentariosList.css";
 
-const ComentariosList = ({ eventoId }) => {
-  useEffect(() => {
-    getComentariosByEvent(eventoId);
-  }, []);
+const ComentariosList = ({ eventoId, hayUser }) => {
+  
+
+      useEffect(() => {
+        getComentariosByEvent(eventoId);
+      }, []);
+
 
   const { loading, comentarios } = useSelector(
     (reducer) => reducer.comentariosReducer
   );
 
   return (
-    <div className="div-textAviso">
+    <div className={`comentarios-container ${hayUser ? 'hayUser' : ''}`}>
       {loading && (
         <div className="div-img">
           <img src="/assets/music.gif" />
         </div>
       )}
 
-      <h2 className="texto-aviso">COMENTARIOS DO EVENTO</h2>
+      
       {comentarios.length ? (
         comentarios.map((comentario) => {
           return <Comentario comentario={comentario} key={comentario._id} />;

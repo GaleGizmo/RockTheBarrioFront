@@ -1,10 +1,13 @@
 .nuevo-comentario{
     border-style: solid;
     background-color: white;
-    width:50%;
+    /* width:75%; */
     margin: 0 auto;
     border-radius: 10px;
-    margin-bottom: 50px;
+  
+}
+.nuevo-comentario label{
+    font-weight: 600;
 }
 .displayFlex{
     display: flex;
@@ -17,15 +20,13 @@
 }
 .content{
     width:90%;
-    height: 100px;
+    height: 60px;
     margin-right: 2%;
     margin-left: 3%;
-    margin-top:2%;
+    
     border:solid 1px
 }
-.divContent{
-    margin-top: 1%;
-}
+
 .labelCont{
     margin-left: 3%;
 }
@@ -36,14 +37,14 @@
 }
 .inputVal{
     margin-left:1%;
-    margin-top:4%;
+    
     margin-bottom: 2%;
     border:solid 1px;
     height:40%
 }
 .inputTit{
     /* margin-left:1%; */
-    margin-top:2%;
+   
     margin-bottom: 2%;
     border:solid 1px;
     width:90%;
@@ -51,6 +52,7 @@
 }
 .h2NC{
     text-align: center;
+    font-size: 1.5rem;
 }
 
 @media (max-width:720px){
@@ -60,17 +62,17 @@
         flex-direction: column;
     }
     .tit{
-        margin-bottom: 1%;
+        margin-bottom: 2px;
     }
     .divBoton{
-        margin-bottom: 1%;
+        margin-bottom: 3px;
         display: flex;
         justify-content: center;
     }
     .nuevo-comentario{
         border-style: solid;
         background-color: white;
-        width:82%;
+       
         margin: 0 auto;
         border-radius: 10px;
     }

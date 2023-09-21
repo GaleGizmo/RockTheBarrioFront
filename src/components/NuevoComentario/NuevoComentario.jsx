@@ -35,12 +35,12 @@ const NuevoComentario = ({ eventoId, user }) => {
         <h2 className="h2NC">Danos a túa opinión</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="displayFlex">
-            <div className="form-group tit">
+            <div className=" tit">
               <label>Título</label>
               <input type="text" {...register("titulo")} className="inputTit" />
             </div>
-            <div className="form-group tit">
-              <label>Valoración </label>
+            <div className=" tit">
+              <label >Valoración </label>
               <select className="inputVal"
               {...register("valoracion")}
                 value={value ? value.toString() : "Ninguna"}
@@ -57,8 +57,8 @@ const NuevoComentario = ({ eventoId, user }) => {
             </div>
           </div>
 
-          <div className="form-group divContent">
-            <label className="labelCont">Comentario</label>
+          <div className=" divContent">
+            <label className="tit">Comentario</label>
             <textarea {...register("contenido")} className="content"></textarea>
           </div>
           <div className="divBoton">
