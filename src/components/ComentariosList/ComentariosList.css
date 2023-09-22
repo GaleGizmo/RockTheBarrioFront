@@ -11,6 +11,8 @@
     left: auto;
     right: auto;
     position: fixed;
+    scrollbar-width: none;/*oculta la barra de scroll en Firefox*/
+    -ms-overflow-style: none;  /* Oculta la barra de desplazamiento en IE */
 }
 .hayUser{
     max-height: 50vh;

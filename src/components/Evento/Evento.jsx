@@ -61,12 +61,12 @@ const Evento = ({ evento, user }) => {
           )}
         </div>
 
-        <div className="div">
+        <div className="title-artist_container">
           <h1 className={isLongTitle ? "long-title" : ""}>{evento.title}</h1>
 
           <h2>{evento.artist}</h2>
         </div>
-        <div className="div2">
+        <div className="detalles_container">
           <div className="ver-detalles">
             <Link to={{ pathname: `/${evento._id}` }}>
               <BsInfoCircleFill className="mas-info" onClick={getEvento} />
