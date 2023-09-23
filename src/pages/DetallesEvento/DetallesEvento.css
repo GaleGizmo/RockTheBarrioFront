@@ -70,12 +70,18 @@
   gap: 5px;
 }
 .boleto_precio {
+  
   transition: drop-shadow 0.3s; /* Agrega una transición suave para el efecto de brillo */
+}
+img.boleto_imagen {
+  border: none !important;
+  box-shadow: none !important;
 }
 .boleto_imagen {
   width: 75%;
   transition: filter 0.3s;
   height: fit-content;
+  
 }
 .muestra-fecha h3 {
   margin: 0;
@@ -289,8 +295,8 @@
     width: 90%;
     margin-left: 5%;
   }
-  .boleto_imagen {
-    width: 65%;
+  img.boleto_imagen {
+    width: 75%;
   }
   .detalles_precio {
     gap: 3px;

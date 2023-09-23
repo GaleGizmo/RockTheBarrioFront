@@ -155,18 +155,7 @@ const DetallesEvento = () => {
                         href={evento.buy_ticket}
                         target="blank"
                       >
-                        <svg
-                          className="boleto_imagen"
-                          width="40"
-                          height="40"
-                          viewBox="0 0 100 100"
-                        >
-                          <image
-                            href="/assets/boleto2.svg"
-                            width="100"
-                            height="100"
-                          />
-                        </svg>
+                        <img src="/assets/boleto.png" className="boleto_imagen"/>
                       </a>
                     )}
                   </div>
