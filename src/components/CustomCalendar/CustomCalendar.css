@@ -34,13 +34,13 @@
 
 .calendar {
   position: fixed;
-  margin-top: 20px;
+  top: 70px;
   margin-left: auto;
   margin-right: auto;
   color: brown;
  
 
-  /* max-width: 20%; */
+  
 }
 .react-calendar {
   font-family: inherit;

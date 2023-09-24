@@ -14,11 +14,7 @@
   text-align: center;
   max-width: 1230px;
   width: 95%;
-  margin-top: 2%;
-  /* margin-left: auto;
-  margin-right: auto; */
-  /* background-image:linear-gradient(to bottom, var(--primary-color), #fff); */
-  
+
 }
 .card {
   opacity: 0;
