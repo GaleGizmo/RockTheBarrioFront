@@ -25,7 +25,7 @@ const EventosList = () => {
     }
   }, [eventosFiltrados, eventos]);
 
-  console.log(eventosToShow);
+ 
   const eventosOrdenados = [...eventosToShow].sort(
     (a, b) => new Date(a.date_start) - new Date(b.date_start)
   );

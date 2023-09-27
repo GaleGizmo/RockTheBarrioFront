@@ -9,12 +9,12 @@ import {
   deleteFilteredEventos,
   getFilteredEventos,
 } from "../../redux/eventos/eventos.actions";
+import ConfirmModal from "../ConfirmModal/ConfirmModal";
 
 const Buscador = ({ eventos, user }) => {
-  
   const dispatch = useDispatch();
   const [showAdvancedSearch, setShowAdavancedSearch] = useState(false);
-  const [inputValue, setInputValue] = useState("");
+  const [noResults, setNoResults] = useState(false);
   const [searchAll, setSearchAll] = useState(true);
   const [searchTitle, setSearchTitle] = useState(false);
   const [searchArtist, setSearchArtist] = useState(false);
@@ -102,20 +102,24 @@ const Buscador = ({ eventos, user }) => {
       data.searchFinalDate.setHours(23, 59, 0, 0);
     }
 
-     // Filtrado previo de eventos pasados
-  let eventosToShow = eventos;
-  if (!pastEvents) {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    eventosToShow = eventos.filter(evento => new Date(evento.date_start) >= today);
-  }
+    // Filtrado previo de eventos pasados
+    let eventosToShow = eventos;
+    if (!pastEvents) {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      eventosToShow = eventos.filter(
+        (evento) => new Date(evento.date_start) >= today
+      );
+    }
 
-    console.log(data);
+    
     const filteredResults = FilterEvents(eventosToShow, data, user);
-    if (filteredResults.length===0){
-        console.log("no hay resultados");
+    if (filteredResults.length === 0) {
+      
+      setNoResults(true);
     } else {
-    dispatch(getFilteredEventos(filteredResults));}
+      dispatch(getFilteredEventos(filteredResults));
+    }
   };
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
@@ -139,11 +143,25 @@ const Buscador = ({ eventos, user }) => {
     setSearchAll(true);
     setFavoritesOnly(false);
     setCustomDates(false);
+    setPastEvents(false)
     dispatch(deleteFilteredEventos());
   };
 
   return (
     <div className="buscador-container">
+      <ConfirmModal
+      title="Ups!"
+      p1="Non se atoparon resultados."
+      p2="Tenta buscar con outros parámetros"
+      buttonText="Aceptar"
+        show={noResults}
+        onConfirm={() => {
+          setNoResults(false);
+        }}
+        onCancel={() => {
+          setNoResults(false);
+        }}
+      />
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="buscador-input_wrapper">
           <input
@@ -306,9 +324,11 @@ const Buscador = ({ eventos, user }) => {
           )}
         </div>
 
-        <div className={`buscador-item ${
+        <div
+          className={`buscador-item ${
             showAdvancedSearch ? "show-advanced" : ""
-          }`}>
+          }`}
+        >
           <label>Só favoritos</label>
           <input
             type="checkbox"
@@ -317,10 +337,12 @@ const Buscador = ({ eventos, user }) => {
             disabled={!user}
           />
         </div>
-        <div className={`boton-buscar ${
+        <div
+          className={`boton-buscar ${
             showAdvancedSearch ? "show-advanced" : ""
-          }`}>
-        <Button text="Buscar" type="small" />
+          }`}
+        >
+          <Button text="Buscar" type="small" />
           <Button text="Limpar" type="small" onClick={cleanFiltered} />{" "}
           <label>
             Inclue eventos pasados
@@ -330,9 +352,13 @@ const Buscador = ({ eventos, user }) => {
               onChange={(e) => setPastEvents(e.target.checked)}
               disabled={searchDate} // Deshabilitar si searchDate está activo
             />
-           
           </label>
-          <BiDotsHorizontalRounded className="dotts-icon" onClick={()=>{setShowAdavancedSearch(false)}} />
+          <BiDotsHorizontalRounded
+            className="dotts-icon"
+            onClick={() => {
+              setShowAdavancedSearch(false);
+            }}
+          />
         </div>
       </form>
     </div>

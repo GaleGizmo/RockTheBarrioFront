@@ -59,7 +59,15 @@ const Evento = ({ evento, user }) => {
       <div className="border-card">
         <div className="div-image">
           {evento.image ? (
-            <img src={evento.image} alt={evento.title} />
+            <img
+              src={evento.image}
+              alt={evento.title}
+              onError={(e) => {
+                e.target.src =
+                  "https://metropoliabierta.elespanol.com/uploads/s1/36/81/72/audience-band-celebration-1190298_9_1200x480.jpeg";
+                e.target.alt = "Imagen nula";
+              }}
+            />
           ) : (
             <img
               src="https://metropoliabierta.elespanol.com/uploads/s1/36/81/72/audience-band-celebration-1190298_9_1200x480.jpeg"
@@ -79,22 +87,34 @@ const Evento = ({ evento, user }) => {
               <BsInfoCircleFill className="mas-info" onClick={getEvento} />
             </Link>
             {user && (
-              <div className="icon-container" onClick={handleFavorites} 
-              onMouseEnter={handleMouseEnter} 
-              onMouseLeave={handleMouseLeave}>
-                {isFavorite ? (<>
-                  <BiCalendarHeart className="favorito" />
-                  {hovered && <span className="favorito-tooltip">Engadir/quitar favorito</span>}</>
-                ) : (<>
-                  <BiCalendarAlt className="favorito" />
-                  {hovered && <span className="favorito-tooltip">Engadir/quitar favorito</span>}
+              <div
+                className="icon-container"
+                onClick={handleFavorites}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+              >
+                {isFavorite ? (
+                  <>
+                    <BiCalendarHeart className="favorito" />
+                    {hovered && (
+                      <span className="favorito-tooltip">
+                        Engadir/quitar favorito
+                      </span>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    <BiCalendarAlt className="favorito" />
+                    {hovered && (
+                      <span className="favorito-tooltip">
+                        Engadir/quitar favorito
+                      </span>
+                    )}
                   </>
                 )}
-                
               </div>
-             
             )}
-            
+
             {showFavorite && (
               <Favorito evento={evento._id} favoriteStatus={isFavorite} />
             )}
@@ -120,8 +140,8 @@ const Evento = ({ evento, user }) => {
             </div>
           )}
           <p className="dias-faltantes">
-       
-            {esAnterior(evento.date_start) ? "Fai": "Faltan"} <span className="gratuito">{diasFaltantes} </span>
+            {esAnterior(evento.date_start) ? "Fai" : "Faltan"}{" "}
+            <span className="gratuito">{diasFaltantes} </span>
           </p>
           {evento.genre && <p className="evento-genre">{evento.genre}</p>}
           {evento.price == 0 ? (

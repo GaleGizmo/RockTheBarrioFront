@@ -63,7 +63,10 @@ const PerfilUsuario = () => {
         />
       )}
       <ConfirmModal 
-            
+            title="Confirmar borrado"
+            p1="Seguro que desexas borrar a túa conta?"
+            p2="Borraránse tamén todos os comentarios que teñas feito"
+            buttonText="Borrar"
             show={showDeleteModal}
             onCancel={handleDeleteCancelled}
             onConfirm={handleDeleteConfirmed}

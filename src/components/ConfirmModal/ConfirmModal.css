@@ -1,6 +1,7 @@
 .estilo-modal {
   background-image: linear-gradient(to bottom, var(--primary-color), #fff);
   border: 2px solid var(--secondary-color);
+  border-radius: 8px;
   box-shadow: 5px 5px 5px var(--secondary-shadow);
 }
 
