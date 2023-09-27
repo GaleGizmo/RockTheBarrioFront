@@ -141,7 +141,7 @@ const Evento = ({ evento, user }) => {
             </div>
           )}
           <p className="dias-faltantes">
-            {esAnterior(evento.date_start) ? "Fai" : "Faltan"}{" "}
+            {esAnterior(evento.date_start) ? "Fai" : "Dentro de"}{" "}
             <span className="gratuito">{diasFaltantes} </span>
           </p>
           {evento.genre && <p className="evento-genre">{evento.genre}</p>}

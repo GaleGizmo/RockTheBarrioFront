@@ -21,20 +21,19 @@ const FormularioEdicionUsuario = ({ userData }) => {
   const { error } = useSelector((state) => state.usuariosReducer);
   const navigate = useNavigate();
 
-  const passwordRegex =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-
   useEffect(() => {
-    // Rellena el form con los datos del usuario
     setValue("email", userData.email);
     setValue("username", userData.username);
     setValue("newevent", userData.newevent);
     setValue("newsletter", userData.newsletter)
   }, [userData, setValue]);
-const handleCancel=()=>{
-  navigate("/")
+
+const handleCancel=(e)=>{
+  e.preventDefault()
+    navigate("/")
 }
   const handleFormSubmit = (data) => {
+    
     const editedUser = {
       ...userData,
       ...data,
@@ -84,7 +83,7 @@ const handleCancel=()=>{
         <div className="div-inputReg">
         <label className="margin-label">Notifica novo evento</label>
         <input
-            {...register("newevent", { required: true })}
+            {...register("newevent")}
             type="checkbox"
             name="newevent"
             id="newevent"
@@ -94,7 +93,7 @@ const handleCancel=()=>{
         <div className="div-inputReg">
         <label className="margin-label">Manda eventos da semana</label>
         <input
-            {...register("newsletter", { required: true })}
+            {...register("newsletter")}
             type="checkbox"
             name="newsletter"
             id="newsletter"
@@ -127,7 +126,7 @@ const handleCancel=()=>{
 
         <div className="margin-botonReg">
         <Button text="Cancelar" type="medium" onClick={handleCancel}/>
-          <Button text="Gardar cambios" type="medium" onClick={handleSubmit} />
+          <Button text="Gardar cambios" type="medium" onClick={handleSubmit(handleFormSubmit)} />
         </div>
       </form>
     </div>

@@ -92,7 +92,7 @@
   align-items: center;
   gap: 5px;
 }
-.dotts-icon {
+.chevrons-icon {
   display: none;
 }
 @media (max-width: 420px) {
@@ -115,7 +115,7 @@
     width: 60%;
   }
   .buscador-input_wrapper {
-    padding: 2px 0 0 0;
+    padding: 2px 5px 0 0;
   }
 
   .buscador-checks {
@@ -127,12 +127,13 @@
   .boton-buscar {
     display: none;
   }
-  .buscador-avanzada {
-    width: 60px;
+  .buscador-avanzada {width: 60px;
     display: inline;
     color: white;
     font-size: 12px;
     margin: auto 0 0 0;
+    text-align: center;
+    
   }
   .buscador-dataoptions {
     display: flex;
@@ -153,13 +154,13 @@
   .boton-buscar label {
     margin-left: auto;
   }
-  .dotts-icon {
+  .chevrons-icon {
     font-size: 22px;
     display: inline;
     /* margin-left: auto; */
     margin-top: auto;
   }
-  .dotts-icon:hover {
+  .chevrons-icon:hover {
     filter: brightness(2);
     filter: contrast(2);
   }

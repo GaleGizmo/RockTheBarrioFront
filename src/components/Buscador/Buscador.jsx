@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import "./Buscador.css";
-import { BiDotsHorizontalRounded, BiSearchAlt } from "react-icons/bi";
+import { BiChevronsUp, BiDotsHorizontalRounded, BiSearchAlt } from "react-icons/bi";
 import { useForm } from "react-hook-form";
 import Button from "../Button/Button";
 import FilterEvents from "../../customhooks/Filter";
@@ -174,7 +174,7 @@ const Buscador = ({ eventos, user }) => {
           />
           <BiSearchAlt className="search_icon" onClick={handleSearchClick} />
           <p onClick={handleShowAdvancedSearch} className="buscador-avanzada">
-            Avanzada
+           {showAdvancedSearch ? "Sinxela":"Avanzada"}
           </p>
         </div>
         <div
@@ -353,8 +353,8 @@ const Buscador = ({ eventos, user }) => {
               disabled={searchDate} // Deshabilitar si searchDate está activo
             />
           </label>
-          <BiDotsHorizontalRounded
-            className="dotts-icon"
+          <BiChevronsUp
+            className="chevrons-icon"
             onClick={() => {
               setShowAdavancedSearch(false);
             }}

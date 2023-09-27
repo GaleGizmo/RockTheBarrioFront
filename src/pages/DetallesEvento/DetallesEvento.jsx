@@ -174,7 +174,7 @@ const DetallesEvento = () => {
                 {fechaEnd && <h3>{fechaEnd}</h3>}
                 <p>
                 
-                {esAnterior(evento.date_start) ? "Fai": "Faltan"}  <span className="gratuito">{diasFaltantes} </span>
+                {esAnterior(evento.date_start) ? "Fai": "Dentro de"}  <span className="gratuito">{diasFaltantes} </span>
                 </p>
                 {evento.genre && (
                   <h3>

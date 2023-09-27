@@ -20,12 +20,14 @@ const Perfil = ({ userData, onEditClick }) => {
 
       <p>Mandar eventos da semana: {userData.newsletter ? (<span className="perfil__user-data">Sí</span>):(<span className="perfil__user-data">No</span>)}</p>
       <div>
-              {userData && userData.role === 2 && (
+              {userData && userData.role === 2 && (<>
                 <Link to="/crear-evento">
                   <span className="boton-crear">
                     <Button text="Crear evento" type="medium" />
                   </span>
                 </Link>
+                <Button text="Eventos diarios" type="medium"/>
+                </>
               )}
             </div>
       <div className="margin-botonReg">

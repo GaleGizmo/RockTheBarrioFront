@@ -3,7 +3,7 @@ import store from "../store";
 
 const { dispatch } = store;
 
-const setUserData = (resultado, navigate) => {
+const setUserData = (resultado, navigate) =>{
   dispatch({
     type: "LOGIN",
     contenido: {
@@ -35,11 +35,13 @@ const login = (datos, navigate) => async () => {
   }
 };
 
-const setUser = (userData) => {
-  return {
-    type: "SET_USER",
-    contenido: userData,
-  };
+const updateLocalStorage = (userData) => {
+  dispatch({
+    type:"SET_USER",
+    contenido: userData
+  })
+  localStorage.setItem("user", JSON.stringify(userData));
+ 
 };
 
 const logout = () => {
@@ -82,7 +84,7 @@ const registerUser = (datos, navigate) => async () => {
     }
 
     const resultado = await APIIMAGES.post("/usuario/register", formData);
-    // dispatch({ type: "SET_USER", contenido: resultado.data.user });
+
     setUserData(resultado, navigate);
   } catch (error) {
     if (error.response && error.response.data && error.response.data.message) {
@@ -111,9 +113,11 @@ const updateUser = (datos, navigate) => async (dispatch) => {
     }
 
     const resultado = await APIIMAGES.put(`/usuario/${datos._id}`, formData);
-    dispatch({ type: "SET_USER", contenido: resultado.data.user });
+   console.log(resultado.data)
+    // dispatch({ type: "SET_USER", contenido: resultado.data });
+    updateLocalStorage(resultado.data)
+     navigate ("/");
 
-    navigate("/perfil");
   } catch (error) {
     if (error.response && error.response.data && error.response.data.message) {
       dispatch({
@@ -229,14 +233,14 @@ const addToFavorites = (eventId, userId, add) => async () => {
     }
   }
 };
-const clearError = () =>()=> {
+const clearError = () => () => {
   dispatch({ type: "CLEAR_ERROR" });
-}
+};
 
 export {
   login,
   logout,
-  setUser,
+  updateLocalStorage,
   checkSesion,
   registerUser,
   updateUser,
