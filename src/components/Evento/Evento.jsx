@@ -26,7 +26,8 @@ const Evento = ({ evento, user }) => {
   const handleMouseEnter = () => {
     setHovered(true);
   };
-
+  const isSoldout = evento?.status === "soldout";
+  const isDelayed = evento?.status === "delayed"
   const handleMouseLeave = () => {
     setHovered(false);
   };
@@ -55,7 +56,7 @@ const Evento = ({ evento, user }) => {
   //   : null;
 
   return (
-    <div className="card">
+    <div className={`card ${isSoldout ? "soldout" : ""} ${isDelayed ? "delayed":""}`}>
       <div className="border-card">
         <div className="div-image">
           {evento.image ? (

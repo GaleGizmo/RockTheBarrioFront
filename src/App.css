@@ -8,6 +8,8 @@
   --event-color: #f16704;
   --hover-color: #f0e9e9;
   --text-color: #212529;
+  --soldout-color:#f16704cd;
+  --delayed-color:#124ec6cd;
   --margin-right: auto;
   
 }
