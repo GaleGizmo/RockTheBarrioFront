@@ -9,7 +9,7 @@ import {
 } from "../../redux/eventos/eventos.actions";
 import Button from "../../components/Button/Button";
 import NuevoComentario from "../../components/NuevoComentario/NuevoComentario";
-import { esHoy, formatDate } from "../../shared/formatDate";
+import { esAnterior, esHoy, formatDate } from "../../shared/formatDate";
 import MapComponent from "../../components/MapComponent/MapComponent";
 import MapIcon from "../../components/MapIcon/MapIcon";
 import { AiFillCloseSquare } from "react-icons/ai";
@@ -173,22 +173,12 @@ const DetallesEvento = () => {
                 )}
                 {fechaEnd && <h3>{fechaEnd}</h3>}
                 <p>
-                  {" "}
-                  Faltan <span className="gratuito">{diasFaltantes} </span>
+                
+                {esAnterior(evento.date_start) ? "Fai": "Faltan"}  <span className="gratuito">{diasFaltantes} </span>
                 </p>
                 {evento.genre && (
                   <h3>
                     <strong>Xénero:</strong> {evento.genre}
-                  </h3>
-                )}
-                <div className="evento_contenido">
-                  {formattedContent.split("\n").map((sentence, index) => (
-                    <p key={index}>{sentence}</p>
-                  ))}
-                </div>
-                {evento.url && (
-                  <div className="margin-boton-info">
-                    <Button text="+Info" type="medium" onClick={comprar} />
                     {user && (
                       <span onClick={handleFavorites}>
                         {isFavorite ? (
@@ -199,11 +189,22 @@ const DetallesEvento = () => {
                       </span>
                     )}
                     {showFavorite && (
-                      <Favorito
+                      <Favorito claseDetalle="tooltip-detalle"
                         evento={evento._id}
                         favoriteStatus={isFavorite}
                       />
                     )}
+                  </h3>
+                )}
+                <div className="evento_contenido">
+                  {formattedContent.split("\n").map((sentence, index) => (
+                    <p key={index}>{sentence}</p>
+                  ))}
+                </div>
+                {evento.url && (
+                  <div className="margin-boton-info">
+                    <Button text="+Info" type="medium" onClick={comprar} />
+                    
                   </div>
                 )}
                 {user?.role === 2 && (

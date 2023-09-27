@@ -13,6 +13,13 @@ export function formatDate(dateString, locale) {
   return dateObj.toLocaleDateString(locale, opciones);
 }
 
+export function esAnterior(fecha){
+  const fechaActual = new Date()
+  const  fechaEvento = new Date(fecha)
+
+  return fechaActual>fechaEvento
+}
+
 export function esHoy(fecha) {
   const fechaActual = new Date();
   const fechaIntroducida = new Date(fecha);

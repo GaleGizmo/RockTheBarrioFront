@@ -152,7 +152,7 @@ function CustomCalendar({ eventos }) {
           isMenuOpen ? "menu-open" : ""
         }`}
       >
-        <Legend/>
+        
         <Calendar
           formatMonthYear={formatMonthYear}
           formatShortWeekday={formatShortWeekday}
@@ -160,6 +160,7 @@ function CustomCalendar({ eventos }) {
           tileClassName={tileClassName}
           onClickDay={(date, event) => handleTileClick(date, event)}
         />
+        <Legend/>
       </div>
       {isModalOpen && (
         <div ref={modalContentRef}>

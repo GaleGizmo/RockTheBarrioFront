@@ -3,7 +3,7 @@ import "./Evento.css";
 import { BiCalendarHeart, BiCalendarAlt } from "react-icons/bi";
 import { Link } from "react-router-dom";
 
-import { esHoy } from "../../shared/formatDate";
+import { esAnterior, esHoy } from "../../shared/formatDate";
 import { format, formatDistanceToNow, parseISO } from "date-fns";
 import { gl } from "date-fns/locale";
 import MapIcon from "../MapIcon/MapIcon";
@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux";
 import { setEvento } from "../../redux/eventos/eventos.actions";
 
 const Evento = ({ evento, user }) => {
+  const [hovered, setHovered] = useState(false);
   const [showMap, setShowMap] = useState(false);
   const dispatch = useDispatch();
   const { isFavorite, handleFavorites, showFavorite } = useFavorites(
@@ -22,7 +23,13 @@ const Evento = ({ evento, user }) => {
     evento ? evento._id : null,
     user ? user._id : null
   );
+  const handleMouseEnter = () => {
+    setHovered(true);
+  };
 
+  const handleMouseLeave = () => {
+    setHovered(false);
+  };
   const handleToggleMap = () => {
     setShowMap((showMap) => !showMap);
   };
@@ -72,14 +79,22 @@ const Evento = ({ evento, user }) => {
               <BsInfoCircleFill className="mas-info" onClick={getEvento} />
             </Link>
             {user && (
-              <span onClick={handleFavorites}>
-                {isFavorite ? (
+              <div className="icon-container" onClick={handleFavorites} 
+              onMouseEnter={handleMouseEnter} 
+              onMouseLeave={handleMouseLeave}>
+                {isFavorite ? (<>
                   <BiCalendarHeart className="favorito" />
-                ) : (
+                  {hovered && <span className="favorito-tooltip">Engadir/quitar favorito</span>}</>
+                ) : (<>
                   <BiCalendarAlt className="favorito" />
+                  {hovered && <span className="favorito-tooltip">Engadir/quitar favorito</span>}
+                  </>
                 )}
-              </span>
+                
+              </div>
+             
             )}
+            
             {showFavorite && (
               <Favorito evento={evento._id} favoriteStatus={isFavorite} />
             )}
@@ -105,8 +120,8 @@ const Evento = ({ evento, user }) => {
             </div>
           )}
           <p className="dias-faltantes">
-            {" "}
-            Faltan <span className="gratuito">{diasFaltantes} </span>
+       
+            {esAnterior(evento.date_start) ? "Fai": "Faltan"} <span className="gratuito">{diasFaltantes} </span>
           </p>
           {evento.genre && <p className="evento-genre">{evento.genre}</p>}
           {evento.price == 0 ? (

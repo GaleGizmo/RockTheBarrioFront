@@ -17,6 +17,10 @@
   z-index: 1052;
   background-color: var(--secondary-color);
   border:none;
+  border-radius: 0;
+}
+.menu-toggle.custom-toggle svg{
+height: 1.3em;
 }
 
 .slide-menu {
@@ -34,7 +38,7 @@
 
 .calendar {
   position: fixed;
-  top: 70px;
+  top: 125px;
   margin-left: auto;
   margin-right: auto;
   color: brown;
@@ -48,7 +52,7 @@
   border-color: black;
   border-width: 3px;
   box-shadow: 5px 5px 4px var(--secondary-shadow);
-  /* width: 95%; */
+  width: 95%;
 }
 .react-calendar__tile--now {
   border-radius: 50%;

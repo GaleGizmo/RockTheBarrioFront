@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import "./Favorito.css";
 
-const Favorito = ({ evento, favoriteStatus }) => {
+const Favorito = ({ evento, favoriteStatus, claseDetalle }) => {
   const [showMessage, setShowMessage] = useState(false);
 
   useEffect(() => {
@@ -18,8 +18,8 @@ const Favorito = ({ evento, favoriteStatus }) => {
  
 
   return (
-    <div className={`add-favorito ${showMessage ? 'favorito-visible' : 'favorito-hidden'}`}>
-      <p>{favoriteStatus ? "Evento engadido a favoritos!" : "Evento eliminado de favoritos"}</p>
+    <div className={`add-favorito ${showMessage ? 'favorito-visible' : 'favorito-hidden'} ${claseDetalle}`}>
+      <p className="favorito-text">{favoriteStatus ? "Evento engadido a favoritos!" : "Evento eliminado de favoritos"} </p>
     </div>
   );
 }

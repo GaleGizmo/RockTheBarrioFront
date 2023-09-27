@@ -3,6 +3,7 @@
     align-items: center;
     margin-right: 20px;
     font-weight: 600;
+    
   }
   
   .legend-dot {
@@ -21,6 +22,6 @@
     background-color: var(--event-color);
   }
   .legend-label {
-    color: white;
+    color: var(--secondary-color);
     font-size: 14px;
   }

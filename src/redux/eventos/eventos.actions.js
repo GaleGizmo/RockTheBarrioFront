@@ -113,6 +113,14 @@ const clearMensajes = () => {
 const setEvento = (eventoId) => (dispatch) => {
   dispatch({ type: "GET_EVENTOBYID", contenido: eventoId });
 };
+
+const getFilteredEventos =(resultadoFiltrado)=>(dispatch)=>{
+  dispatch({ type: "GET_EVENTOSFILTRADOS", contenido: resultadoFiltrado })
+}
+
+const deleteFilteredEventos =()=>(dispatch)=>{
+  dispatch({type: "DELETE_EVENTOSFILTRADOS"})
+}
 export {
   getAllEventos,
   getEventoById,
@@ -122,4 +130,6 @@ export {
   sendEventosSemanales,
   clearMensajes,
   setEvento,
+  getFilteredEventos,
+  deleteFilteredEventos
 };
