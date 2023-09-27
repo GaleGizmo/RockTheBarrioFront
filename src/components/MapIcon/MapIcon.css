@@ -1,4 +1,6 @@
 .map-icon{
+  
+  transform: scale(1.2);
   color: var(--icon-color);
   filter: drop-shadow(2px 2px 2px var(--secondary-shadow));
 }
@@ -9,7 +11,9 @@
   cursor:pointer;
 }
 .map-icon:hover{
-    color: var(--hover-color);
+  filter: brightness(2);
+  filter: contrast(2);
+  transform: scale(1.4);
     cursor:pointer;
     
     

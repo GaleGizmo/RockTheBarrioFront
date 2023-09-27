@@ -83,13 +83,11 @@ const Evento = ({ evento, user }) => {
           <h2>{evento.artist}</h2>
         </div>
         <div className="detalles_container">
-          <div className="ver-detalles">
-            <Link to={{ pathname: `/${evento._id}` }}>
-              <BsInfoCircleFill className="mas-info" onClick={getEvento} />
-            </Link>
+          <div className="icon-container">
+            
             {user && (
               <div
-                className="icon-container"
+                className="favorito-container"
                 onClick={handleFavorites}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
@@ -115,13 +113,15 @@ const Evento = ({ evento, user }) => {
                 )}
               </div>
             )}
-
+            <Link to={{ pathname: `/${evento._id}` }}>
+              <BsInfoCircleFill className="mas-info" onClick={getEvento} />
+            </Link>
             {showFavorite && (
               <Favorito evento={evento._id} favoriteStatus={isFavorite} />
             )}
           </div>
           {evento.site && evento.site !== "Varios" ? (
-            <p>
+            <p className="detalles-site">
               {evento.site.split(",")[0]}{" "}
               <MapIcon showMap={showMap} onClick={handleToggleMap} />
             </p>
