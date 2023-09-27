@@ -98,7 +98,8 @@
 @media (max-width: 420px) {
   .buscador-container {
     width: 100%;
-
+    position: fixed;
+    top: 60px;
     margin-right: 0;
     display: flex;
     margin-left: auto;
