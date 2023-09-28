@@ -4,6 +4,19 @@
     position: fixed;
     left: 50%;
     transform: translateX(-50%);
-    bottom: 15vh;
+    bottom: 12vh;
     
+}
+.botones-edicion-usuario{
+    display:flex ;
+    gap: 10px;
+    justify-content: center;
+    padding-top: 200px;
+}
+
+@media (max-width: 420px){
+    .botones-edicion-usuario{
+       
+        padding-top: 50px;
+    }
 }

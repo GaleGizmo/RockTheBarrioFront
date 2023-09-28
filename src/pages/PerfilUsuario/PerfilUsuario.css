@@ -29,6 +29,7 @@
 }
 @media (min-width: 1px) and (max-width: 469.98px) {
 .perfil-container{
+    padding: 10px;
     width: 80%;
     margin-top:70px;
 }

@@ -124,9 +124,9 @@ const handleCancel=(e)=>{
           )}
         </div>
 
-        <div className="margin-botonReg">
+        <div className="botones-edicion-usuario">
         <Button text="Cancelar" type="medium" onClick={handleCancel}/>
-          <Button text="Gardar cambios" type="medium" onClick={handleSubmit(handleFormSubmit)} />
+          <Button text="Gardar" type="medium" onClick={handleSubmit(handleFormSubmit)} />
         </div>
       </form>
     </div>
