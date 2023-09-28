@@ -6,12 +6,20 @@ import { updateUser } from "../../redux/usuarios/usuarios.actions";
 import Button from "../Button/Button";
 import SubirImagen from "../SubirImagen/SubirImagen";
 import "./FormularioEdicionUsuario.css"
+import { useDropzone } from 'react-dropzone';
 
 
 const FormularioEdicionUsuario = ({ userData }) => {
   const dispatch = useDispatch();
   const [imageFile, setImageFile] = useState();
-
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    accept: 'image/jpeg, image/png',
+    maxFiles: 1, 
+    maxSize: 2 * 1024 * 1024,
+    onDrop: (acceptedFiles) => {
+      // Lógica para manejar la carga de archivos
+    },
+  });
   const {
     register,
     handleSubmit,
@@ -102,26 +110,21 @@ const handleCancel=(e)=>{
         </div>
         <div className="div-inputReg imgReg">
           <label>Imaxe</label>
-          <SubirImagen
-            register={register}
-            funcion={(e) =>
-              setImageFile(URL.createObjectURL(e.target.files[0]))
-            }
-          />
-         {userData.avatar && (
-            <img
-              className="imagen-avatar"
-              src={userData.avatar}
-              alt="Avatar do usuario"
-            />
+          <div {...getRootProps()}>
+          <input {...getInputProps()} />
+          {isDragActive ? (
+            <p>Suelta la imagen aquí...</p>
+          ) : (
+            <p>Arrastra y suelta una imagen aquí, o haz clic para seleccionarla</p>
           )}
-          {imageFile && (
+        </div>
+          {/* {imageFile && (
             <img
               className="imagen-avatar"
               src={imageFile}
               alt="Avatar do usuario"
             />
-          )}
+          )} */}
         </div>
 
         <div className="botones-edicion-usuario">
