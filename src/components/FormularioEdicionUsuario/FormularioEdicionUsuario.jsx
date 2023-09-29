@@ -6,9 +6,8 @@ import { updateUser } from "../../redux/usuarios/usuarios.actions";
 import Button from "../Button/Button";
 import SubirImagen from "../SubirImagen/SubirImagen";
 import "./FormularioEdicionUsuario.css";
-import { useDropzone } from "react-dropzone";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; 
+
+import DropzoneComponent from "../Dropzone/Dropzone";
 
 
 const FormularioEdicionUsuario = ({ userData }) => {
@@ -16,16 +15,7 @@ const FormularioEdicionUsuario = ({ userData }) => {
   const dispatch = useDispatch();
   const [imageFile, setImageFile] = useState(userData.avatar);
   const [selectedFile, setSelectedFile] = useState(null);
-  const notify = () => toast.error("Arquivo non valido", {
-    position: "bottom-center",
-    autoClose: 1000,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "dark",
-    });
+  
   const mostrarSubirImagenHandler = () => {
     setMostrarSubirImagen(true);
   };
@@ -38,58 +28,7 @@ const FormularioEdicionUsuario = ({ userData }) => {
     setImageFile(URL.createObjectURL(e.target.files[0]));
     setSelectedFile(e.target.files[0])
   };
-  const fileValidator = (file) => {
-    const acceptedFileTypes = ["image/jpeg", "image/png", "image/gif"];
-    if (!acceptedFileTypes.includes(file.type)) {
-      return {
-        code: "filetype-not-allowed",
-        message: `El tipo de archivo no está permitido. Los tipos de archivo permitidos son: JPEG, PNG y GIF.`,
-      };
-    }
-    if (file.size > 2 * 1024 * 1024) {
-      return {
-        code: "size-too-large",
-        message: `El archivo es demasiado grande. El tamaño máximo permitido es de 2MB.`,
-      };
-    }
-    return null;
-  }
-  const { getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject } = useDropzone({
-    validator: fileValidator,
-    maxFiles: 1,
- 
-    onDrop: (files) => {
-      if (files.length === 0) {
-        // Si no se soltó ningún archivo, terminamos aquí
-        return;
-      }
-      const file = files[0];
-      if (file.size > 2 * 1024 * 1024) {
-        // Archivo demasiado grande, muestra un mensaje de error
-        alert("El archivo es demasiado grande. El tamaño máximo permitido es de 2MB.");
-      } else if (!["image/jpeg", "image/png", "image/gif"].includes(file.type)) {
-        // Tipo de archivo no admitido, muestra un mensaje de error al usuario
-        alert("Tipo de archivo no admitido. Los tipos de archivo admitidos son: JPEG, PNG y GIF.");
-      } else {
-        setImageFile(URL.createObjectURL(file));
-        setSelectedFile(file);
-      }
-    },
-    
-    
-    onDropRejected: (rejectedFiles) => {
-      const rejectedFile = rejectedFiles[0];
-      if (rejectedFile.size > 2 * 1024 * 1024) {
-        
-        console.error("El archivo es demasiado grande. El tamaño máximo permitido es de 2MB.");
-      } else {
-      
-       notify()
-       
-      }
-    },
-    
-  });
+
   const {
     register,
     handleSubmit,
@@ -123,7 +62,7 @@ const FormularioEdicionUsuario = ({ userData }) => {
 
   return (
     <div className="cardReg perfil-container">
-    <ToastContainer/>
+   
       <h1>EDITAR DATOS DO USUARIO</h1>
       <p className="error-message">{error}</p>
       <form onSubmit={handleSubmit(handleFormSubmit)}>
@@ -200,23 +139,7 @@ const FormularioEdicionUsuario = ({ userData }) => {
             </label>
           </div>
         ) : (
-          <div className={`div-inputReg imagenReg dropzone-container ${isDragActive ? "focused" : ""} ${isDragAccept ? "accept" : ""} ${isDragReject ? "reject" : ""}`}>
-            <label>Avatar</label>
-            <div {...getRootProps()} >
-              <input {...getInputProps()} />
-              {isDragActive ? (
-                <p >Solta a imaxe aquí...</p>
-              ) : (
-                <p>
-                  Fai clic ou arrastra unha imaxe aquí
-                </p>
-              )}
-            </div>
-            {/* {imageFile && (
-              <img className="imagen-avatar" src={imageFile} alt="Preview" />
-            )} */}
-            <p className="warning">Só arquivos PNG, JPG ou GIF de menos de 2Mb</p>
-          </div>
+          <DropzoneComponent setImageFile={setImageFile} setSelectedFile={setSelectedFile}/>
         )}
 
         <div className="botones-edicion-usuario">
