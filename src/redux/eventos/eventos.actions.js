@@ -11,9 +11,9 @@ const getAllEventos = () => async () => {
   dispatch({ type: "GET_EVENTOS", contenido: resultado.data });
 };
 
-const sendEventosSemanales = () => async (dispatch) => {
+const sendEventosDiarios = () => async (dispatch) => {
   try {
-    await API.post("/evento/sendeventos/");
+    await API.get("/evento/sendEventosDiarios/");
     dispatch({ type: "EVENTOS_ENVIADOS", contenido: "Eventos enviados" });
   } catch (error) {
     dispatch({ type: "ERROR_EVENTO", contenido: error.message });
@@ -127,7 +127,7 @@ export {
   addEvento,
   deleteEvento,
   editEvento,
-  sendEventosSemanales,
+  sendEventosDiarios,
   clearMensajes,
   setEvento,
   getFilteredEventos,

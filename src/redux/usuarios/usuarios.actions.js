@@ -97,22 +97,22 @@ const registerUser = (datos, navigate) => async () => {
     }
   }
 };
-const updateUser = (datos, navigate) => async (dispatch) => {
+const updateUser = (datos, userId, navigate) => async (dispatch) => {
   try {
-    const formData = new FormData();
-    datos.birthday = "";
+    // const formData = new FormData();
+    // datos.birthday = "";
 
-    formData.append("email", datos.email);
-    formData.append("username", datos.username);
-    // formData.append("password", datos.password);
-    formData.append("birthday", datos.birthday);
-    formData.append("newsletter", datos.newsletter);
-    formData.append("newevent", datos.newevent);
-    if (datos.image[0] !== undefined) {
-      formData.append("avatar", datos.image[0]);
-    }
+    // formData.append("email", datos.email);
+    // formData.append("username", datos.username);
+    // // formData.append("password", datos.password);
+    // formData.append("birthday", datos.birthday);
+    // formData.append("newsletter", datos.newsletter);
+    // formData.append("newevent", datos.newevent);
+    // if (datos.image[0] !== undefined) {
+    //   formData.append("avatar", datos.image[0]);
+    // }
 
-    const resultado = await APIIMAGES.put(`/usuario/${datos._id}`, formData);
+    const resultado = await APIIMAGES.put(`/usuario/${userId}`, datos);
    console.log(resultado.data)
     // dispatch({ type: "SET_USER", contenido: resultado.data });
     updateLocalStorage(resultado.data)

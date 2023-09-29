@@ -5,19 +5,34 @@ import { useNavigate } from "react-router-dom";
 import { updateUser } from "../../redux/usuarios/usuarios.actions";
 import Button from "../Button/Button";
 import SubirImagen from "../SubirImagen/SubirImagen";
-import "./FormularioEdicionUsuario.css"
-import { useDropzone } from 'react-dropzone';
-
+import "./FormularioEdicionUsuario.css";
+import { useDropzone } from "react-dropzone";
 
 const FormularioEdicionUsuario = ({ userData }) => {
+  const [mostrarSubirImagen, setMostrarSubirImagen] = useState(false);
   const dispatch = useDispatch();
-  const [imageFile, setImageFile] = useState();
+  const [imageFile, setImageFile] = useState(userData.avatar);
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  const mostrarSubirImagenHandler = () => {
+    setMostrarSubirImagen(true);
+  };
+
+  const removeAvatar = () => {
+    setImageFile("");
+  };
+
+  const handleImageSelection = (e) => {
+    setImageFile(URL.createObjectURL(e.target.files[0]));
+  };
+
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    accept: 'image/jpeg, image/png',
-    maxFiles: 1, 
+    accept: "image/jpeg, image/png, image/gif",
+    maxFiles: 1,
     maxSize: 2 * 1024 * 1024,
     onDrop: (acceptedFiles) => {
-      // Lógica para manejar la carga de archivos
+      setImageFile(URL.createObjectURL(acceptedFiles[0]));
+      setSelectedFile(acceptedFiles[0]);
     },
   });
   const {
@@ -33,21 +48,21 @@ const FormularioEdicionUsuario = ({ userData }) => {
     setValue("email", userData.email);
     setValue("username", userData.username);
     setValue("newevent", userData.newevent);
-    setValue("newsletter", userData.newsletter)
+    setValue("newsletter", userData.newsletter);
   }, [userData, setValue]);
 
-const handleCancel=(e)=>{
-  e.preventDefault()
-    navigate("/")
-}
+  const handleCancel = (e) => {
+    e.preventDefault();
+    navigate("/");
+  };
   const handleFormSubmit = (data) => {
-    
-    const editedUser = {
-      ...userData,
-      ...data,
-    };
-  
-    dispatch(updateUser(editedUser, navigate));
+    const formData = new FormData();
+    Object.keys(data).forEach((key) => formData.append(key, data[key]));
+    if (selectedFile) {
+      formData.append("avatar", selectedFile);
+    }
+    console.log(Array.from(formData.entries()));
+    dispatch(updateUser(formData, userData._id, navigate));
   };
 
   return (
@@ -89,8 +104,8 @@ const handleCancel=(e)=>{
           )}
         </div>
         <div className="div-inputReg">
-        <label className="margin-label">Notifica novo evento</label>
-        <input
+          <label className="margin-label">Notifica novo evento</label>
+          <input
             {...register("newevent")}
             type="checkbox"
             name="newevent"
@@ -99,8 +114,8 @@ const handleCancel=(e)=>{
           />
         </div>
         <div className="div-inputReg">
-        <label className="margin-label">Manda eventos da semana</label>
-        <input
+          <label className="margin-label">Manda eventos da semana</label>
+          <input
             {...register("newsletter")}
             type="checkbox"
             name="newsletter"
@@ -108,28 +123,52 @@ const handleCancel=(e)=>{
             className="inputReg"
           />
         </div>
-        <div className="div-inputReg imgReg">
-          <label>Imaxe</label>
-          <div {...getRootProps()}>
-          <input {...getInputProps()} />
-          {isDragActive ? (
-            <p>Suelta la imagen aquí...</p>
-          ) : (
-            <p>Arrastra y suelta una imagen aquí, o haz clic para seleccionarla</p>
-          )}
-        </div>
-          {/* {imageFile && (
-            <img
-              className="imagen-avatar"
-              src={imageFile}
-              alt="Avatar do usuario"
-            />
-          )} */}
-        </div>
+        {imageFile ? (
+          <div className="div-inputReg imagenReg">
+            
+            <Button text="Eliminar avatar" type="small" onClick={removeAvatar}/>
+            {mostrarSubirImagen && (
+              <SubirImagen register={register} funcion={handleImageSelection} />
+            )}
+
+            <label htmlFor="file-input" className="imagen-avatar-label">
+              <img
+                className="imagen-avatar"
+                src={imageFile}
+                alt="Avatar do usuario"
+                onClick={() => {
+                  mostrarSubirImagenHandler();
+                }}
+              />
+            </label>
+          </div>
+        ) : (
+          <div className="div-inputReg imagenReg">
+            <label>Avatar</label>
+            <div {...getRootProps()} className="dropzone">
+              <input {...getInputProps()} />
+              {isDragActive ? (
+                <p>Suelta la imagen aquí...</p>
+              ) : (
+                <p>
+                  Arrastra unha imaxe aquí, ou fai clic para
+                  selecciona-la
+                </p>
+              )}
+            </div>
+            {imageFile && (
+              <img className="imagen-avatar" src={imageFile} alt="Preview" />
+            )}
+          </div>
+        )}
 
         <div className="botones-edicion-usuario">
-        <Button text="Cancelar" type="medium" onClick={handleCancel}/>
-          <Button text="Gardar" type="medium" onClick={handleSubmit(handleFormSubmit)} />
+          <Button text="Cancelar" type="medium" onClick={handleCancel} />
+          <Button
+            text="Gardar"
+            type="medium"
+            onClick={handleSubmit(handleFormSubmit)}
+          />
         </div>
       </form>
     </div>

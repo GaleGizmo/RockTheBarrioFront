@@ -3,8 +3,21 @@ import Button from "../../components/Button/Button";
 
 import "./Perfil.css"
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { sendEventosDiarios } from "../../redux/eventos/eventos.actions";
 
 const Perfil = ({ userData, onEditClick }) => {
+
+  const dispatch=useDispatch()
+
+  const sendDiarios=()=>{
+    try {
+      dispatch(sendEventosDiarios())
+      console.log("eventos diarios enviados");
+    } catch (err) {
+      console.error("Error al mandar eventos:", err)
+    }
+  }
 
  
   return (
@@ -26,7 +39,7 @@ const Perfil = ({ userData, onEditClick }) => {
                     <Button text="Crear evento" type="medium" />
                   </span>
                 </Link>
-                <Button text="Eventos diarios" type="medium"/>
+                <Button text="Eventos diarios" type="medium" onClick={sendDiarios}/>
                 </>
               )}
             </div>
