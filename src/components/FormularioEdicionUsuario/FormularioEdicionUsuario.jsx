@@ -5,13 +5,20 @@ import { useNavigate } from "react-router-dom";
 import { updateUser } from "../../redux/usuarios/usuarios.actions";
 import Button from "../Button/Button";
 import SubirImagen from "../SubirImagen/SubirImagen";
-import "./FormularioEdicionUsuario.css"
-
+import "./FormularioEdicionUsuario.css";
 
 const FormularioEdicionUsuario = ({ userData }) => {
   const dispatch = useDispatch();
   const [imageFile, setImageFile] = useState();
-
+  const [mostrarSubirImagen, setMostrarSubirImagen] = useState(false);
+  const mostrarSubirImagenHandler = () => {
+    console.log("mostrarSubirImagenHandler llamado");
+    setMostrarSubirImagen(true);
+  };
+  const handleImageSelection = (e) => {
+    console.log("handleImageSelection llamado");
+    setImageFile(URL.createObjectURL(e.target.files[0]));
+  };
   const {
     register,
     handleSubmit,
@@ -25,20 +32,19 @@ const FormularioEdicionUsuario = ({ userData }) => {
     setValue("email", userData.email);
     setValue("username", userData.username);
     setValue("newevent", userData.newevent);
-    setValue("newsletter", userData.newsletter)
+    setValue("newsletter", userData.newsletter);
   }, [userData, setValue]);
 
-const handleCancel=(e)=>{
-  e.preventDefault()
-    navigate("/")
-}
+  const handleCancel = (e) => {
+    e.preventDefault();
+    navigate("/");
+  };
   const handleFormSubmit = (data) => {
-    
     const editedUser = {
       ...userData,
       ...data,
     };
-  
+
     dispatch(updateUser(editedUser, navigate));
   };
 
@@ -81,8 +87,8 @@ const handleCancel=(e)=>{
           )}
         </div>
         <div className="div-inputReg">
-        <label className="margin-label">Notifica novo evento</label>
-        <input
+          <label className="margin-label">Notifica novo evento</label>
+          <input
             {...register("newevent")}
             type="checkbox"
             name="newevent"
@@ -91,8 +97,8 @@ const handleCancel=(e)=>{
           />
         </div>
         <div className="div-inputReg">
-        <label className="margin-label">Manda eventos da semana</label>
-        <input
+          <label className="margin-label">Manda eventos da semana</label>
+          <input
             {...register("newsletter")}
             type="checkbox"
             name="newsletter"
@@ -101,32 +107,33 @@ const handleCancel=(e)=>{
           />
         </div>
         <div className="div-inputReg imgReg">
-          <label>Imaxe</label>
-          <SubirImagen
-            register={register}
-            funcion={(e) =>
-              setImageFile(URL.createObjectURL(e.target.files[0]))
-            }
-          />
-         {userData.avatar && (
-            <img
-              className="imagen-avatar"
-              src={userData.avatar}
-              alt="Avatar do usuario"
-            />
+          <label>Avatar</label>
+          {mostrarSubirImagen && (
+            <SubirImagen register={register} funcion={handleImageSelection} />
           )}
-          {imageFile && (
-            <img
-              className="imagen-avatar"
-              src={imageFile}
-              alt="Avatar do usuario"
-            />
+          {userData.avatar && (
+            <label htmlFor="file-input" className="imagen-avatar-label">
+              <img
+                className="imagen-avatar"
+                src={imageFile || userData.avatar}
+                alt="Avatar do usuario"
+                onClick={() => {
+                  console.log("Imagen del avatar clicada");
+                  mostrarSubirImagenHandler();
+                }}
+              />
+            </label>
           )}
+         
         </div>
 
         <div className="botones-edicion-usuario">
-        <Button text="Cancelar" type="medium" onClick={handleCancel}/>
-          <Button text="Gardar" type="medium" onClick={handleSubmit(handleFormSubmit)} />
+          <Button text="Cancelar" type="medium" onClick={handleCancel} />
+          <Button
+            text="Gardar"
+            type="medium"
+            onClick={handleSubmit(handleFormSubmit)}
+          />
         </div>
       </form>
     </div>

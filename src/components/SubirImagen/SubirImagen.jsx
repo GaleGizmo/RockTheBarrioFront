@@ -12,7 +12,7 @@ const SubirImagen = ({ register, funcion }) => {
         {...register("image")}
         onChange={funcion}
       />
-      <label className="file-input__label" htmlFor="file-input">
+      {/* <label className="file-input__label" htmlFor="file-input">
         <svg
           aria-hidden="true"
           focusable="false"
@@ -29,7 +29,7 @@ const SubirImagen = ({ register, funcion }) => {
           ></path>
         </svg>
         <span>Subir imaxe</span>
-      </label>
+      </label> */}
     </div>
   );
 };

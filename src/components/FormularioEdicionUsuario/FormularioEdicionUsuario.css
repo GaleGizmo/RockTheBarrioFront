@@ -2,10 +2,17 @@
     width:100px;
     height: 100px;
     position: fixed;
+    top:  65%;
     left: 50%;
     transform: translateX(-50%);
     bottom: 12vh;
-    
+    transition: box-shadow 0.3s ease-in-out; 
+}
+.imagen-avatar:hover{
+    transform: translateX(-50%) scale(1.05);
+    cursor: pointer;
+    box-shadow: 0 0 5px 5px rgba(253, 252, 252, 0.8);
+
 }
 .botones-edicion-usuario{
     display:flex ;
