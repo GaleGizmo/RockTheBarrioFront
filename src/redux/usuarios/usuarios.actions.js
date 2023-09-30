@@ -1,4 +1,4 @@
-import { API, APIIMAGES } from "../../shared/api";
+import { API, APIIMAGES, getToken } from "../../shared/api";
 import store from "../store";
 
 const { dispatch } = store;
@@ -20,6 +20,7 @@ const setUserData = (resultado, navigate) =>{
 
 const login = (datos, navigate) => async () => {
   dispatch({ type: "LOADING_USUARIOS_LOGIN" });
+  
   try {
     const resultado = await API.post("/usuario/login", datos);
     setUserData(resultado, navigate);
@@ -71,19 +72,9 @@ const checkSesion = () => () => {
 
 const registerUser = (datos, navigate) => async () => {
   try {
-    const formData = new FormData();
-    datos.birthday = "";
-    formData.append("email", datos.email);
-    formData.append("username", datos.username);
-    formData.append("password", datos.password);
-    formData.append("birthday", datos.birthday);
-    formData.append("newsletter", datos.newsletter);
-    formData.append("newevent", datos.newevent);
-    if (datos.image[0] !== undefined) {
-      formData.append("avatar", datos.image[0]);
-    }
+   
 
-    const resultado = await APIIMAGES.post("/usuario/register", formData);
+    const resultado = await APIIMAGES.post("/usuario/register", datos);
 
     setUserData(resultado, navigate);
   } catch (error) {
@@ -99,22 +90,11 @@ const registerUser = (datos, navigate) => async () => {
 };
 const updateUser = (datos, userId, navigate) => async (dispatch) => {
   try {
-    // const formData = new FormData();
-    // datos.birthday = "";
+    
 
-    // formData.append("email", datos.email);
-    // formData.append("username", datos.username);
-    // // formData.append("password", datos.password);
-    // formData.append("birthday", datos.birthday);
-    // formData.append("newsletter", datos.newsletter);
-    // formData.append("newevent", datos.newevent);
-    // if (datos.image[0] !== undefined) {
-    //   formData.append("avatar", datos.image[0]);
-    // }
-
-    const resultado = await APIIMAGES.put(`/usuario/${userId}`, datos);
+    const resultado = await APIIMAGES.put(`/usuario/${userId}`, datos, getToken());
    console.log(resultado.data)
-    // dispatch({ type: "SET_USER", contenido: resultado.data });
+    
     updateLocalStorage(resultado.data)
      navigate ("/");
 
@@ -132,7 +112,8 @@ const updateUser = (datos, userId, navigate) => async (dispatch) => {
 
 const deleteUser = (userId, navigate) => async () => {
   try {
-    await API.delete(`/usuario/${userId}`);
+    
+    await API.delete(`/usuario/${userId}`, getToken());
     dispatch({ type: "LOGOUT" });
     localStorage.removeItem("token");
     localStorage.removeItem("user");

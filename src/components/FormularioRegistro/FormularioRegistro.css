@@ -3,8 +3,15 @@
   margin-left: 5px;
   margin-top: 0;
 }
-.cardReg form{
+.cardReg form {
   width: 100%;
+}
+.div-checkReg {
+  margin-top: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 @media (min-width: 420px) {
   .cardReg {
@@ -32,7 +39,6 @@
     transform: translateX(-100px);
     animation: appearCard 0.5s ease-in-out forwards;
   }
-  
 
   @keyframes appearCard {
     0% {
@@ -52,14 +58,6 @@
     text-align: center;
   }
 
-  .div-checkReg {
-    margin-top: 10%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
   .div-inputReg {
     font-weight: 600;
     display: flex;
@@ -72,7 +70,7 @@
   .imagenReg {
     position: relative;
     padding-top: 5px;
-  
+
     height: 135px;
     justify-content: end;
   }
@@ -122,14 +120,13 @@
     padding-top: 5px;
     /* width: 50%; */
     height: 135px;
-  justify-content:end !important;
+    justify-content: end !important;
   }
   .cardReg {
     opacity: 0;
     transform: translateX(-100px);
     animation: appearCard 0.5s ease-in-out forwards;
   }
- 
 
   @keyframes appearCard {
     0% {
@@ -150,8 +147,8 @@
   }
 
   .div-inputReg {
-    margin-top: 20px;
-width: 100%;
+    margin-top: 10px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;

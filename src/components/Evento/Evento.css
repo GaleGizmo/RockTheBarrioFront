@@ -217,6 +217,8 @@
   align-items: end;
   margin-right: 1%;
 }
+
+
 .truncate {
   white-space: nowrap;
   overflow: hidden;

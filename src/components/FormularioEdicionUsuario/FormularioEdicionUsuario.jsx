@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { updateUser } from "../../redux/usuarios/usuarios.actions";
+import { clearError, updateUser } from "../../redux/usuarios/usuarios.actions";
 import Button from "../Button/Button";
 import SubirImagen from "../SubirImagen/SubirImagen";
 import "./FormularioEdicionUsuario.css";
@@ -11,6 +11,9 @@ import DropzoneComponent from "../Dropzone/Dropzone";
 
 
 const FormularioEdicionUsuario = ({ userData }) => {
+  useEffect(()=>{
+    dispatch(clearError())
+  },[])
   const [mostrarSubirImagen, setMostrarSubirImagen] = useState(false);
   const dispatch = useDispatch();
   const [imageFile, setImageFile] = useState(userData.avatar);

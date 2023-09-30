@@ -14,7 +14,8 @@ const EventListModal = memo(({ events, onClose, position }) => {
     dispatch(setEvento(id));
   };
   const modalToLeft = left > window.innerWidth / 2;
-  const modalToUp = top > window.innerHeight * (2/3);
+  const modalToUp = top > window.innerHeight / 2;
+ 
   const modalStyles = {
     top: `${top+10}px`,
     left: `${left}px`,

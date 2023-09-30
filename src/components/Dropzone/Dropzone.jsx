@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const DropzoneComponent = ({ setImageFile, setSelectedFile }) => {
   const notify = () =>
-    toast.error("Archivo no válido", {
+    toast.error("Arquivo non válido", {
       position: "bottom-center",
       autoClose: 1000,
       hideProgressBar: true,
@@ -22,13 +22,13 @@ const DropzoneComponent = ({ setImageFile, setSelectedFile }) => {
     if (!acceptedFileTypes.includes(file.type)) {
       return {
         code: "filetype-not-allowed",
-        message: `El tipo de archivo no está permitido. Los tipos de archivo permitidos son: JPEG, PNG y GIF.`,
+        message: `Solo archivos de tipo: JPEG, PNG y GIF.`,
       };
     }
     if (file.size > 2 * 1024 * 1024) {
       return {
         code: "size-too-large",
-        message: `El archivo es demasiado grande. El tamaño máximo permitido es de 2MB.`,
+        message: `El tamaño máximo de archivo es de 2MB.`,
       };
     }
     return null;
@@ -43,9 +43,9 @@ const DropzoneComponent = ({ setImageFile, setSelectedFile }) => {
       }
       const file = files[0];
       if (file.size > 2 * 1024 * 1024) {
-        alert("El archivo es demasiado grande. El tamaño máximo permitido es de 2MB.");
+        console.error(" El tamaño máximo de archivo es de 2MB.");
       } else if (!["image/jpeg", "image/png", "image/gif"].includes(file.type)) {
-        alert("Tipo de archivo no admitido. Los tipos de archivo admitidos son: JPEG, PNG y GIF.");
+        console.error("Solo archivos de tipo: JPEG, PNG y GIF.");
       } else {
         setImageFile(URL.createObjectURL(file));
         setSelectedFile(file);
@@ -54,7 +54,7 @@ const DropzoneComponent = ({ setImageFile, setSelectedFile }) => {
     onDropRejected: (rejectedFiles) => {
       const rejectedFile = rejectedFiles[0];
       if (rejectedFile.size > 2 * 1024 * 1024) {
-        console.error("El archivo es demasiado grande. El tamaño máximo permitido es de 2MB.");
+        console.error("El tamaño máximo de archivo es de 2MB.");
       } else {
         notify();
       }
@@ -67,13 +67,13 @@ const DropzoneComponent = ({ setImageFile, setSelectedFile }) => {
       <div {...getRootProps()}>
         <input {...getInputProps()} />
         {isDragActive ? (
-          <p>Suelta la imagen aquí...</p>
+          <p>Solta a imaxe eiquí...</p>
         ) : (
-          <p>Haz clic o arrastra una imagen aquí</p>
+          <p>Fai clic ou arrastra unha imaxe eiquí</p>
         )}
       </div>
-      {/* {imageFile && <img className="imagen-avatar" src={imageFile} alt="Preview" />} */}
-      <p className="warning">Solo archivos PNG, JPG o GIF de menos de 2MB</p>
+      
+      <p className="warning">Só arquivos PNG, JPG ou GIF de menos de 2MB</p>
       <ToastContainer/>
     </div>
   );
