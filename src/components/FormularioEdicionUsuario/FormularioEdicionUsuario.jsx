@@ -2,15 +2,35 @@ import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { updateUser } from "../../redux/usuarios/usuarios.actions";
+import { clearError, updateUser } from "../../redux/usuarios/usuarios.actions";
 import Button from "../Button/Button";
 import SubirImagen from "../SubirImagen/SubirImagen";
-import "./FormularioEdicionUsuario.css"
+import "./FormularioEdicionUsuario.css";
+
+import DropzoneComponent from "../Dropzone/Dropzone";
 
 
 const FormularioEdicionUsuario = ({ userData }) => {
+  useEffect(()=>{
+    dispatch(clearError())
+  },[])
+  const [mostrarSubirImagen, setMostrarSubirImagen] = useState(false);
   const dispatch = useDispatch();
-  const [imageFile, setImageFile] = useState();
+  const [imageFile, setImageFile] = useState(userData.avatar);
+  const [selectedFile, setSelectedFile] = useState(null);
+  
+  const mostrarSubirImagenHandler = () => {
+    setMostrarSubirImagen(true);
+  };
+
+  const removeAvatar = () => {
+    setImageFile(null);
+  };
+
+  const handleImageSelection = (e) => {
+    setImageFile(URL.createObjectURL(e.target.files[0]));
+    setSelectedFile(e.target.files[0])
+  };
 
   const {
     register,
@@ -25,25 +45,27 @@ const FormularioEdicionUsuario = ({ userData }) => {
     setValue("email", userData.email);
     setValue("username", userData.username);
     setValue("newevent", userData.newevent);
-    setValue("newsletter", userData.newsletter)
+    setValue("newsletter", userData.newsletter);
   }, [userData, setValue]);
 
-const handleCancel=(e)=>{
-  e.preventDefault()
-    navigate("/")
-}
+  const handleCancel = (e) => {
+    e.preventDefault();
+    navigate("/");
+  };
   const handleFormSubmit = (data) => {
-    
-    const editedUser = {
-      ...userData,
-      ...data,
-    };
-  
-    dispatch(updateUser(editedUser, navigate));
+    const formData = new FormData();
+    Object.keys(data).forEach((key) => formData.append(key, data[key]));
+    if (selectedFile) {
+      formData.append("avatar", selectedFile);
+    }
+    formData.delete('image')
+    console.log(Array.from(formData.entries()));
+    dispatch(updateUser(formData, userData._id, navigate));
   };
 
   return (
     <div className="cardReg perfil-container">
+   
       <h1>EDITAR DATOS DO USUARIO</h1>
       <p className="error-message">{error}</p>
       <form onSubmit={handleSubmit(handleFormSubmit)}>
@@ -81,8 +103,8 @@ const handleCancel=(e)=>{
           )}
         </div>
         <div className="div-inputReg">
-        <label className="margin-label">Notifica novo evento</label>
-        <input
+          <label className="margin-label">Notifica novo evento</label>
+          <input
             {...register("newevent")}
             type="checkbox"
             name="newevent"
@@ -91,8 +113,8 @@ const handleCancel=(e)=>{
           />
         </div>
         <div className="div-inputReg">
-        <label className="margin-label">Manda eventos da semana</label>
-        <input
+          <label className="margin-label">Manda eventos da semana</label>
+          <input
             {...register("newsletter")}
             type="checkbox"
             name="newsletter"
@@ -100,33 +122,36 @@ const handleCancel=(e)=>{
             className="inputReg"
           />
         </div>
-        <div className="div-inputReg imgReg">
-          <label>Imaxe</label>
-          <SubirImagen
-            register={register}
-            funcion={(e) =>
-              setImageFile(URL.createObjectURL(e.target.files[0]))
-            }
-          />
-         {userData.avatar && (
-            <img
-              className="imagen-avatar"
-              src={userData.avatar}
-              alt="Avatar do usuario"
-            />
-          )}
-          {imageFile && (
-            <img
-              className="imagen-avatar"
-              src={imageFile}
-              alt="Avatar do usuario"
-            />
-          )}
-        </div>
+        {imageFile ? (
+          <div className="div-inputReg imagenReg">
+            
+            <Button text="Eliminar avatar" type="small" onClick={removeAvatar}/>
+            {mostrarSubirImagen && (
+              <SubirImagen register={register} funcion={handleImageSelection} />
+            )}
+
+            <label htmlFor="file-input" className="imagen-avatar-label">
+              <img
+                className="imagen-avatar"
+                src={imageFile}
+                alt="Avatar do usuario"
+                onClick={() => {
+                  mostrarSubirImagenHandler();
+                }}
+              />
+            </label>
+          </div>
+        ) : (
+          <DropzoneComponent setImageFile={setImageFile} setSelectedFile={setSelectedFile}/>
+        )}
 
         <div className="botones-edicion-usuario">
-        <Button text="Cancelar" type="medium" onClick={handleCancel}/>
-          <Button text="Gardar" type="medium" onClick={handleSubmit(handleFormSubmit)} />
+          <Button text="Cancelar" type="medium" onClick={handleCancel} />
+          <Button
+            text="Gardar"
+            type="medium"
+            onClick={handleSubmit(handleFormSubmit)}
+          />
         </div>
       </form>
     </div>

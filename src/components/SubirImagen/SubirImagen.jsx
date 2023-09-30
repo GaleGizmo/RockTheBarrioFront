@@ -1,7 +1,7 @@
 import React from "react";
 import "./SubirImagen.css";
 
-const SubirImagen = ({ register, funcion }) => {
+const SubirImagen = ({ register, funcion, evento }) => {
   return (
     <div className="file-input">
       <input
@@ -12,7 +12,7 @@ const SubirImagen = ({ register, funcion }) => {
         {...register("image")}
         onChange={funcion}
       />
-      <label className="file-input__label" htmlFor="file-input">
+      {evento && <label className="file-input__label" htmlFor="file-input">
         <svg
           aria-hidden="true"
           focusable="false"
@@ -29,7 +29,7 @@ const SubirImagen = ({ register, funcion }) => {
           ></path>
         </svg>
         <span>Subir imaxe</span>
-      </label>
+      </label>}
     </div>
   );
 };

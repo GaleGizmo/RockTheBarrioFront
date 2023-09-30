@@ -1,4 +1,4 @@
-import { API, APIIMAGES } from "../../shared/api.js";
+import { API, APIIMAGES, getToken } from "../../shared/api.js";
 import store from "../store.js";
 
 const { dispatch } = store;
@@ -11,9 +11,9 @@ const getAllEventos = () => async () => {
   dispatch({ type: "GET_EVENTOS", contenido: resultado.data });
 };
 
-const sendEventosSemanales = () => async (dispatch) => {
+const sendEventosDiarios = () => async (dispatch) => {
   try {
-    await API.post("/evento/sendeventos/");
+    await API.get("/evento/sendEventosDiarios/");
     dispatch({ type: "EVENTOS_ENVIADOS", contenido: "Eventos enviados" });
   } catch (error) {
     dispatch({ type: "ERROR_EVENTO", contenido: error.message });
@@ -66,7 +66,7 @@ const addEvento = (eventoData, navigate, userId) => async (dispatch) => {
     eventoData.user_creator = userId.user;
     const formData = createFormData(eventoData);
 
-    const resultado = await APIIMAGES.post("/evento", formData);
+    const resultado = await APIIMAGES.post("/evento", formData, getToken());
     dispatch({ type: "ADD_EVENTO", contenido: resultado.data });
     navigate("/");
   } catch (error) {
@@ -81,7 +81,7 @@ const editEvento = (id, eventoData, navigate) => {
     try {
       const formData = createFormData(eventoData);
 
-      const resultado = await APIIMAGES.put(`/evento/${id}`, formData);
+      const resultado = await APIIMAGES.put(`/evento/${id}`, formData, getToken());
 
       dispatch({
         type: "EDIT_EVENTO",
@@ -99,7 +99,7 @@ const deleteEvento = (eventoId, navigate) => async () => {
   dispatch({ type: "LOADING_EVENTOS" });
 
   try {
-    await API.delete(`/evento/${eventoId}`);
+    await API.delete(`/evento/${eventoId}`, getToken());
     dispatch({ type: "DELETE_EVENTO", contenido: eventoId });
     navigate("/");
   } catch (error) {
@@ -127,7 +127,7 @@ export {
   addEvento,
   deleteEvento,
   editEvento,
-  sendEventosSemanales,
+  sendEventosDiarios,
   clearMensajes,
   setEvento,
   getFilteredEventos,

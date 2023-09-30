@@ -1,16 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./FormularioRegistro.css";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { registerUser } from "../../redux/usuarios/usuarios.actions";
+import { clearError, registerUser } from "../../redux/usuarios/usuarios.actions";
 import Button from "../Button/Button";
 import SubirImagen from "../SubirImagen/SubirImagen";
 import { AiFillCloseSquare } from "react-icons/ai";
+import DropzoneComponent from "../Dropzone/Dropzone";
 
 const FormularioRegistro = () => {
   const dispatch = useDispatch();
+  useEffect(()=>{
+    dispatch(clearError())
+  },[])
   const [imageFile, setImageFile] = useState();
+  const [selectedFile, setSelectedFile] = useState(null);
   const [newsletter, setNewsletter] = useState(true);
   const [newEvent, setNewevent] = useState(false);
   const {
@@ -22,39 +27,49 @@ const FormularioRegistro = () => {
   const { error } = useSelector((state) => state.usuariosReducer);
   const navigate = useNavigate();
 
-  const onSubmit = (datos) => {
-    if (datos.password === datos.confirmPassword) {
-      datos.newsletter = newsletter;
-      datos.newevent = newEvent;
-      console.log(datos);
-      dispatch(registerUser(datos, navigate));
-    } else {
-      // Manejar el caso en el que las contraseñas no coinciden
-      console.log("Las contraseñas no coinciden");
+  const handleImageSelection = (e) => {
+    setImageFile(URL.createObjectURL(e.target.files[0]));
+    setSelectedFile(e.target.files[0]);
+  };
+
+  const onSubmit = (data) => {
+    const formData = new FormData();
+    Object.keys(data).forEach((key) => formData.append(key, data[key]));
+    if (selectedFile) {
+      formData.append("avatar", selectedFile);
     }
+    formData.delete('image')
+    console.log(Array.from(formData.entries()));
+    dispatch(registerUser(formData, navigate));
   };
   const passwordRegex =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    const handleIcon = () => {
-      navigate(-1);
-    };
+  const handleIcon = () => {
+    navigate(-1);
+  };
   return (
     <div className="cardReg">
-    <AiFillCloseSquare className="close-icon" onClick={handleIcon} />
+      <AiFillCloseSquare className="close-icon" onClick={handleIcon} />
       <h1>DATE DE ALTA</h1>
       <p className="error-message">{error}</p>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="div-inputReg">
           <label className="margin-label">E-mail</label>
           <input
-            {...register("email", { required: true })}
+            {...register("email", {
+              required: "Email é requerido",
+              pattern: {
+                value: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+                message: "Formato de email incorrecto",
+              },
+            })}
             type="email"
             name="email"
             id="email"
             className="inputReg"
           />
           {errors.email && (
-            <span className="error-message">Email é requerido</span>
+            <span className="error-message">{errors.email.message}</span>
           )}
         </div>
         <div className="div-inputReg">
@@ -109,61 +124,73 @@ const FormularioRegistro = () => {
 
         <div className="div-inputReg imgReg">
           <label>Avatar</label>
-          <SubirImagen
-            register={register}
-            funcion={(e) =>
-              setImageFile(URL.createObjectURL(e.target.files[0]))
-            }
+          {imageFile && (
+            <>
+              <img className="imagenReg" src={imageFile} />
+              <label htmlFor="file-input">
+              <SubirImagen register={register} funcion={handleImageSelection} />
+              </label>
+            </>
+          )}
+          <DropzoneComponent
+            setImageFile={setImageFile}
+            setSelectedFile={setSelectedFile}
           />
-          {imageFile && <img className="imagen-formulario avatar" src={imageFile} />}
         </div>
 
         <div className="margin-botonReg">
           <div className="div-checkReg">
-          <div>
-            <label>Mándame un email cos eventos da semana</label>
-            <input
-              className="checkReg"
-              type="checkbox"
-             
-              checked={newsletter}
-              onChange={(e) => setNewsletter(e.target.checked)}
-            />
+            <div>
+              <label>Mándame un email cos eventos da semana</label>
+              <input
+                className="checkReg"
+                type="checkbox"
+                checked={newsletter}
+                onChange={(e) => setNewsletter(e.target.checked)}
+              />
             </div>
             <div>
-            <label>Avísame cando se engada un evento</label>
-            <input
-              className="checkReg"
-              type="checkbox"
-              checked={newEvent}
-              onChange={(e) => setNewevent(e.target.checked)}
-            />
-            
+              <label>Avísame cando se engada un evento</label>
+              <input
+                className="checkReg"
+                type="checkbox"
+                checked={newEvent}
+                onChange={(e) => setNewevent(e.target.checked)}
+              />
             </div>
-             <div>
-            <label>Acepto os {" "}
-        <Link to="/terminos">Termos e Condicións</Link></label>
-            <input
-             {...register("terminos", { required: true })}
-              className="checkReg"
-              type="checkbox"
-              
-            /><p>
-            {errors.terminos && (
-            <span className="error-message">Debes aceptar os Termos e Condicións</span>
-          )}</p>
-          </div>
-             <div>
-            <label>Acepto a <Link to="/privacidad" >Política de Privacidade</Link></label>
-            <input
-             {...register("privacidad", { required: true })}
-              className="checkReg"
-              type="checkbox"
-              
-            /><p>
-            {errors.privacidad && (
-            <span className="error-message">Debes aceptar a Política de Privacidade</span>
-          )}</p>
+            <div>
+              <label>
+                Acepto os <Link to="/terminos">Termos e Condicións</Link>
+              </label>
+              <input
+                {...register("terminos", { required: true })}
+                className="checkReg"
+                type="checkbox"
+              />
+              <p>
+                {errors.terminos && (
+                  <span className="error-message">
+                    Debes aceptar os Termos e Condicións
+                  </span>
+                )}
+              </p>
+            </div>
+            <div>
+              <label>
+                Acepto a <Link to="/privacidad">Política de Privacidade</Link>
+              </label>
+              <input
+                {...register("privacidad", { required: true })}
+                className="checkReg"
+                type="checkbox"
+              />
+              <p>
+                {errors.privacidad && (
+                  <span className="error-message">
+                    Debes aceptar a Política de Privacidade
+                  </span>
+                )}
+              </p>
             </div>
           </div>
 
