@@ -23,3 +23,13 @@ export const APIIMAGES = axios.create({
   baseURL: import.meta.env.VITE_APP_BASE_URL,
   headers: APIHeaders2,
 });
+
+export const getToken =()=>{
+  const token=localStorage.getItem("token")
+  const config = {
+    headers: {
+      "Authorization": `Bearer ${token}`,
+    },
+  };
+  return config
+}

@@ -2,23 +2,21 @@ import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { updateUser } from "../../redux/usuarios/usuarios.actions";
+import { clearError, updateUser } from "../../redux/usuarios/usuarios.actions";
 import Button from "../Button/Button";
 import SubirImagen from "../SubirImagen/SubirImagen";
 import "./FormularioEdicionUsuario.css";
 
+import DropzoneComponent from "../Dropzone/Dropzone";;
+
 const FormularioEdicionUsuario = ({ userData }) => {
+  useEffect(()=>{
+    dispatch(clearError())
+  },[])
+  const [mostrarSubirImagen, setMostrarSubirImagen] = useState(false);
   const dispatch = useDispatch();
   const [imageFile, setImageFile] = useState();
-  const [mostrarSubirImagen, setMostrarSubirImagen] = useState(false);
-  const mostrarSubirImagenHandler = () => {
-    console.log("mostrarSubirImagenHandler llamado");
-    setMostrarSubirImagen(true);
-  };
-  const handleImageSelection = (e) => {
-    console.log("handleImageSelection llamado");
-    setImageFile(URL.createObjectURL(e.target.files[0]));
-  };
+
   const {
     register,
     handleSubmit,
@@ -40,16 +38,18 @@ const FormularioEdicionUsuario = ({ userData }) => {
     navigate("/");
   };
   const handleFormSubmit = (data) => {
+    
     const editedUser = {
       ...userData,
       ...data,
     };
-
+  
     dispatch(updateUser(editedUser, navigate));
   };
 
   return (
     <div className="cardReg perfil-container">
+   
       <h1>EDITAR DATOS DO USUARIO</h1>
       <p className="error-message">{error}</p>
       <form onSubmit={handleSubmit(handleFormSubmit)}>
@@ -107,24 +107,27 @@ const FormularioEdicionUsuario = ({ userData }) => {
           />
         </div>
         <div className="div-inputReg imgReg">
-          <label>Avatar</label>
-          {mostrarSubirImagen && (
-            <SubirImagen register={register} funcion={handleImageSelection} />
+          <label>Imaxe</label>
+          <SubirImagen
+            register={register}
+            funcion={(e) =>
+              setImageFile(URL.createObjectURL(e.target.files[0]))
+            }
+          />
+         {userData.avatar && (
+            <img
+              className="imagen-avatar"
+              src={userData.avatar}
+              alt="Avatar do usuario"
+            />
           )}
-          {userData.avatar && (
-            <label htmlFor="file-input" className="imagen-avatar-label">
-              <img
-                className="imagen-avatar"
-                src={imageFile || userData.avatar}
-                alt="Avatar do usuario"
-                onClick={() => {
-                  console.log("Imagen del avatar clicada");
-                  mostrarSubirImagenHandler();
-                }}
-              />
-            </label>
+          {imageFile && (
+            <img
+              className="imagen-avatar"
+              src={imageFile}
+              alt="Avatar do usuario"
+            />
           )}
-         
         </div>
 
         <div className="botones-edicion-usuario">

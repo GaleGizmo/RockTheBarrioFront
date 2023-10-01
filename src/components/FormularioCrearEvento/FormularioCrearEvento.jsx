@@ -183,6 +183,7 @@ const FormularioCrearEvento = () => {
           <label>Imaxe</label>
           <SubirImagen
             register={register}
+            evento={true}            
             funcion={(e) =>
               setImageFile(URL.createObjectURL(e.target.files[0]))
             }

@@ -1,10 +1,18 @@
-.checkReg{
+.checkReg {
   border-radius: 10px;
   margin-left: 5px;
   margin-top: 0;
- 
 }
-
+.cardReg form {
+  width: 100%;
+}
+.div-checkReg {
+  margin-top: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 @media (min-width: 420px) {
   .cardReg {
     display: flex;
@@ -19,23 +27,17 @@
     margin-bottom: 20px;
     text-align: center;
     width: 90%;
-   
+
     margin-left: 2.5%;
     margin-right: 2.5%;
     background-image: linear-gradient(to bottom, rgb(237 132 57), #fff);
-    
-  
+
     box-sizing: content-box;
   }
   .cardReg {
     opacity: 0;
     transform: translateX(-100px);
     animation: appearCard 0.5s ease-in-out forwards;
-  }
-  .imagenReg {
-    padding-top: 5px;
-    width: 50%;
-    height: 10vh;
   }
 
   @keyframes appearCard {
@@ -49,36 +51,37 @@
     }
   }
   .inputReg {
-    width: 100%;
+    width: 90%;
     height: 100%;
     border-radius: 10px;
     font-size: large;
     text-align: center;
   }
 
-.div-checkReg {
- 
-  margin-top: 10%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
   .div-inputReg {
-    height: 30px;
-    margin-top: 10%;
-    
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: fit-content;
+    margin-top: 20px;
+  }
+  .imagenReg {
+    position: relative;
+    padding-top: 5px;
+
+    height: 135px;
+    justify-content: end;
   }
   .margin-botonReg {
-    
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 10px;
     margin-top: 5%;
-    padding-top: 150px;
+    padding-top: 0px;
   }
   .fechaReg {
     width: 100%;
@@ -89,9 +92,9 @@
     flex-direction: column;
   }
 }
-.div-checkReg label{
+.div-checkReg label {
   padding-bottom: 2px;
-  font-size: .9rem;
+  font-size: 0.9rem;
 }
 @media (max-width: 420px) {
   .cardReg {
@@ -103,30 +106,26 @@
     border: 2px solid var(--secondary-color);
     border-radius: 8px;
     box-shadow: 10px 10px 5px var(--secondary-shadow);
-    padding: 20px;
+    padding: 10px;
     margin-bottom: 20px;
     text-align: center;
 
-    margin-top: 20%;
+    margin-top: 80px;
     margin-left: 0;
     margin-right: 0;
     background-image: linear-gradient(to bottom, rgb(237 132 57), #fff);
- 
-
   }
   .imagenReg {
+    position: relative;
     padding-top: 5px;
-    width: 50%;
-    height: fit-content;
+    /* width: 50%; */
+    height: 135px;
+    justify-content: end !important;
   }
   .cardReg {
     opacity: 0;
     transform: translateX(-100px);
     animation: appearCard 0.5s ease-in-out forwards;
-  }
-  .imagenReg {
-    padding-top: 10px;
-    width: 50%;
   }
 
   @keyframes appearCard {
@@ -148,20 +147,18 @@
   }
 
   .div-inputReg {
-    
-    margin-top: 15%;
-   
+    margin-top: 10px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
- 
+
   .margin-botonReg {
-  
     gap: 5px;
     margin-top: 0;
-    padding-top: 50px;
+    padding-top: 10px;
   }
   .fechaReg {
     width: 81%;
