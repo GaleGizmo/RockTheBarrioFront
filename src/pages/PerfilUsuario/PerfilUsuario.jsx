@@ -8,6 +8,7 @@ import "./PerfilUsuario.css";
 import Perfil from "../../components/Perfil/Perfil";
 import { AiFillCloseSquare } from "react-icons/ai";
 import ConfirmModal from "../../components/ConfirmModal/ConfirmModal";
+import FormularioRegistro from "../../components/FormularioRegistro/FormularioRegistro";
 
 const PerfilUsuario = () => {
   const dispatch = useDispatch();
@@ -56,9 +57,9 @@ const PerfilUsuario = () => {
       )}
 
       {isEditing && (
-        <FormularioEdicionUsuario
+        <FormularioRegistro
           userData={userData}
-          onSubmit={handleFormSubmit}
+          isEdit={true}
         />
       )}
       <ConfirmModal

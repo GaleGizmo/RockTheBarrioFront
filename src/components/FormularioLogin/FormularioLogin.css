@@ -1,4 +1,4 @@
- @media (min-width: 420px) {
+
     .cardLogin {
         display: flex;
         flex-direction: column;
@@ -10,8 +10,8 @@
         padding: 30px;
         
         text-align: center;
-        width: 100%;
-        margin-top: 10%;
+        width: 50%;
+        margin: 80px auto 0 auto;
         
         background-image:linear-gradient(to bottom, rgb(237 132 57), #fff);
        
@@ -43,15 +43,19 @@
       }
     
       .div-inputLogin{
+        width: 100%;
         height: 30px;
         margin-top: 7%;
        
+      }
+      .div-inputLogin label{
+        width: 100%;
       }
       .margin-botonLogin{
         margin-top: 10%;
       }
     
-  }
+  
 
   @media (max-width: 420px) {
     .cardLogin {
@@ -64,12 +68,10 @@
         border-radius: 8px;
         box-shadow: 10px 10px 5px  var(--secondary-shadow);
         padding: 20px;
-        
+        width: 70%;
         text-align: center;
    
-        margin-top: 20%;
-        margin-left: 2.5%;
-        margin-right: 2.5%;
+        
         background-image:linear-gradient(to bottom, rgb(237 132 57), #fff);
        
         
@@ -110,3 +112,6 @@
       
   }
 
+  @media (min-width: 421px) and (max-width: 720px){
+
+  }

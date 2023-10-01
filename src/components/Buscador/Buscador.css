@@ -62,6 +62,11 @@
   padding: 7px 0 7px 3px;
   border-bottom: 1px solid var(--secondary-shadow);
 }
+.buscador-fav {
+  margin-left: 20px;
+  border: none;
+  padding: 0;
+}
 .buscador-datalabel {
   width: 100%;
   align-self: flex-start;
@@ -141,7 +146,7 @@
     width: 100%;
   }
   .search_icon {
-    right: 70px;
+    right: 75px;
     top: 6px;
   }
   .show-advanced {

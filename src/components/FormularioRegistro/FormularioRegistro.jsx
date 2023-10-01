@@ -6,25 +6,48 @@ import { Link, useNavigate } from "react-router-dom";
 import {
   clearError,
   registerUser,
+  updateUser,
 } from "../../redux/usuarios/usuarios.actions";
 import Button from "../Button/Button";
 import SubirImagen from "../SubirImagen/SubirImagen";
 import { AiFillCloseSquare } from "react-icons/ai";
 import DropzoneComponent from "../Dropzone/Dropzone";
 
-const FormularioRegistro = () => {
+const FormularioRegistro = ({ userData, isEdit }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(clearError());
   }, []);
-  const [imageFile, setImageFile] = useState();
+  const [mostrarSubirImagen, setMostrarSubirImagen] = useState(false);
+
+  const [imageFile, setImageFile] = useState(isEdit ? userData.avatar:null);
   const [selectedFile, setSelectedFile] = useState(null);
-  const [newsletter, setNewsletter] = useState(true);
-  const [newEvent, setNewevent] = useState(false);
+  // const [newsletter, setNewsletter] = useState(true);
+  // const [newEvent, setNewevent] = useState(false);
+
+  const mostrarSubirImagenHandler = () => {
+    setMostrarSubirImagen(true);
+  };
+  const removeAvatar = () => {
+    setImageFile(null);
+  };
+  useEffect(() => {
+    if (isEdit) {
+      setValue("email", userData.email);
+      setValue("username", userData.username);
+      setValue("newevent", userData.newevent);
+      setValue("newsletter", userData.newsletter);
+    } else {
+      setValue("newsletter", true);
+      setValue("newevent", false);
+    }
+  }, [userData, isEdit]);
+
   const {
     register,
     handleSubmit,
     getValues,
+    setValue,
     formState: { errors },
   } = useForm();
   const { error } = useSelector((state) => state.usuariosReducer);
@@ -35,6 +58,11 @@ const FormularioRegistro = () => {
     setSelectedFile(e.target.files[0]);
   };
 
+  const handleCancel = (e) => {
+    e.preventDefault();
+    navigate("/");
+  };
+
   const onSubmit = (data) => {
     const formData = new FormData();
     Object.keys(data).forEach((key) => formData.append(key, data[key]));
@@ -43,7 +71,9 @@ const FormularioRegistro = () => {
     }
     formData.delete("image");
     console.log(Array.from(formData.entries()));
-    dispatch(registerUser(formData, navigate));
+    if (isEdit){ dispatch(updateUser(formData, userData._id, navigate));}
+    else 
+   { dispatch(registerUser(formData, navigate));}
   };
   const passwordRegex =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
@@ -51,9 +81,10 @@ const FormularioRegistro = () => {
     navigate(-1);
   };
   return (
-    <div className="cardReg">
+    <div className={`cardReg ${isEdit ? 'isEdit' : ''}`}>
+
       <AiFillCloseSquare className="close-icon" onClick={handleIcon} />
-      <h1>DATE DE ALTA</h1>
+      {isEdit ? <h1>EDITAR USUARIO</h1> : <h1> DATE DE ALTA </h1>}
       <p className="error-message">{error}</p>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="div-inputReg">
@@ -95,75 +126,91 @@ const FormularioRegistro = () => {
             <span className="error-message">{errors.username.message}</span>
           )}
         </div>
+        {!isEdit && (
+          <>
+            <div className="div-inputReg">
+              <label className="margin-labelReg">Contrasinal</label>
+              <input
+                {...register("password", { required: true })}
+                type="password"
+                className="inputReg"
+              />
+              {errors.password && (
+                <span className="error-message">Contrasinal é requerido</span>
+              )}
+            </div>
+            <div className="div-inputReg">
+              <label className="margin-labelReg">Confirma Contrasinal</label>
+              <input
+                {...register("confirmPassword", {
+                  required: true,
+                  validate: (value) =>
+                    value === getValues("password") ||
+                    "Os contrasinais non coinciden",
+                })}
+                type="password"
+                className="inputReg"
+              />
+              {errors.confirmPassword && (
+                <span className="error-message">
+                  {errors.confirmPassword.message}
+                </span>
+              )}
+            </div>
+          </>
+        )}
         <div className="div-inputReg">
-          <label className="margin-labelReg">Contrasinal</label>
+          <label>Email cos eventos da semana</label>
           <input
-            {...register("password", { required: true })}
-            type="password"
-            className="inputReg"
+            {...register("newsletter")}
+            className="checkReg"
+            name="newsletter"
+            type="checkbox"
+            
+            defaultChecked={isEdit ? userData.newsletter : true}
           />
-          {errors.password && (
-            <span className="error-message">Contrasinal é requerido</span>
-          )}
         </div>
         <div className="div-inputReg">
-          <label className="margin-labelReg">Confirma Contrasinal</label>
+          <label>Email con novos eventos engadidos</label>
           <input
-            {...register("confirmPassword", {
-              required: true,
-              validate: (value) =>
-                value === getValues("password") ||
-                "Os contrasinais non coinciden",
-            })}
-            type="password"
-            className="inputReg"
+            {...register("newevent")}
+            className="checkReg"
+            type="checkbox"
+           name="newevent"
+            defaultChecked={isEdit ? userData.newevent : false}
           />
-          {errors.confirmPassword && (
-            <span className="error-message">
-              {errors.confirmPassword.message}
-            </span>
-          )}
         </div>
+        {imageFile ? (
+          <div className="div-inputReg imagenReg">
+            <Button
+              text="Eliminar avatar"
+              type="small"
+              onClick={removeAvatar}
+            />
+            {mostrarSubirImagen && (
+              <SubirImagen register={register} funcion={handleImageSelection} />
+            )}
 
-        <div className="div-inputReg imgReg">
-          <label>Avatar</label>
-          {imageFile && (
-            <>
-              <img className="imagenReg" src={imageFile} />
-              <label htmlFor="file-input">
-                <SubirImagen
-                  register={register}
-                  funcion={handleImageSelection}
-                />
-              </label>
-            </>
-          )}
+            <label htmlFor="file-input" >
+              <img
+                className="imagen-avatar"
+                src={imageFile}
+                alt="Avatar do usuario"
+                onClick={() => {
+                  mostrarSubirImagenHandler();
+                }}
+              />
+            </label>
+          </div>
+        ) : (
           <DropzoneComponent
             setImageFile={setImageFile}
             setSelectedFile={setSelectedFile}
           />
-        </div>
+        )}
 
         <div className="margin-botonReg">
-          <div className="div-checkReg">
-            <div>
-              <label>Mándame un email cos eventos da semana</label>
-              <input
-                className="checkReg"
-                type="checkbox"
-                checked={newsletter}
-                onChange={(e) => setNewsletter(e.target.checked)}
-              />
-            </div>
-            <div>
-              <label>Avísame cando se engada un evento</label>
-              <input
-                className="checkReg"
-                type="checkbox"
-                checked={newEvent}
-                onChange={(e) => setNewevent(e.target.checked)}
-              />
-            </div>
+         {!isEdit && <div className="div-checkReg">
             <div>
               <label>
                 Acepto os <Link to="/terminos">Termos e Condicións</Link>
@@ -198,9 +245,9 @@ const FormularioRegistro = () => {
                 )}
               </p>
             </div>
-          </div>
-
-          <Button text="Rexistrarse" type="large" />
+          </div>}
+          <div className="botones-edicion-usuario"><Button text="Cancelar" type="medium" onClick={handleCancel} />
+          <Button text={isEdit ? "Gardar" : "Rexistrarse"} type="medium" /> </div>
         </div>
       </form>
     </div>

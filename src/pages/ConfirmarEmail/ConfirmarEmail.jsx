@@ -5,8 +5,10 @@ import { forgotPassword, unsubscribeEmail } from "../../redux/usuarios/usuarios.
 import Button from "../../components/Button/Button";
 import "./ConfirmarEmail.css";
 import { useNavigate } from "react-router-dom";
+import { AiFillCloseSquare } from "react-icons/ai";
 
 const ConfirmarEmail = ({ token }) => {
+ 
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
@@ -21,9 +23,12 @@ const ConfirmarEmail = ({ token }) => {
       dispatch(unsubscribeEmail(data.email, token, user._id, navigate));
     } else dispatch(forgotPassword(data.email));
   };
-
+  const handleIcon = () => {
+    navigate(-1);
+  };
   return (
     <div className="cardLogin recuperar">
+    <AiFillCloseSquare className="close-icon" onClick={handleIcon} />
       <div>
         <h1>Confirmar Email</h1>
         {error && <p className="error-message">{error}</p>}

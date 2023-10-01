@@ -36,10 +36,10 @@ const Perfil = ({ userData, onEditClick }) => {
               {userData && userData.role === 2 && (<>
                 <Link to="/crear-evento">
                   <span className="boton-crear">
-                    <Button text="Crear evento" type="medium" />
+                    <Button text="Crear evento" type="large" />
                   </span>
                 </Link>
-                <Button text="Eventos diarios" type="medium" onClick={sendDiarios}/>
+                <Button text="Eventos diarios" type="large" onClick={sendDiarios}/>
                 </>
               )}
             </div>
