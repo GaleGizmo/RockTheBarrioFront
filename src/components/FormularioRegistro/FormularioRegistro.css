@@ -13,6 +13,58 @@
   justify-content: center;
   align-items: center;
 }
+.imagen-avatar {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;
+}
+.imagen-avatar:hover {
+  transform: translateX(-50%) scale(1.05);
+  cursor: pointer;
+  box-shadow: 0 0 5px 5px rgba(253, 252, 252, 0.8);
+}
+.botones-edicion-usuario {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  padding-top: 30px;
+}
+.dropzone-container {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border: 2px dashed #eeeeee;
+  border-radius: 2px;
+  width: 100%;
+  background-color: #fafafa;
+  color: #bdbdbd;
+  outline: none;
+  transition: border 0.24s ease-in-out;
+}
+.dropzone-container.focused {
+  border-color: #2196f3;
+}
+
+.dropzone-container.accept {
+  border-color: #00e676;
+}
+
+.dropzone-container.reject {
+  border-color: #ff1744;
+}
+.dropzone-container .warning {
+  position: absolute;
+  bottom: -40px;
+  left: 0;
+  color: var(--secondary-color);
+  font-size: 0.8rem;
+}
+
 @media (min-width: 420px) {
   .cardReg {
     display: flex;
@@ -26,10 +78,10 @@
     padding: 20px;
     margin-bottom: 20px;
     text-align: center;
-    width: 90%;
+    width: 50%;
 
-    margin-left: 2.5%;
-    margin-right: 2.5%;
+    margin-left: auto;
+    margin-right: auto;
     background-image: linear-gradient(to bottom, rgb(237 132 57), #fff);
 
     box-sizing: content-box;
@@ -39,7 +91,10 @@
     transform: translateX(-100px);
     animation: appearCard 0.5s ease-in-out forwards;
   }
-
+  .isEdit {
+    width: 50%;
+    margin: 80px auto 0 auto;
+  }
   @keyframes appearCard {
     0% {
       opacity: 0;
@@ -107,13 +162,17 @@
     border-radius: 8px;
     box-shadow: 10px 10px 5px var(--secondary-shadow);
     padding: 10px;
-    margin-bottom: 20px;
-    text-align: center;
-
     margin-top: 80px;
-    margin-left: 0;
-    margin-right: 0;
+    text-align: center;
+    width: 80%;
+
+    margin-left: auto;
+    margin-right: auto;
     background-image: linear-gradient(to bottom, rgb(237 132 57), #fff);
+  }
+  .isEdit {
+    width: 90%;
+    margin: 80px auto 0 auto;
   }
   .imagenReg {
     position: relative;
@@ -169,5 +228,8 @@
     flex-direction: column;
     padding-bottom: 25px;
     font-size: large;
+  }
+  .botones-edicion-usuario {
+    padding-top: 20px;
   }
 }

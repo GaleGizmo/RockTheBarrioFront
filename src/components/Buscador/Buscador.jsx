@@ -144,6 +144,7 @@ const Buscador = ({ eventos, user }) => {
     setFavoritesOnly(false);
     setCustomDates(false);
     setPastEvents(false)
+    setShowAdavancedSearch(false)
     dispatch(deleteFilteredEventos());
   };
 
@@ -254,7 +255,21 @@ const Buscador = ({ eventos, user }) => {
             checked={freeEvent}
             onChange={(e) => setFreeEvent(e.target.checked)}
           />
+          <div
+          className={`buscador-item buscador-fav  ${
+            showAdvancedSearch ? "show-advanced" : ""
+          }`}
+        >
+          <label>Só favoritos</label>
+          <input
+            type="checkbox"
+            checked={favoritesOnly}
+            onChange={(e) => setFavoritesOnly(e.target.checked)}
+            disabled={!user}
+          />
         </div>
+        </div>
+        
         <div
           className={`buscador-item ${
             showAdvancedSearch ? "show-advanced" : ""
@@ -324,25 +339,13 @@ const Buscador = ({ eventos, user }) => {
           )}
         </div>
 
-        <div
-          className={`buscador-item ${
-            showAdvancedSearch ? "show-advanced" : ""
-          }`}
-        >
-          <label>Só favoritos</label>
-          <input
-            type="checkbox"
-            checked={favoritesOnly}
-            onChange={(e) => setFavoritesOnly(e.target.checked)}
-            disabled={!user}
-          />
-        </div>
+        
         <div
           className={`boton-buscar ${
             showAdvancedSearch ? "show-advanced" : ""
           }`}
         >
-          <Button text="Buscar" type="small" />
+          <Button text="Buscar" type="small" onClick={handleSearchClick} />
           <Button text="Limpar" type="small" onClick={cleanFiltered} />{" "}
           <label>
             Inclue eventos pasados
