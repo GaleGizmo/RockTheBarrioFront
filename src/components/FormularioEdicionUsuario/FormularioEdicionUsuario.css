@@ -1,11 +1,16 @@
-.imagen-avatar{
-    width:100px;
-    height: 100px;
-    position: fixed;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: 12vh;
-    
+.imagen-avatar {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;
+}
+.imagen-avatar:hover{
+    transform: translateX(-50%) scale(1.05);
+    cursor: pointer;
+    box-shadow: 0 0 5px 5px rgba(253, 252, 252, 0.8);
+
 }
 .botones-edicion-usuario {
   display: flex;

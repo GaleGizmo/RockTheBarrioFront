@@ -9,16 +9,15 @@ import "./FormularioEdicionUsuario.css";
 
 import DropzoneComponent from "../Dropzone/Dropzone";
 
-
 const FormularioEdicionUsuario = ({ userData }) => {
-  useEffect(()=>{
-    dispatch(clearError())
-  },[])
+  useEffect(() => {
+    dispatch(clearError());
+  }, []);
   const [mostrarSubirImagen, setMostrarSubirImagen] = useState(false);
   const dispatch = useDispatch();
   const [imageFile, setImageFile] = useState(userData.avatar);
   const [selectedFile, setSelectedFile] = useState(null);
-  
+
   const mostrarSubirImagenHandler = () => {
     setMostrarSubirImagen(true);
   };
@@ -29,7 +28,7 @@ const FormularioEdicionUsuario = ({ userData }) => {
 
   const handleImageSelection = (e) => {
     setImageFile(URL.createObjectURL(e.target.files[0]));
-    setSelectedFile(e.target.files[0])
+    setSelectedFile(e.target.files[0]);
   };
 
   const {
@@ -58,14 +57,13 @@ const FormularioEdicionUsuario = ({ userData }) => {
     if (selectedFile) {
       formData.append("avatar", selectedFile);
     }
-    formData.delete('image')
+    formData.delete("image");
     console.log(Array.from(formData.entries()));
     dispatch(updateUser(formData, userData._id, navigate));
   };
 
   return (
     <div className="cardReg perfil-container">
-   
       <h1>EDITAR DATOS DO USUARIO</h1>
       <p className="error-message">{error}</p>
       <form onSubmit={handleSubmit(handleFormSubmit)}>
@@ -124,8 +122,11 @@ const FormularioEdicionUsuario = ({ userData }) => {
         </div>
         {imageFile ? (
           <div className="div-inputReg imagenReg">
-            
-            <Button text="Eliminar avatar" type="small" onClick={removeAvatar}/>
+            <Button
+              text="Eliminar avatar"
+              type="small"
+              onClick={removeAvatar}
+            />
             {mostrarSubirImagen && (
               <SubirImagen register={register} funcion={handleImageSelection} />
             )}
@@ -142,7 +143,10 @@ const FormularioEdicionUsuario = ({ userData }) => {
             </label>
           </div>
         ) : (
-          <DropzoneComponent setImageFile={setImageFile} setSelectedFile={setSelectedFile}/>
+          <DropzoneComponent
+            setImageFile={setImageFile}
+            setSelectedFile={setSelectedFile}
+          />
         )}
 
         <div className="botones-edicion-usuario">

@@ -3,7 +3,10 @@ import "./FormularioRegistro.css";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { clearError, registerUser } from "../../redux/usuarios/usuarios.actions";
+import {
+  clearError,
+  registerUser,
+} from "../../redux/usuarios/usuarios.actions";
 import Button from "../Button/Button";
 import SubirImagen from "../SubirImagen/SubirImagen";
 import { AiFillCloseSquare } from "react-icons/ai";
@@ -11,9 +14,9 @@ import DropzoneComponent from "../Dropzone/Dropzone";
 
 const FormularioRegistro = () => {
   const dispatch = useDispatch();
-  useEffect(()=>{
-    dispatch(clearError())
-  },[])
+  useEffect(() => {
+    dispatch(clearError());
+  }, []);
   const [imageFile, setImageFile] = useState();
   const [selectedFile, setSelectedFile] = useState(null);
   const [newsletter, setNewsletter] = useState(true);
@@ -38,7 +41,7 @@ const FormularioRegistro = () => {
     if (selectedFile) {
       formData.append("avatar", selectedFile);
     }
-    formData.delete('image')
+    formData.delete("image");
     console.log(Array.from(formData.entries()));
     dispatch(registerUser(formData, navigate));
   };
@@ -128,7 +131,10 @@ const FormularioRegistro = () => {
             <>
               <img className="imagenReg" src={imageFile} />
               <label htmlFor="file-input">
-              <SubirImagen register={register} funcion={handleImageSelection} />
+                <SubirImagen
+                  register={register}
+                  funcion={handleImageSelection}
+                />
               </label>
             </>
           )}
