@@ -103,15 +103,15 @@ const Buscador = ({ eventos, user }) => {
     }
 
     // Filtrado previo de eventos pasados
-    let eventosToShow = eventos;
-    if (!pastEvents) {
+    let eventosToShow = [...eventos];
+    if (!pastEvents && !searchDate) {
       const today = new Date();
       today.setHours(0, 0, 0, 0);
-      eventosToShow = eventos.filter(
+      eventosToShow = eventosToShow.filter(
         (evento) => new Date(evento.date_start) >= today
       );
     }
-
+console.log(eventosToShow,data);
     
     const filteredResults = FilterEvents(eventosToShow, data, user);
     if (filteredResults.length === 0) {
