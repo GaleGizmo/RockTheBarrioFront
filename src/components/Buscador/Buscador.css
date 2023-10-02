@@ -56,14 +56,20 @@
 }
 .buscador-item {
   display: flex;
-
+  justify-content: center;
   align-items: center;
-  gap: 5px;
+  gap: 25px;
   padding: 7px 0 7px 3px;
   border-bottom: 1px solid var(--secondary-shadow);
 }
+.buscador-item>label {
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+}
+
 .buscador-fav {
-  margin-left: 20px;
+ gap: 5px;
   border: none;
   padding: 0;
 }
@@ -132,12 +138,14 @@
   .boton-buscar {
     display: none;
   }
-  .buscador-avanzada {width: 60px;
+  .buscador-avanzada {
+    width: 60px;
     display: inline;
     color: white;
     font-size: 12px;
     margin: auto 0 0 0;
     text-align: center;
+    border-color: white;
     
   }
   .buscador-dataoptions {
@@ -168,5 +176,13 @@
   .chevrons-icon:hover {
     filter: brightness(2);
     filter: contrast(2);
+  }
+}
+@media (min-width: 421px) and (max-width:991px){
+  .buscador-container {
+    font-size: .65rem;
+  }
+  .boton-buscar label{
+    font-size: .5rem;
   }
 }

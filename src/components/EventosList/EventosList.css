@@ -44,12 +44,9 @@ flex-direction: column;
    
 }
 
-@media (min-width: 420px) and (max-width: 1014px){
+@media (min-width: 420px) and (max-width: 992px){
     .eventos-list{
-        display:block;
-        margin-right: auto;
-        margin-left: auto;
-        margin-top: 20px;
+        grid-template-columns: minmax(200px, 300px) minmax(auto, 1270px)
     }
     .eventos{
         margin-top: 40px;

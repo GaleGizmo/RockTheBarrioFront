@@ -248,6 +248,10 @@ console.log(eventosToShow,data);
             showAdvancedSearch ? "show-advanced" : ""
           }`}
         >
+        <div
+          className={`buscador-item buscador-fav ${
+            showAdvancedSearch ? "show-advanced" : ""
+          }`}>
           <label>Gratuito</label>
           <input
             type="checkbox"
@@ -255,6 +259,7 @@ console.log(eventosToShow,data);
             checked={freeEvent}
             onChange={(e) => setFreeEvent(e.target.checked)}
           />
+          </div>
           <div
           className={`buscador-item buscador-fav  ${
             showAdvancedSearch ? "show-advanced" : ""

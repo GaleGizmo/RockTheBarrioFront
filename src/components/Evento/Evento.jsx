@@ -83,6 +83,37 @@ const Evento = ({ evento, user }) => {
           <h2>{evento.artist}</h2>
         </div>
         <div className="detalles_container">
+          
+          {evento.site && evento.site !== "Varios" ? (
+            <p className="detalles-site">
+              {evento.site.split(",")[0]}{" "}
+              <MapIcon showMap={showMap} onClick={handleToggleMap} />
+            </p>
+          ) : (
+            <p>{evento.site.split(",")[0]}</p>
+          )}
+
+          {fechaStart && (
+            <div>
+              {esHoy(evento.date_start) ? (
+                <p className="gratuito hoy">HOXE</p>
+              ) : (
+                <div className="muestra-fecha">
+                  <p>{fechaStart}h</p>
+                </div>
+              )}
+            </div>
+          )}
+          <p className="dias-faltantes">
+            {esAnterior(evento.date_start) ? "Fai" : "Dentro de"}{" "}
+            <span className="gratuito">{diasFaltantes} </span>
+          </p>
+          {evento.genre && <p className="evento-genre">{evento.genre}</p>}
+          {evento.price == 0 ? (
+            <p className="gratuito">GRATUITO</p>
+          ) : (
+            evento.price && <p>{evento.price} €</p>
+          )}
           <div className="icon-container">
             
             {user && (
@@ -120,36 +151,6 @@ const Evento = ({ evento, user }) => {
               <Favorito evento={evento._id} favoriteStatus={isFavorite} />
             )}
           </div>
-          {evento.site && evento.site !== "Varios" ? (
-            <p className="detalles-site">
-              {evento.site.split(",")[0]}{" "}
-              <MapIcon showMap={showMap} onClick={handleToggleMap} />
-            </p>
-          ) : (
-            <p>{evento.site.split(",")[0]}</p>
-          )}
-
-          {fechaStart && (
-            <div>
-              {esHoy(evento.date_start) ? (
-                <p className="gratuito hoy">HOXE</p>
-              ) : (
-                <div className="muestra-fecha">
-                  <p>{fechaStart}h</p>
-                </div>
-              )}
-            </div>
-          )}
-          <p className="dias-faltantes">
-            {esAnterior(evento.date_start) ? "Fai" : "Dentro de"}{" "}
-            <span className="gratuito">{diasFaltantes} </span>
-          </p>
-          {evento.genre && <p className="evento-genre">{evento.genre}</p>}
-          {evento.price == 0 ? (
-            <p className="gratuito">GRATUITO</p>
-          ) : (
-            evento.price && <p>{evento.price} €</p>
-          )}
         </div>
       </div>
       {showMap && <MapComponent direccion={evento.site} />}

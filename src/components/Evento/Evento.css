@@ -149,9 +149,10 @@
   align-items: start;
 }
 .icon-container {
-  position: absolute;
-  bottom: 0;
-  right: 0;
+  position: relative;
+  margin-top: auto;
+  /* bottom: 0;
+  right: 0; */
   display: flex;
   justify-content: space-between;
   width: 50px;
@@ -208,7 +209,7 @@
 }
 .detalles_container {
   position: relative;
-  flex-basis: 32%;
+  flex-basis: 35%;
   flex-grow: 1;
   max-height: 200px;
   width: 100%;
@@ -342,14 +343,16 @@
   .card h2 {
     text-align: center;
     margin-left: 2%;
+    font-size: 1.2rem;
   }
   .card p {
+    font-size: 1rem;
     margin-left: 2%;
     width: max-content;
   }
   .card h1 {
     margin-left: 2%;
-    font-size: 40px;
+    font-size: 1.4rem;
     width: 100%;
     text-align: center;
   }
@@ -385,7 +388,7 @@
   }
 
   .card p {
-    font-size: 1rem;
+    font-size: .85rem;
     text-align: right;
   }
 }
