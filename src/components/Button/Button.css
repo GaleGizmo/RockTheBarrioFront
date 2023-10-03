@@ -36,6 +36,7 @@
   padding: 0 5px;
 }
 .small {
+  height: fit-content;
   width: fit-content;
   font-size: 0.8rem;
   padding-bottom: 0;

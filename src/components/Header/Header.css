@@ -32,10 +32,10 @@
 .title img{
   width: 80%;
 }
-@font-face {
+/* @font-face {
   font-family: "urban-jungle";
   src: url("./UrbanJungleDEMO.otf");
-}
+} */
 
 .title-font {
   font-family: "urban-jungle";

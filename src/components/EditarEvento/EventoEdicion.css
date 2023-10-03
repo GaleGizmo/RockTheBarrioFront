@@ -1,15 +1,17 @@
 .imagen-formulario{
     width:100px;
     height: 100px;
-    position: fixed;
-    left: 37%;
-    bottom: 9%
+    position: absolute;
+    left: 50%;
+    bottom: 7%;
+    transform: translateX(-50%);
 }
 .avatar{
     bottom: 30%
   }
   .edit__botons{
     display: flex;
+    justify-content: center;
     gap: 10px
   }
 @media (max-width: 420px){

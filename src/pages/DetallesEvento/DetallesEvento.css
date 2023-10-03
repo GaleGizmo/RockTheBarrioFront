@@ -12,7 +12,7 @@
   border: 2px solid var(--secondary-color);
   border-radius: 8px;
   box-shadow: 10px 10px 5px var(--secondary-shadow);
-  padding: 20px 0px;
+  padding: 20px 10px;
   
   text-align: center;
   width: 70%;
@@ -67,7 +67,8 @@
 .detalles_precio {
   display: flex;
   justify-content: center;
-  gap: 5px;
+ 
+  gap: 7px;
 }
 .boleto_precio {
   
@@ -80,7 +81,8 @@ img.boleto_imagen {
 .boleto_imagen {
   width: 75%;
   transition: filter 0.3s;
-  height: fit-content;
+  height: min-content;
+  padding-top: 3px;
   
 }
 .muestra-fecha h3 {

@@ -1,9 +1,9 @@
-.editarEvento{
-    padding-top: 200px;
-    width: 50%;
+/* .editarEvento{
+    
+    width: 60%;
     margin: auto;
     height: fit-content;
-}
+} */
 @media (max-width: 420px){
     .editarEvento{
        

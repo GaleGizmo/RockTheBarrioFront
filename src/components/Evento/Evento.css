@@ -18,13 +18,12 @@
   transform: translateX(-100px);
   animation: appearCard 0.5s ease-in-out forwards;
 }
-.card.soldout::before {
-  content: "E S G O T A D O";
+.status::before {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) rotate(-30deg);
-  background-color: var(--soldout-color);
+
   color: white;
   padding: 10px 20px;
   border-radius: 10px;
@@ -35,22 +34,21 @@
   overflow: hidden;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
-.card.delayed::before {
+.soldout::before {
+  content: "E S G O T A D O";
+  background-color: var(--soldout-color);
+}
+.delayed::before {
   content: "A P R A Z A D O";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotate(-30deg);
   background-color: var(--delayed-color);
-  color: white;
-  padding: 10px 20px;
-  border-radius: 10px;
-  font-size: 1.9rem;
-  white-space: nowrap;
-  font-weight: 900;
-  z-index: 1;
-  overflow: hidden;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+.cancelled::before {
+  content: "C A N C E L A D O";
+  background-color: var(--cancelled-color)
+}
+.new_date::before{
+  content: "N O V A  D A T A";
+  background-color: var(--new_date-color)
 }
 .muestra-fecha {
   margin: 0;
@@ -187,7 +185,7 @@
   display: block;
 }
 
-.detalles-site{
+.detalles-site {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -218,7 +216,6 @@
   align-items: end;
   margin-right: 1%;
 }
-
 
 .truncate {
   white-space: nowrap;
@@ -388,7 +385,7 @@
   }
 
   .card p {
-    font-size: .85rem;
+    font-size: 0.85rem;
     text-align: right;
   }
 }

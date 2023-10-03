@@ -23,10 +23,7 @@
     color: var(--terciary-color);
     cursor: pointer;
 }
-.perfil-avatar{
-    width: 40%;
-    margin: 0 auto 15px;
-}
+
 @media (min-width: 1px) and (max-width: 469.98px) {
 .perfil-container{
     padding: 10px;

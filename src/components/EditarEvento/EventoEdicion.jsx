@@ -5,10 +5,14 @@ import { editEvento } from "../../redux/eventos/eventos.actions";
 import SubirImagen from "../../components/SubirImagen/SubirImagen";
 import Button from "../Button/Button";
 import "./EventoEdicion.css";
+import { AiFillCloseSquare } from "react-icons/ai";
 
 const EventoEdicion = ({ evento, navigate }) => {
   const dispatch = useDispatch();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [selectedStatus, setSelectedStatus] = useState(
+    !evento.status ? "Ok" : evento.status
+  );
   const {
     register,
     handleSubmit,
@@ -16,7 +20,14 @@ const EventoEdicion = ({ evento, navigate }) => {
     formState: { errors },
   } = useForm();
   const [imageFile, setImageFile] = useState();
-
+  const statusOptions = [
+    { label: "Ok", value: "" },
+    { label: "Cancelado", value: "cancelled" },
+    { label: "Aplazado", value: "delayed" },
+    { label: "Nova data", value: "new_date" },
+    { label: "Esgotado", value: "soldout" },
+   
+  ];
   const handleInputChange = (e) => {
     setValue(e.target.name, e.target.value);
   };
@@ -31,7 +42,7 @@ const EventoEdicion = ({ evento, navigate }) => {
   };
 
   const handleSave = (data) => {
-    setIsSubmitting(true)
+    setIsSubmitting(true);
     const { day_start, time_start } = data;
 
     // Combinar la fecha y la hora en un objeto Date
@@ -44,15 +55,18 @@ const EventoEdicion = ({ evento, navigate }) => {
     };
 
     dispatch(editEvento(evento._id, editedEvento, navigate));
-    setIsSubmitting(false)
+    setIsSubmitting(false);
   };
 
   const handleCancel = () => {
     navigate(`/detalles-evento/${evento._id}`);
   };
-
+  const handleIcon = () => {
+    navigate(-1);
+  };
   return (
     <div className="cardCrearEvento">
+      <AiFillCloseSquare className="close-icon" onClick={handleIcon} />
       <h1>Editar Evento</h1>
       <form onSubmit={handleSubmit(handleSave)}>
         <div className="div-inputCrearEvento">
@@ -90,6 +104,17 @@ const EventoEdicion = ({ evento, navigate }) => {
             {...register("site", { required: true })}
           />
           {errors.site && <span>Sitio é requerido</span>}
+        </div>
+        <div className="infoCrearEvento">
+          <label>Contido:</label>
+          <textarea
+            className="inputCrearEvento"
+            defaultValue={evento.content}
+            onChange={handleInputChange}
+            name="content"
+            {...register("content", { required: true })}
+          ></textarea>
+          {errors.content && <span>Contido é requerido</span>}
         </div>
         <div className="div-inputCrearEvento">
           <label>Prezo:</label>
@@ -174,23 +199,40 @@ const EventoEdicion = ({ evento, navigate }) => {
             onChange={handleInputChange}
             {...register("youtubeVideoId")}
           />
-          
         </div>
-        <div className="infoCrearEvento">
-          <label>Información:</label>
-          <textarea
+        <div className="div-inputCrearEvento">
+          <label>Máis Info:</label>
+          <input
             className="inputCrearEvento"
-            defaultValue={evento.content}
+            type="text"
+            name="url"
+            defaultValue={evento.url}
             onChange={handleInputChange}
-            name="content"
-            {...register("content", { required: true })}
-          ></textarea>
-          {errors.content && <span>Contido é requerido</span>}
+            {...register("url")}
+          />
         </div>
+        <div className="div-inputCrearEvento">
+          <label>Estado:</label>
+          <select
+            className="inputCrearEvento"
+            name="status"
+            defaultValue={evento.status}
+            onChange={handleInputChange}
+            {...register("status")}
+          >
+            {statusOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </div>
+
         <div className="div-inputCrearEvento">
           <label>Imaxe:</label>
           <SubirImagen
             register={register}
+            evento={true}
             funcion={(e) =>
               setImageFile(URL.createObjectURL(e.target.files[0]))
             }

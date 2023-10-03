@@ -6,6 +6,7 @@ import "./FormularioCrearEvento.css";
 import { useNavigate } from "react-router-dom";
 import SubirImagen from "../../components/SubirImagen/SubirImagen";
 import Button from "../Button/Button";
+import { AiFillCloseSquare } from "react-icons/ai";
 
 const FormularioCrearEvento = () => {
   const { user } = useSelector((state) => state.usuariosReducer);
@@ -62,9 +63,13 @@ const FormularioCrearEvento = () => {
   } = useForm();
   const dispatch = useDispatch();
   const [imageFile, setImageFile] = useState();
+  const handleIcon = () => {
+    navigate(-1);
+  };
 
   return (
     <div className="cardCrearEvento">
+     <AiFillCloseSquare className="close-icon" onClick={handleIcon} />
       <h1>Crear Evento</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="div-inputCrearEvento">

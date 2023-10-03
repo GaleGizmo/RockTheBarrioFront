@@ -103,14 +103,14 @@ const DetallesEvento = () => {
       ) : (
         <>
           <div className="detalles-container">
-            <div className="divCardDetEv">
+          <div className={`divCardDetEv `}>
               <div className="cardDetEv">
                 <AiFillCloseSquare className="close-icon" onClick={goHome} />
                 <h1 className={isLongTitle ? "long-title" : ""}>
                   {evento.title}
                 </h1>
                 {evento.youtubeVideoId ? (
-                  <div className="youtube-video-container">
+                  <div className={`youtube-video-container ${evento.status ? "status " + evento.status : ""}`}>
                     <iframe
                       width="560"
                       height="315"
@@ -122,7 +122,7 @@ const DetallesEvento = () => {
                     ></iframe>
                   </div>
                 ) : evento.image ? (
-                  <img src={evento.image} alt={evento.title} />
+                  <img className={`${evento.status ? evento.status : ""}`} src={evento.image} alt={evento.title} />
                 ) : (
                   <img
                     src="https://metropoliabierta.elespanol.com/uploads/s1/36/81/72/audience-band-celebration-1190298_9_1200x480.jpeg"

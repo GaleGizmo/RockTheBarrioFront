@@ -46,7 +46,9 @@ const createFormData = (eventoData) => {
   if (eventoData.youtubeVideoId) {
     formData.append("youtubeVideoId", eventoData.youtubeVideoId);
   }
-
+  if(eventoData.status) {
+    formData.append("status", eventoData.status);
+  }
   formData.append("buy_ticket", eventoData.buy_ticket);
   formData.append("genre", eventoData.genre);
   formData.append("content", eventoData.content);

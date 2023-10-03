@@ -32,6 +32,31 @@
     margin-top: 0;
     margin-bottom: 0.5rem;
   }
+  .scroll-up{
+    background-color: var(--hover-color);
+    color: var(--event-color);
+    font-weight: 600;
+    font-size: 3rem;
+    position: fixed;
+    bottom: 50px;
+    right: 30px;
+    border: 1px solid var(--secondary-color);
+    border-radius: 50%;
+
+  }
+  .scroll-up:hover{
+    filter: brightness(1);
+    filter: contrast(2);
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+  @media (max-width:420px) {
+    .scroll-up{
+      font-size: 2rem;
+      bottom: 30px;
+      right: 10px;
+    }
+  }
   @media (max-width:1015px) {
     .header-listado{
         display: none;

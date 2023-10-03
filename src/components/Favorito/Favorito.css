@@ -34,9 +34,9 @@
   transform: scale(2);
 }
 .favorito-detalle {
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   margin-left: 10px;
-  transform: scale(1.5);
+  transform: scale(1.1);
 }
 .favorito__yes {
   color: red;
