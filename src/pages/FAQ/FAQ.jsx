@@ -10,11 +10,13 @@ import {
 import React from "react";
 import "./FAQ.css";
 import { FaRegCalendarAlt } from "react-icons/fa";
+import { BiCalendarAlt } from "react-icons/bi";
+import { BsInfo, BsInfoCircleFill } from "react-icons/bs";
 
 const faqData = [
   {
-    title: "Que vexo ao entrar na web?",
-    content: `A páxina principal amosa un listado de eventos ordeados cronolóxicamente. Hai un buscador á esquerda e un calendario á dereita. En móbiles tanto o calendario (oculto por defecto) coma o buscador están baixo a cabeceira. O calendario amósase clicando no icono correspondente. `,
+    title: "Que estou vendo ao entrar na web?",
+    content: `A páxina principal amosa un listado de eventos ordeados cronolóxicamente. Hai un buscador á esquerda e un calendario á dereita. En móbiles tanto o calendario (oculto por defecto) coma o buscador están baixo a cabeceira e o calendario amósase clicando neste icono: `,
   },
   {
     title: "Que información hai de cada evento?",
@@ -22,9 +24,9 @@ const faqData = [
       "Na páxina principal amósase para cada evento: nome do evento, artista(s), lugar, data, xénero musical, prezo (se procede) e número de comentarios dos usuarios.",
   },
   {
-    title: "Para que é o icono de Info?",
+    title: "Para que é o icono de Info?  ",
     content:
-      "Clicando nel accédese á páxina detallada de cada evento onde, ademáis dos datos amosadoos no listado de eventos, temos: descripción (máis ou menos detallada) do evento, video de YouTube cun tema do artista, enlace á web de compra de entradas e botón de '+Info' que leva a unha url externa con máis datos do artista ou do evento. Aquí están tamén os comentarios dos usuarios sobor do evento.",
+      "Clicando neste icono accédese á páxina detallada de cada evento onde, ademáis dos datos amosados na páxina principal, temos: descripción (máis ou menos detallada) do evento, video de YouTube cun tema do artista, enlace á web de compra de entradas e botón de '+Info' que leva a unha url externa con máis datos do artista ou do evento. Aquí podense ver tamén os comentarios dos usuarios sobor do evento.",
   },
   {
     title: "Podo ver información de eventos xa pasados?",
@@ -39,25 +41,27 @@ const faqData = [
   {
     title: "Como funciona o buscador?",
     content:
-      "Por defecto, a palabra ou palabras que se introduzan búscanse nos campos principais dun evento (nome do evento, artista, lugar e  xénero). Para axilizar a búsqueda é aconsellable marcar o campo concreto no que se quere buscar. Ademáis, pódese restrinxir a búsqueda só a eventos gratuitos, que tiveran lugar nunhas datas concretas, ou os que o usuario teña engadidos a favoritos. Os resultados da búsqueda, salvo que se marque a casiña 'Inclue eventos pasados', devolverán os eventos a partires da data actual. ",
+      "Por defecto, a palabra ou palabras que se introduzan búscanse en todos os campos principais dun evento (nome do evento, artista, lugar e  xénero). Para axilizar a búsqueda é aconsellabel marcar o campo concreto no que se quere buscar. Ademáis, pódese restrinxir a búsqueda só a eventos gratuitos, que tiveran lugar nunhas datas concretas, ou os que o usuario teña engadidos a favoritos. O resultado da búsqueda, salvo que se marque a casiña 'Inclue eventos pasados', devolverá só os eventos a partires da data actual. ",
   },
   {
     title: "Como volto á lista de eventos por defecto?",
     content:
       "Os resultados da búsqueda permañecen en pantalla ata que se clica o botón 'Limpar' do buscador. Clicando no logo da web que está na parte superior esquerda tamén se carga o listado de eventos por defecto.",
   },
-    {title: "Como engado eventos a favoritos?",
-    content: "Para engadir un evento a favoritos, hai que clicar no icono do calendario que está ao lado do icono de info de cada evento, no listado de eventos, ou no icono de calendario á dereita da información do xénero na páxina de detalles de cada evento.",
+  {
+    title: "Como engado eventos a favoritos?",
+    content:
+      "Tanto na páxina principal como na de detalles de cada evento, pódese engadir un evento a favoritos clicando neste icono: ",
   },
   {
     title: "Non vexo os iconos que dis para engadir a favoritos",
     content:
-      "Para poder engadir un evento a favoritos debes rexistrarte antes na web.",
+      "Para poder engadir un evento a favoritos debes rexistrarte antes na web. Unha vez logueado xa poderás ver o icono para engadir un evento a favoritos, e máis facer búsquedas que incluan só eventos favoritos. ",
   },
   {
     title: "Que vantaxes ten rexistrarse?",
     content:
-      "Ainda que a información dos eventos está dispoñible para calquera que visite a web, os usuarios rexistrados teñen acceso a: notificación de eventos via email, engadir comentarios e valoracións aos eventos, e engadir eventos a favoritos.",
+      "Ainda que a información dos eventos está dispoñibel para calquera que visite a web, os usuarios rexistrados teñen acceso a: notificación de eventos via email, engadir comentarios e valoracións aos eventos, e engadir eventos a favoritos.",
   },
   {
     title: "Cantas notificacións me vas mandar? Non máis spam, por favor!",
@@ -67,7 +71,7 @@ const faqData = [
   {
     title: "Pois marco as notificacións semanais, con iso chega, non?",
     content:
-      "En xeral si. Mais dado que algúns locais avisan dos eventos con poucos días de antelación, pode pasar que se engadan eventos durante a semana que non estaban incluidos no email semanal. A solución sería marcar tamén as notificacións puntuais, ou visitar a nosa web regularmente. ",
+      "En xeral si. Mais dado que algúns locais avisan dos eventos con poucos días de antelación, pode pasar que se engadan eventos durante a semana que non estaban incluidos no email semanal. A solución sería marcar tamén as notificacións puntuais, ou visitar a web regularmente. ",
   },
   {
     title: "E para que vale engadir eventos a favoritos?",
@@ -78,8 +82,7 @@ const faqData = [
     title: "Como podo cambiar os datos da miña conta?",
     content:
       "Facendo clic no teu nome de usuario ou no teu avatar, abriras a páxina do teu perfil. Nela hai un botón de 'Editar datos' que che permitirá cambiar o teu nome de usuario, o email co que te rexistraches, o teu avatar, e as túas preferencias de notificacións. ",
-  }
-
+  },
 ];
 const FAQ = () => {
   return (
@@ -91,10 +94,15 @@ const FAQ = () => {
             {faqData.map((comentario, index) => (
               <AccordionItem key={index} value={index.toString()}>
                 <AccordionHeader>
-                  <div className="faq-titulo">{comentario.title}</div>
+                  <div className="faq-titulo">{comentario.title} 
+                  {index==2 && <span className="faq-infoContainer" > <BsInfoCircleFill className="faq-infoIcon"/><BsInfo className="faq-infoInner" /> </span>}</div>
                 </AccordionHeader>
                 <AccordionPanel>
-                  {comentario.content && <p className="faq-contenido">{comentario.content}</p>}
+                  {comentario.content && (
+                    <p className="faq-contenido">{comentario.content}
+                    {index==0 && <FaRegCalendarAlt/>}
+                    {index==7 && (<span className="faq-favIcon"><BiCalendarAlt/></span>)}</p>
+                  )}
                 </AccordionPanel>
               </AccordionItem>
             ))}

@@ -9,6 +9,7 @@
   background-color: var(--event-color);
   font-weight: 600;
   font-size: 0.9rem;
+  box-shadow: 5px 5px 4px var(--secondary-shadow);
 }
 .buscador-avanzada {
   display: none;

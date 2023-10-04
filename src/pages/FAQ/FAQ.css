@@ -5,7 +5,7 @@
   margin-top: 80px;
   margin-left: 25%;
   margin-right: 25%;
-  background-image: linear-gradient(to bottom, rgb(237 132 57), #fff);
+  background-image: linear-gradient(to bottom, var(--primary-color), var(--hover-color));
 }
 .cardFaq-container h1 {
   margin: 0 auto 20px auto;
@@ -14,9 +14,9 @@
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
-  align-items: left;
+  
 
-  padding: 20px 10px 40px 5%;
+  padding: 20px 5% 40px 5%;
   margin-bottom: 20px;
 
   box-sizing: content-box;
@@ -24,6 +24,8 @@
 .faq-titulo{
     font-size: 1.2rem;
     font-weight: 700;
+    display: flex;
+    align-items: center;
 }
 .faq-contenido{
     font-weight: 600;
@@ -33,6 +35,26 @@
     border: 1px solid var(--secondary-shadow);
     box-shadow:  3px 3px 3px rgba(0, 0, 0, 0.5), inset 0px 0 3px rgba(0, 0, 0, 0.5); /* Sombra interna */
 }
+.faq-infoContainer{
+    position: relative;
+}
+.faq-infoInner{
+    position: absolute;
+    color: white;
+    left: 4px;
+    bottom: 1px;
+    font-size: 1.3rem;
+}
+.faq-favIcon{
+    color: var(--icon-color);
+}
+.faq-infoIcon{
+        color: var(--icon-color);
+        font-size: 1.3rem;
+        margin-left: 4px;
+        align-self: center;
+}
+
 @media (max-width:420px){
     .cardFaq-container {
         margin: 80px auto 20px auto;
@@ -41,6 +63,9 @@
 .faq-titulo{
     font-size: 1rem;
     font-weight: 700;
+}
+.faq-infoInner{
+    bottom: 0
 }
 
 }

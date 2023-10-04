@@ -101,16 +101,7 @@
   object-fit: cover;
 }
 
-/* .card a {
-  text-decoration: none;
-  color: black;
-}
 
-.card a:hover {
-  text-decoration: none;
-  color: var(--hover-color)
-  
-} */
 
 .card a:visited {
   text-decoration: none;
@@ -132,10 +123,7 @@
   border: solid;
   border-radius: 8px;
 }
-/* .div-image:hover{
-  border-color: var(--hover-color);
-  box-shadow: 0 0 5px 2px var(--terciary-color);
-} */
+
 
 .title-artist_container {
   flex-basis: 40%;
@@ -149,10 +137,9 @@
 .icon-container {
   position: relative;
   margin-top: auto;
-  /* bottom: 0;
-  right: 0; */
   display: flex;
-  justify-content: space-between;
+  gap: 15px;
+  justify-content: flex-end;
   width: 50px;
 }
 .mas-info {
@@ -277,7 +264,7 @@
     align-self: center;
   }
   .card p {
-    /* margin-right: 2%; */
+   
     margin-left: 2%;
     width: max-content;
   }
@@ -355,30 +342,7 @@
   }
 }
 
-/* Pantallas grandes
-@media (min-width: 769px) and (max-width: 992px) {
-  .card h1{
-    margin-left: 2%;
-    font-size: 40px;
-    width: 100%;
-    text-align: center;
-  }
-  .detalles_container {
 
-    margin-top: 1%;
-  }
-  .card h2{
-    text-align: start;
-    margin-left: 2%;
-  }
-
-  .card p {
-    font-size: 18px;
-    text-align: left;
-  }
-} */
-
-/* Pantallas extra grandes */
 @media (min-width: 1015px) {
   .card h1 {
     font-size: 1.7rem;

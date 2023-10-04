@@ -48,7 +48,7 @@ height: 1.3em;
 }
 .react-calendar {
   font-family: inherit;
-  border-radius: 0.25rem;
+  border-radius: 8px;
   border-color: var(--secondary-color);
   border-width: 2px;
   box-shadow: 5px 5px 4px var(--secondary-shadow);

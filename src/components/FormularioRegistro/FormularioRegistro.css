@@ -34,13 +34,15 @@
 }
 .dropzone-container {
   cursor: pointer;
+  margin-left: 20%;
+  margin-right: 20%;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
   border: 2px dashed #eeeeee;
   border-radius: 2px;
-  width: 100%;
+  /* width: 100%; */
   background-color: #fafafa;
   color: #bdbdbd;
   outline: none;
@@ -76,12 +78,10 @@
     border-radius: 8px;
     box-shadow: 10px 10px 5px var(--secondary-shadow);
     padding: 20px;
-    margin-bottom: 20px;
+    margin: 80px auto 20px auto;
     text-align: center;
     width: 50%;
 
-    margin-left: auto;
-    margin-right: auto;
     background-image: linear-gradient(to bottom, rgb(237 132 57), #fff);
 
     box-sizing: content-box;
@@ -106,7 +106,7 @@
     }
   }
   .inputReg {
-    width: 90%;
+    width: 60%;
     height: 100%;
     border-radius: 10px;
     font-size: large;
@@ -168,7 +168,7 @@
 
     margin-left: auto;
     margin-right: auto;
-    background-image: linear-gradient(to bottom, rgb(237 132 57), #fff);
+    background-image: linear-gradient(to bottom, var(--primary-color), var(--hover-color));
   }
   .isEdit {
     width: 90%;
@@ -231,5 +231,9 @@
   }
   .botones-edicion-usuario {
     padding-top: 20px;
+  }
+  .dropzone-container{
+    margin: 10px 0 0 0;
+    
   }
 }
