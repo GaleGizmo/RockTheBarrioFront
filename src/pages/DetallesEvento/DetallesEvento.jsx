@@ -103,14 +103,14 @@ const DetallesEvento = () => {
       ) : (
         <>
           <div className="detalles-container">
-          <div className={`divCardDetEv `}>
+          <div className={`divCardDetEv  ${evento.status ? "status " + evento.status : ""}`}>
               <div className="cardDetEv">
                 <AiFillCloseSquare className="close-icon" onClick={goHome} />
                 <h1 className={isLongTitle ? "long-title" : ""}>
                   {evento.title}
                 </h1>
                 {evento.youtubeVideoId ? (
-                  <div className={`youtube-video-container ${evento.status ? "status " + evento.status : ""}`}>
+                  <div className={`youtube-video-container`}>
                     <iframe
                       width="560"
                       height="315"

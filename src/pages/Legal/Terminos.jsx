@@ -14,37 +14,37 @@ const navigate = useNavigate()
      <AiFillCloseSquare className="close-icon" onClick={handleIcon}/>
       <h1>TERMOS E CONDICIONS</h1>
       <h3>
-        Ao se rexistrar neste sitio web, vostede acepta os seguintes termos e
+        Ao te rexistrar neste sitio web, aceptas os seguintes termos e
         condicións:
       </h3>
       <ul>
         <li>
-          Vostede é responsable de manter a confidencialidade do seu nome de
-          usuario e contrasinal e é responsable de todas as actividades que
-          ocorren baixo a súa conta.
+          Es ti mesmo o responsable de manter a confidencialidade do teu nome de
+          usuario e contrasinal e es responsable de todas as actividades que
+          ocorren baixo a túa conta.
         </li>
         <li>
-          Vostede non utilizará este sitio web para ningún propósito ilegal ou
+          Non utilizarás este sitio web para ningún propósito ilegal ou
           non autorizado.
         </li>
         <li>
-          Vostede non distribuirá ningún material que sexa danoso, ofensivo,
+          Non distribuirás ningún material que sexa danoso, ofensivo,
           discriminatorio ou difamatorio.
         </li>
         <li>
-          Vostede non utilizará este sitio web para recopilar ou almacenar
+          Non utilizarás este sitio web para recopilar ou almacenar
           información persoal sobre outros usuarios sen o seu consentimento.
         </li>
         <li>
-          Reservámonos o dereito de rescindir o seu acceso a este sitio web en
+          Reservámonos o dereito de rescindir o teu acceso a este sitio web en
           calquera momento sen previo aviso.
         </li>
       </ul>
       <h3>Aceptación de termos e condicións</h3>
       <p>
-        Ao se rexistrar neste sitio web, vostede acepta os termos e condicións
-        anteriores. Se non está de acordo con estes termos e condicións, non
-        debe rexistrarse neste sitio web.
+        Ao te rexistrar neste sitio web, aceptas os termos e condicións
+        anteriores. Se non estás de acordo con estes termos e condicións, non te
+        debes rexistrar neste sitio web.
       </p>
     </div>
   );

@@ -72,7 +72,11 @@
     transform: translateX(0);
   }
 }
-
+.card-comments{
+  font-weight: bold;
+  color: var(--link-color);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
 .card h1 {
   font-size: 40px;
   font-weight: bold;
@@ -103,7 +107,7 @@
 
 
 
-.card a:visited {
+.card a {
   text-decoration: none;
 }
 
@@ -347,7 +351,9 @@
   .card h1 {
     font-size: 1.7rem;
   }
-
+.status::before{
+  font-size: 3em;
+}
   .card p {
     font-size: 0.85rem;
     text-align: right;
