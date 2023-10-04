@@ -1,14 +1,10 @@
-/* img{
-    width: 50%;
-    height: 50%;
-    
-} */
+
 
 .eventos-list{
     display: grid;
     grid-template-columns: 300px minmax(auto, 1270px) minmax(300px, 20%);
     padding: 30px 0;
-    /* width: 100%; */
+    
     margin: auto;
     
 }
