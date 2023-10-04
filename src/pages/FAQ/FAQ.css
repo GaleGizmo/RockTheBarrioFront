@@ -1,0 +1,46 @@
+.cardFaq-container {
+  border: 2px solid var(--secondary-color);
+  border-radius: 8px;
+  box-shadow: 10px 10px 5px var(--secondary-shadow);
+  margin-top: 80px;
+  margin-left: 25%;
+  margin-right: 25%;
+  background-image: linear-gradient(to bottom, rgb(237 132 57), #fff);
+}
+.cardFaq-container h1 {
+  margin: 0 auto 20px auto;
+}
+.cardFaq {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: left;
+
+  padding: 20px 10px 40px 5%;
+  margin-bottom: 20px;
+
+  box-sizing: content-box;
+}
+.faq-titulo{
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+.faq-contenido{
+    font-weight: 600;
+    background-color: var(--hover-color);
+    border-radius: 10px;
+    padding: 10px 20px;
+    border: 1px solid var(--secondary-shadow);
+    box-shadow:  3px 3px 3px rgba(0, 0, 0, 0.5), inset 0px 0 3px rgba(0, 0, 0, 0.5); /* Sombra interna */
+}
+@media (max-width:420px){
+    .cardFaq-container {
+        margin: 80px auto 20px auto;
+        width:90%
+}
+.faq-titulo{
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+}

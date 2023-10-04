@@ -51,7 +51,7 @@
 .favorito-detalle:hover {
   filter: brightness(2);
   filter: contrast(2);
-  transform: scale(1.7);
+  transform: scale(1.2);
 }
 @media (max-width: 420px) {
   .add-favorito {

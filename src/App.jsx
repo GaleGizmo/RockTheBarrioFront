@@ -21,6 +21,7 @@ import ConfirmarEmail from "./pages/ConfirmarEmail/ConfirmarEmail";
 
 import CambiarPassword from "./pages/CambiarPassword/CambiarPassword";
 import Contacto from "./pages/Contacto/Contacto";
+import FAQ from "./pages/FAQ/FAQ";
 
 function App() {
   const { user } = useSelector((state) => state.usuariosReducer);
@@ -42,10 +43,11 @@ function App() {
             <Route path="/contacto" element={<Contacto/>}/>
             <Route path="/terminos" element={<Terminos />} />
             <Route path="/privacidad" element={<Privacidad />} />
+            <Route path="/faq" element={<FAQ/>}/>
             <Route path="/recuperar-password" element={<ConfirmarEmail />} />
             <Route
               path="/reset-password/:token"
-              element={<CambiarPassword />}
+              element={ <CambiarPassword />}
             
             />
             <Route path="/:id" element={<DetallesEvento />} />

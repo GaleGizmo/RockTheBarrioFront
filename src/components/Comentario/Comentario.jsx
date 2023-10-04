@@ -20,7 +20,7 @@ import { DeleteTwoTone } from "@ant-design/icons";
 
 const Comentario = ({ comentario }) => {
   const dispatch = useDispatch();
-
+console.log(comentario);
   const { user } = useSelector((state) => state.usuariosReducer);
   const [editMode, setEditMode] = useState(false);
   const [editedTitle, setEditedTitle] = useState(comentario.title);

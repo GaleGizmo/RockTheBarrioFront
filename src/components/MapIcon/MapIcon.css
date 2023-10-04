@@ -1,8 +1,11 @@
 .map-icon{
   
-  padding-bottom: 3px;
+  
   color: var(--icon-color);
   filter: drop-shadow(2px 2px 2px var(--secondary-shadow));
+}
+h3 .map-icon{
+  padding-bottom: 3px;
 }
 .map-icon__active{
   color: var(--hover-color)
@@ -13,7 +16,7 @@
 .map-icon:hover{
   filter: brightness(2);
   filter: contrast(2);
-  transform: scale(1.4);
+  transform: scale(1.2);
     cursor:pointer;
     
     

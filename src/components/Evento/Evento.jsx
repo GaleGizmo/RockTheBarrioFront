@@ -113,6 +113,9 @@ const Evento = ({ evento, user }) => {
           ) : (
             evento.price && <p>{evento.price} €</p>
           )}
+          {evento.commentsCount && evento.commentsCount>1 ? (<p className="gratuito">Hai {evento.commentsCount} comentarios</p>):(
+            evento.commentsCount===1 ? (<p className="gratuito">Hai un comentario</p>):(<p>Non hai comentarios</p>)
+          )}
           <div className="icon-container">
             
             {user && (

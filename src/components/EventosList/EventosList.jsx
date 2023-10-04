@@ -33,6 +33,7 @@ const EventosList = () => {
     _id: evento._id,
     title: evento.title,
     date_start: evento.date_start,
+    commentsCount: evento.commentsCount,
   }));
   useEffect(() => {
     dispatch(getAllEventos());

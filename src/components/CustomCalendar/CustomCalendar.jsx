@@ -34,8 +34,12 @@ function CustomCalendar({ eventos }) {
 
   const tileContent = ({ date }) => {
     const currentDate = date.toDateString();
-    if (eventDates.has(currentDate)) {
-      return <span>•</span>;
+    const eventsForDate = eventos.filter(
+      (evento) => new Date(evento.date_start).toDateString() === currentDate
+    );
+  
+    if (eventsForDate.length > 1) {
+      return <span>+</span>;
     } else {
       return null;
     }

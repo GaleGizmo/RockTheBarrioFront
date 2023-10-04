@@ -6,7 +6,7 @@
 .comentarios-container {
     max-height: 70vh;
     overflow-y: scroll;
-    width: max-content;
+    width: 300px;
     top: 20vh;
     left: auto;
     right: auto;
@@ -90,6 +90,7 @@ margin-top: 5%;
     .comentarios-container{
         position: relative;
         top: 0;
+        width: 200px;
     }
     h2.texto-aviso  {
         font-size: 3.5vw;
