@@ -319,10 +319,11 @@
   .mas-info {
     left: 35px;
   }
+  .data-label_container{
+    left: 13px;
+  }
 }
-.data-label_container{
-  left: 13px;
-}
+
 
 @media (min-width: 420px) and (max-width: 1014px) {
   .card {
@@ -348,7 +349,7 @@
   .border-card {
     flex-direction: column;
     height: auto;
-    margin-right: 4%;
+    /* margin-right: 4%; */
   }
 
   .div-image {
