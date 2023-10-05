@@ -4,7 +4,7 @@ import { BiCalendarHeart, BiCalendarAlt } from "react-icons/bi";
 import { Link } from "react-router-dom";
 
 import { esAnterior, esHoy } from "../../shared/formatDate";
-import { format, formatDistanceToNow, parseISO } from "date-fns";
+import { format, formatDistanceToNow, parse, parseISO } from "date-fns";
 import { gl } from "date-fns/locale";
 import MapIcon from "../MapIcon/MapIcon";
 import Favorito from "../Favorito/Favorito";
@@ -44,18 +44,26 @@ const Evento = ({ evento, user }) => {
     locale: gl,
   });
   const fechaStart = evento.date_start
-    ? format(fechaEvento, "EEE, dd MMM, yyyy, HH:mm", {
+    ? format(fechaEvento, "EEE, dd, MMM ", {
         locale: gl,
       })
     : null;
-  // const fechaEnd = evento.date_end
-  //   ? format(parseISO(evento.date_end), "EEE, dd MMM, yyyy, HH:mm", {
-  //       locale: gl,
-  //     })
-  //   : null;
-
+  const horaStart = evento.date_start ? format(fechaEvento, "HH:mm") : null;
+  console.log(fechaStart);
   return (
     <div className={`card ${evento.status ? "status " + evento.status : ""}`}>
+     {esHoy(evento.date_start) ? ( <div className="data-label_container esHoy">
+        
+          <div className="data-label_esHoy">HOXE</div></div>
+        ) : (
+          <div className="data-label_container">
+           
+            <div className="data-label_weekday">{fechaStart.split(",")[0]}</div>
+            <div className="data-label_day">{fechaStart.split(",")[1]}</div>
+            <div className="data-label_month">{fechaStart.split(",")[2]}</div>
+            </div>
+        )}
+      
       <div className="border-card">
         <div className="div-image">
           {evento.image ? (
@@ -82,7 +90,6 @@ const Evento = ({ evento, user }) => {
           <h2>{evento.artist}</h2>
         </div>
         <div className="detalles_container">
-          
           {evento.site && evento.site !== "Varios" ? (
             <p className="detalles-site">
               {evento.site.split(",")[0]}{" "}
@@ -92,15 +99,9 @@ const Evento = ({ evento, user }) => {
             <p>{evento.site.split(",")[0]}</p>
           )}
 
-          {fechaStart && (
+          {horaStart && (
             <div>
-              {esHoy(evento.date_start) ? (
-                <p className="gratuito hoy">HOXE</p>
-              ) : (
-                <div className="muestra-fecha">
-                  <p>{fechaStart}h</p>
-                </div>
-              )}
+              <p>{horaStart}h</p>
             </div>
           )}
           <p className="dias-faltantes">
@@ -113,11 +114,22 @@ const Evento = ({ evento, user }) => {
           ) : (
             evento.price && <p>{evento.price} €</p>
           )}
-          {evento.commentsCount && evento.commentsCount>1 ? ( <Link to={{ pathname: `/${evento._id}` }}><p className="card-comments" onClick={getEvento}>Hai {evento.commentsCount} comentarios</p></Link>):(
-            evento.commentsCount===1 ? (<Link to={{ pathname: `/${evento._id}` }}><p className="card-comments" onClick={getEvento}>Hai un comentario</p></Link>):(<p>Non hai comentarios</p>)
+          {evento.commentsCount && evento.commentsCount > 1 ? (
+            <Link to={{ pathname: `/${evento._id}` }}>
+              <p className="card-comments" onClick={getEvento}>
+                Hai {evento.commentsCount} comentarios
+              </p>
+            </Link>
+          ) : evento.commentsCount === 1 ? (
+            <Link to={{ pathname: `/${evento._id}` }}>
+              <p className="card-comments" onClick={getEvento}>
+                Hai un comentario
+              </p>
+            </Link>
+          ) : (
+            <p>Non hai comentarios</p>
           )}
           <div className="icon-container">
-            
             {user && (
               <div
                 className="favorito-container"
