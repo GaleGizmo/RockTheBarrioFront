@@ -1,16 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { forgotPassword, unsubscribeEmail } from "../../redux/usuarios/usuarios.actions";
+import { clearError, forgotPassword, unsubscribeEmail } from "../../redux/usuarios/usuarios.actions";
 import Button from "../../components/Button/Button";
 import "./ConfirmarEmail.css";
 import { useNavigate } from "react-router-dom";
 import { AiFillCloseSquare } from "react-icons/ai";
 
 const ConfirmarEmail = ({ token }) => {
- 
-  const navigate = useNavigate();
   const dispatch = useDispatch();
+  useEffect(() => {
+    
+    dispatch(clearError());
+  }, []);
+  const navigate = useNavigate();
+
   const { register, handleSubmit } = useForm();
   const { user } = useSelector((reducer) => reducer.usuariosReducer);
   const { error, successMessage } = useSelector(
@@ -19,8 +23,15 @@ const ConfirmarEmail = ({ token }) => {
 
   const handleSendEmail = async (data) => {
     if (token.includes("unsubscribe")) {
-      
-      dispatch(unsubscribeEmail(data.email, token, user._id, navigate));
+      try {
+        await dispatch(unsubscribeEmail(data.email, token, user._id));
+        // Agregar una pausa de 2 segundos (2000 milisegundos)
+        setTimeout(() => {
+          navigate("/"); 
+        }, 2000);
+      } catch (error) {
+        console.error("error en el email", error)
+      }
     } else dispatch(forgotPassword(data.email));
   };
   const handleIcon = () => {

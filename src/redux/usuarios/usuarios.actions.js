@@ -20,7 +20,7 @@ const setUserData = (resultado, navigate) =>{
 
 const login = (datos, navigate) => async () => {
   dispatch({ type: "LOADING_USUARIOS_LOGIN" });
-  
+  dispatch({ type: "CLEAR_ERROR" })
   try {
     const resultado = await API.post("/usuario/login", datos);
     setUserData(resultado, navigate);
@@ -31,7 +31,7 @@ const login = (datos, navigate) => async () => {
         contenido: error.response.data.message,
       });
     } else {
-      dispatch({ type: "ERROR_USUARIO", contenido: "Error desconocido" });
+      dispatch({ type: "ERROR_USUARIO", contenido: "Error descoñecido" });
     }
   }
 };
@@ -71,6 +71,7 @@ const checkSesion = () => () => {
 };
 
 const registerUser = (datos, navigate) => async () => {
+  dispatch({ type: "CLEAR_ERROR" })
   try {
    
 
@@ -84,11 +85,12 @@ const registerUser = (datos, navigate) => async () => {
         contenido: error.response.data.message,
       });
     } else {
-      dispatch({ type: "ERROR_USUARIO", contenido: "Error desconocido" });
+      dispatch({ type: "ERROR_USUARIO", contenido: "Error descoñecido" });
     }
   }
 };
 const updateUser = (datos, userId, navigate) => async (dispatch) => {
+  dispatch({ type: "CLEAR_ERROR" })
   try {
     
 
@@ -105,12 +107,13 @@ const updateUser = (datos, userId, navigate) => async (dispatch) => {
         contenido: error.response.data.message,
       });
     } else {
-      dispatch({ type: "ERROR_USUARIO", contenido: "Error desconocido" });
+      dispatch({ type: "ERROR_USUARIO", contenido: "Error descoñecido" });
     }
   }
 };
 
 const deleteUser = (userId, navigate) => async () => {
+  dispatch({ type: "CLEAR_ERROR" })
   try {
     
     await API.delete(`/usuario/${userId}`, getToken());
@@ -125,18 +128,19 @@ const deleteUser = (userId, navigate) => async () => {
         contenido: error.response.data.message,
       });
     } else {
-      dispatch({ type: "ERROR_USUARIO", contenido: "Error desconocido" });
+      dispatch({ type: "ERROR_USUARIO", contenido: "Error descoñecido" });
     }
   }
 };
 const forgotPassword = (email) => async () => {
   dispatch({ type: "LOADING_USUARIOS" });
+  dispatch({ type: "CLEAR_ERROR" })
   try {
     await API.post("/usuario/recuperar-password/", { email });
     dispatch({
       type: "FORGOT_PASSWORD_SUCCESS",
       contenido:
-        "Enviouse un correo electrónico de recuperación de contrasinal",
+        "Enviouse un correo electrónico de recuperación de contrasinal.",
     });
   } catch (error) {
     if (error.response && error.response.data && error.response.data.message) {
@@ -145,12 +149,13 @@ const forgotPassword = (email) => async () => {
         contenido: error.response.data.message,
       });
     } else {
-      dispatch({ type: "ERROR_USUARIO", contenido: "Error desconocido" });
+      dispatch({ type: "ERROR_USUARIO", contenido: "Error descoñecido" });
     }
   }
 };
 const resetPassword = (token, password, navigate) => async () => {
   dispatch({ type: "LOADING_USUARIOS" });
+  dispatch({ type: "CLEAR_ERROR" })
   try {
     await API.post("/usuario/reset-password", { token, password });
     navigate("/login");
@@ -161,12 +166,13 @@ const resetPassword = (token, password, navigate) => async () => {
         contenido: error.response.data.message,
       });
     } else {
-      dispatch({ type: "ERROR_USUARIO", contenido: "Error desconocido" });
+      dispatch({ type: "ERROR_USUARIO", contenido: "Error descoñecido" });
     }
   }
 };
-const unsubscribeEmail = (email, unsubscribe, userId, navigate) => async () => {
+const unsubscribeEmail = (email, unsubscribe, userId) => async () => {
   dispatch({ type: "LOADING_USUARIOS" });
+  dispatch({ type: "CLEAR_ERROR" })
   try {
     await API.put(`/usuario/reset-password/unsubscribe/${userId}`, {
       email,
@@ -177,7 +183,7 @@ const unsubscribeEmail = (email, unsubscribe, userId, navigate) => async () => {
       contenido: "Axustes de suscripción modificados",
     });
 
-    navigate("/");
+    
   } catch (error) {
     if (error.response && error.response.data && error.response.data.message) {
       dispatch({
@@ -185,13 +191,13 @@ const unsubscribeEmail = (email, unsubscribe, userId, navigate) => async () => {
         contenido: error.response.data.message,
       });
     } else {
-      dispatch({ type: "ERROR_USUARIO", contenido: "Error desconocido" });
+      dispatch({ type: "ERROR_USUARIO", contenido: "Error descoñecido" });
     }
   }
 };
 const addToFavorites = (eventId, userId, add) => async () => {
   dispatch({ type: "LOADING_USUARIOS" });
-
+  dispatch({ type: "CLEAR_ERROR" })
   try {
     await API.patch(`/usuario/add-favorite`, { eventId, userId, add });
     const user = JSON.parse(localStorage.getItem("user"));
@@ -210,7 +216,7 @@ const addToFavorites = (eventId, userId, add) => async () => {
         contenido: error.response.data.message,
       });
     } else {
-      dispatch({ type: "ERROR_USUARIO", contenido: "Error desconocido" });
+      dispatch({ type: "ERROR_USUARIO", contenido: "Error descoñecido" });
     }
   }
 };

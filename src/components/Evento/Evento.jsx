@@ -49,7 +49,7 @@ const Evento = ({ evento, user }) => {
       })
     : null;
   const horaStart = evento.date_start ? format(fechaEvento, "HH:mm") : null;
-  console.log(fechaStart);
+
   return (
     <div className={`card ${evento.status ? "status " + evento.status : ""}`}>
      {esHoy(evento.date_start) ? ( <div className="data-label_container esHoy">

@@ -36,7 +36,7 @@ const FormularioLogin = () => {
           <label>
             <input
               {...register("username")}
-              placeholder="Usuario"
+              placeholder="Usuario ou email"
               className="inputLogin"
             />
           </label>
