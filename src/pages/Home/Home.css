@@ -33,15 +33,17 @@
     margin-bottom: 0.5rem;
   }
   .scroll-up{
-    background-color: var(--hover-color);
-    color: var(--event-color);
-    font-weight: 600;
+    background-color: var(--event-color);
+   padding: 8px;
+    color: var(--hover-color);
+    font-weight: 800;
     font-size: 3rem;
     position: fixed;
     bottom: 50px;
     right: 30px;
-    border: 1px solid var(--secondary-color);
+    border: 2px solid var(--secondary-color);
     border-radius: 50%;
+
 
   }
   .scroll-up:hover{

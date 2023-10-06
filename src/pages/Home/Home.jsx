@@ -1,7 +1,7 @@
 import React from "react";
 import "./Home.css";
 import EventosList from "../../components/EventosList/EventosList";
-import { BsFillArrowUpCircleFill, BsInfoCircleFill } from "react-icons/bs";
+import { BsArrowUp, BsFillArrowUpCircleFill, BsInfoCircleFill } from "react-icons/bs";
 
 
 const Home = () => {
@@ -14,7 +14,7 @@ const Home = () => {
         </div>
       </div>
       <EventosList />
-      <BsFillArrowUpCircleFill className="scroll-up" onClick={()=>{window.scrollTo(0,0)}}/>
+      <BsArrowUp className="scroll-up" onClick={()=>{window.scrollTo(0,0)}} style={{ strokeWidth: '1.3' }}/>
     </div>
   );
 };

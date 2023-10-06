@@ -74,8 +74,9 @@
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 .soldout::before {
-  content: "E S G O T A D O";
+  content: "ESGOTADO";
   background-color: var(--soldout-color);
+  letter-spacing: 0.2em;
 }
 .delayed::before {
   content: "A P R A Z A D O";
@@ -86,8 +87,9 @@
   background-color: var(--cancelled-color);
 }
 .new_date::before {
-  content: "N O V A  D A T A";
+  content: "NOVA  DATA";
   background-color: var(--new_date-color);
+  letter-spacing: 0.2em;
 }
 .muestra-fecha {
   margin: 0;

@@ -14,7 +14,7 @@
     z-index:999;
   }
 .close-icon{
-    position: fixed;
+    position: absolute;
     right: 5px;
     top: 5px;
     transform: scale(1.5);
