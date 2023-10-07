@@ -20,20 +20,21 @@ const ConfirmarEmail = ({ token }) => {
   const { error, successMessage } = useSelector(
     (state) => state.usuariosReducer
   );
+  if (token.includes("unsubscribe") && !user) {navigate("/login")}
 
   const handleSendEmail = async (data) => {
     if (token.includes("unsubscribe")) {
-      try {
-        await dispatch(unsubscribeEmail(data.email, token, user._id));
-        // Agregar una pausa de 2 segundos (2000 milisegundos)
+      const result = await dispatch(unsubscribeEmail(data.email, token, user._id));
+      if (result) {
         setTimeout(() => {
           navigate("/"); 
         }, 2000);
-      } catch (error) {
-        console.error("error en el email", error)
       }
-    } else dispatch(forgotPassword(data.email));
+    } else {
+      dispatch(forgotPassword(data.email));
+    }
   };
+  ;
   const handleIcon = () => {
     navigate(-1);
   };

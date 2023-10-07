@@ -8,11 +8,10 @@ const CambiarPassword = () => {
 
   return (
     <div>
-      {token.includes("unsubscribe") ? (
+      {token.includes("unsubscribe") || token === "forgot"   ? (
         <ConfirmarEmail token={token} />
-      ) : token === "forgot" ? (
-        <ConfirmarEmail token={token} />
-      ) : (
+      ) :  (
+        
         <ResetearPassword token={token} />
       )}
     </div>

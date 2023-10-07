@@ -51,24 +51,24 @@ const logout = () => {
   dispatch({ type: "LOGOUT" });
 };
 
-const checkSesion = () => () => {
-  try {
-    const userJson = localStorage.getItem("user");
-    const tokenJson = localStorage.getItem("token");
+// const checkSesion = () => () => {
+//   try {
+//     const userJson = localStorage.getItem("user");
+//     const tokenJson = localStorage.getItem("token");
 
-    if (userJson && tokenJson) {
-      dispatch({
-        type: "LOGIN",
-        contenido: {
-          user: JSON.parse(userJson),
-          token: tokenJson,
-        },
-      });
-    }
-  } catch (error) {
-    console.log(error);
-  }
-};
+//     if (userJson && tokenJson) {
+//       dispatch({
+//         type: "LOGIN",
+//         contenido: {
+//           user: JSON.parse(userJson),
+//           token: tokenJson,
+//         },
+//       });
+//     }
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 const registerUser = (datos, navigate) => async () => {
   dispatch({ type: "CLEAR_ERROR" })
@@ -170,10 +170,11 @@ const resetPassword = (token, password, navigate) => async () => {
     }
   }
 };
-const unsubscribeEmail = (email, unsubscribe, userId) => async () => {
+const unsubscribeEmail = (email, unsubscribe, userId) => async (dispatch) => {
   dispatch({ type: "LOADING_USUARIOS" });
   dispatch({ type: "CLEAR_ERROR" })
   try {
+
     await API.put(`/usuario/reset-password/unsubscribe/${userId}`, {
       email,
       unsubscribe,
@@ -182,7 +183,7 @@ const unsubscribeEmail = (email, unsubscribe, userId) => async () => {
       type: "FORGOT_PASSWORD_SUCCESS",
       contenido: "Axustes de suscripción modificados",
     });
-
+    return true
     
   } catch (error) {
     if (error.response && error.response.data && error.response.data.message) {
@@ -193,6 +194,7 @@ const unsubscribeEmail = (email, unsubscribe, userId) => async () => {
     } else {
       dispatch({ type: "ERROR_USUARIO", contenido: "Error descoñecido" });
     }
+    return false
   }
 };
 const addToFavorites = (eventId, userId, add) => async () => {
@@ -228,7 +230,7 @@ export {
   login,
   logout,
   updateLocalStorage,
-  checkSesion,
+
   registerUser,
   updateUser,
   resetPassword,

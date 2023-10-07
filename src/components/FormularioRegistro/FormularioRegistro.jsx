@@ -93,7 +93,7 @@ const FormularioRegistro = ({ userData, isEdit }) => {
             {...register("email", {
               required: "Email é requerido",
               pattern: {
-                value: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
                 message: "Formato de email incorrecto",
               },
             })}
