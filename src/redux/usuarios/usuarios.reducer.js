@@ -26,7 +26,7 @@ export const usuariosReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         loading: false,
-        
+
         error: action.contenido,
       };
     case "LOGOUT":
@@ -38,10 +38,26 @@ export const usuariosReducer = (state = INITIAL_STATE, action) => {
         successMessage: action.contenido,
         error: null,
       };
-      case 'CLEAR_ERROR':
+    case "CHANGE_SUBSCRIPTION_SUCCESS":
+      const { fieldToUpdate } = action.contenido;
+      const updatedUser = { ...state.user }; 
+
+      // Verificamos si fieldToUpdate existe enuser y lo establecemos en false
+      if (updatedUser.hasOwnProperty(fieldToUpdate)) {
+        updatedUser[fieldToUpdate] = false;
+      }
       return {
         ...state,
-        error: null
+        user: updatedUser,
+        loading: false,
+        successMessage: action.contenido.message,
+
+        error: null,
+      };
+    case "CLEAR_ERROR":
+      return {
+        ...state,
+        error: null,
       };
     default:
       return state;

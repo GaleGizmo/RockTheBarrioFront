@@ -103,7 +103,11 @@ const DetallesEvento = () => {
       ) : (
         <>
           <div className="detalles-container">
-          <div className={`divCardDetEv  ${evento.status ? "status " + evento.status : ""}`}>
+            <div
+              className={`divCardDetEv  ${
+                evento.status ? "status " + evento.status : ""
+              }`}
+            >
               <div className="cardDetEv">
                 <AiFillCloseSquare className="close-icon" onClick={goHome} />
                 <h1 className={isLongTitle ? "long-title" : ""}>
@@ -122,7 +126,11 @@ const DetallesEvento = () => {
                     ></iframe>
                   </div>
                 ) : evento.image ? (
-                  <img className={`${evento.status ? evento.status : ""}`} src={evento.image} alt={evento.title} />
+                  <img
+                    className={`${evento.status ? evento.status : ""}`}
+                    src={evento.image}
+                    alt={evento.title}
+                  />
                 ) : (
                   <img
                     src="https://metropoliabierta.elespanol.com/uploads/s1/36/81/72/audience-band-celebration-1190298_9_1200x480.jpeg"
@@ -131,7 +139,7 @@ const DetallesEvento = () => {
                 )}
                 <h2>{evento.artist}</h2>
                 <h3>
-                  <strong>Lugar: </strong>
+                  <div><strong>Lugar: </strong>
                   {evento.site && evento.site !== "Varios" ? (
                     <>
                       {evento.site.split(",")[0]}{" "}
@@ -139,27 +147,31 @@ const DetallesEvento = () => {
                     </>
                   ) : (
                     <>{evento.site.split(",")[0]}</>
+                  )} </div>
+
+                  {evento.price == 0 ? (
+                    <div className="gratuito">GRATUITO</div>
+                  ) : (
+                    <div className="detalles_precio">
+                      <div>
+                        <strong>Prezo: </strong>
+                        {evento.price} €
+                      </div>
+                      {evento.buy_ticket && (
+                        <a
+                          className="boleto_precio"
+                          href={evento.buy_ticket}
+                          target="blank"
+                        >
+                          <img
+                            src="/assets/boleto.png"
+                            className="boleto_imagen"
+                          />
+                        </a>
+                      )}
+                    </div>
                   )}
                 </h3>
-                {evento.price == 0 ? (
-                  <h3 className="gratuito">GRATUITO</h3>
-                ) : (
-                  <div className="detalles_precio">
-                    <h3>
-                      <strong>Prezo: </strong>
-                      {evento.price} €
-                    </h3>
-                    {evento.buy_ticket && (
-                      <a
-                        className="boleto_precio"
-                        href={evento.buy_ticket}
-                        target="blank"
-                      >
-                        <img src="/assets/boleto.png" className="boleto_imagen"/>
-                      </a>
-                    )}
-                  </div>
-                )}
                 {esHoy(evento.date_start) ? (
                   <h3 className="gratuito ">
                     HOXE <span>{fechaStart.split(",")[3]}h</span>
@@ -173,12 +185,12 @@ const DetallesEvento = () => {
                 )}
                 {fechaEnd && <h3>{fechaEnd}</h3>}
                 <p>
-                
-                {esAnterior(evento.date_start) ? "Fai": "Dentro de"}  <span className="gratuito">{diasFaltantes} </span>
+                  {esAnterior(evento.date_start) ? "Fai" : "Dentro de"}{" "}
+                  <span className="gratuito">{diasFaltantes} </span>
                 </p>
                 {evento.genre && (
                   <h3>
-                    <strong>Xénero:</strong> {evento.genre}
+                    <div><strong>Xénero:</strong> {evento.genre}
                     {user && (
                       <span onClick={handleFavorites}>
                         {isFavorite ? (
@@ -187,9 +199,10 @@ const DetallesEvento = () => {
                           <BiCalendarAlt className="favorito favorito-detalle" />
                         )}
                       </span>
-                    )}
+                    )} </div>
                     {showFavorite && (
-                      <Favorito claseDetalle="tooltip-detalle"
+                      <Favorito
+                        claseDetalle="tooltip-detalle"
                         evento={evento._id}
                         favoriteStatus={isFavorite}
                       />
@@ -204,7 +217,6 @@ const DetallesEvento = () => {
                 {evento.url && (
                   <div className="margin-boton-info">
                     <Button text="+Info" type="medium" onClick={comprar} />
-                    
                   </div>
                 )}
                 {user?.role === 2 && (
@@ -237,7 +249,9 @@ const DetallesEvento = () => {
                   <h2 className="texto-aviso">COMENTARIOS DO EVENTO</h2>
                 </div>
                 <div className="comentarioslist-wrapper">
-                  {evento ? <ComentariosList eventoId={evento._id} hayUser={user} /> : null}
+                  {evento ? (
+                    <ComentariosList eventoId={evento._id} hayUser={user} />
+                  ) : null}
                 </div>
               </div>
             </div>

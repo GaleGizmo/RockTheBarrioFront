@@ -68,6 +68,9 @@ const FormularioRegistro = ({ userData, isEdit }) => {
     Object.keys(data).forEach((key) => formData.append(key, data[key]));
     if (selectedFile) {
       formData.append("avatar", selectedFile);
+    } else if (imageFile) {
+      // If the selectedFile hasn't changed, append the current imageFile
+      formData.append("avatar", imageFile);
     }
     formData.delete("image");
     console.log(Array.from(formData.entries()));

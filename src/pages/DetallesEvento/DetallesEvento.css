@@ -17,8 +17,9 @@
   text-align: center;
   width: 70%;
   margin-top: 80px;
-  margin-left: 2.5%;
-  margin-right: 2.5%;
+ 
+  /* margin-left: 2.5%;
+  margin-right: 2.5%; */
   /* background-image: linear-gradient(to bottom, rgb(237 132 57), #fff); */
 }
 .cardDetEv {
@@ -95,7 +96,7 @@ img.boleto_imagen {
 }
 .cardDetEv h1 {
   color: var(--secondary-color);
-  font-size: 3.5vw;
+  font-size: 3vw;
   font-weight: bold;
   margin-bottom: 5px;
   margin-top: 1%;
@@ -112,6 +113,8 @@ img.boleto_imagen {
   transition: text-shadow 0.3s ease-in-out;
 }
 .cardDetEv h3 {
+  display: flex;
+  gap: 20px;
   position: relative;
   font-size: calc(1.2rem + 0.4vw);
 }
@@ -168,7 +171,7 @@ img.boleto_imagen {
   display: flex;
   position: relative;
   align-items: center;
-  
+  margin-bottom: 30px;
   width: 100%;
   flex-direction: column;
 }

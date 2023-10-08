@@ -3,7 +3,7 @@ import store from "../store";
 
 const { dispatch } = store;
 
-const setUserData = (resultado, navigate) =>{
+const setUserData = (resultado, navigate) => {
   dispatch({
     type: "LOGIN",
     contenido: {
@@ -20,7 +20,7 @@ const setUserData = (resultado, navigate) =>{
 
 const login = (datos, navigate) => async () => {
   dispatch({ type: "LOADING_USUARIOS_LOGIN" });
-  dispatch({ type: "CLEAR_ERROR" })
+  dispatch({ type: "CLEAR_ERROR" });
   try {
     const resultado = await API.post("/usuario/login", datos);
     setUserData(resultado, navigate);
@@ -38,11 +38,31 @@ const login = (datos, navigate) => async () => {
 
 const updateLocalStorage = (userData) => {
   dispatch({
-    type:"SET_USER",
-    contenido: userData
-  })
+    type: "SET_USER",
+    contenido: userData,
+  });
   localStorage.setItem("user", JSON.stringify(userData));
- 
+};
+
+const updateUserSubscriptions = (unsubscribe) => {
+  dispatch({
+    type: "CHANGE_SUBSCRIPTION_SUCCESS",
+    contenido: {
+      fieldToUpdate: unsubscribe,
+      
+      message: "Axustes de suscripción modificados",
+    },
+  });
+  const userData = JSON.parse(localStorage.getItem("user"));
+
+  // Verificar si el objeto user existe y si la propiedad coincide con unsubscribe
+  if (userData && userData[unsubscribe] !== undefined) {
+    // Cambiar el valor de la propiedad a false
+    userData[unsubscribe] = false;
+
+    // Actualizar el objeto user en el localStorage
+    localStorage.setItem("user", JSON.stringify(userData));
+  }
 };
 
 const logout = () => {
@@ -71,10 +91,8 @@ const logout = () => {
 // };
 
 const registerUser = (datos, navigate) => async () => {
-  dispatch({ type: "CLEAR_ERROR" })
+  dispatch({ type: "CLEAR_ERROR" });
   try {
-   
-
     const resultado = await APIIMAGES.post("/usuario/register", datos);
 
     setUserData(resultado, navigate);
@@ -90,16 +108,17 @@ const registerUser = (datos, navigate) => async () => {
   }
 };
 const updateUser = (datos, userId, navigate) => async (dispatch) => {
-  dispatch({ type: "CLEAR_ERROR" })
+  dispatch({ type: "CLEAR_ERROR" });
   try {
-    
+    const resultado = await APIIMAGES.put(
+      `/usuario/${userId}`,
+      datos,
+      getToken()
+    );
+    console.log(resultado.data);
 
-    const resultado = await APIIMAGES.put(`/usuario/${userId}`, datos, getToken());
-   console.log(resultado.data)
-    
-    updateLocalStorage(resultado.data)
-     navigate ("/");
-
+    updateLocalStorage(resultado.data);
+    navigate("/");
   } catch (error) {
     if (error.response && error.response.data && error.response.data.message) {
       dispatch({
@@ -113,9 +132,8 @@ const updateUser = (datos, userId, navigate) => async (dispatch) => {
 };
 
 const deleteUser = (userId, navigate) => async () => {
-  dispatch({ type: "CLEAR_ERROR" })
+  dispatch({ type: "CLEAR_ERROR" });
   try {
-    
     await API.delete(`/usuario/${userId}`, getToken());
     dispatch({ type: "LOGOUT" });
     localStorage.removeItem("token");
@@ -134,7 +152,7 @@ const deleteUser = (userId, navigate) => async () => {
 };
 const forgotPassword = (email) => async () => {
   dispatch({ type: "LOADING_USUARIOS" });
-  dispatch({ type: "CLEAR_ERROR" })
+  dispatch({ type: "CLEAR_ERROR" });
   try {
     await API.post("/usuario/recuperar-password/", { email });
     dispatch({
@@ -155,7 +173,7 @@ const forgotPassword = (email) => async () => {
 };
 const resetPassword = (token, password, navigate) => async () => {
   dispatch({ type: "LOADING_USUARIOS" });
-  dispatch({ type: "CLEAR_ERROR" })
+  dispatch({ type: "CLEAR_ERROR" });
   try {
     await API.post("/usuario/reset-password", { token, password });
     navigate("/login");
@@ -172,19 +190,18 @@ const resetPassword = (token, password, navigate) => async () => {
 };
 const unsubscribeEmail = (email, unsubscribe, userId) => async (dispatch) => {
   dispatch({ type: "LOADING_USUARIOS" });
-  dispatch({ type: "CLEAR_ERROR" })
+  dispatch({ type: "CLEAR_ERROR" });
   try {
-
     await API.put(`/usuario/reset-password/unsubscribe/${userId}`, {
       email,
       unsubscribe,
     });
-    dispatch({
-      type: "FORGOT_PASSWORD_SUCCESS",
-      contenido: "Axustes de suscripción modificados",
-    });
-    return true
-    
+    updateUserSubscriptions( unsubscribe);
+    // dispatch({
+    //   type: "FORGOT_PASSWORD_SUCCESS",
+    //   contenido: "Axustes de suscripción modificados",
+    // });
+    return true;
   } catch (error) {
     if (error.response && error.response.data && error.response.data.message) {
       dispatch({
@@ -194,12 +211,12 @@ const unsubscribeEmail = (email, unsubscribe, userId) => async (dispatch) => {
     } else {
       dispatch({ type: "ERROR_USUARIO", contenido: "Error descoñecido" });
     }
-    return false
+    return false;
   }
 };
 const addToFavorites = (eventId, userId, add) => async () => {
   dispatch({ type: "LOADING_USUARIOS" });
-  dispatch({ type: "CLEAR_ERROR" })
+  dispatch({ type: "CLEAR_ERROR" });
   try {
     await API.patch(`/usuario/add-favorite`, { eventId, userId, add });
     const user = JSON.parse(localStorage.getItem("user"));
@@ -230,7 +247,6 @@ export {
   login,
   logout,
   updateLocalStorage,
-
   registerUser,
   updateUser,
   resetPassword,

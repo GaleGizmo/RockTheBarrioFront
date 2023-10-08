@@ -24,7 +24,8 @@ const ConfirmarEmail = ({ token }) => {
 
   const handleSendEmail = async (data) => {
     if (token.includes("unsubscribe")) {
-      const result = await dispatch(unsubscribeEmail(data.email, token, user._id));
+      const unsubscribe=token.replace("unsubscribe","")
+      const result = await dispatch(unsubscribeEmail(data.email, unsubscribe, user._id));
       if (result) {
         setTimeout(() => {
           navigate("/"); 
