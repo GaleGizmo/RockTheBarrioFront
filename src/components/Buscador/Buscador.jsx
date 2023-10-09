@@ -1,6 +1,10 @@
 import React, { useRef, useState } from "react";
 import "./Buscador.css";
-import { BiChevronsUp, BiDotsHorizontalRounded, BiSearchAlt } from "react-icons/bi";
+import {
+  BiChevronsUp,
+  BiDotsHorizontalRounded,
+  BiSearchAlt,
+} from "react-icons/bi";
 import { useForm } from "react-hook-form";
 import Button from "../Button/Button";
 import FilterEvents from "../../customhooks/Filter";
@@ -111,11 +115,10 @@ const Buscador = ({ eventos, user }) => {
         (evento) => new Date(evento.date_start) >= today
       );
     }
-console.log(eventosToShow,data);
-    
+    console.log(eventosToShow, data);
+
     const filteredResults = FilterEvents(eventosToShow, data, user);
     if (filteredResults.length === 0) {
-      
       setNoResults(true);
     } else {
       dispatch(getFilteredEventos(filteredResults));
@@ -143,18 +146,18 @@ console.log(eventosToShow,data);
     setSearchAll(true);
     setFavoritesOnly(false);
     setCustomDates(false);
-    setPastEvents(false)
-    setShowAdavancedSearch(false)
+    setPastEvents(false);
+    setShowAdavancedSearch(false);
     dispatch(deleteFilteredEventos());
   };
 
   return (
     <div className="buscador-container">
       <ConfirmModal
-      title="Ups!"
-      p1="Non se atoparon resultados."
-      p2="Tenta buscar con outros parámetros"
-      buttonText="Aceptar"
+        title="Ups!"
+        p1="Non se atoparon resultados."
+        p2="Tenta buscar con outros parámetros"
+        buttonText="Aceptar"
         show={noResults}
         onConfirm={() => {
           setNoResults(false);
@@ -175,11 +178,11 @@ console.log(eventosToShow,data);
           />
           <BiSearchAlt className="search_icon" onClick={handleSearchClick} />
           <p onClick={handleShowAdvancedSearch} className="buscador-avanzada">
-           {showAdvancedSearch ? "Sinxela":"Avanzada"}
+            {showAdvancedSearch ? "Sinxela" : "Avanzada"}
           </p>
         </div>
         <div
-          className={`buscador-checks ${
+          className={`buscador buscador-checks ${
             showAdvancedSearch ? "show-advanced" : ""
           }`}
         >
@@ -244,43 +247,44 @@ console.log(eventosToShow,data);
           </div>
         </div>
         <div
-          className={`buscador-item ${
+          className={`buscador buscador-item ${
             showAdvancedSearch ? "show-advanced" : ""
           }`}
         >
-        <div
-          className={`buscador-item buscador-fav ${
-            showAdvancedSearch ? "show-advanced" : ""
-          }`}>
-          <label>Gratuito</label>
-          <input
-            type="checkbox"
-            {...register("freeEvent")}
-            checked={freeEvent}
-            onChange={(e) => setFreeEvent(e.target.checked)}
-          />
+          <div
+            className={`buscador buscador-fav ${
+              showAdvancedSearch ? "show-advanced" : ""
+            }`}
+          >
+            <label>Gratuito</label>
+            <input
+              type="checkbox"
+              {...register("freeEvent")}
+              checked={freeEvent}
+              onChange={(e) => setFreeEvent(e.target.checked)}
+            />
           </div>
           <div
-          className={`buscador-item buscador-fav  ${
-            showAdvancedSearch ? "show-advanced" : ""
-          }`}
-        >
-          <label>Só favoritos</label>
-          <input
-            type="checkbox"
-            checked={favoritesOnly}
-            onChange={(e) => setFavoritesOnly(e.target.checked)}
-            disabled={!user}
-          />
+            className={`buscador buscador-fav  ${
+              showAdvancedSearch ? "show-advanced" : ""
+            }`}
+          >
+            <label>Só favoritos</label>
+            <input 
+              type="checkbox"
+              checked={favoritesOnly}
+              onChange={(e) => setFavoritesOnly(e.target.checked)}
+              disabled={!user}
+            />
+          </div>
         </div>
-        </div>
-        
+
         <div
-          className={`buscador-item ${
+          className={`buscador buscador-data ${
             showAdvancedSearch ? "show-advanced" : ""
           }`}
         >
-          <div className="buscador-datalabel">
+          <div className=" buscador-datalabel">
             <label>Data</label>
             <input
               type="checkbox"
@@ -344,7 +348,6 @@ console.log(eventosToShow,data);
           )}
         </div>
 
-        
         <div
           className={`boton-buscar ${
             showAdvancedSearch ? "show-advanced" : ""
