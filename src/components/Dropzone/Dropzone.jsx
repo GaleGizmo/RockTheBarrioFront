@@ -8,7 +8,7 @@ const DropzoneComponent = ({ setImageFile, setSelectedFile }) => {
   const notify = () =>
     toast.error("Arquivo non válido", {
       position: "bottom-center",
-      autoClose: 1000,
+      autoClose: 2000,
       hideProgressBar: true,
       closeOnClick: true,
       pauseOnHover: true,
@@ -18,7 +18,7 @@ const DropzoneComponent = ({ setImageFile, setSelectedFile }) => {
     });
 
   const fileValidator = (file) => {
-    const acceptedFileTypes = ["image/jpeg", "image/png", "image/gif"];
+    const acceptedFileTypes = [ "image/jpeg", "image/png", "image/gif"];
     if (!acceptedFileTypes.includes(file.type)) {
       return {
         code: "filetype-not-allowed",
@@ -74,7 +74,7 @@ const DropzoneComponent = ({ setImageFile, setSelectedFile }) => {
       </div>
       
       <p className="warning">Só arquivos PNG, JPG ou GIF de menos de 2MB</p>
-      <ToastContainer/>
+    
     </div>
   );
 };

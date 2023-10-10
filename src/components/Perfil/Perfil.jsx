@@ -1,27 +1,58 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Button from "../../components/Button/Button";
-
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./Perfil.css"
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { sendEventosDiarios } from "../../redux/eventos/eventos.actions";
 
 const Perfil = ({ userData, onEditClick }) => {
-
+  
   const dispatch=useDispatch()
+const notify= (status) =>{
+  if(status===true) {
+    toast.success("Eventos enviados", {
+      position: "bottom-center",
+      autoClose: 3000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    })
+  } else {
+    toast.error("Error al enviar eventos", {
+      position: "bottom-center",
+      autoClose: 3000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    })
+    
+  }}
 
   const sendDiarios=()=>{
+    let status=null
     try {
       dispatch(sendEventosDiarios())
-      console.log("eventos diarios enviados");
+      status=true
     } catch (err) {
+      status=false
       console.error("Error al mandar eventos:", err)
     }
+    notify(status)
   }
 
  
   return (
-    <div>
+    
+    <div >
+
       <p>Email: <span className="perfil__user-data">{userData.email}</span></p>
       <p>Usuario:<span className="perfil__user-data">{userData.username}</span> </p>
       {userData.avatar && (
@@ -44,8 +75,10 @@ const Perfil = ({ userData, onEditClick }) => {
               )}
             </div>
       <div className="margin-botonReg">
+     
         <Button text="Editar Datos" type="medium" onClick={onEditClick} />
       </div>
+      
     </div>
   );
 };

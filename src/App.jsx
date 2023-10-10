@@ -23,6 +23,7 @@ import CambiarPassword from "./pages/CambiarPassword/CambiarPassword";
 import Contacto from "./pages/Contacto/Contacto";
 import FAQ from "./pages/FAQ/FAQ";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const { user } = useSelector((state) => state.usuariosReducer);
@@ -36,6 +37,7 @@ function App() {
   return (
     <>
       <div className="app">
+      <ToastContainer />
         <Header />
         <ScrollArriba />
 

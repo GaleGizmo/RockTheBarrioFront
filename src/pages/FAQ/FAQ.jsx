@@ -12,6 +12,7 @@ import { FaRegCalendarAlt } from "react-icons/fa";
 import { BiCalendarAlt } from "react-icons/bi";
 import { BsInfo, BsInfoCircleFill } from "react-icons/bs";
 import { AiFillCloseSquare } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 const faqData = [
   {
@@ -84,10 +85,12 @@ const faqData = [
       "Facendo clic no teu nome de usuario ou no teu avatar, abriras a páxina do teu perfil. Nela hai un botón de 'Editar datos' que che permitirá cambiar o teu nome de usuario, o email co que te rexistraches, o teu avatar, e as túas preferencias de notificacións. ",
   },
 ];
-const handleIcon = () => {
+
+const FAQ = () => {
+const navigate=useNavigate()
+  const handleIcon = () => {
     navigate(-1);
   };
-const FAQ = () => {
   return (
     <div className="cardFaq-container">
           <AiFillCloseSquare className="close-icon" onClick={handleIcon} />
