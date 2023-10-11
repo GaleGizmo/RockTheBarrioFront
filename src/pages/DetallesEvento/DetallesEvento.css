@@ -1,8 +1,7 @@
-.detalles-container{
+.detalles-container {
   display: grid;
   grid-template-columns: 70% 30%;
 }
-
 
 .cardDetEv {
   display: flex;
@@ -13,11 +12,11 @@
   border-radius: 8px;
   box-shadow: 10px 10px 5px var(--secondary-shadow);
   padding: 20px 10px;
-  
+
   text-align: center;
   width: 70%;
   margin-top: 80px;
- 
+
   /* margin-left: 2.5%;
   margin-right: 2.5%; */
   /* background-image: linear-gradient(to bottom, rgb(237 132 57), #fff); */
@@ -27,10 +26,10 @@
   transform: translateX(-100px);
   animation: appearCard 0.5s ease-in-out forwards;
 }
-.detalle-comentarios{
+.detalle-comentarios {
   margin-top: 80px;
 }
-.comentarioslist-wrapper{
+.comentarioslist-wrapper {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -68,11 +67,12 @@
 .detalles_precio {
   display: flex;
   justify-content: center;
- 
+  align-items: center;
   gap: 7px;
+
 }
 .boleto_precio {
-  
+  display: flex;
   transition: drop-shadow 0.3s; /* Agrega una transición suave para el efecto de brillo */
 }
 img.boleto_imagen {
@@ -80,11 +80,9 @@ img.boleto_imagen {
   box-shadow: none !important;
 }
 .boleto_imagen {
-  width: 75%;
   transition: filter 0.3s;
   height: min-content;
   padding-top: 3px;
-  
 }
 .muestra-fecha h3 {
   margin: 0;
@@ -175,8 +173,8 @@ img.boleto_imagen {
   width: 100%;
   flex-direction: column;
 }
-.nuevocomentario-wrapper{
-  position:fixed;
+.nuevocomentario-wrapper {
+  position: fixed;
 }
 /* .divDetEv {
   flex-basis: 40%;
@@ -217,7 +215,7 @@ img.boleto_imagen {
     border-radius: 8px;
     box-shadow: 10px 10px 5px var(--secondary-shadow);
     padding: 20px 0px;
-    
+
     text-align: center;
     width: 100%;
     margin-top: 80px;
@@ -228,7 +226,7 @@ img.boleto_imagen {
   }
   .nuevocomentario-wrapper {
     position: sticky;
-}
+  }
   .margin-boton-info {
     margin-top: 3%;
     margin-bottom: 3%;
@@ -243,13 +241,12 @@ img.boleto_imagen {
     justify-content: center;
     width: 90%;
     margin-left: 5%;
-   
   }
 }
 @media (max-width: 589px) {
-  .detalles-container{
+  .detalles-container {
     display: flex;
-   flex-direction: column;
+    flex-direction: column;
   }
   .cardDetEv h1 {
     font-size: 30px;
@@ -286,7 +283,7 @@ img.boleto_imagen {
     gap: 1px;
     /* background-image: linear-gradient(to bottom, rgb(237 132 57), #fff); */
   }
-  .nuevocomentario-wrapper{
+  .nuevocomentario-wrapper {
     position: relative;
   }
   .margin-boton-info {
@@ -307,25 +304,23 @@ img.boleto_imagen {
     width: 75%;
   }
   .detalles_precio {
-    gap: 3px;
+    gap: 5px;
     align-items: center;
   }
   .evento_contenido {
     margin: 10px 5px;
-   
   }
-  .evento_contenido p{
-    font-size: .7rem;
+  .evento_contenido p {
+    font-size: 0.7rem;
   }
   h3 {
     font-size: calc(0.8rem + 0.9vw);
   }
-  .detalle-comentarios{
+  .detalle-comentarios {
     margin-top: 0;
   }
-  .youtube-video-container{
+  .youtube-video-container {
     width: 60%;
     padding-top: 41.66%;
-}
-  
+  }
 }
