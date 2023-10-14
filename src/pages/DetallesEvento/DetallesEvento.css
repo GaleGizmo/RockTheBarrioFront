@@ -225,7 +225,8 @@ img.boleto_imagen {
     border: solid black;
   }
   .nuevocomentario-wrapper {
-    position: sticky;
+    position: fixed;
+    top: 80px;
   }
   .margin-boton-info {
     margin-top: 3%;

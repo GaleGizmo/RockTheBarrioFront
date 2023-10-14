@@ -71,17 +71,13 @@ const Evento = ({ evento, user }) => {
               src={evento.image}
               alt={evento.title}
               onError={(e) => {
-                e.target.src =
-                  "https://metropoliabierta.elespanol.com/uploads/s1/36/81/72/audience-band-celebration-1190298_9_1200x480.jpeg";
-                e.target.alt = "Imagen nula";
-              }}
-            />
-          ) : (
-            <img
-              src="https://metropoliabierta.elespanol.com/uploads/s1/36/81/72/audience-band-celebration-1190298_9_1200x480.jpeg"
-              alt="Imagen nula"
-            />
-          )}
+            e.target.style.display = 'none'; // Oculta la imagen que no se carga
+            e.target.classList.add('background-logo'); // Muestra el fondo del logotipo
+          }}
+        />
+      ) : (
+        <div className="background-logo"></div>
+      )}
         </div>
 
         <div className="title-artist_container">

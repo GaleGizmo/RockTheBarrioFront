@@ -105,6 +105,16 @@
   margin: 0;
   font-weight: bold;
 }
+.background-logo{
+  background-color: var(--event-color);
+  width: 100%; /* Ajusta el tamaño según tus necesidades */
+  height: 100%; /* Ajusta el tamaño según tus necesidades */
+  background-image:  url('../../../public/assets/logo.png'); /* Ruta a tu logotipo */
+  background-repeat: space;
+ background-size: 30px 35px;
+ /* background-position: 50% 50%; */
+ 
+}
 @keyframes appearCard {
   0% {
     opacity: 0;
@@ -192,8 +202,8 @@
 }
 .mas-info:hover {
   transform: scale(1.7);
-  filter: brightness(2);
-  filter: contrast(2);
+  filter: brightness(2) contrast(2);
+ 
 }
 .favorito-container {
   cursor: pointer;
