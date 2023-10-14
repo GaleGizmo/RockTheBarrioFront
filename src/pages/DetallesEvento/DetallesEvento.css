@@ -28,9 +28,12 @@
 }
 .detalle-comentarios {
   margin-top: 80px;
+  position: relative;
+  margin-right: 15%;
+
 }
 .comentarioslist-wrapper {
-  width: 100%;
+ 
   display: flex;
   justify-content: center;
 }
@@ -174,7 +177,8 @@ img.boleto_imagen {
   flex-direction: column;
 }
 .nuevocomentario-wrapper {
-  position: fixed;
+  position: sticky;
+  top: 80px
 }
 /* .divDetEv {
   flex-basis: 40%;
@@ -225,7 +229,7 @@ img.boleto_imagen {
     border: solid black;
   }
   .nuevocomentario-wrapper {
-    position: fixed;
+    position: sticky;
     top: 80px;
   }
   .margin-boton-info {
@@ -248,6 +252,9 @@ img.boleto_imagen {
   .detalles-container {
     display: flex;
     flex-direction: column;
+  }
+  .detalle-comentarios{
+    margin: 0 5% 50px 5%;
   }
   .cardDetEv h1 {
     font-size: 30px;
@@ -286,6 +293,7 @@ img.boleto_imagen {
   }
   .nuevocomentario-wrapper {
     position: relative;
+    top:0;
   }
   .margin-boton-info {
     margin: 0;
@@ -317,9 +325,7 @@ img.boleto_imagen {
   h3 {
     font-size: calc(0.8rem + 0.9vw);
   }
-  .detalle-comentarios {
-    margin-top: 0;
-  }
+
   .youtube-video-container {
     width: 60%;
     padding-top: 41.66%;

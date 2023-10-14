@@ -30,16 +30,16 @@ const NuevoComentario = ({ eventoId, user }) => {
   };
 
   return (
-    <div>
+    <>
       <div className="nuevo-comentario">
         <h2 className="h2NC">Danos a túa opinión</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="displayFlex">
+          <div className="TitVal-container">
             <div className=" tit">
               <label>Título</label>
               <input type="text" {...register("titulo")} className="inputTit" />
             </div>
-            <div className=" tit">
+            <div className=" tit val">
               <label >Valoración </label>
               <select className="inputVal"
               {...register("valoracion")}
@@ -66,7 +66,7 @@ const NuevoComentario = ({ eventoId, user }) => {
           </div>
         </form>
       </div>
-    </div>
+    </>
   );
 };
 

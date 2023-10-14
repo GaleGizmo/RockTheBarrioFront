@@ -1,15 +1,15 @@
 .nuevo-comentario{
     border-style: solid;
     background-color: white;
-    /* width:75%; */
-    margin: 0 auto;
+    
+  
     border-radius: 10px;
   
 }
 .nuevo-comentario label{
     font-weight: 600;
 }
-.displayFlex{
+.TitVal-container{
     display: flex;
     justify-content: center;
     
@@ -18,12 +18,15 @@
     margin-right: 10px;
     margin-left: 3%;
 }
+.val{
+    align-self: flex-end;
+}
 .content{
-    width:90%;
+    width:95%;
     height: 60px;
     margin-right: 2%;
     margin-left: 3%;
-    
+    border-radius: 8px;
     border:solid 1px
 }
 
@@ -31,32 +34,36 @@
     margin-left: 3%;
 }
 .divBoton{
-    margin-bottom: 1%;
+    margin-bottom: 5px;
     display: flex;
     justify-content: center;
 }
 .inputVal{
-    margin-left:1%;
-    
+    /* margin-left:1%; */
+    border-radius: 5px;
     margin-bottom: 2%;
     border:solid 1px;
-    height:40%
+    height:40%;
+    text-align: center;
+    font-size: .8rem;
 }
 .inputTit{
     /* margin-left:1%; */
-   
+   border-radius: 5px;
     margin-bottom: 2%;
     border:solid 1px;
     width:90%;
-    height:40%
+    height:40%;
+    font-size: .8rem;
 }
 .h2NC{
+    margin-top: 5px;
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
 }
 
 @media (max-width:720px){
-    .displayFlex{
+    .TitVal-container{
         display: flex;
         justify-content: center;
         flex-direction: column;
@@ -74,6 +81,11 @@
         background-color: white;
        
         margin: 0 auto;
-        border-radius: 10px;
+        
+    }
+    .val{
+        align-self: flex-start;
+        display: flex;
+        gap: 5px
     }
 }

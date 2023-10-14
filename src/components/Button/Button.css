@@ -61,7 +61,7 @@
   transform: none;
   font-weight: 400;
 }
-@media (min-width: 421px) and (max-width: 720px) {
+@media (min-width: 421px) and (max-width: 980px) {
   .large {
     width: 250px;
     margin: 0 10px 0 5px;
