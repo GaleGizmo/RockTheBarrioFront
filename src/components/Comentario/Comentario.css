@@ -9,21 +9,52 @@
 .comentario-card{
     border: 2px solid;
     border-radius: 10px;
+    padding-bottom: 5px;
 
 }
 .muestra-valor{
+    padding-right: 8px;
+    font-size: 10px;
     display: flex;
     justify-content: end;
 }
 .comentario-title-box{
     display: flex;
     align-items: center;
-    margin: 10px;
+   
 
 }
 
 .comentario-title-name{
-    margin: 10px;
+    margin:  0 10px;
 }
+.ant-card-head{
+    min-height: 40px !important;
+}
+.ant-card-body{
+    padding: 0px !important;
+}
+.comentarioOwner_button{
+    padding: 0;
+  border: none;
+  background-color: transparent;
+  margin: 0;
+  position: absolute;
+  bottom: 0px;
+  right: 8px;
+}
+.comentarioOwner_button__icon:hover{
+    cursor: pointer;
+    filter:brightness(1) contrast(2)
+}
+.delete_icon {
+    vertical-align: 0 !important;
+  }
 
-
+  .edit_icon {
+    
+    color: var(--icon-color);
+  
+    bottom: -5px;
+    font-size: 1.1rem;
+  }

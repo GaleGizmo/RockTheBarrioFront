@@ -16,11 +16,12 @@ import {
 } from "@fluentui/react-components";
 import { Star20Filled } from "@fluentui/react-icons";
 import { Card } from "antd";
+import { AiTwotoneEdit } from "react-icons/ai";
 import { DeleteTwoTone } from "@ant-design/icons";
 
 const Comentario = ({ comentario }) => {
   const dispatch = useDispatch();
-console.log(comentario);
+  console.log(comentario);
   const { user } = useSelector((state) => state.usuariosReducer);
   const [editMode, setEditMode] = useState(false);
   const [editedTitle, setEditedTitle] = useState(comentario.title);
@@ -88,7 +89,7 @@ console.log(comentario);
             <div className="comentario-title-box">
               <Avatar
                 color="colorful"
-                size={64}
+                size={32}
                 name={comentario.user.username}
                 image={{
                   src: comentario.user.avatar,
@@ -110,34 +111,33 @@ console.log(comentario);
 
           {editMode ? (
             <div className="edit-coment">
-            <div className="displayFlex">
-              <input
-              className="tit"
-                type="text"
-                value={editedTitle}
-                onChange={(e) => setEditedTitle(e.target.value)}
-              />
-              <select
-               className="tit"
-                value={editedValue ? editedValue.toString() : "Ninguna"}
-                onChange={handleChangeValue}
-              >
-                <option value="Ningunha">Ningunha</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-              </select>
+              <div className="displayFlex">
+                <input
+                  className="tit"
+                  type="text"
+                  value={editedTitle}
+                  onChange={(e) => setEditedTitle(e.target.value)}
+                />
+                <select
+                  className="tit"
+                  value={editedValue ? editedValue.toString() : "Ninguna"}
+                  onChange={handleChangeValue}
+                >
+                  <option value="Ningunha">Ningunha</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
               </div>
-              
+
               <textarea
-              className="content"
+                className="content"
                 type="text"
                 value={editedContent}
                 onChange={(e) => setEditedContent(e.target.value)}
               />
-             
             </div>
           ) : (
             <>
@@ -148,16 +148,14 @@ console.log(comentario);
                   </AccordionHeader>
                   <AccordionPanel>
                     {comentario.content && <p>{comentario.content}</p>}
-                    
                   </AccordionPanel>
                 </AccordionItem>
-                
               </Accordion>
-              {comentario.value>0 && (
-                      <div className="muestra-valor">
-                        <p>{renderStars(comentario.value)}</p>
-                      </div>
-                    )}
+              {comentario.value > 0 && (
+                <div className="muestra-valor">
+                  <p>{renderStars(comentario.value)}</p>
+                </div>
+              )}
             </>
           )}
           {puedeEditarYBorrar && (
@@ -176,17 +174,16 @@ console.log(comentario);
                   />
                 </>
               ) : (
-                <Button
-                  type="editar"
-                  text="Editar"
-                  onClick={() => handleEdit()}
-                />
+                <div className="comentarioOwner_button">
+                  <span className="comentarioOwner_button__icon" onClick={() => handleDelete()}>
+                    <DeleteTwoTone className="delete_icon" twoToneColor="#757575" />
+                  </span>
+                  <span className="comentarioOwner_button__icon edit_icon" onClick={() => handleEdit()}>
+                    {" "}
+                    <AiTwotoneEdit />
+                  </span>
+                </div>
               )}
-              <Button
-                type="delete"
-                text={<DeleteTwoTone twoToneColor="#757575" />}
-                onClick={() => handleDelete()}
-              />
             </>
           )}
         </Card>

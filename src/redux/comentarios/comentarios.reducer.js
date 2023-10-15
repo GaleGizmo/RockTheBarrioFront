@@ -1,7 +1,8 @@
 const INITIAL_STATE = {
   comentarios: [],
   loading: false,
-  error: null, // Agregamos una propiedad "error" al estado inicial
+  error: null, 
+  escribiendoComentario: false
 };
 
 export const comentariosReducer = (state = INITIAL_STATE, action) => {
@@ -46,7 +47,11 @@ export const comentariosReducer = (state = INITIAL_STATE, action) => {
         ),
         error: null,
       };
-
+    case "SWITCH_CREATECOMENTARIO":
+      return {
+        ...state,
+        escribiendoComentario: action.contenido
+      }
     case "ERROR_COMENTARIOS":
       return {
         ...state,

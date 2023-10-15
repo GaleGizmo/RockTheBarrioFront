@@ -1,21 +1,32 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./NuevoComentario.css";
 
 import Button from "../Button/Button";
-import { addComentario } from "../../redux/comentarios/comentarios.actions";
+import {
+  addComentario,
+  switchEscribiendoComentario,
+} from "../../redux/comentarios/comentarios.actions";
+import { AiFillCloseCircle, AiTwotoneEdit } from "react-icons/ai";
 
 const NuevoComentario = ({ eventoId, user }) => {
+  const { escribiendoComentario } = useSelector(
+    (state) => state.comentariosReducer
+  );
   const { register, handleSubmit, reset } = useForm();
+  // const [showForm, setShowForm] = useState(false)
   const dispatch = useDispatch();
   const [value, setValue] = useState(0);
   const handleChange = (event) => {
-    const newValue = event.target.value === "Ninguna" ? 0 : parseInt(event.target.value);
-  
+    const newValue =
+      event.target.value === "Ninguna" ? 0 : parseInt(event.target.value);
+
     setValue(newValue);
   };
-
+  const toggleComentarios = () => {
+    dispatch(switchEscribiendoComentario(!escribiendoComentario));
+  };
   const onSubmit = (data) => {
     const comentarioData = {
       title: data.titulo,
@@ -24,7 +35,7 @@ const NuevoComentario = ({ eventoId, user }) => {
       event: eventoId,
       user: user._id,
     };
-    
+
     dispatch(addComentario(comentarioData, eventoId));
     reset();
   };
@@ -32,39 +43,52 @@ const NuevoComentario = ({ eventoId, user }) => {
   return (
     <>
       <div className="nuevo-comentario">
-        <h2 className="h2NC">Danos a túa opinión</h2>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="TitVal-container">
-            <div className=" tit">
-              <label>Título</label>
-              <input type="text" {...register("titulo")} className="inputTit" />
+        <h2 className="h2NC" onClick={toggleComentarios}>
+          Engadir comentario: {escribiendoComentario ? (<AiFillCloseCircle className="edit_close"/>) : (<AiTwotoneEdit className="edit_icon" />)}
+        </h2>
+        {escribiendoComentario && (
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="TitVal-container">
+              <div className=" tit">
+                <label>Título</label>
+                <input
+                  type="text"
+                  {...register("titulo")}
+                  className="inputTit"
+                />
+              </div>
+              <div className=" tit val">
+                <label>Valoración </label>
+                <select
+                  className="inputVal"
+                  {...register("valoracion")}
+                  value={value ? value.toString() : "Ninguna"}
+                  onChange={handleChange}
+                >
+                  <option default value="Ningunha">
+                    Ningunha
+                  </option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+              </div>
             </div>
-            <div className=" tit val">
-              <label >Valoración </label>
-              <select className="inputVal"
-              {...register("valoracion")}
-                value={value ? value.toString() : "Ninguna"}
-                
-                onChange={handleChange}
-              >
-                <option default value="Ningunha">Ningunha</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-              </select>
-            </div>
-          </div>
 
-          <div className=" divContent">
-            <label className="tit">Comentario</label>
-            <textarea {...register("contenido")} className="content"></textarea>
-          </div>
-          <div className="divBoton">
-            <Button type="medium" text="Enviar" />
-          </div>
-        </form>
+            <div className=" divContent">
+              <label className="tit">Comentario</label>
+              <textarea
+                {...register("contenido")}
+                className="content"
+              ></textarea>
+            </div>
+            <div className="divBoton">
+              <Button type="medium" text="Enviar" />
+            </div>
+          </form>
+        )}
       </div>
     </>
   );

@@ -1,4 +1,4 @@
-import { API } from "../../shared/api.js";
+import { API, getToken } from "../../shared/api.js";
 import store from "../store.js";
 
 const { dispatch } = store;
@@ -15,15 +15,17 @@ const getAllComentarios = () => async () => {
     });
   }
 };
-
+const switchEscribiendoComentario = (writingState) => {
+  dispatch({ type: "SWITCH_CREATECOMENTARIO", contenido: writingState });
+};
 const addComentario = (comentarioData, eventId) => async (dispatch) => {
   dispatch({ type: "LOADING_COMENTARIOS" });
   try {
-    await API.post("/comentario", comentarioData);
+    await API.post("/comentario", comentarioData, getToken());
     // const resultadoGet = await API.get(`/comentario/getbyevent/${eventId}`)
     // console.log(resultadoGet);
     // dispatch({ type: "ADD_COMENTARIO", contenido: resultadoGet.data });
-   
+
     getComentariosByEvent(eventId);
   } catch (error) {
     dispatch({
@@ -52,9 +54,9 @@ const editComentario = (idComentario, comentarioData) => async (dispatch) => {
   try {
     const resultado = await API.put(
       `/comentario/${idComentario}`,
-      comentarioData
+      comentarioData, getToken()
     );
-getComentariosByEvent(resultado.data.event)
+    getComentariosByEvent(resultado.data.event);
     console.log(resultado.data);
 
     dispatch({ type: "EDIT_COMENTARIO", contenido: resultado.data });
@@ -78,6 +80,7 @@ const deleteComentario = (idComentario) => async () => {
 };
 
 export {
+  switchEscribiendoComentario,
   addComentario,
   getAllComentarios,
   getComentariosByEvent,

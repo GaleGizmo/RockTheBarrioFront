@@ -5,22 +5,21 @@
 } */
 .comentarios-container {
     max-height: 70vh;
-    overflow-y: scroll;
+    overflow-y: auto;
     width: 300px;
-    top: 20vh;
+    position: fixed;
     left: auto;
     right: auto;
-    position: fixed;
-    scrollbar-width: none;/*oculta la barra de scroll en Firefox*/
-    -ms-overflow-style: none;  /* Oculta la barra de desplazamiento en IE */
+  
+
 }
 .hayUser{
     max-height: 50vh;
     top: 42vh
 }
-.comentarios-container::-webkit-scrollbar {
-    width: 0;  /* Oculta la barra de desplazamiento en los navegadores Webkit */
-}
+/* .comentarios-container::-webkit-scrollbar {
+    width: 0; 
+} */
 
 .div-img{
 display: flex;
@@ -78,8 +77,12 @@ margin-top: 5%;
         top: 28vh;
     }
     .hayUser{
+        max-height: 70vh;
+        top: 27vh
+    }
+    .estaEscribiendo{
+        top: 57vh;
         max-height: 35vh;
-        top: 60vh
     }
 
 }

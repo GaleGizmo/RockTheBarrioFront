@@ -1,9 +1,10 @@
 .nuevo-comentario{
     border-style: solid;
     background-color: white;
-    
-  
+   margin: 0 auto;
+   width: fit-content;
     border-radius: 10px;
+    max-width: 300px;
   
 }
 .nuevo-comentario label{
@@ -57,9 +58,23 @@
     font-size: .8rem;
 }
 .h2NC{
-    margin-top: 5px;
+    border-bottom: 1px solid var(--secondary-color);
+    margin: 0;
+    padding: 0 10px 3px 10px;
     text-align: center;
-    font-size: 1.3rem;
+    font-size: 1.8vw;
+   
+    border-top: 1px solid var(--secondary-color);
+}
+h2 [class^="edit"]:hover{
+    cursor: pointer;
+   filter:  contrast(150%) brightness(150%);
+   transform: scale(1.1);
+   
+}
+.edit_close{
+   color: var(--icon-color)
+   
 }
 
 @media (max-width:720px){
@@ -87,5 +102,9 @@
         align-self: flex-start;
         display: flex;
         gap: 5px
+    }
+    .h2NC{
+        font-size: 3.5vw;
+        padding-bottom: 0;
     }
 }

@@ -6,19 +6,19 @@ import Comentario from "../Comentario/Comentario";
 import "./ComentariosList.css";
 
 const ComentariosList = ({ eventoId, hayUser }) => {
-  
+
 
       useEffect(() => {
         getComentariosByEvent(eventoId);
       }, []);
 
 
-  const { loading, comentarios } = useSelector(
+  const { loading, comentarios, escribiendoComentario } = useSelector(
     (reducer) => reducer.comentariosReducer
   );
 
   return (
-    <div className={`comentarios-container ${hayUser ? 'hayUser' : ''}`}>
+    <div className={`comentarios-container ${hayUser ? 'hayUser' : ''} ${escribiendoComentario ? 'estaEscribiendo':''}`}>
       {loading && (
         <div className="div-img">
           <img src="/assets/music.gif" />
