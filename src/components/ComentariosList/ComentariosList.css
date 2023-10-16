@@ -86,14 +86,15 @@ margin-top: 5%;
     }
 
 }
-@media (max-width: 720px){
+
+@media (max-width: 589px){
     .div-textAviso{
         width: 90%
     }
     .comentarios-container{
         position: relative;
         top: 0;
-        width: 200px;
+        width: 85%;
     }
     h2.texto-aviso  {
         font-size: 3.5vw;
@@ -102,3 +103,18 @@ margin-top: 5%;
         font-size: 3vw;
     }
 }
+@media (min-width: 590px) and (max-width: 720px){
+    h2.texto-aviso{
+        font-size: 2vw;
+    }
+    .comentarios-container {
+        width: 200px;
+    }
+}
+
+@media (min-width: 721px) and (max-width: 1040px){
+    .comentarios-container {
+        width: 250px;
+    }
+}
+

@@ -97,7 +97,7 @@ img.boleto_imagen {
 }
 .cardDetEv h1 {
   color: var(--secondary-color);
-  font-size: 3vw;
+  font-size: 3.5vw;
   font-weight: bold;
   margin-bottom: 5px;
   margin-top: 1%;
@@ -107,7 +107,7 @@ img.boleto_imagen {
 
 .cardDetEv h2 {
   margin-top: 1%;
-  font-size: 2rem;
+  font-size: 3vw;
   margin-bottom: 25px;
   font-weight: bold;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
@@ -210,6 +210,9 @@ img.boleto_imagen {
 }
 
 @media (min-width: 590px) and (max-width: 1040px) {
+  .detalles-container {
+    grid-template-columns: minmax(auto, 70%) minmax(250px, auto);
+  }
   .cardDetEv {
     display: flex;
     flex-direction: column;
@@ -221,7 +224,7 @@ img.boleto_imagen {
     padding: 20px 0px;
 
     text-align: center;
-    width: 100%;
+    width: 90%;
     margin-top: 80px;
     margin-left: 2.5%;
     margin-right: 2.5%;
@@ -247,6 +250,16 @@ img.boleto_imagen {
     width: 90%;
     margin-left: 5%;
   }
+}
+.cardDetEv h3 {
+  font-size: calc(1rem + 0.2vw);
+  flex-direction: column;
+}
+.cardDetEv h2{
+  font-size: 2.5vw;
+}
+.cardDetEv h1 {
+  font-size: 3vw;
 }
 @media (max-width: 589px) {
   .detalles-container {

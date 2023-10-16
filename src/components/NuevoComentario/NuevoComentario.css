@@ -77,7 +77,7 @@ h2 [class^="edit"]:hover{
    
 }
 
-@media (max-width:720px){
+@media (max-width:589px){
     .TitVal-container{
         display: flex;
         justify-content: center;
@@ -106,5 +106,10 @@ h2 [class^="edit"]:hover{
     .h2NC{
         font-size: 3.5vw;
         padding-bottom: 0;
+    }
+}
+@media (min-width:590px) and (max-width: 720px){
+    .h2NC {
+        font-size: 2vw;
     }
 }
