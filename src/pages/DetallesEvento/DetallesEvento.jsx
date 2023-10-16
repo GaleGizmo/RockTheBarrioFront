@@ -236,23 +236,21 @@ const DetallesEvento = () => {
             </div>
           </div>
           <div className="detalle-comentarios">
-            
-              <div className="nuevocomentario-wrapper">
-                {user ? (
-                  <NuevoComentario eventoId={evento._id} user={user} />
-                ) : (
-                  <p className="texto-aviso">
-                    Tes que te rexistrar para poder comentar
-                  </p>
-                )}
-                <h2 className="texto-aviso">COMENTARIOS DO EVENTO</h2>
-              </div>
-              <div className="comentarioslist-wrapper">
-                {evento ? (
-                  <ComentariosList eventoId={evento._id} hayUser={user} />
-                ) : null}
-              </div>
-            
+            <div className="nuevocomentario-wrapper">
+              {user ? (
+                <NuevoComentario eventoId={evento._id} user={user} />
+              ) : (
+                <p className="texto-aviso">
+                  Tes que te rexistrar para poder comentar
+                </p>
+              )}
+              <h2 className="texto-aviso">COMENTARIOS DO EVENTO</h2>
+            </div>
+            <div className="comentarioslist-wrapper">
+              {evento ? (
+                <ComentariosList eventoId={evento._id} hayUser={user} />
+              ) : null}
+            </div>
           </div>
         </div>
       )}

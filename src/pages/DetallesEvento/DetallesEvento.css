@@ -250,17 +250,18 @@ img.boleto_imagen {
     width: 90%;
     margin-left: 5%;
   }
+  .cardDetEv h3 {
+    font-size: calc(1rem + 0.2vw);
+    flex-direction: column;
+  }
+  .cardDetEv h2{
+    font-size: 2.5vw;
+  }
+  .cardDetEv h1 {
+    font-size: 3vw;
+  }
 }
-.cardDetEv h3 {
-  font-size: calc(1rem + 0.2vw);
-  flex-direction: column;
-}
-.cardDetEv h2{
-  font-size: 2.5vw;
-}
-.cardDetEv h1 {
-  font-size: 3vw;
-}
+
 @media (max-width: 589px) {
   .detalles-container {
     display: flex;

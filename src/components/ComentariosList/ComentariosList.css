@@ -14,8 +14,12 @@
 
 }
 .hayUser{
-    max-height: 50vh;
-    top: 42vh
+    max-height: 80vh;
+    top: 21vh
+}
+.estaEscribiendo{
+    top: 42vh;
+    max-height: 55vh;
 }
 /* .comentarios-container::-webkit-scrollbar {
     width: 0; 
@@ -51,7 +55,11 @@ margin-top: 5%;
     }
     .hayUser{
         max-height: 50vh;
-        top: 50vh
+        top: 20vh
+    }
+    .estaEscribiendo{
+        top: 42vh;
+        max-height: 45vh;
     }
 }
 @media (height<810px){
@@ -59,8 +67,12 @@ margin-top: 5%;
         top: 22vh;
     }
     .hayUser{
+        max-height: 75vh;
+        top: 20vh
+    }
+    .estaEscribiendo{
+        top: 47vh;
         max-height: 50vh;
-        top: 55vh
     }
 }
 @media (height<720px){
@@ -68,8 +80,12 @@ margin-top: 5%;
         top: 25vh;
     }
     .hayUser{
-        max-height: 50vh;
-        top: 55vh
+        max-height: 70vh;
+        top: 22vh
+    }
+    .estaEscribiendo{
+        top: 53vh;
+        max-height: 45vh;
     }
 }
 @media (height<630px){
