@@ -101,14 +101,7 @@ const Comentario = ({ comentario }) => {
             </div>
           }
           bordered={true}
-          // style={{ width: 100% }}
         >
-          {/* {comentario.user.avatar ? (
-          <img src={comentario.user.avatar} alt="user avatar" />
-        ) : (
-          ""
-        )} */}
-
           {editMode ? (
             <div className="edit-coment">
               <div className="displayFlex">
@@ -141,7 +134,7 @@ const Comentario = ({ comentario }) => {
             </div>
           ) : (
             <>
-              <Accordion collapsible>
+             {comentario.title && <Accordion collapsible>
                 <AccordionItem value="1">
                   <AccordionHeader>
                     <div>{comentario.title}</div>
@@ -150,7 +143,7 @@ const Comentario = ({ comentario }) => {
                     {comentario.content && <p>{comentario.content}</p>}
                   </AccordionPanel>
                 </AccordionItem>
-              </Accordion>
+              </Accordion>}
               {comentario.value > 0 && (
                 <div className="muestra-valor">
                   <p>{renderStars(comentario.value)}</p>
@@ -175,10 +168,19 @@ const Comentario = ({ comentario }) => {
                 </>
               ) : (
                 <div className="comentarioOwner_button">
-                  <span className="comentarioOwner_button__icon" onClick={() => handleDelete()}>
-                    <DeleteTwoTone className="delete_icon" twoToneColor="#757575" />
+                  <span
+                    className="comentarioOwner_button__icon"
+                    onClick={() => handleDelete()}
+                  >
+                    <DeleteTwoTone
+                      className="delete_icon"
+                      twoToneColor="#757575"
+                    />
                   </span>
-                  <span className="comentarioOwner_button__icon edit_icon" onClick={() => handleEdit()}>
+                  <span
+                    className="comentarioOwner_button__icon edit_icon"
+                    onClick={() => handleEdit()}
+                  >
                     {" "}
                     <AiTwotoneEdit />
                   </span>

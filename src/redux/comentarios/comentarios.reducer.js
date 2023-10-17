@@ -58,7 +58,11 @@ export const comentariosReducer = (state = INITIAL_STATE, action) => {
         loading: false,
         error: action.contenido,
       };
-
+    case "CLEAR_ERRORCOMENTARIOS":
+      return {
+        ...state,
+        error: null,
+      }  
     default:
       return state;
   }

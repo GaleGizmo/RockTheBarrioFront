@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import "./NuevoComentario.css";
-
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Button from "../Button/Button";
 import {
   addComentario,
@@ -11,9 +12,14 @@ import {
 import { AiFillCloseCircle, AiTwotoneEdit } from "react-icons/ai";
 
 const NuevoComentario = ({ eventoId, user }) => {
-  const { escribiendoComentario } = useSelector(
+  const { escribiendoComentario, error } = useSelector(
     (state) => state.comentariosReducer
   );
+  useEffect(() => {
+    if (error){
+      toast.error(error, {position: 'top-right'});
+    }
+  }, [error]);
   const { register, handleSubmit, reset } = useForm();
   // const [showForm, setShowForm] = useState(false)
   const dispatch = useDispatch();
@@ -37,6 +43,7 @@ const NuevoComentario = ({ eventoId, user }) => {
     };
 
     dispatch(addComentario(comentarioData, eventoId));
+   
     reset();
   };
 
@@ -62,7 +69,7 @@ const NuevoComentario = ({ eventoId, user }) => {
                 <select
                   className="inputVal"
                   {...register("valoracion")}
-                  value={value ? value.toString() : "Ninguna"}
+                  value={value ? value.toString() : "Ningunha"}
                   onChange={handleChange}
                 >
                   <option default value="Ningunha">

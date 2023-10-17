@@ -20,6 +20,7 @@ const switchEscribiendoComentario = (writingState) => {
 };
 const addComentario = (comentarioData, eventId) => async (dispatch) => {
   dispatch({ type: "LOADING_COMENTARIOS" });
+  dispatch({ type: "CLEAR_ERRORCOMENTARIOS" });
   try {
     await API.post("/comentario", comentarioData, getToken());
     // const resultadoGet = await API.get(`/comentario/getbyevent/${eventId}`)
@@ -51,10 +52,12 @@ const getComentariosByEvent = async (eventId) => {
 
 const editComentario = (idComentario, comentarioData) => async (dispatch) => {
   dispatch({ type: "LOADING_COMENTARIOS" });
+  dispatch({ type: "CLEAR_ERRORCOMENTARIOS" });
   try {
     const resultado = await API.put(
       `/comentario/${idComentario}`,
-      comentarioData, getToken()
+      comentarioData,
+      getToken()
     );
     getComentariosByEvent(resultado.data.event);
     console.log(resultado.data);
@@ -70,12 +73,13 @@ const editComentario = (idComentario, comentarioData) => async (dispatch) => {
 
 const deleteComentario = (idComentario) => async () => {
   dispatch({ type: "LOADING_COMENTARIOS" });
+  dispatch({type: "CLEAR_ERRORCOMENTARIOS"})
   try {
     const resultado = await API.delete(`/comentario/${idComentario}`);
 
     dispatch({ type: "DELETE_COMENTARIO", contenido: resultado.data });
   } catch (error) {
-    dispatch({ type: "ERROR_COMENTARIOS", contenido: error.message });
+    dispatch({ type: "ERROR_COMENTARIOS", contenido: error.response.data.message });
   }
 };
 
