@@ -12,17 +12,24 @@ import {
 import { AiFillCloseCircle, AiTwotoneEdit } from "react-icons/ai";
 
 const NuevoComentario = ({ eventoId, user }) => {
-  const { escribiendoComentario, error } = useSelector(
+  let { escribiendoComentario, error } = useSelector(
     (state) => state.comentariosReducer
   );
+  const dispatch = useDispatch();
+  useEffect(() => {
+    return () => {
+      dispatch(switchEscribiendoComentario(false));
+    };
+  }, [dispatch]);
+  
   useEffect(() => {
     if (error){
       toast.error(error, {position: 'top-right'});
     }
   }, [error]);
   const { register, handleSubmit, reset } = useForm();
-  // const [showForm, setShowForm] = useState(false)
-  const dispatch = useDispatch();
+
+  
   const [value, setValue] = useState(0);
   const handleChange = (event) => {
     const newValue =

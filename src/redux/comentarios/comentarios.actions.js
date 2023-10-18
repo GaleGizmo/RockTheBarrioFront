@@ -15,9 +15,8 @@ const getAllComentarios = () => async () => {
     });
   }
 };
-const switchEscribiendoComentario = (writingState) => {
-  dispatch({ type: "SWITCH_CREATECOMENTARIO", contenido: writingState });
-};
+const switchEscribiendoComentario = (writingState) => ({ type: "SWITCH_CREATECOMENTARIO", contenido: writingState });
+
 const addComentario = (comentarioData, eventId) => async (dispatch) => {
   dispatch({ type: "LOADING_COMENTARIOS" });
   dispatch({ type: "CLEAR_ERRORCOMENTARIOS" });
@@ -75,7 +74,7 @@ const deleteComentario = (idComentario) => async () => {
   dispatch({ type: "LOADING_COMENTARIOS" });
   dispatch({type: "CLEAR_ERRORCOMENTARIOS"})
   try {
-    const resultado = await API.delete(`/comentario/${idComentario}`);
+    const resultado = await API.delete(`/comentario/${idComentario}`, getToken());
 
     dispatch({ type: "DELETE_COMENTARIO", contenido: resultado.data });
   } catch (error) {
