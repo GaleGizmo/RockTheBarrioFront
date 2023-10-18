@@ -159,15 +159,7 @@ img.boleto_imagen {
   height: 200px;
 }
 
-.div-imageDetEv {
-  flex-basis: 20%;
-  flex-grow: 1;
-  max-height: 200px;
-  width: 100%;
-  margin: 1%;
-  border: solid;
-  border-radius: 8px;
-}
+
 .divCardDetEv {
   display: flex;
   position: relative;
@@ -175,6 +167,14 @@ img.boleto_imagen {
   margin-bottom: 30px;
   width: 100%;
   flex-direction: column;
+}
+.divCardDetEv__noimage{
+  background-color: #f1670469;
+   width: 60%;
+    min-height: 25vh;
+    background-image: url(/public/assets/noimage_logo.png);
+    background-repeat: space;
+    background-size: 30px 35px;
 }
 .nuevocomentario-wrapper {
   position: sticky;

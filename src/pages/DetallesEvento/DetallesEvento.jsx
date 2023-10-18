@@ -131,10 +131,7 @@ const DetallesEvento = () => {
                   alt={evento.title}
                 />
               ) : (
-                <img
-                  src="https://metropoliabierta.elespanol.com/uploads/s1/36/81/72/audience-band-celebration-1190298_9_1200x480.jpeg"
-                  alt="Imagen genérica"
-                />
+                <img className="divCardDetEv__noimage" ></img>
               )}
               <h2>{evento.artist}</h2>
               <h3>
