@@ -52,34 +52,37 @@ const Evento = ({ evento, user }) => {
 
   return (
     <div className={`card ${evento.status ? "status " + evento.status : ""}`}>
-     {esHoy(evento.date_start) ? ( <div className="data-label_container esHoy">
-        
-          <div className="data-label_esHoy">HOXE</div></div>
-        ) : (
-          <div className="data-label_container">
-           
-            <div className="data-label_weekday">{fechaStart.split(",")[0]}</div>
-            <div className="data-label_day">{fechaStart.split(",")[1]}</div>
-            <div className="data-label_month">{fechaStart.split(",")[2]}</div>
-            </div>
-        )}
-      
+      {esHoy(evento.date_start) ? (
+        <div className="data-label_container esHoy">
+          <div className="data-label_esHoy">HOXE</div>
+        </div>
+      ) : (
+        <div className="data-label_container">
+          <div className="data-label_weekday">{fechaStart.split(",")[0]}</div>
+          <div className="data-label_day">{fechaStart.split(",")[1]}</div>
+          <div className="data-label_month">{fechaStart.split(",")[2]}</div>
+        </div>
+      )}
+
       <div className="border-card">
-        <div className="div-image">
+      
+        <div className="div-image" onClick={getEvento}>
+        <Link to={{ pathname: `/${evento._id}` }}>
           {evento.image ? (
             <img
               src={evento.image}
               alt={evento.title}
               onError={(e) => {
-            e.target.style.display = 'none'; // Oculta la imagen que no se carga
-            e.target.classList.add('background-logo'); // Muestra el fondo del logotipo
-          }}
-        />
-      ) : (
-        <div className="background-logo"></div>
-      )}
+                e.target.style.display = "none"; // Oculta la imagen que no se carga
+                e.target.classList.add("background-logo"); // Muestra el fondo del logotipo
+              }}
+            />
+          ) : (
+            <div className="background-logo"></div>
+          )}
+          </Link>
         </div>
-
+      
         <div className="title-artist_container">
           <h1 className={isLongTitle ? "long-title" : ""}>{evento.title}</h1>
 

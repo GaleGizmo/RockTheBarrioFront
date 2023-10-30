@@ -175,6 +175,10 @@
   border: solid;
   border-radius: 8px;
 }
+.div-image:hover{
+  border-color: var(--event-color);
+  filter: contrast(150%);
+}
 
 .title-artist_container {
   flex-basis: 40%;
