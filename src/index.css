@@ -29,4 +29,7 @@
     background-attachment: scroll;
     z-index: -1;
   }
+  html{
+    scroll-behavior: smooth;
+  }
   

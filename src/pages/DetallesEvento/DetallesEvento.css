@@ -322,6 +322,7 @@ img.boleto_imagen {
     justify-content: center;
     width: 90%;
     margin-left: 5%;
+    margin-bottom: 0;
   }
   img.boleto_imagen {
     width: 75%;
