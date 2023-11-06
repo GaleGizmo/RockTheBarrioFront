@@ -10,13 +10,13 @@
   width: 100%;
 
   border-top: 1px solid var(--secondary-shadow);
-  background-color: var(--event-color);
+  background-color: var(--secondary-color);
   
 }
 .footer-link{
   position: relative;
     text-decoration: none;
-    color: var(--link-color);
+    color: var(--hover-color);
     padding: 0 5px;
     
 }

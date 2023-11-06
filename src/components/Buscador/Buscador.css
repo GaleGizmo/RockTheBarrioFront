@@ -3,7 +3,8 @@
   top: 125px;
   display: flex;
   flex-direction: column;
-  margin-left: 5%;
+  margin-left: auto;
+  max-width: 350px;
   border-radius: 8px;
   border: 2px solid var(--secondary-shadow);
   background-color: var(--event-color);
@@ -118,9 +119,10 @@
 }
 @media (max-width: 420px) {
   .buscador-container {
+    max-width: 100%;
     width: 100%;
     position: fixed;
-    top: 60px;
+    top: 40px;
     margin-right: 0;
     display: flex;
     margin-left: auto;

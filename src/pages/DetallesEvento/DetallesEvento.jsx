@@ -84,7 +84,7 @@ const DetallesEvento = () => {
       })
     : null;
   const fechaStart = fechaEvento
-    ? format(fechaEvento, "EEEE, dd MMMM, yyyy, HH:mm", {
+    ? format(fechaEvento, "EEEE, dd MMMM, HH:mm", {
         locale: gl,
       })
     : null;

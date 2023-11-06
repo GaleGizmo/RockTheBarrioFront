@@ -32,7 +32,11 @@
     color:var(--hover-color)
   }
   
-  
+  @media (width<420px) {
+    .event-list-modal{
+      max-width: 230px;
+    }
+  }
   
   /* .event-list-modal button {
     display: block;

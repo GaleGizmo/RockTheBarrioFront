@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Evento.css";
 import { BiCalendarHeart, BiCalendarAlt } from "react-icons/bi";
 import { Link } from "react-router-dom";
-
+import {BsClockFill} from "react-icons/bs"
 import { esAnterior, esHoy } from "../../shared/formatDate";
 import { format, formatDistanceToNow, parse, parseISO } from "date-fns";
 import { gl } from "date-fns/locale";
@@ -84,35 +84,37 @@ const Evento = ({ evento, user }) => {
         </div>
       
         <div className="title-artist_container">
-          <h1 className={isLongTitle ? "long-title" : ""}>{evento.title}</h1>
+          <h2 className={isLongTitle ? "long-title" : ""}>{evento.title}</h2>
 
-          <h2>{evento.artist}</h2>
+          <h3>{evento.artist}</h3>
         </div>
         <div className="detalles_container">
           {evento.site && evento.site !== "Varios" ? (
             <p className="detalles-site">
+            <MapIcon showMap={showMap} onClick={handleToggleMap} />
               {evento.site.split(",")[0]}{" "}
-              <MapIcon showMap={showMap} onClick={handleToggleMap} />
+             
             </p>
           ) : (
             <p>{evento.site.split(",")[0]}</p>
           )}
 
           {horaStart && (
-            <div>
-              <p>{horaStart}h</p>
+            <div className="evento-hora">
+             <p> <BsClockFill className="hora-icon"/> {horaStart}h</p>
             </div>
           )}
           <p className="dias-faltantes">
             {esAnterior(evento.date_start) ? "Fai" : "Dentro de"}{" "}
             <span className="gratuito">{diasFaltantes} </span>
           </p>
-          {evento.genre && <p className="evento-genre">{evento.genre}</p>}
+         
           {evento.price == 0 ? (
             <p className="gratuito">GRATUITO</p>
           ) : (
-            evento.price && <p>{evento.price} €</p>
+            evento.price && <p>Prezo: {evento.price} €</p>
           )}
+          {evento.genre && <p className="evento-genre">{evento.genre}</p>}
           {evento.commentsCount && evento.commentsCount > 1 ? (
             <Link to={{ pathname: `/${evento._id}` }}>
               <p className="card-comments" onClick={getEvento}>
@@ -126,8 +128,9 @@ const Evento = ({ evento, user }) => {
               </p>
             </Link>
           ) : (
-            <p>Non hai comentarios</p>
+            <p className="card-nocomments">Non hai comentarios</p>
           )}
+          <div className="div_relleno"></div>
           <div className="icon-container">
             {user && (
               <div

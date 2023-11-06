@@ -1,9 +1,9 @@
 .eventos-list {
   display: grid;
-  grid-template-columns: 300px minmax(auto, 1270px) minmax(300px, 20%);
+  grid-template-columns: minmax(300px, auto) minmax(auto, 900px) minmax(300px, auto);
   padding: 30px 0;
 
-  margin: auto;
+  /* margin: auto; */
 }
 .div-buscador {
   position: relative;
@@ -16,8 +16,9 @@
 .eventos {
   display: flex;
   flex-direction: column;
-
+  padding: 30px 15px;
   align-items: center;
+  
 }
 @media (max-width: 420px) {
   .div-img {
@@ -30,7 +31,8 @@
     margin-left: 0;
   }
   .eventos {
-    margin-top: 20px;
+    margin-top: 0px;
+    padding-top: 0;
   }
 }
 

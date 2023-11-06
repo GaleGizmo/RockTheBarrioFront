@@ -10,7 +10,7 @@ const Home = () => {
       <div className="header-listado">
       <div className="black-border">
         <h1>PROXIMOS EVENTOS</h1>
-        <p>Preme <BsInfoCircleFill style={{ color: 'var(--icon-color)' }}/> para ver a ficha completa</p>
+        {/* <p>Preme <BsInfoCircleFill style={{ color: 'var(--icon-color)' }}/> para ver a ficha completa</p> */}
         </div>
       </div>
       <EventosList />

@@ -15,7 +15,7 @@
         margin-top: 80px;
         margin-left: auto;
         margin-right: auto;
-        background-image:linear-gradient(to bottom, rgb(237 132 57), #fff);
+        /* background-image:linear-gradient(to bottom, rgb(237 132 57), #fff); */
         
         
         height:fit-content
@@ -47,6 +47,7 @@
         border-radius: 10px;
         font-size: large;
         text-align: center;
+        background-color: var(--hover-color);
       }
 
       .fechaCrearEvento{

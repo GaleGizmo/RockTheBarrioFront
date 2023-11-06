@@ -29,7 +29,15 @@ const EventListModal = memo(({ events, onClose, position }) => {
     modalStyles.top= `${top-10}px`
     modalStyles.transform = "translateY(-100%)";
   }
-
+  const truncateTitle = (title) => {
+    if (title.length <= 35) {
+      return title;
+    } else {
+      let truncationPoint = title.lastIndexOf(' ', 35);
+      if (truncationPoint === -1) truncationPoint = 35;
+      return `${title.substring(0, truncationPoint)}...`;
+    }
+  };
   return (
     <div className="event-list-modal" style={modalStyles}>
       <h2>
@@ -40,7 +48,7 @@ const EventListModal = memo(({ events, onClose, position }) => {
           <Link to={`/${evento._id}`}>
             {" "}
             <Button
-              text={evento.title}
+              text={truncateTitle(evento.title)}
               type="small evento-calendar"
               onClick={() => getEvento(evento._id)}
             />

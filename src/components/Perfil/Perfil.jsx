@@ -67,10 +67,10 @@ const notify= (status) =>{
               {userData && userData.role === 2 && (<>
                 <Link to="/crear-evento">
                   <span className="boton-crear">
-                    <Button text="Crear evento" type="large" />
+                    <Button text="Crear evento" type="medium" />
                   </span>
                 </Link>
-                <Button text="Eventos diarios" type="large" onClick={sendDiarios}/>
+                <Button text="Eventos diarios" type="medium" onClick={sendDiarios}/>
                 </>
               )}
             </div>

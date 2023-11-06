@@ -13,7 +13,7 @@
   margin-top: 80px;
   margin-left: 25%;
   margin-right: 25%;
-  background-image: linear-gradient(to bottom, var(--primary-color), var(--hover-color));
+  /* background-image: linear-gradient(to bottom, var(--primary-color), var(--hover-color)); */
 
   box-sizing: content-box;
 }
@@ -33,7 +33,7 @@
 }
 @media (max-width: 420px) {
   .cardLegal {
-    margin-top: 150px;
+    margin-top: 50px;
     margin-left: 2.5%;
     margin-right: 2.5%;
   }

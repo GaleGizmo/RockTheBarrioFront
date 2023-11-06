@@ -74,18 +74,18 @@ h3 a {
 }
 .no-logged {
    
-   transform: scale(2.5);
-   color: var(--secondary-color);
+   transform: scale(2.7);
+   color: var(--primary-color);
   }
   .no-logged:hover{
-    color: var(--hover-color);
+    color: var(--secondary-color);
   }
 @media (min-width: 1px) and (max-width: 469.98px) {
   .navbar {
     padding: 0;
     margin: 0;
-    height: 50px;
-    align-self: self-end;
+    
+    /* align-self: self-end; */
   }
   .disp {
     display: flex;
@@ -110,13 +110,14 @@ h3 a {
     height: 100%;
   }
   .icono-salir {
-    transform: scale(1.2);
-    right: 10px;
+    transform: scale(1);
+    right: 5px;
+    top:-5px
   }
   .avatar-container {
     
-    max-width: 40px;
-    max-height: 40px;
+    max-width: 30px;
+    max-height: 30px;
   }
   .medium {
     width: max-content;
@@ -126,7 +127,9 @@ h3 a {
   .header-salir {
     display: none;
   }
-  
+  .no-logged{
+    transform: scale(1.8);
+  }
 }
 @media (min-width: 470px) and (max-width: 1015px) {
   .navbar {

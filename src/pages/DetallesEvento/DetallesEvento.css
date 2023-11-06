@@ -102,7 +102,7 @@ img.boleto_imagen {
   margin-bottom: 5px;
   margin-top: 1%;
   text-align: center;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); */
 }
 
 .cardDetEv h2 {
@@ -110,7 +110,7 @@ img.boleto_imagen {
   font-size: 3vw;
   margin-bottom: 25px;
   font-weight: bold;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); */
   transition: text-shadow 0.3s ease-in-out;
 }
 .cardDetEv h3 {
@@ -271,14 +271,14 @@ img.boleto_imagen {
     margin: 0 5% 50px 5%;
   }
   .cardDetEv h1 {
-    font-size: 30px;
+    font-size: 20px;
     font-weight: bold;
     margin-bottom: 5px;
     margin-top: 1%;
     text-align: center;
   }
   .cardDetEv h2 {
-    font-size: 22px;
+    font-size: 18px;
     margin-bottom: 10px;
   }
   .cardDetEv h3 {
@@ -299,7 +299,7 @@ img.boleto_imagen {
     margin-bottom: 10%;
     text-align: center;
     width: 100%;
-    margin-top: 75px;
+    margin-top: 55px;
     margin-left: 2.5%;
     margin-right: 2.5%;
     gap: 1px;
