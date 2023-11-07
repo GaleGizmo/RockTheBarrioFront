@@ -8,6 +8,7 @@
 .div-buscador {
   position: relative;
   z-index: 1;
+  padding-left: 15px;
 }
 .div-calendario {
   display: flex;
@@ -33,6 +34,9 @@
   .eventos {
     margin-top: 0px;
     padding-top: 0;
+  }
+  .div-buscador{
+    padding-left: 0;
   }
 }
 
