@@ -62,7 +62,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) rotate(-30deg);
-
+opacity: 0;
   color: white;
   padding: 10px 20px;
   border-radius: 10px;
@@ -72,6 +72,16 @@
   z-index: 1;
   overflow: hidden;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  animation: scaleDown .3s 2s forwards, bounce 0.1s 2.3s forwards;
+}
+@keyframes scaleDown {
+  from { transform: translate(-50%, -50%) rotate(-30deg) scale(2); opacity: 0; }
+  to { transform: translate(-50%, -50%) rotate(-30deg) scale(1); opacity: 1; }
+}
+@keyframes bounce {
+  0% { transform: translate(-50%, -50%) rotate(-30deg) scale(1); }
+  50% { transform: translate(-50%, -50%) rotate(-30deg) scale(1.1); }
+  100% { transform: translate(-50%, -50%) rotate(-30deg) scale(1); }
 }
 .soldout::before {
   content: "ESGOTADO";
