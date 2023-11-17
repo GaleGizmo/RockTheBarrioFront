@@ -6,7 +6,7 @@ import { setEvento } from "../../redux/eventos/eventos.actions";
 import Button from "../Button/Button";
 import { useDispatch } from "react-redux";
 
-const EventListModal = memo(({ events, onClose, position }) => {
+const EventListModal = memo(({ events, position }) => {
   const { top, left } = position;
   
   const dispatch = useDispatch();

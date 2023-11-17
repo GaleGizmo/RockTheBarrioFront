@@ -7,7 +7,7 @@ Esta aplicación es una plataforma en línea que recopila los eventos musicales 
 ### Página de inicio
 
 La página de inicio muestra un listado completo de eventos y conciertos en el área de Santiago, ordenados temporalmente, con información como fecha, lugar y nombre del artista o banda. Los usuarios pueden ver el lugar del evento en Google Maps y añadir cada evento a una lista de favoritos. 
-Esta página muestra a su vez un calendario desde el que se puede acceder a los eventos de un día específico.
+Esta página muestra a su vez un calendario desde el que se puede acceder a los eventos de un día específico y un buscador de eventos con posibilidad de hacer búsquedas cruzadas.
 
 ### Página de un evento específico y comentarios de los usuarios
 
@@ -28,11 +28,11 @@ Para acceder a todas las funciones, los usuarios deben registrarse proporcionand
         
         -Recibir cada lunes un email con el listado de eventos semanal.
         
-        -Recibir un email cada vez que se añada un nuevo evento.
+        -Recibir un email cuando se añadan nuevos eventos.
 
 ### Página de edición de datos del usuario
 
-En esta página el usuario puede modificar su email y nombre de usuario, así como las preferencias de notificaciones de eventos.
+En esta página el usuario puede modificar su email, nombre de usuario y avatar, así como las preferencias de notificaciones de eventos.
 
 ### Página de creación de conciertos administrada por el admin
 
@@ -89,14 +89,12 @@ Para el desarrollo de este proyecto se han utilizado las siguientes herramientas
 
 ## Próximas mejoras y funcionalidades futuras
 
-Un Buscador.
-Responsive para tabletas.
 Categorias de eventos y generos musicales.
 
 
 ## Desarrollo
 
-El código de esta aplicación está desarrollado a partir del proyecto final del curso de FSD de Upgrade-Ub, cuyo código se puede ver aquí:
+El código de esta aplicación está basado en el del proyecto final del curso de FSD de Upgrade-Ub, cuyo código original se puede ver aquí:
 [ROCK-THE-BARRIO.VERCEL](https://rock-the-barrio-front.vercel.app)
 
 Participamos en dicho proyecto:
