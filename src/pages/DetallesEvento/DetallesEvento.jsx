@@ -12,12 +12,13 @@ import NuevoComentario from "../../components/NuevoComentario/NuevoComentario";
 import { esAnterior, esHoy, formatDate } from "../../shared/formatDate";
 import MapComponent from "../../components/MapComponent/MapComponent";
 import MapIcon from "../../components/MapIcon/MapIcon";
-import { AiFillCloseSquare } from "react-icons/ai";
+import { AiFillCloseSquare, AiOutlineZoomIn } from "react-icons/ai";
 import useFavorites from "../../shared/useFavorites";
 import { BiCalendarAlt, BiCalendarHeart } from "react-icons/bi";
 import Favorito from "../../components/Favorito/Favorito";
 import { format, formatDistanceToNow, parseISO } from "date-fns";
 import { gl } from "date-fns/locale";
+import ImagenModal from "../../components/ImagenModal/ImagenModal";
 
 const DetallesEvento = () => {
   const dispatch = useDispatch();
@@ -36,10 +37,16 @@ const DetallesEvento = () => {
     evento ? evento._id : null,
     user ? user._id : null
   );
-  // useEffect(() => {
-  //   dispatch(getEventoById(id));
-  // }, [id]);
+  const [showImageModal, setShowImageModal] = useState(false);
 
+  const openImageModal = () => {
+    setShowImageModal(true);
+  };
+  
+  const closeImageModal = () => {
+    setShowImageModal(false);
+  };
+  
   const navigate = useNavigate();
 
   const isLongTitle =
@@ -125,11 +132,12 @@ const DetallesEvento = () => {
                   ></iframe>
                 </div>
               ) : evento.image ? (
-                <img
+                <div className="image-container"><img
                   className={`${evento.status ? evento.status : ""}`}
                   src={evento.image}
                   alt={evento.title}
-                />
+                  onClick={openImageModal}
+                /> <AiOutlineZoomIn className="zoom-icon" onClick={openImageModal} /> </div>
               ) : (
                 <img className="divCardDetEv__noimage" ></img>
               )}
@@ -249,6 +257,8 @@ const DetallesEvento = () => {
               ) : null}
             </div>
           </div>
+          <ImagenModal show={showImageModal} onCancel={closeImageModal} imageUrl={evento.image} />
+
         </div>
       )}
     </>

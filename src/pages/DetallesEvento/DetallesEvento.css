@@ -137,7 +137,31 @@ img.boleto_imagen {
   object-fit: cover;
   max-width: 500px;
 }
+.image-container {
 
+  height: 90%;
+  max-height: 90%;
+  width: fit-content;
+  margin: auto;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ 
+ 
+}
+.zoom-icon{
+  font-size: 1.5rem;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  color: white;
+  filter: drop-shadow(0px 0px 3px #000);
+  opacity: 0.8;
+}.zoom-icon:hover{
+  cursor: pointer;
+ transform: scale(1.2);
+}
 .cardDetEv a {
   text-decoration: none;
   color: black;
@@ -344,5 +368,11 @@ img.boleto_imagen {
   .youtube-video-container {
     width: 60%;
     padding-top: 41.66%;
+  }
+  .image-container{
+    height: fit-content;
+  }
+  .zoom-icon{
+    font-size: 1.1rem;
   }
 }

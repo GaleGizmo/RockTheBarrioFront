@@ -1,0 +1,24 @@
+.modal-image{
+    position: relative;
+    height: 100%;
+    width: fit-content;
+    max-width: 100%;
+    object-fit: contain;
+    margin: 0;
+    border: 10px solid var(--secondary-color);
+}
+.zoom-out{
+    bottom: 15px;
+    right: 15px;
+}
+@media (max-width: 520px){
+    .modal-image{
+        border-width: 2px;
+        height: fit-content;
+    }
+    .zoom-out{
+        bottom: 7px;
+        right: 7px;
+    }
+    
+}
