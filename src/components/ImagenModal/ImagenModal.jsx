@@ -18,6 +18,7 @@ const ImagenModal = ({ show, onCancel, imageUrl }) => {
             src={imageUrl}
             alt="Imagen a tamaño completo"
             className=" modal-image"
+            onClick={onCancel}
           />
          <AiOutlineZoomOut className="zoom-icon zoom-out" onClick={onCancel} /> 
         </div>
