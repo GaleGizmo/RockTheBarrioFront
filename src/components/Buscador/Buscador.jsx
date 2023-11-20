@@ -1,8 +1,8 @@
-import React, { useRef, useState } from "react";
+import React, {  useState } from "react";
 import "./Buscador.css";
 import {
   BiChevronsUp,
-  BiDotsHorizontalRounded,
+
   BiSearchAlt,
 } from "react-icons/bi";
 import { useForm } from "react-hook-form";
@@ -11,9 +11,12 @@ import FilterEvents from "../../customhooks/Filter";
 import { useDispatch } from "react-redux";
 import {
   deleteFilteredEventos,
-  getFilteredEventos,
+  setFilteredEventos,
 } from "../../redux/eventos/eventos.actions";
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
+import { API } from "../../shared/api";
+
+
 
 const Buscador = ({ eventos, user }) => {
   const dispatch = useDispatch();
@@ -31,6 +34,44 @@ const Buscador = ({ eventos, user }) => {
   const [searchFinalDate, setSearchFinalDate] = useState("");
   const [customDates, setCustomDates] = useState(false);
   const [pastEvents, setPastEvents] = useState(false);
+
+  let eventosToShow;
+  let filteredResults = [];
+  function showFilteredResults () {
+    if (filteredResults.length === 0) {
+      setNoResults(true);
+    } else {
+      
+      dispatch(setFilteredEventos(filteredResults));
+    }
+  }
+  async function getAllEventos(filters, userData) {
+    try {
+      const response = await API.get("/evento");
+      eventosToShow = response.data;
+      
+      filteredResults = FilterEvents(eventosToShow, filters, userData);
+      showFilteredResults()
+    } catch (error) {
+      console.error("Error al obtener eventos:", error);
+      throw error;
+    }
+  }
+
+  async function getEventosEntreFechas(filters, userData, startDate, endDate){
+    try {
+      const response = await API.post("/evento/eventosEntreFechas", {startDate, endDate});
+      eventosToShow = response.data;
+      
+      filteredResults = FilterEvents(eventosToShow, filters, userData);
+      showFilteredResults()
+    } catch (error) {
+      console.error("Error al obtener eventos:", error);
+      throw error;
+    }
+  
+
+  }
 
   const getNextDayOfWeek = (date, dayOfWeek) => {
     const resultDate = new Date(date.getTime());
@@ -106,23 +147,24 @@ const Buscador = ({ eventos, user }) => {
       data.searchFinalDate.setHours(23, 59, 0, 0);
     }
 
-    // Filtrado previo de eventos pasados
-    let eventosToShow = [...eventos];
-    if (!pastEvents && !searchDate) {
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-      eventosToShow = eventosToShow.filter(
-        (evento) => new Date(evento.date_start) >= today
-      );
-    }
-    console.log(eventosToShow, data);
+    const today=new Date();
 
-    const filteredResults = FilterEvents(eventosToShow, data, user);
-    if (filteredResults.length === 0) {
-      setNoResults(true);
+    if (pastEvents) {
+       getAllEventos(data, user);
+          
+    } else if (searchInitialDate && searchInitialDate<today){
+      let initialDate=new Date(searchInitialDate);
+      let finalDate=new Date(searchFinalDate);
+      
+      getEventosEntreFechas(data, user, initialDate, finalDate)
     } else {
-      dispatch(getFilteredEventos(filteredResults));
+      eventosToShow =[...eventos]
+      filteredResults = FilterEvents(eventosToShow, data, user);
+      showFilteredResults()
     }
+    
+
+  
   };
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
@@ -270,7 +312,7 @@ const Buscador = ({ eventos, user }) => {
             }`}
           >
             <label>Só favoritos</label>
-            <input 
+            <input
               type="checkbox"
               checked={favoritesOnly}
               onChange={(e) => setFavoritesOnly(e.target.checked)}

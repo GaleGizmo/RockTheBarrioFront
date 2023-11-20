@@ -1,6 +1,7 @@
 const INITIAL_STATE = {
   eventos: [],
   eventosFiltrados: [],
+  eventosCalendar:[],
   loading: false,
   evento: null,
   error: null,
@@ -12,6 +13,8 @@ export const eventosReducer = (state = INITIAL_STATE, action) => {
       return { ...state, loading: true, error: null };
     case "GET_EVENTOS":
       return { ...state, loading: false, eventos: [...action.contenido] };
+    case "GET_EVENTOSCALENDAR":
+      return { ...state, loading: false, eventosCalendar: [...action.contenido] };
     case "GET_EVENTO":
       return { ...state, loading: false, evento: action.contenido };
     case "ADD_EVENTO":
@@ -69,11 +72,11 @@ export const eventosReducer = (state = INITIAL_STATE, action) => {
         error: null,
       };
       case "GET_EVENTOSFILTRADOS":
-        const ids = action.contenido.map(obj => obj._id);
+        
         return {
           ...state,
           loading: false,
-          eventosFiltrados: state.eventos.filter(evento => ids.includes(evento._id))
+          eventosFiltrados: action.contenido,
         };
       
       case "DELETE_EVENTOSFILTRADOS":
