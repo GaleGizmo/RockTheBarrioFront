@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {  useState } from "react";
 import "./Evento.css";
 import { BiCalendarHeart, BiCalendarAlt } from "react-icons/bi";
 import { Link } from "react-router-dom";
@@ -16,6 +16,8 @@ import { setEvento } from "../../redux/eventos/eventos.actions";
 
 const Evento = ({ evento, user }) => {
   const [hovered, setHovered] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
   const [showMap, setShowMap] = useState(false);
   const dispatch = useDispatch();
   const { isFavorite, handleFavorites, showFavorite } = useFavorites(
@@ -49,9 +51,9 @@ const Evento = ({ evento, user }) => {
       })
     : null;
   const horaStart = evento.date_start ? format(fechaEvento, "HH:mm") : null;
-
+  
   return (
-    <div className={`card ${evento.status ? "status " + evento.status : ""}`}>
+    <div className={`card ${scrolled ? 'hidden' : ''} ${evento.status ? "status " + evento.status : ""}`}>
       {esHoy(evento.date_start) ? (
         <div className="data-label_container esHoy">
           <div className="data-label_esHoy">HOXE</div>

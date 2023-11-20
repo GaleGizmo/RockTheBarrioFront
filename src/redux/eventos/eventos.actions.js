@@ -3,14 +3,26 @@ import store from "../store.js";
 
 const { dispatch } = store;
 
-const getAllEventos = () => async () => {
+
+
+const getEventosDesdeHoy = () => async () => {
   dispatch({ type: "LOADING_EVENTOS" });
 
-  const resultado = await API.get("/evento");
+  const resultado = await API.get(`/evento/eventosDesdeHoy`);
 
   dispatch({ type: "GET_EVENTOS", contenido: resultado.data });
-};
 
+}
+
+const getEventosParaCalendar=()=>async ()=>{
+  dispatch({ type: "LOADING_EVENTOS" });
+
+  const resultado = await API.get(`/evento/eventosParaCalendar`);
+
+  dispatch({ type: "GET_EVENTOSCALENDAR", contenido: resultado.data });
+
+
+}
 const sendEventosDiarios = () => async (dispatch) => {
   try {
     await API.get("/evento/sendEventosDiarios/");
@@ -116,7 +128,7 @@ const setEvento = (eventoId) => (dispatch) => {
   dispatch({ type: "GET_EVENTOBYID", contenido: eventoId });
 };
 
-const getFilteredEventos =(resultadoFiltrado)=>(dispatch)=>{
+const setFilteredEventos =(resultadoFiltrado)=>(dispatch)=>{
   dispatch({ type: "GET_EVENTOSFILTRADOS", contenido: resultadoFiltrado })
 }
 
@@ -124,7 +136,9 @@ const deleteFilteredEventos =()=>(dispatch)=>{
   dispatch({type: "DELETE_EVENTOSFILTRADOS"})
 }
 export {
-  getAllEventos,
+  
+  getEventosDesdeHoy,
+  getEventosParaCalendar,
   getEventoById,
   addEvento,
   deleteEvento,
@@ -132,6 +146,6 @@ export {
   sendEventosDiarios,
   clearMensajes,
   setEvento,
-  getFilteredEventos,
+  setFilteredEventos,
   deleteFilteredEventos
 };

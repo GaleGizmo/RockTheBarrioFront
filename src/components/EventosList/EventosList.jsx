@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { getAllEventos } from "../../redux/eventos/eventos.actions";
+import {
+  getEventosDesdeHoy,
+  getEventosParaCalendar,
+} from "../../redux/eventos/eventos.actions";
 import { useDispatch, useSelector } from "react-redux";
 import Evento from "../Evento/Evento";
 
@@ -11,35 +14,50 @@ import Buscador from "../Buscador/Buscador";
 
 const EventosList = () => {
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getEventosParaCalendar());
+  }, [dispatch]);
+  const [filtroActivo, setFiltroActivo] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [eventosToShow, setEventosToShow] = useState([]);
   const { user } = useSelector((reducer) => reducer.usuariosReducer);
-  let { loading, eventos, eventosFiltrados } = useSelector(
+  let { loading, eventos, eventosFiltrados, eventosCalendar } = useSelector(
     (reducer) => reducer.eventosReducer
   );
 
   useEffect(() => {
     if (Array.isArray(eventosFiltrados) && eventosFiltrados.length > 0) {
       setEventosToShow([...eventosFiltrados]);
+      setFiltroActivo(true);
     } else {
       setEventosToShow([...eventos]);
+      setFiltroActivo(false)
     }
   }, [eventosFiltrados, eventos]);
 
- 
-  const eventosOrdenados = [...eventosToShow].sort(
-    (a, b) => new Date(a.date_start) - new Date(b.date_start)
-  );
-  const eventosParaCalendario = eventosOrdenados.map((evento) => ({
-    _id: evento._id,
-    title: evento.title,
-    date_start: evento.date_start,
-    
-  }));
   useEffect(() => {
-    dispatch(getAllEventos());
+    dispatch(getEventosDesdeHoy());
   }, [dispatch]);
-  const fechaHoy = new Date();
+  useEffect(() => {
+   
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const threshold = 10; 
 
+      if (scrollPosition > threshold) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+   
+      }
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
   return (
     <div className="eventos-list">
       <div className="div-buscador">
@@ -50,20 +68,21 @@ const EventosList = () => {
           <div className="div-img">
             <img src="/assets/music.gif" alt="Cargando..." />
           </div>
-        ) : eventosFiltrados.length>0 ? (
-          eventosOrdenados.map((evento) => (
-            <Evento user={user} evento={evento} key={evento._id} />
-          ))
         ) : (
-          eventosOrdenados
-            .filter((evento) => new Date(evento.date_start) >= fechaHoy)
-            .map((evento) => (
+          <>
+            {filtroActivo && (
+              <p className={`resultados_busqueda ${scrolled ? 'hidden' : ''}`}>
+                Hai {eventosFiltrados.length} resultados para a túa búsqueda 
+              </p>
+            )}
+            {eventosToShow.map((evento) => (
               <Evento user={user} evento={evento} key={evento._id} />
-            ))
+            ))}
+          </>
         )}
       </div>
       <div className="div-calendario">
-        <CustomCalendar eventos={eventosParaCalendario} />
+        <CustomCalendar eventos={eventosCalendar} />
       </div>
     </div>
   );
