@@ -87,8 +87,19 @@ img.boleto_imagen {
   height: min-content;
   padding-top: 3px;
 }
-.muestra-fecha h3 {
+.muestra-fecha {
+  font-size: calc(1.2rem + 0.4vw);
   margin: 0;
+  height: fit-content;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  /* flex-direction: column; */
+  align-items: center;
+  /* text-align: right; */
+}
+.muestra-fecha h3 {
+  margin: 0 5px;
 }
 .boleto_imagen:hover {
   transform: scale(1.1);
@@ -118,10 +129,11 @@ img.boleto_imagen {
   gap: 20px;
   position: relative;
   font-size: calc(1.2rem + 0.4vw);
+  
 }
 
 .cardDetEv p {
-  font-size: 16px;
+  font-size: calc(.8rem + 0.4vw);
   margin-bottom: 0;
   margin-top: 0;
   text-align: center;
@@ -204,15 +216,7 @@ img.boleto_imagen {
   position: sticky;
   top: 80px
 }
-/* .divDetEv {
-  flex-basis: 40%;
-  flex-grow: 1;
-  max-height: 200px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-} */
+
 
 .gratuito:hover {
   text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.8);
@@ -231,6 +235,10 @@ img.boleto_imagen {
   margin: 10px 20px;
   background-color: var(--hover-color);
   box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.4);
+}
+.dias-faltantes__detalle{
+ 
+ width: 100%;
 }
 
 @media (min-width: 590px) and (max-width: 1040px) {
@@ -329,6 +337,9 @@ img.boleto_imagen {
     gap: 1px;
     /* background-image: linear-gradient(to bottom, rgb(237 132 57), #fff); */
   }
+  .cardDetEv p {
+    font-size: calc(.7rem + 0.4vw);
+  }
   .nuevocomentario-wrapper {
     position: relative;
     top:0;
@@ -360,6 +371,9 @@ img.boleto_imagen {
   }
   .evento_contenido p {
     font-size: 0.7rem;
+  }
+  .muestra-fecha{
+    font-size: calc(0.8rem + 0.9vw);
   }
   h3 {
     font-size: calc(0.8rem + 0.9vw);

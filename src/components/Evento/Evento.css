@@ -106,14 +106,7 @@ opacity: 0;
   background-color: var(--new_date-color);
   letter-spacing: 0.2em;
 }
-.muestra-fecha {
-  margin: 0;
-  height: fit-content;
-  display: flex;
-  flex-direction: column;
-  align-items: end;
-  text-align: right;
-}
+
 .fecha-end {
   margin: 0;
   font-weight: bold;

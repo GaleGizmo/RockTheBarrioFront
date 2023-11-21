@@ -16,7 +16,7 @@ import { setEvento } from "../../redux/eventos/eventos.actions";
 
 const Evento = ({ evento, user }) => {
   const [hovered, setHovered] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  
 
   const [showMap, setShowMap] = useState(false);
   const dispatch = useDispatch();
@@ -38,31 +38,34 @@ const Evento = ({ evento, user }) => {
   const getEvento = () => {
     dispatch(setEvento(evento._id));
   };
-  const isLongTitle = evento.title.length > 10 && !evento.title.includes(" ");
+  const isLongTitle = evento?.title?.length > 10 && !evento.title.includes(" ");
 
-  const fechaEvento = evento.date_start ? parseISO(evento.date_start) : null;
-  const diasFaltantes = formatDistanceToNow(fechaEvento, {
-    unit: "day",
-    locale: gl,
-  });
-  const fechaStart = evento.date_start
+  const fechaEvento = evento?.date_start ? parseISO(evento.date_start) : null;
+  let diasFaltantes = null;
+  if(fechaEvento) {
+     diasFaltantes = formatDistanceToNow(fechaEvento, {
+      unit: "day",
+      locale: gl,
+    });
+  }
+  const fechaStart = evento?.date_start
     ? format(fechaEvento, "EEE, dd, MMM ", {
         locale: gl,
       })
     : null;
-  const horaStart = evento.date_start ? format(fechaEvento, "HH:mm") : null;
+  const horaStart = evento?.date_start ? format(fechaEvento, "HH:mm") : null;
   
   return (
-    <div className={`card ${scrolled ? 'hidden' : ''} ${evento.status ? "status " + evento.status : ""}`}>
+    <div className={`card ${evento.status ? "status " + evento.status : ""}`}>
       {esHoy(evento.date_start) ? (
         <div className="data-label_container esHoy">
           <div className="data-label_esHoy">HOXE</div>
         </div>
       ) : (
         <div className="data-label_container">
-          <div className="data-label_weekday">{fechaStart.split(",")[0]}</div>
-          <div className="data-label_day">{fechaStart.split(",")[1]}</div>
-          <div className="data-label_month">{fechaStart.split(",")[2]}</div>
+          <div className="data-label_weekday">{fechaStart?.split(",")[0]}</div>
+          <div className="data-label_day">{fechaStart?.split(",")[1]}</div>
+          <div className="data-label_month">{fechaStart?.split(",")[2]}</div>
         </div>
       )}
 
@@ -98,7 +101,7 @@ const Evento = ({ evento, user }) => {
              
             </p>
           ) : (
-            <p>{evento.site.split(",")[0]}</p>
+            <p>{evento?.site?.split(",")[0]}</p>
           )}
 
           {horaStart && (

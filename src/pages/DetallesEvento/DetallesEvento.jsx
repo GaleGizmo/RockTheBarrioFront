@@ -42,11 +42,11 @@ const DetallesEvento = () => {
   const openImageModal = () => {
     setShowImageModal(true);
   };
-  
+
   const closeImageModal = () => {
     setShowImageModal(false);
   };
-  
+
   const navigate = useNavigate();
 
   const isLongTitle =
@@ -91,7 +91,7 @@ const DetallesEvento = () => {
       })
     : null;
   const fechaStart = fechaEvento
-    ? format(fechaEvento, "EEEE, dd MMMM, HH:mm", {
+    ? format(fechaEvento, " dd MMMM, HH:mm", {
         locale: gl,
       })
     : null;
@@ -132,14 +132,20 @@ const DetallesEvento = () => {
                   ></iframe>
                 </div>
               ) : evento.image ? (
-                <div className="image-container"><img
-                  className={`${evento.status ? evento.status : ""}`}
-                  src={evento.image}
-                  alt={evento.title}
-                  onClick={openImageModal}
-                /> <AiOutlineZoomIn className="zoom-icon" onClick={openImageModal} /> </div>
+                <div className="image-container">
+                  <img
+                    className={`${evento.status ? evento.status : ""}`}
+                    src={evento.image}
+                    alt={evento.title}
+                    onClick={openImageModal}
+                  />{" "}
+                  <AiOutlineZoomIn
+                    className="zoom-icon"
+                    onClick={openImageModal}
+                  />{" "}
+                </div>
               ) : (
-                <img className="divCardDetEv__noimage" ></img>
+                <img className="divCardDetEv__noimage"></img>
               )}
               <h2>{evento.artist}</h2>
               <h3>
@@ -184,29 +190,29 @@ const DetallesEvento = () => {
                 </h3>
               ) : (
                 <div className="muestra-fecha">
-                  <h3>{fechaStart}h</h3>
-
-                  {fechaEnd && <span className="fecha-end"> {fechaEnd}</span>}
-                </div>
-              )}
-              {fechaEnd && <h3>{fechaEnd}</h3>}
-              <p>
+                  <strong>Data:{' '}</strong>
+                   <h3> {fechaStart}h </h3> 
+                  {user && (
+                    <span onClick={handleFavorites}>
+                      {isFavorite ? (
+                        <BiCalendarHeart className="favorito favorito-detalle" />
+                      ) : (
+                        <BiCalendarAlt className="favorito favorito-detalle" />
+                      )}
+                    </span>
+                  )}
+                  <p className="dias-faltantes__detalle">
                 {esAnterior(evento.date_start) ? "Fai" : "Dentro de"}{" "}
                 <span className="gratuito">{diasFaltantes} </span>
               </p>
+                </div>
+              )}
+              {fechaEnd && <h3>{fechaEnd}</h3>}
+             
               {evento.genre && (
                 <h3>
                   <div>
                     <strong>Xénero:</strong> {evento.genre}
-                    {user && (
-                      <span onClick={handleFavorites}>
-                        {isFavorite ? (
-                          <BiCalendarHeart className="favorito favorito-detalle" />
-                        ) : (
-                          <BiCalendarAlt className="favorito favorito-detalle" />
-                        )}
-                      </span>
-                    )}{" "}
                   </div>
                   {showFavorite && (
                     <Favorito
@@ -257,8 +263,11 @@ const DetallesEvento = () => {
               ) : null}
             </div>
           </div>
-          <ImagenModal show={showImageModal} onCancel={closeImageModal} imageUrl={evento.image} />
-
+          <ImagenModal
+            show={showImageModal}
+            onCancel={closeImageModal}
+            imageUrl={evento.image}
+          />
         </div>
       )}
     </>

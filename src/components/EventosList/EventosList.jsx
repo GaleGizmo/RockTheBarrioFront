@@ -14,9 +14,13 @@ import Buscador from "../Buscador/Buscador";
 
 const EventosList = () => {
   const dispatch = useDispatch();
+  
+
+  
   useEffect(() => {
     dispatch(getEventosParaCalendar());
   }, [dispatch]);
+
   const [filtroActivo, setFiltroActivo] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [eventosToShow, setEventosToShow] = useState([]);
@@ -35,9 +39,7 @@ const EventosList = () => {
     }
   }, [eventosFiltrados, eventos]);
 
-  useEffect(() => {
-    dispatch(getEventosDesdeHoy());
-  }, [dispatch]);
+  
   useEffect(() => {
    
     const handleScroll = () => {
@@ -58,6 +60,10 @@ const EventosList = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  useEffect(() => {
+    dispatch(getEventosDesdeHoy());
+  }, [dispatch]);
   return (
     <div className="eventos-list">
       <div className="div-buscador">

@@ -35,8 +35,8 @@
 }
 .favorito-detalle {
   margin-bottom: 5px;
-  margin-left: 10px;
-  transform: scale(1.1);
+  margin-left: 5px;
+  transform: scale(1.3);
 }
 .favorito__yes {
   color: red;
@@ -50,8 +50,8 @@
 
 .favorito-detalle:hover {
   filter: brightness(2);
-  filter: contrast(2);
-  transform: scale(1.2);
+  
+  transform: scale(1.5);
 }
 @media (max-width: 420px) {
   .add-favorito {
@@ -62,8 +62,8 @@
 
   .favorito-detalle {
     margin-bottom: 5px;
-    margin-left: 10px;
-    transform: scale(1.5);
+    margin-left: 5px;
+    transform: scale(1.3);
   }
   .tooltip-detalle {
     font-size: 8px;
