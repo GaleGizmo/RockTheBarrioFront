@@ -162,6 +162,7 @@ img.boleto_imagen {
  
  
 }
+
 .zoom-icon{
   font-size: 1.5rem;
   position: absolute;
@@ -173,6 +174,10 @@ img.boleto_imagen {
 }.zoom-icon:hover{
   cursor: pointer;
  transform: scale(1.2);
+}
+.zoom-out{
+  bottom: 10px;
+  right: 10px;
 }
 .cardDetEv a {
   text-decoration: none;
@@ -303,7 +308,7 @@ img.boleto_imagen {
     margin: 0 5% 50px 5%;
   }
   .cardDetEv h1 {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: bold;
     margin-bottom: 5px;
     margin-top: 1%;

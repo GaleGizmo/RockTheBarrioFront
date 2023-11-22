@@ -1,3 +1,7 @@
+.modal-backdrop{
+    width: auto;
+    height: inherit;
+}
 .modal-image{
     position: relative;
     height: 100%;
@@ -7,9 +11,23 @@
     margin: 0;
     border: 10px solid var(--secondary-color);
 }
-.zoom-out{
-    bottom: 15px;
-    right: 15px;
+
+.rrss-container{
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: white;
+    gap: 5px;
+    height: fit-content;
+    padding: 10px;
+    margin: auto;
+    justify-content: center;
+    border: 1px solid var(--secondary-color);
+    border-radius: 8px;
+}
+.rrss-container p{
+    width: 100%;
+    text-align: center;
 }
 @media (max-width: 520px){
     .modal-image{

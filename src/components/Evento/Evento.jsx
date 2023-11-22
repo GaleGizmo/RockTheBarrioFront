@@ -4,19 +4,21 @@ import { BiCalendarHeart, BiCalendarAlt } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import {BsClockFill} from "react-icons/bs"
 import { esAnterior, esHoy } from "../../shared/formatDate";
-import { format, formatDistanceToNow, parse, parseISO } from "date-fns";
+import { format, formatDistanceToNow, parse, parseISO, set } from "date-fns";
 import { gl } from "date-fns/locale";
 import MapIcon from "../MapIcon/MapIcon";
 import Favorito from "../Favorito/Favorito";
 import { BsInfoCircleFill } from "react-icons/bs";
+import { BsFillShareFill } from "react-icons/bs";
 import MapComponent from "../MapComponent/MapComponent";
 import useFavorites from "../../shared/useFavorites";
 import { useDispatch } from "react-redux";
 import { setEvento } from "../../redux/eventos/eventos.actions";
+import ImagenModal from "../ImagenModal/ImagenModal";
 
 const Evento = ({ evento, user }) => {
   const [hovered, setHovered] = useState(false);
-  
+  const [shareModal, setShareModal]=useState(false)
 
   const [showMap, setShowMap] = useState(false);
   const dispatch = useDispatch();
@@ -28,6 +30,10 @@ const Evento = ({ evento, user }) => {
   const handleMouseEnter = () => {
     setHovered(true);
   };
+
+  const handleShareModal=()=>{
+    setShareModal(!shareModal)
+  }
 
   const handleMouseLeave = () => {
     setHovered(false);
@@ -57,6 +63,8 @@ const Evento = ({ evento, user }) => {
   
   return (
     <div className={`card ${evento.status ? "status " + evento.status : ""}`}>
+                {shareModal && <ImagenModal show="true" evento={evento} handleShareModal={handleShareModal}/>}
+
       {esHoy(evento.date_start) ? (
         <div className="data-label_container esHoy">
           <div className="data-label_esHoy">HOXE</div>
@@ -165,14 +173,18 @@ const Evento = ({ evento, user }) => {
                 )}
               </div>
             )}
+            <span onClick={handleShareModal}><BsFillShareFill className="mas-info" /> </span>
             <Link to={{ pathname: `/${evento._id}` }}>
               <BsInfoCircleFill className="mas-info" onClick={getEvento} />
             </Link>
             {showFavorite && (
               <Favorito evento={evento._id} favoriteStatus={isFavorite} />
             )}
+
           </div>
+
         </div>
+
       </div>
       {showMap && <MapComponent direccion={evento.site} />}
     </div>
