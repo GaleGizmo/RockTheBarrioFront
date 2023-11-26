@@ -93,7 +93,7 @@
   }
   .isEdit {
     width: 50%;
-    margin: 80px auto 0 auto;
+    margin: 80px auto 40px auto;
   }
   @keyframes appearCard {
     0% {

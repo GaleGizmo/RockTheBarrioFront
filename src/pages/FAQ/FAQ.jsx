@@ -22,13 +22,9 @@ const faqData = [
   {
     title: "Que información hai de cada evento?",
     content:
-      "Na páxina principal amósase para cada evento: nome do evento, artista(s), lugar, data, xénero musical, prezo (se procede) e número de comentarios dos usuarios.",
+      "Na páxina principal amósase para cada evento: nome do evento, artista(s), lugar, data, xénero musical, prezo (se procede) e número de comentarios dos usuarios. Pódesen ver máis detalles de cada evento, así coma os comentarios (de habelos) facendo click na imaxe do evento ou no icono de Info:",
   },
-  {
-    title: "Para que é o icono de Info?  ",
-    content:
-      "Clicando neste icono accédese á páxina detallada de cada evento onde, ademáis dos datos amosados na páxina principal, temos: descripción (máis ou menos detallada) do evento, video de YouTube cun tema do artista, enlace á web de compra de entradas e botón de '+Info' que leva a unha url externa con máis datos do artista ou do evento. Aquí podense ver tamén os comentarios dos usuarios sobor do evento.",
-  },
+  
   {
     title: "Podo ver información de eventos xa pasados?",
     content:
@@ -103,13 +99,14 @@ const navigate=useNavigate()
               <AccordionItem key={index} value={index.toString()}>
                 <AccordionHeader>
                   <div className="faq-titulo">{comentario.title} 
-                  {index==2 && <span className="faq-infoContainer" > <BsInfoCircleFill className="faq-infoIcon"/><BsInfo className="faq-infoInner" /> </span>}</div>
+                 </div>
                 </AccordionHeader>
                 <AccordionPanel>
                   {comentario.content && (
                     <p className="faq-contenido">{comentario.content}
                     {index==0 && <FaRegCalendarAlt/>}
-                    {index==7 && (<span className="faq-favIcon"><BiCalendarAlt/></span>)}</p>
+                    {index==6 && (<span className="faq-favIcon"><BiCalendarAlt/></span>)}
+                    {index==1 && <span  > <BsInfoCircleFill className="faq-infoIcon"/> </span>} </p>
                   )}
                 </AccordionPanel>
               </AccordionItem>
