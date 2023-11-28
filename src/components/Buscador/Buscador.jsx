@@ -15,6 +15,7 @@ import {
 } from "../../redux/eventos/eventos.actions";
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
 import { API } from "../../shared/api";
+import Modal from "../Modal/Modal";
 
 
 
@@ -34,16 +35,20 @@ const Buscador = ({ eventos, user }) => {
   const [searchFinalDate, setSearchFinalDate] = useState("");
   const [customDates, setCustomDates] = useState(false);
   const [pastEvents, setPastEvents] = useState(false);
+  const [showLoader, setShowLoader] = useState(false)
 
   let eventosToShow;
   let filteredResults = [];
   function showFilteredResults () {
+    setShowLoader(false)
+    
     if (filteredResults.length === 0) {
       setNoResults(true);
     } else {
       
       dispatch(setFilteredEventos(filteredResults));
     }
+    
   }
   async function getAllEventos(filters, userData) {
     try {
@@ -130,6 +135,7 @@ const Buscador = ({ eventos, user }) => {
 
   const { register, handleSubmit, reset, setValue } = useForm();
   const onSubmit = (data) => {
+    setShowLoader(true)
     data.searchAll = searchAll;
     data.searchArtist = searchArtist;
     data.searchSite = searchSite;
@@ -160,6 +166,7 @@ const Buscador = ({ eventos, user }) => {
     } else {
       eventosToShow =[...eventos]
       filteredResults = FilterEvents(eventosToShow, data, user);
+      
       showFilteredResults()
     }
     
@@ -195,6 +202,9 @@ const Buscador = ({ eventos, user }) => {
 
   return (
     <div className="buscador-container">
+    {showLoader && (
+      <Modal show={true} showLoader={true}/>
+    )}
       <ConfirmModal
         title="Ups!"
         p1="Non se atoparon resultados."

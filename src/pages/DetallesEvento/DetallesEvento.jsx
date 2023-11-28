@@ -18,7 +18,8 @@ import { BiCalendarAlt, BiCalendarHeart } from "react-icons/bi";
 import Favorito from "../../components/Favorito/Favorito";
 import { format, formatDistanceToNow, parseISO } from "date-fns";
 import { gl } from "date-fns/locale";
-import ImagenModal from "../../components/ImagenModal/ImagenModal";
+import Modal from "../../components/Modal/Modal";
+import Loader from "../../components/Loader/Loader";
 
 const DetallesEvento = () => {
   const dispatch = useDispatch();
@@ -100,13 +101,7 @@ const DetallesEvento = () => {
   return (
     <>
       {!evento ? (
-        <div className="div-img">
-          <img
-            src="/assets/music.gif"
-            style={{ marginTop: "200px" }}
-            alt="Cargando..."
-          />
-        </div>
+        <Loader/>
       ) : (
         <div className="detalles-container">
           <div
@@ -264,7 +259,7 @@ const DetallesEvento = () => {
               ) : null}
             </div>
           </div>
-          <ImagenModal
+          <Modal
             show={showImageModal}
             onCancel={closeImageModal}
             imageUrl={evento.image}

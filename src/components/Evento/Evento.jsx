@@ -14,7 +14,7 @@ import MapComponent from "../MapComponent/MapComponent";
 import useFavorites from "../../shared/useFavorites";
 import { useDispatch } from "react-redux";
 import { setEvento } from "../../redux/eventos/eventos.actions";
-import ImagenModal from "../ImagenModal/ImagenModal";
+import Modal from "../Modal/Modal";
 
 const Evento = ({ evento, user }) => {
   const [hovered, setHovered] = useState(false);
@@ -63,7 +63,7 @@ const Evento = ({ evento, user }) => {
   
   return (
     <div className={`card ${evento.status ? "status " + evento.status : ""}`}>
-                {shareModal && <ImagenModal show="true" evento={evento} handleShareModal={handleShareModal}/>}
+                {shareModal && <Modal show="true" evento={evento} handleShareModal={handleShareModal}/>}
 
       {esHoy(evento.date_start) ? (
         <div className="data-label_container esHoy">

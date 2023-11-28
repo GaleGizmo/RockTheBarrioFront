@@ -42,3 +42,14 @@ body {
   color: green;
   font-weight: 500;
 }
+.close-icon{
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  transform: scale(1.5);
+}
+.close-icon:hover{
+  color: var(--terciary-color);
+  cursor: pointer;
+}
+

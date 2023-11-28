@@ -11,6 +11,7 @@ import "./EventosList.css";
 
 import CustomCalendar from "../CustomCalendar/CustomCalendar";
 import Buscador from "../Buscador/Buscador";
+import Loader from "../Loader/Loader";
 
 const EventosList = () => {
   const dispatch = useDispatch();
@@ -71,9 +72,7 @@ const EventosList = () => {
       </div>
       <div className="eventos">
         {loading ? (
-          <div className="div-img">
-            <img src="/assets/music.gif" alt="Cargando..." />
-          </div>
+          <Loader/>
         ) : (
           <>
             {filtroActivo && (

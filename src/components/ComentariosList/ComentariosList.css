@@ -1,8 +1,4 @@
-/* img{
-    width: 50%;
-    height: 50%;
-    
-} */
+
 .comentarios-container {
     max-height: 70vh;
     overflow-y: auto;
@@ -21,15 +17,7 @@
     top: 42vh;
     max-height: 55vh;
 }
-/* .comentarios-container::-webkit-scrollbar {
-    width: 0; 
-} */
 
-/* .div-img{
-display: flex;
-justify-content: center;
-margin-top: 5%;
-} */
 
 .div-textAviso{
     width: 75%

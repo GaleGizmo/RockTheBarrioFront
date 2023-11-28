@@ -4,25 +4,7 @@
 
 }
 
-.modal-backdrop {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.6);
-    z-index:999;
-  }
-.close-icon{
-    position: absolute;
-    right: 5px;
-    top: 5px;
-    transform: scale(1.5);
-}
-.close-icon:hover{
-    color: var(--terciary-color);
-    cursor: pointer;
-}
+
 
 @media (min-width: 1px) and (max-width: 469.98px) {
 .perfil-container{

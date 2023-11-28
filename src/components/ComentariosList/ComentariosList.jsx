@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import Comentario from "../Comentario/Comentario";
 
 import "./ComentariosList.css";
+import Loader from "../Loader/Loader";
 
 const ComentariosList = ({ eventoId, hayUser }) => {
 
@@ -20,9 +21,7 @@ const ComentariosList = ({ eventoId, hayUser }) => {
   return (
     <div className={`comentarios-container ${hayUser ? 'hayUser' : ''} ${escribiendoComentario ? 'estaEscribiendo':''}`}>
       {loading && (
-        <div className="div-img">
-          <img src="/assets/music.gif" />
-        </div>
+        <Loader/>
       )}
 
       

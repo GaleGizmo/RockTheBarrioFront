@@ -11,18 +11,21 @@ import {
   TelegramShareButton,
   TelegramIcon,
 } from "react-share";
-import "./ImagenModal.css";
+import "./Modal.css";
 import { AiFillCloseSquare, AiOutlineZoomOut } from "react-icons/ai";
+import Loader from "../Loader/Loader";
 
-const ImagenModal = ({
+const Modal = ({
   show,
+  showLoader,
   onCancel,
   imageUrl,
   evento,
   handleShareModal,
 }) => {
-  let eventoUrl=""
- if (evento) eventoUrl = `https://rock-the-barrio-front-one.vercel.app/${evento._id}`;
+  let eventoUrl = "";
+  if (evento)
+    eventoUrl = `https://rock-the-barrio-front-one.vercel.app/${evento._id}`;
   return (
     <>
       {show && (
@@ -32,6 +35,9 @@ const ImagenModal = ({
         className={`modal  fade ${show ? "show" : ""}`}
         style={{ display: show ? "flex" : "none" }}
       >
+      {showLoader && (
+        <Loader/>
+      )}
         {imageUrl && (
           <div className="image-container">
             <img
@@ -62,11 +68,15 @@ const ImagenModal = ({
             <TwitterShareButton url={eventoUrl} title={evento.title}>
               <TwitterIcon size={32} round />
             </TwitterShareButton>
-           <TelegramShareButton url={eventoUrl} title={evento.title}>
+            <TelegramShareButton url={eventoUrl} title={evento.title}>
               <TelegramIcon size={32} round />
             </TelegramShareButton>
-            
-            <EmailShareButton url={eventoUrl} body="Mira este evento: " subject={evento.title}>
+
+            <EmailShareButton
+              url={eventoUrl}
+              body="Mira este evento: "
+              subject={evento.title}
+            >
               <EmailIcon size={32} round />
             </EmailShareButton>
           </div>
@@ -76,4 +86,4 @@ const ImagenModal = ({
   );
 };
 
-export default ImagenModal;
+export default Modal;

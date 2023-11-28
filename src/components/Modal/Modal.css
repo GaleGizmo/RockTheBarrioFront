@@ -1,7 +1,16 @@
-.modal-backdrop{
+
+
+.modal-backdrop {
     width: auto;
     height: inherit;
-}
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index:1049;
+  }
 .modal-image{
     position: relative;
     height: 100%;
@@ -37,6 +46,9 @@
     .zoom-out{
         bottom: 7px;
         right: 7px;
+    }
+    .modal-backdrop{
+        height: 100vh;
     }
     
 }
