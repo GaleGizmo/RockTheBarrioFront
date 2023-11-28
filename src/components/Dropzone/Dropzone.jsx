@@ -73,7 +73,7 @@ const DropzoneComponent = ({ setImageFile, setSelectedFile }) => {
         )}
       </div>
       
-      <p className="warning">Só arquivos PNG, JPG ou GIF de menos de 2MB</p>
+      <p className="warning">Só arquivos PNG, JPG ou GIF &lt; 2MB</p>
     
     </div>
   );

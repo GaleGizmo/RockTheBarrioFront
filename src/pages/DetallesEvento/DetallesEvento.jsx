@@ -243,8 +243,9 @@ const DetallesEvento = () => {
                   <Button text="Editar" type="medium" onClick={editarEvento} />
                 </div>
               )}
-              {showMap && <MapComponent direccion={evento.site} />}
+              {showMap && <MapComponent direccion={evento.site} /> }
             </div>
+            
           </div>
           <div className="detalle-comentarios">
             <div className="nuevocomentario-wrapper">

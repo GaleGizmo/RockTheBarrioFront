@@ -1,13 +1,18 @@
 //convierte los campos de los eventos a minusculas
 const propertiesToConvert = ["title", "artist", "site", "genre"];
+const propertiesToConvertExtended= ["title", "artist", "site", "genre", "content"]
 const convertEventosToLowerCase = (eventos) => {
   return eventos.map((evento) => {
     let eventoLowerCase = { ...evento };
     propertiesToConvert.forEach((prop) => {
-      if (typeof evento[prop] === "string") {
+      
         eventoLowerCase[prop] = evento[prop].toLowerCase();
-      }
+        if (eventoLowerCase[prop]=="varios"){
+         
+          eventoLowerCase.content=evento.content.toLowerCase()
+        }
     });
+   
     return eventoLowerCase;
   });
 };
@@ -23,13 +28,20 @@ const FilterEvents = (eventos, filtros, user) => {
 
   const filteredEvents = () => {
     filtered = filtered.filter((evento) => {
-      const matchInput = propertiesToConvert.some((prop) => {
+      let propertiesToSearch=null
+      if (evento.site=="varios"||evento.artist=="varios"){
+        propertiesToSearch=propertiesToConvertExtended
+      } else {
+        propertiesToSearch=propertiesToConvert
+      }
+      const matchInput = propertiesToSearch.some((prop) => {
         return (
           (filtros.searchAll ||
             filtros[`search${prop.charAt(0).toUpperCase() + prop.slice(1)}`]) &&
           evento[prop].includes(inputLowerCase)
         );
       });
+      
       const matchFavorites =
         user && filtros.favorites && user.favorites.includes(evento._id);
       const matchFreeEvent = filtros.freeEvent && evento.price === 0;
