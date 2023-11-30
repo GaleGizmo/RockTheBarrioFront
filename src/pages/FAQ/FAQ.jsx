@@ -38,7 +38,7 @@ const faqData = [
   {
     title: "Como funciona o buscador?",
     content:
-      "Por defecto, a palabra ou palabras que se introduzan búscanse en todos os campos principais dun evento (nome do evento, artista, lugar e  xénero). Para axilizar a búsqueda é aconsellabel marcar o campo concreto no que se quere buscar. Ademáis, pódese restrinxir a búsqueda só a eventos gratuitos, que tiveran lugar nunhas datas concretas, ou os que o usuario teña engadidos a favoritos. O resultado da búsqueda, salvo que se marque a casiña 'Inclue eventos pasados', devolverá só os eventos a partires da data actual. ",
+      "Por defecto, a palabra que se introduza búscase en tódolos campos principais dos eventos (nome do evento, artista, lugar e  xénero). Cando se introduce máis dun termo de búsqueda devólvense os resultados que conteñan tódolos termos, salvo que se marque a casiña 'Calquera termo' o que fará que se devolvan tódolos eventos que conteñan alomenos unha das palabras. Para axilizar a búsqueda é aconsellabel marcar o campo concreto no que se quere buscar. Ademáis, pódese restrinxir a búsqueda só a eventos gratuitos, que tiveran lugar nunhas datas concretas, ou os que o usuario teña engadidos a favoritos. O resultado da búsqueda, salvo que se marque a casiña 'Inclue eventos pasados', devolverá só os eventos a partires da data actual. ",
   },
   {
     title: "Como volto á lista de eventos por defecto?",

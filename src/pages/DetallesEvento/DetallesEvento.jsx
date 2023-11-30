@@ -181,7 +181,7 @@ const DetallesEvento = () => {
               </h3>
               {esHoy(evento.date_start) ? (
                 <h3 className="gratuito ">
-                  HOXE <span>{fechaStart.split(",")[2]}h</span>
+                  HOXE <span>{fechaStart.split(",")[1]}h</span>
                 </h3>
               ) : (
                 <div className="muestra-fecha">

@@ -1,10 +1,6 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import "./Buscador.css";
-import {
-  BiChevronsUp,
-
-  BiSearchAlt,
-} from "react-icons/bi";
+import { BiChevronsUp, BiSearchAlt } from "react-icons/bi";
 import { useForm } from "react-hook-form";
 import Button from "../Button/Button";
 import FilterEvents from "../../customhooks/Filter";
@@ -17,13 +13,12 @@ import ConfirmModal from "../ConfirmModal/ConfirmModal";
 import { API } from "../../shared/api";
 import Modal from "../Modal/Modal";
 
-
-
 const Buscador = ({ eventos, user }) => {
   const dispatch = useDispatch();
   const [showAdvancedSearch, setShowAdavancedSearch] = useState(false);
   const [noResults, setNoResults] = useState(false);
   const [searchAll, setSearchAll] = useState(true);
+  const [searchWithOr, setSearchWithOr] = useState(false);
   const [searchTitle, setSearchTitle] = useState(false);
   const [searchArtist, setSearchArtist] = useState(false);
   const [searchGenre, setSearchGenre] = useState(false);
@@ -35,47 +30,46 @@ const Buscador = ({ eventos, user }) => {
   const [searchFinalDate, setSearchFinalDate] = useState("");
   const [customDates, setCustomDates] = useState(false);
   const [pastEvents, setPastEvents] = useState(false);
-  const [showLoader, setShowLoader] = useState(false)
+  const [showLoader, setShowLoader] = useState(false);
 
   let eventosToShow;
   let filteredResults = [];
-  function showFilteredResults () {
-    setShowLoader(false)
-    
+  function showFilteredResults() {
+    setShowLoader(false);
+
     if (filteredResults.length === 0) {
       setNoResults(true);
     } else {
-      
       dispatch(setFilteredEventos(filteredResults));
     }
-    
   }
   async function getAllEventos(filters, userData) {
     try {
       const response = await API.get("/evento");
       eventosToShow = response.data;
-      
+
       filteredResults = FilterEvents(eventosToShow, filters, userData);
-      showFilteredResults()
+      showFilteredResults();
     } catch (error) {
       console.error("Error al obtener eventos:", error);
       throw error;
     }
   }
 
-  async function getEventosEntreFechas(filters, userData, startDate, endDate){
+  async function getEventosEntreFechas(filters, userData, startDate, endDate) {
     try {
-      const response = await API.post("/evento/eventosEntreFechas", {startDate, endDate});
+      const response = await API.post("/evento/eventosEntreFechas", {
+        startDate,
+        endDate,
+      });
       eventosToShow = response.data;
-      
+
       filteredResults = FilterEvents(eventosToShow, filters, userData);
-      showFilteredResults()
+      showFilteredResults();
     } catch (error) {
       console.error("Error al obtener eventos:", error);
       throw error;
     }
-  
-
   }
 
   const getNextDayOfWeek = (date, dayOfWeek) => {
@@ -135,7 +129,9 @@ const Buscador = ({ eventos, user }) => {
 
   const { register, handleSubmit, reset, setValue } = useForm();
   const onSubmit = (data) => {
-    setShowLoader(true)
+    setShowLoader(true);
+   
+    data.searchWithOr = searchWithOr;
     data.searchAll = searchAll;
     data.searchArtist = searchArtist;
     data.searchSite = searchSite;
@@ -153,25 +149,21 @@ const Buscador = ({ eventos, user }) => {
       data.searchFinalDate.setHours(23, 59, 0, 0);
     }
 
-    const today=new Date();
+    const today = new Date();
 
     if (pastEvents) {
-       getAllEventos(data, user);
-          
-    } else if (searchInitialDate && searchInitialDate<today){
-      let initialDate=new Date(searchInitialDate);
-      let finalDate=new Date(searchFinalDate);
-      
-      getEventosEntreFechas(data, user, initialDate, finalDate)
-    } else {
-      eventosToShow =[...eventos]
-      filteredResults = FilterEvents(eventosToShow, data, user);
-      
-      showFilteredResults()
-    }
-    
+      getAllEventos(data, user);
+    } else if (searchInitialDate && searchInitialDate < today) {
+      let initialDate = new Date(searchInitialDate);
+      let finalDate = new Date(searchFinalDate);
 
-  
+      getEventosEntreFechas(data, user, initialDate, finalDate);
+    } else {
+      eventosToShow = [...eventos];
+      filteredResults = FilterEvents(eventosToShow, data, user);
+
+      showFilteredResults();
+    }
   };
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
@@ -186,6 +178,7 @@ const Buscador = ({ eventos, user }) => {
   const cleanFiltered = (event) => {
     event.preventDefault();
     reset({ input: "" });
+    setSearchWithOr(false);
     setFreeEvent(false);
     setSearchDate(false);
     setSearchArtist(false);
@@ -202,9 +195,7 @@ const Buscador = ({ eventos, user }) => {
 
   return (
     <div className="buscador-container">
-    {showLoader && (
-      <Modal show={true} showLoader={true}/>
-    )}
+      {showLoader && <Modal show={true} showLoader={true} />}
       <ConfirmModal
         title="Ups!"
         p1="Non se atoparon resultados."
@@ -232,13 +223,25 @@ const Buscador = ({ eventos, user }) => {
           <p onClick={handleShowAdvancedSearch} className="buscador-avanzada">
             {showAdvancedSearch ? "Sinxela" : "Avanzada"}
           </p>
+          <div className={`buscador-input_type ${
+            showAdvancedSearch ? "show-advanced" : ""
+          }`}>
+            <input
+              type="checkbox"
+              checked={searchWithOr}
+              onChange={(e) => {
+                setSearchWithOr(e.target.checked);
+              }}
+            />
+            <label>Calquera termo</label>
+          </div>
         </div>
         <div
           className={`buscador buscador-checks ${
             showAdvancedSearch ? "show-advanced" : ""
           }`}
         >
-          <div className="buscador-checks_item">
+          {/* <div className="buscador-checks_item">
             <label>Calquera</label>
             <input
               type="checkbox"
@@ -251,7 +254,7 @@ const Buscador = ({ eventos, user }) => {
                 setSearchGenre(false);
               }}
             />
-          </div>
+          </div> */}
 
           <div className="buscador-checks_item">
             <label>Evento</label>
@@ -260,7 +263,7 @@ const Buscador = ({ eventos, user }) => {
               checked={searchTitle}
               onChange={(e) => {
                 setSearchTitle(e.target.checked);
-                setSearchAll(false);
+                setSearchAll(!e.target.checked);
               }}
             />
           </div>
@@ -271,7 +274,7 @@ const Buscador = ({ eventos, user }) => {
               checked={searchArtist}
               onChange={(e) => {
                 setSearchArtist(e.target.checked);
-                setSearchAll(false);
+                setSearchAll(!e.target.checked);
               }}
             />
           </div>
@@ -282,7 +285,7 @@ const Buscador = ({ eventos, user }) => {
               checked={searchSite}
               onChange={(e) => {
                 setSearchSite(e.target.checked);
-                setSearchAll(false);
+                setSearchAll(!e.target.checked);
               }}
             />
           </div>
@@ -293,7 +296,7 @@ const Buscador = ({ eventos, user }) => {
               checked={searchGenre}
               onChange={(e) => {
                 setSearchGenre(e.target.checked);
-                setSearchAll(false);
+                setSearchAll(!e.target.checked);
               }}
             />
           </div>

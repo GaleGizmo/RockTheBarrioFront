@@ -23,7 +23,7 @@ const dateInRange = (date, start, end) => {
 
 const FilterEvents = (eventos, filtros, user) => {
   const eventosLowerCase = convertEventosToLowerCase(eventos);
-  const inputLowerCase = filtros.input.toLowerCase();
+  const inputLowerCase = filtros.input.trim().split(' ').filter(e => String(e).trim());
   let filtered = eventosLowerCase;
 
   const filteredEvents = () => {
@@ -38,7 +38,7 @@ const FilterEvents = (eventos, filtros, user) => {
         return (
           (filtros.searchAll ||
             filtros[`search${prop.charAt(0).toUpperCase() + prop.slice(1)}`]) &&
-          evento[prop].includes(inputLowerCase)
+            (filtros.searchWithOr ? inputLowerCase.some(word => evento[prop].includes(word)) : inputLowerCase.every(word => evento[prop].includes(word)))
         );
       });
       
