@@ -22,7 +22,7 @@ const faqData = [
   {
     title: "Que información hai de cada evento?",
     content:
-      "Na páxina principal amósase para cada evento: nome do evento, artista(s), lugar, data, xénero musical, prezo (se procede) e número de comentarios dos usuarios. Pódesen ver máis detalles de cada evento, así coma os comentarios (de habelos) facendo click na imaxe do evento ou no icono de Info:",
+      "Na páxina principal amósase para cada evento: nome do evento, artista(s), lugar, data, xénero musical, prezo (se procede) e número de comentarios dos usuarios. Pódense ver máis detalles de cada evento, así coma os comentarios (de habelos) facendo click na imaxe do evento ou no icono de Info:",
   },
   
   {
@@ -38,7 +38,7 @@ const faqData = [
   {
     title: "Como funciona o buscador?",
     content:
-      "Por defecto, a palabra que se introduza búscase en tódolos campos principais dos eventos (nome do evento, artista, lugar e  xénero). Cando se introduce máis dun termo de búsqueda devólvense os resultados que conteñan tódolos termos, salvo que se marque a casiña 'Calquera termo' o que fará que se devolvan tódolos eventos que conteñan alomenos unha das palabras. Para axilizar a búsqueda é aconsellabel marcar o campo concreto no que se quere buscar. Ademáis, pódese restrinxir a búsqueda só a eventos gratuitos, que tiveran lugar nunhas datas concretas, ou os que o usuario teña engadidos a favoritos. O resultado da búsqueda, salvo que se marque a casiña 'Inclue eventos pasados', devolverá só os eventos a partires da data actual. ",
+      'Por defecto, a palabra que se introduza búscase en tódolos campos principais dos eventos: nome do evento, artista, lugar e  xénero.\n Cando se introduce máis dun termo de búsqueda devólvense os resultados que conteñan tódolos termos, salvo que se marque a casiña "Calquera termo" o que fará que se devolvan tódolos eventos que conteñan alomenos unha das palabras.\n Para axilizar a búsqueda é aconsellabel marcar o campo concreto no que se quere buscar. Ademáis, pódese restrinxir a búsqueda só a eventos gratuitos, que tiveran lugar nunhas datas concretas, ou os que o usuario teña engadidos a favoritos. O resultado da búsqueda, salvo que se marque a casiña "Inclue eventos pasados", devolverá só os eventos a partires da data actual. ',
   },
   {
     title: "Como volto á lista de eventos por defecto?",
@@ -103,10 +103,15 @@ const navigate=useNavigate()
                 </AccordionHeader>
                 <AccordionPanel>
                   {comentario.content && (
-                    <p className="faq-contenido">{comentario.content}
-                    {index==0 && <FaRegCalendarAlt/>}
-                    {index==6 && (<span className="faq-favIcon"><BiCalendarAlt/></span>)}
-                    {index==1 && <span  > <BsInfoCircleFill className="faq-infoIcon"/> </span>} </p>
+                    <div className="faq-contenido">
+                      {comentario.content.split('\n').map((linea, i) => 
+                        <p key={i} >{linea} 
+                        {index==0 && <FaRegCalendarAlt/>}
+                      {index==6 && (<span className="faq-favIcon"><BiCalendarAlt/></span>)}
+                      {index==1 && <span  > <BsInfoCircleFill className="faq-infoIcon"/> </span>}</p>
+                      )}
+                      
+                    </div>
                   )}
                 </AccordionPanel>
               </AccordionItem>
