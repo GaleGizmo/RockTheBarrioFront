@@ -9,6 +9,12 @@
     border-radius: 50%;
     overflow: hidden;
 }
+.green{
+    color: green;
+}
+.red {
+    color: red;
+}
 @media (min-width: 421px) and (max-width: 992px){
     .perfil-avatar{
         width:150px;
