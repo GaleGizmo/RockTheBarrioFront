@@ -345,7 +345,7 @@ const Buscador = ({ eventos, user }) => {
               type="checkbox"
               checked={searchDate}
               onChange={(e) => setSearchDate(e.target.checked)}
-            />{" "}
+            />
           </div>
           {searchDate && (
             <div

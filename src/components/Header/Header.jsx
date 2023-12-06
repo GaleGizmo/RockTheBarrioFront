@@ -15,7 +15,7 @@ const Header = () => {
       <div className="title">
         <Link to="/" className="link">
          
-          <img src="/assets/logo.png" onClick={reloadEvents}></img>
+          <img src="/assets/logo.gif" onClick={reloadEvents}></img>
         </Link>
       </div>
       

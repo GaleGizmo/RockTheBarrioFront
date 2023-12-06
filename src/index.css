@@ -1,18 +1,18 @@
 :root {
-    --primary-color: #ed8439;
+    --primary-color: #3EB4B8;
     --secondary-color: #153243;
     --secondary-shadow: #153243ab;
     --terciary-color: #757575;
     --link-color: #0d2f7a;
-    --icon-color: #124ec6;
-    --event-color: #f16704;
+    --icon-color: #0aa0af;
+    --event-color: #0cbbc1;
     --hover-color: #f0e9e9;
     --text-color: #212529;
     --soldout-color:#f16704cd;
     --delayed-color:#124ec6cd;
     --cancelled-color:#f52a2acd;
     --new_date-color:#16b616cd;
-    --data_label-color: #124ec6;
+    --data_label-color: #417df5;
     --margin-right: auto;
 
     

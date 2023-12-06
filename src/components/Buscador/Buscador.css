@@ -7,7 +7,7 @@
   max-width: 350px;
   border-radius: 8px;
   border: 2px solid var(--secondary-shadow);
-  background-color: var(--event-color);
+  background-color: var(--primary-color);
   font-weight: 600;
   font-size: 0.9rem;
   box-shadow: 5px 5px 4px var(--secondary-shadow);
