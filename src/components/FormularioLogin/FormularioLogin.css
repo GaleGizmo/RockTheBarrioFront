@@ -61,7 +61,7 @@
     
   
 
-  @media (max-width: 420px) {
+  @media (max-width: 520px) {
     .cardLogin {
         display: flex;
         flex-direction: column;

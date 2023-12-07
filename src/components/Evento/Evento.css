@@ -278,7 +278,7 @@ opacity: 0;
   text-overflow: ellipsis;
 }
 
-@media (max-width: 420px) {
+@media (max-width: 520px) {
   .card {
     display: flex;
     flex-direction: column;
@@ -376,8 +376,7 @@ opacity: 0;
   
   
 }
-
-@media (min-width: 420px) and (max-width: 1014px) {
+@media (min-width: 520px) and (max-width: 720px) {
   .card {
     display: flex;
     flex-direction: column;
@@ -389,13 +388,67 @@ opacity: 0;
     padding: 20px;
     margin-bottom: 20px;
     text-align: center;
-    max-width: 75%;
+    max-width: 95%;
+  }
+  .border-card{
+    flex-direction: column;
+    height: auto;
+  }
+  .div-image {
+    max-height: 300px;
+    margin: 0;
+  }
+  .card img {
+    max-height: 300px;
+  
+  }
+
+  .title-artist_container {
+    flex-basis: 100%;
+    margin-top: 1%;
+    align-items: center;
+  }
+  .detalles_container {
+    flex-basis: 100%;
+    margin-top: 5%;
+  }
+  .card h3 {
+    text-align: center;
+    margin-left: 2%;
+    font-size: 1.2rem;
+  }
+  .card p {
+    font-size: 1rem;
+    margin-left: 2%;
+    width: max-content;
+  }
+  .card h2 {
+    margin-left: 2%;
+    font-size: 1.4rem;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (min-width: 721px) and (max-width: 1014px) {
+  .card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid var(--secondary-color);
+    border-radius: 8px;
+    box-shadow: 2px 2px 4px var(--secondary-shadow);
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    max-width: 85%;
   }
   .icon-container {
     position: absolute;
-    margin-left: 2%;
+    
     right: auto;
-    left: 0;
+    left: 30px;
     bottom: 0;
   }
   .border-card {
@@ -406,9 +459,11 @@ opacity: 0;
 
   .div-image {
     max-height: 300px;
+    margin: 0;
   }
   .card img {
     max-height: 300px;
+  
   }
 
   .title-artist_container {

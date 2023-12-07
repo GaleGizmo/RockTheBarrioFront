@@ -67,7 +67,7 @@
   font-size: 0.8rem;
 }
 
-@media (min-width: 420px) {
+@media (min-width: 520px) {
   .cardReg {
     display: flex;
 
@@ -152,7 +152,7 @@
   padding-bottom: 2px;
   font-size: 0.9rem;
 }
-@media (max-width: 420px) {
+@media (max-width: 520px) {
   .cardReg {
     display: flex;
 

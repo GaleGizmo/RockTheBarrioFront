@@ -1,6 +1,6 @@
 .eventos-list {
   display: grid;
-  grid-template-columns: minmax(300px, auto) minmax(auto, 900px) minmax(300px, auto);
+  grid-template-columns: minmax(250px, auto) minmax(460px, 900px) minmax(300px, auto);
   padding: 30px 0;
 
   /* margin: auto; */
@@ -37,7 +37,7 @@
   .resultados_busqueda.hidden{
     opacity: 0;
   }
-@media (max-width: 420px) {
+@media (max-width: 520px) {
   .div-img {
     width: 100%;
   }
@@ -59,7 +59,7 @@
   }
 }
 
-@media (min-width: 420px) and (max-width: 992px) {
+@media (min-width: 520px) and (max-width: 992px) {
   .eventos-list {
     grid-template-columns: minmax(200px, 300px) minmax(auto, 1270px);
   }

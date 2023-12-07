@@ -130,7 +130,7 @@ const Buscador = ({ eventos, user }) => {
   const { register, handleSubmit, reset, setValue } = useForm();
   const onSubmit = (data) => {
     setShowLoader(true);
-   
+
     data.searchWithOr = searchWithOr;
     data.searchAll = searchAll;
     data.searchArtist = searchArtist;
@@ -223,9 +223,11 @@ const Buscador = ({ eventos, user }) => {
           <p onClick={handleShowAdvancedSearch} className="buscador-avanzada">
             {showAdvancedSearch ? "Sinxela" : "Avanzada"}
           </p>
-          <div className={`buscador-input_type ${
-            showAdvancedSearch ? "show-advanced" : ""
-          }`}>
+          <div
+            className={`buscador-input_type ${
+              showAdvancedSearch ? "show-advanced " : ""
+            }`}
+          >
             <input
               type="checkbox"
               checked={searchWithOr}
@@ -408,10 +410,13 @@ const Buscador = ({ eventos, user }) => {
             showAdvancedSearch ? "show-advanced" : ""
           }`}
         >
-          <Button text="Buscar" type="small" onClick={handleSearchClick} />
+          <div>
           <Button text="Limpar" type="small" onClick={cleanFiltered} />{" "}
+            <Button text="Buscar" type="small" onClick={handleSearchClick} />
+            
+          </div>
           <label>
-            Inclue eventos pasados
+            Eventos pasados
             <input
               type="checkbox"
               checked={pastEvents}

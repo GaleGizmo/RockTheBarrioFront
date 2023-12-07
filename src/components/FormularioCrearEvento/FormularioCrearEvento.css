@@ -1,5 +1,5 @@
 
-@media (min-width: 420px) {
+@media (min-width: 520px) {
     .cardCrearEvento {
         display: flex;
         flex-direction: column;
@@ -85,7 +85,7 @@
     
   }
 
-  @media (max-width: 420px) {
+  @media (max-width: 520px) {
     .cardCrearEvento {
         display: flex;
         flex-direction: column;

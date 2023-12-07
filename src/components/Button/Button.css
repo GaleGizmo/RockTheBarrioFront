@@ -57,7 +57,7 @@
   width: 150px;
 }
 }
-@media (max-width: 420px) {
+@media (max-width: 520px) {
   .large {
     width: 200px;
     margin: 0 10px 0 5px;

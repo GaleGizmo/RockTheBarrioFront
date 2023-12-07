@@ -48,7 +48,7 @@
         align-self: center;
 }
 
-@media (max-width:420px){
+@media (max-width:520px){
     .cardFaq-container {
         margin: 50px auto 20px auto;
         width:90%

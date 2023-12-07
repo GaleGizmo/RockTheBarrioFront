@@ -13,8 +13,10 @@
 .menu-toggle.custom-toggle {
   position: fixed;
   top: 40px;
+  width: 60px;
   left: 0;
   z-index: 1052;
+  padding-left: 0;
   background-color: var(--secondary-color);
   border:none;
   border-radius: 0;
@@ -92,7 +94,7 @@ height: 1.3em;
   
 }
 
-@media (max-width: 420px) {
+@media (max-width: 520px) {
   .react-calendar {
     width: 100%;
   }

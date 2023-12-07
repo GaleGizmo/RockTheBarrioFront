@@ -9,13 +9,12 @@
   top: 0;
   width: 100%;
   z-index: 1000;
-  border-bottom: 1px solid var(--secondary-shadow)
+  border-bottom: 1px solid var(--secondary-shadow);
 }
 .link:link {
   color: black;
   text-decoration-line: none;
 }
-
 
 .link:visited {
   color: black;
@@ -27,24 +26,11 @@
   text-decoration-line: none;
 }
 
-
-
-.title img{
+.title img {
   width: 80%;
 }
-/* @font-face {
-  font-family: "urban-jungle";
-  src: url("./UrbanJungleDEMO.otf");
-} */
 
-.title-font {
-  font-family: "urban-jungle";
-  font-size: 80px;
-  color: var(--secondary-color)
-}
-.title-font:hover{
-  color: var(--hover-color)
-}
+
 .title {
   margin-top: 0;
   width: 50px;
@@ -56,65 +42,38 @@
     display: flex;
     padding-left: 10px;
     justify-content: space-between;
-  align-items: center  ;
-    z-index:1000;
+    align-items: center;
+    z-index: 1000;
     height: 40px;
   }
 
   .title {
     margin: 0px;
-   width: 40%;
-    
+    width: 40%;
   }
-  .title img{
+  .title img {
     width: 20%;
   }
- 
-}
-.title-font {
-  font-size: 10vw;
-  margin-top: .5vh;
-  margin-bottom: 0;
-
 }
 
-/* Estilos para pantallas pequeñas (s) */
-/* @media (min-width: 470px) and (max-width: 852.98px) {
-  .header {
-    flex-direction: column;
-    height: auto;
-    height: 160px;
-    z-index: 1000;
-  }
 
-  .title {
-    margin-top: 0px;
-    text-align: center;
-  }
 
-  .title-font {
-    font-size: 50px;
-    margin-bottom: 0px;
-    margin-top: 0px;
-  }
-} */
 
 /* Estilos para pantallas medianas (m) */
-/* @media (min-width: 853px) and (max-width: 991.98px) {
+@media (min-width: 470px) and (max-width: 992px) {
   .header {
     display: flex;
     justify-content: space-between;
-    height: 160px;
+    height: 40px;
     z-index: 1000;
   }
-  .title-font {
-    font-size: 50px;
-  }
+  
   .title {
-    margin-top: 30px;
+    width: 35px;
+    margin-top: 0px;
   }
  
-} */
+}
 
 /* Estilos para pantallas grandes (l) */
 /* @media (min-width: 992px) {
@@ -125,10 +84,7 @@
     height: 120px;
     
   }
-  .title-font {
-    font-size: 50px;
-    width: max-content;
-  }
+  
   .title {
     margin-top: 30px;
   }

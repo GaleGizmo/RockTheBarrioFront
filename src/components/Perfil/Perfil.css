@@ -21,7 +21,7 @@
         height: 150px
     }
 }
-@media (max-width: 420px){
+@media (max-width: 520px){
     .perfil-avatar{
         width:100px;
         height: 100px
