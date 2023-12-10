@@ -288,6 +288,7 @@ img.boleto_imagen {
     margin-left: 5%;
   }
   .cardDetEv h3 {
+    gap: 5px;
     font-size: calc(1rem + 0.2vw);
     flex-direction: column;
   }

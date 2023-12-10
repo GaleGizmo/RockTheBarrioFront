@@ -19,7 +19,7 @@ const Header = () => {
         </Link>
       </div>
       
-      <div className="navbar">
+      <div className="navbar-container">
         <Navbar />
       </div>
     </div>

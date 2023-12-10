@@ -1,94 +1,42 @@
+/* Estilos para pantallas extra pequeñas (xs) */
+
 .header {
+  width: 100%;
   background-color: white;
-  height: 60px;
-  align-items: center;
-  padding: 0 20px 0 10px;
-  display: flex;
-  justify-content: space-between;
   position: fixed;
   top: 0;
-  width: 100%;
+  display: flex;
+  padding-left: 10px;
+  justify-content: space-between;
+  align-items: center;
   z-index: 1000;
+  height: 40px;
   border-bottom: 1px solid var(--secondary-shadow);
 }
-.link:link {
-  color: black;
-  text-decoration-line: none;
-}
 
-.link:visited {
-  color: black;
-  text-decoration-line: none;
-}
-
-.link:hover {
-  color: var(--hover-color);
-  text-decoration-line: none;
+.title {
+  width: 35px;
+  margin-top: 0px;
 }
 
 .title img {
   width: 80%;
 }
 
-
-.title {
-  margin-top: 0;
-  width: 50px;
+.link:hover {
+  filter: contrast(150%);
+  text-decoration-line: none;
 }
 
-/* Estilos para pantallas extra pequeñas (xs) */
-@media (min-width: 1px) and (max-width: 469.98px) {
+@media (min-width: 992px) {
   .header {
-    display: flex;
-    padding-left: 10px;
+    height: 60px;
+    padding: 0 20px 0 10px;
     justify-content: space-between;
-    align-items: center;
-    z-index: 1000;
-    height: 40px;
   }
 
   .title {
-    margin: 0px;
-    width: 40%;
-  }
-  .title img {
-    width: 20%;
+    margin-top: 0;
+    width: 50px;
   }
 }
-
-
-
-
-/* Estilos para pantallas medianas (m) */
-@media (min-width: 470px) and (max-width: 992px) {
-  .header {
-    display: flex;
-    justify-content: space-between;
-    height: 40px;
-    z-index: 1000;
-  }
-  
-  .title {
-    width: 35px;
-    margin-top: 0px;
-  }
- 
-}
-
-/* Estilos para pantallas grandes (l) */
-/* @media (min-width: 992px) {
-  .header {
-    display: flex;
-    justify-content: space-between;
-    z-index: 1000;
-    height: 120px;
-    
-  }
-  
-  .title {
-    margin-top: 30px;
-  }
-  .navbar {
-    margin-bottom: 50px;
-  }
-} */

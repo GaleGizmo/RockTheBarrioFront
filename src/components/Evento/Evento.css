@@ -1,28 +1,106 @@
 .card {
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: white;
-  border: 2px solid var(--secondary-color);
+  background-color: #fff;
+  border: 1px solid var(--secondary-color);
   border-radius: 8px;
-  box-shadow: 5px 5px 4px var(--secondary-shadow);
-  padding: 10px;
- 
+  box-shadow: 2px 2px 4px var(--secondary-shadow);
+  padding: 20px;
   margin-bottom: 20px;
   text-align: center;
- 
   width: 100%;
+  max-width: 95%;
 }
+.border-card {
+  display: flex;
+  justify-content: start;
+  width: 100%;
+  flex-direction: column;
+  height: auto;
+}
+.div-image {
+  flex-basis: 20%;
+  flex-grow: 1;
 
-.card {
-  opacity: 0;
-  transform: translateX(-100px);
-  animation: appearCard 0.5s ease-in-out forwards;
+  width: 100%;
+
+  border: solid;
+  border-radius: 8px;
+  max-height: 300px;
+  margin: 0;
+}
+.card img {
+  max-height: 300px;
+}
+.div-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background-color: #f1670469;
+}
+.title-artist_container {
+  flex-basis: 100%;
+  margin-top: 1%;
+  align-items: center;
+  flex-grow: 1;
+  max-height: 200px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.detalles_container {
+  position: relative;
+
+  flex-grow: 1;
+  max-height: 200px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  margin-right: 1%;
+  flex-basis: 100%;
+  margin-top: 5%;
+}
+.card h3 {
+  margin-top: 1%;
+  text-align: center;
+  margin-left: 2%;
+  font-size: 1.2rem;
+}
+.card p {
+  margin-bottom: 7px;
+
+  text-align: right;
+  font-weight: bold;
+  font-size: .8rem;
+  margin-left: 2%;
+  width: max-content;
+}
+.card h2 {
+  margin-left: 2%;
+  font-size: 1.4rem;
+  width: 100%;
+  text-align: center;
+}
+.detalles-site {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 3px;
+}
+.icon-container {
+  position: absolute;
+  display: flex;
+  left: 0;
+  gap: 10px;
+  right: auto;
+  font-size: .9rem;
+  bottom: 0;
 }
 
 .data-label_container {
-  box-shadow:  -4px 4px 3px var(--secondary-shadow);
+  box-shadow: -4px 4px 3px var(--secondary-shadow);
   position: absolute;
   z-index: 17;
   left: 13px;
@@ -37,6 +115,13 @@
   line-height: 12px;
   background-color: var(--data_label-color);
 }
+
+.card {
+  opacity: 0;
+  transform: translateX(-100px);
+  animation: appearCard 0.5s ease-in-out forwards;
+}
+
 .esHoy {
   background-color: var(--event-color);
 }
@@ -65,7 +150,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) rotate(-30deg);
-opacity: 0;
+  opacity: 0;
   color: white;
   padding: 10px 20px;
   border-radius: 10px;
@@ -75,16 +160,28 @@ opacity: 0;
   z-index: 1;
   overflow: hidden;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-  animation: scaleDown .3s 2s forwards, bounce 0.1s 2.3s forwards;
+  animation: scaleDown 0.3s 2s forwards, bounce 0.1s 2.3s forwards;
 }
 @keyframes scaleDown {
-  from { transform: translate(-50%, -50%) rotate(-30deg) scale(2); opacity: 0; }
-  to { transform: translate(-50%, -50%) rotate(-30deg) scale(1); opacity: 1; }
+  from {
+    transform: translate(-50%, -50%) rotate(-30deg) scale(2);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(-30deg) scale(1);
+    opacity: 1;
+  }
 }
 @keyframes bounce {
-  0% { transform: translate(-50%, -50%) rotate(-30deg) scale(1); }
-  50% { transform: translate(-50%, -50%) rotate(-30deg) scale(1.1); }
-  100% { transform: translate(-50%, -50%) rotate(-30deg) scale(1); }
+  0% {
+    transform: translate(-50%, -50%) rotate(-30deg) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(-30deg) scale(1.1);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(-30deg) scale(1);
+  }
 }
 .soldout::before {
   content: "ESGOTADO";
@@ -112,9 +209,10 @@ opacity: 0;
   font-weight: bold;
 }
 .background-logo {
-  background-color: #f1670469;
+  background-color: var(--primary-color);
   width: 100%;
   height: 100%;
+  min-height: 15vh;
   background-image: url("../../../public/assets/noimage_logo.png");
   background-repeat: space;
   background-size: 30px 35px;
@@ -134,79 +232,20 @@ opacity: 0;
   color: var(--link-color);
   margin-left: auto;
 }
-.card h2 {
-  font-weight: bold;
-  margin-bottom: 5px;
-  margin-top: 1%;
-  text-align: start;
-}
-
-.card h3 {
-  margin-top: 1%;
-  text-align: start;
-  font-size: calc(1.325rem + 0.2vw);
-}
-
-.card p {
-  font-size: 16px;
-  margin-bottom: 7px;
-
-  text-align: right;
-  font-weight: bold;
-}
-
-.div-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  background-color: #f1670469;
-}
 
 .card a {
   text-decoration: none;
 }
 
-.border-card {
-  display: flex;
-  justify-content: start;
-  width: 100%;
-  height: 200px;
-}
-
-.div-image {
-  flex-basis: 20%;
-  flex-grow: 1;
-  max-height: 200px;
-  width: 100%;
-  margin: 10px;
-  border: solid;
-  border-radius: 8px;
-}
-.div-image:hover{
+.div-image:hover {
   border-color: var(--event-color);
   filter: contrast(150%);
 }
 
-.title-artist_container {
-  flex-basis: 40%;
-  flex-grow: 1;
-  max-height: 200px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-}
-.div_relleno{
+.div_relleno {
   display: none;
 }
-.icon-container {
-  position: relative;
-  margin-top: auto;
-  display: flex;
-  gap: 20px;
-  justify-content: flex-end;
-  width: 50px;
-}
+
 .mas-info {
   transform: scale(1.5);
   color: var(--icon-color);
@@ -237,19 +276,13 @@ opacity: 0;
   display: block;
 }
 
-.detalles-site {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 3px;
-}
 .gratuito {
   color: #0c5460;
   font-weight: bold;
   /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); */
   transition: text-shadow 0.3s ease-in-out;
 }
-.hora-icon{
+.hora-icon {
   margin-bottom: 4px;
   color: var(--icon-color);
 }
@@ -259,17 +292,6 @@ opacity: 0;
 
 .gratuito:hover {
   text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.8);
-}
-.detalles_container {
-  position: relative;
-  flex-basis: 35%;
-  flex-grow: 1;
-  max-height: 200px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: end;
-  margin-right: 1%;
 }
 
 .truncate {
@@ -298,25 +320,23 @@ opacity: 0;
   .evento-genre {
     display: none;
   }
-  .div_relleno{
+  .div_relleno {
     display: block;
   }
   .icon-container {
     position: relative;
     margin-left: auto;
+    font-size: 0.8rem;
   }
-  .evento-hora{
+  .evento-hora {
     margin-left: auto;
-    
   }
   .detalles-site {
     justify-content: left;
-    
   }
   .border-card {
     flex-direction: column;
     height: auto;
-    /* margin-right: 2%; */
   }
 
   .div-image {
@@ -335,9 +355,9 @@ opacity: 0;
   .detalles_container {
     padding-top: 5px;
     flex-basis: 100%;
-   display: grid;
-   grid-template-columns: minmax(auto, 55%) auto;
-   grid-template-rows: auto auto auto;
+    display: grid;
+    grid-template-columns: minmax(auto, 55%) auto;
+    grid-template-rows: auto auto auto;
     border-top: 1px solid var(--secondary-shadow);
     width: 100%;
   }
@@ -348,7 +368,7 @@ opacity: 0;
   }
   .card p {
     font-size: 13px;
- 
+
     max-width: 100%;
     margin-bottom: 3px;
     text-align: left;
@@ -370,144 +390,79 @@ opacity: 0;
   .background-logo {
     min-height: 20vh;
   }
-  .card-nocomments{
+  .card-nocomments {
     margin-left: auto;
   }
-  
-  
-}
-@media (min-width: 520px) and (max-width: 720px) {
-  .card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #fff;
-    border: 1px solid var(--secondary-color);
-    border-radius: 8px;
-    box-shadow: 2px 2px 4px var(--secondary-shadow);
-    padding: 20px;
-    margin-bottom: 20px;
-    text-align: center;
-    max-width: 95%;
-  }
-  .border-card{
-    flex-direction: column;
-    height: auto;
-  }
-  .div-image {
-    max-height: 300px;
-    margin: 0;
-  }
-  .card img {
-    max-height: 300px;
-  
-  }
-
-  .title-artist_container {
-    flex-basis: 100%;
-    margin-top: 1%;
-    align-items: center;
-  }
-  .detalles_container {
-    flex-basis: 100%;
-    margin-top: 5%;
-  }
-  .card h3 {
-    text-align: center;
-    margin-left: 2%;
-    font-size: 1.2rem;
-  }
-  .card p {
-    font-size: 1rem;
-    margin-left: 2%;
-    width: max-content;
-  }
-  .card h2 {
-    margin-left: 2%;
-    font-size: 1.4rem;
-    width: 100%;
-    text-align: center;
-  }
 }
 
-@media (min-width: 721px) and (max-width: 1014px) {
+@media (min-width: 721px) {
   .card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #fff;
-    border: 1px solid var(--secondary-color);
-    border-radius: 8px;
-    box-shadow: 2px 2px 4px var(--secondary-shadow);
-    padding: 20px;
-    margin-bottom: 20px;
-    text-align: center;
     max-width: 85%;
   }
-  .icon-container {
-    position: absolute;
-    
-    right: auto;
-    left: 30px;
-    bottom: 0;
-  }
-  .border-card {
-    flex-direction: column;
-    height: auto;
-    /* margin-right: 4%; */
-  }
-
   .div-image {
-    max-height: 300px;
-    margin: 0;
+    max-height: 200px;
+    margin: 0px;
+    flex-basis: 30%;
   }
-  .card img {
-    max-height: 300px;
-  
-  }
-
-  .title-artist_container {
-    flex-basis: 100%;
-    margin-top: 1%;
-    align-items: center;
-  }
-  .detalles_container {
-    flex-basis: 100%;
-    margin-top: 5%;
-  }
-  .card h3 {
-    text-align: center;
-    margin-left: 2%;
-    font-size: 1.2rem;
-  }
-  .card p {
+  .icon-container{
     font-size: 1rem;
-    margin-left: 2%;
-    width: max-content;
-  }
-  .card h2 {
-    margin-left: 2%;
-    font-size: 1.4rem;
-    width: 100%;
-    text-align: center;
+    gap: 20px;
   }
 }
-@media (min-width: 1015px) and (max-width: 1199px) {
-  .card h2 {
-    font-size: 1.3rem;
+@media (min-width: 1015px) {
+  .card {
+    position: relative;
+    border: 2px solid var(--secondary-color);
+    box-shadow: 5px 5px 4px var(--secondary-shadow);
+    padding: 10px;
+    width: 100%;
+    max-width: 100%;
   }
+  .border-card {
+    flex-direction: row;
+
+    height: 200px;
+  }
+  
+  .detalles_container {
+    margin-top: 0;
+    flex-basis: 35%;
+  }
+  .card h2 {
+    font-weight: bold;
+    font-size: 1.3rem;
+    margin-bottom: 5px;
+    margin-top: 1%;
+    text-align: start;
+  }
+
   .card h3 {
+    
+
+    text-align: start;
+    
     font-size: 1.2rem;
   }
+
+  
+
+  .title-artist_container {
+    flex-basis: 30%;
+    align-items: start;
+  }
+  .icon-container {
+    position: relative;
+    margin-top: auto;
+
+    justify-content: flex-end;
+  }
+
+ 
   .card p {
     font-size: 0.75rem;
   }
-  .title-artist_container {
-    flex-basis: 30%;
-  }
-  .div-image {
-    flex-basis: 30%;
-  }
+  
+  
 }
 
 @media (min-width: 1200px) {
@@ -520,5 +475,8 @@ opacity: 0;
   .card p {
     font-size: 0.85rem;
     text-align: right;
+  }
+  .div-image{
+    margin: 10px;
   }
 }
