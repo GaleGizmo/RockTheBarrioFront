@@ -12,6 +12,7 @@ import {
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
 import { API } from "../../shared/api";
 import Modal from "../Modal/Modal";
+import SwitchButton from "../SwitchButton/SwitchButton";
 
 const Buscador = ({ eventos, user }) => {
   const dispatch = useDispatch();
@@ -417,12 +418,10 @@ const Buscador = ({ eventos, user }) => {
           </div>
           <label>
             Eventos pasados
-            <input
-              type="checkbox"
-              checked={pastEvents}
-              onChange={(e) => setPastEvents(e.target.checked)}
-              disabled={searchDate} // Deshabilitar si searchDate está activo
-            />
+            <SwitchButton
+            isOn={pastEvents}
+            handleToggle={() => setPastEvents(!pastEvents)}
+          />
           </label>
           <BiChevronsUp
             className="chevrons-icon"

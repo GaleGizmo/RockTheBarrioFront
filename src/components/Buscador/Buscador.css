@@ -91,7 +91,7 @@
   /* margin-right: 40px;
   width: fit-content; */
   flex: 1;
-
+  padding-left: 2px;
   align-self: flex-start;
   display: flex;
   align-items: center;
@@ -116,14 +116,15 @@
   padding: 5px;
   justify-content: space-between;
 }
-.boton-buscar label {
+.boton-buscar > label {
   font-size: 11px;
   width: fit-content;
   margin-top: auto;
   display: flex;
+  flex-direction: column;
   text-align: end;
   align-items: center;
-  gap: 5px;
+  gap: 2px;
 }
 .chevrons-icon {
   display: none;
@@ -201,7 +202,7 @@
     padding: 7px 10px;
   }
 
-  .boton-buscar label {
+  .boton-buscar >label {
     margin-left: auto;
   }
   .chevrons-icon {
@@ -219,7 +220,7 @@
   .buscador-container {
     font-size: 0.75rem;
   }
-  .boton-buscar label {
+  .boton-buscar> label {
     font-size: 0.5rem;
   }
   .search_icon {
