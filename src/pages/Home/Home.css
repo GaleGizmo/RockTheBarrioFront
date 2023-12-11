@@ -74,11 +74,17 @@
   .listado-container {
     display: none;
   }
+  .listado-border{
+    display: none;
+  }
 }
 
 @media (min-width: 521px) and (max-width: 992px) {
   .listado-container {
-    top: 5px;
+    top: 35px;
+  }
+  .listado-border{
+    top: 35px;
   }
   .listado-text {
     padding: 1px 5px;
