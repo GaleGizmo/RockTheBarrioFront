@@ -82,14 +82,15 @@ const Evento = ({ evento, user }) => {
         <div className="div-image" onClick={getEvento}>
         <Link to={{ pathname: `/${evento._id}` }}>
           {evento.image ? (
-            <img
+            <><img
               src={evento.image}
               alt={evento.title}
               onError={(e) => {
-                e.target.style.display = "none"; // Oculta la imagen que no se carga
-                e.target.classList.add("background-logo"); // Muestra el fondo del logotipo
-              }}
-            />
+                e.target.style.display = "none"; // Oculta la imagen que no  carga
+                e.target.nextSibling.style.display = "block"; // Muestra el div de los logos
+        }}
+      />
+      <div className="background-logo" style={{display: "none"}}></div>  </>
           ) : (
             <div className="background-logo"></div>
           )}

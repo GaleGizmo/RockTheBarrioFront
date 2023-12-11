@@ -210,7 +210,7 @@ img.boleto_imagen {
   flex-direction: column;
 }
 .divCardDetEv__noimage{
-  background-color: #f1670469;
+  background-color: var(--primary-color);
    width: 60%;
     min-height: 25vh;
     background-image: url(/public/assets/noimage_logo.png);

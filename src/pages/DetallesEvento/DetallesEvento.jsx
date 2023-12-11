@@ -101,7 +101,7 @@ const DetallesEvento = () => {
   return (
     <>
       {!evento ? (
-        <Loader/>
+        <Loader />
       ) : (
         <div className="detalles-container">
           <div
@@ -133,11 +133,19 @@ const DetallesEvento = () => {
                     src={evento.image}
                     alt={evento.title}
                     onClick={openImageModal}
-                  />{" "}
+                    onError={(e) => {
+                      e.target.style.display = "none"; // Oculta la imagen que no carga
+                      e.target.nextSibling.style.display = "block"; // Muestra el div con los logos
+                    }}
+                  />
+                  <div
+                    className="divCardDetEv__noimage"
+                    style={{ display: "none" }}
+                  ></div>
                   <AiOutlineZoomIn
                     className="zoom-icon"
                     onClick={openImageModal}
-                  />{" "}
+                  />
                 </div>
               ) : (
                 <img className="divCardDetEv__noimage"></img>
@@ -185,8 +193,8 @@ const DetallesEvento = () => {
                 </h3>
               ) : (
                 <div className="muestra-fecha">
-                  <strong>Data:{' '}</strong>
-                   <h3> {fechaStart}h </h3> 
+                  <strong>Data: </strong>
+                  <h3> {fechaStart}h </h3>
                   {user && (
                     <span onClick={handleFavorites}>
                       {isFavorite ? (
@@ -197,13 +205,13 @@ const DetallesEvento = () => {
                     </span>
                   )}
                   <p className="dias-faltantes__detalle">
-                {esAnterior(evento.date_start) ? "Fai" : "Dentro de"}{" "}
-                <span className="gratuito">{diasFaltantes} </span>
-              </p>
+                    {esAnterior(evento.date_start) ? "Fai" : "Dentro de"}{" "}
+                    <span className="gratuito">{diasFaltantes} </span>
+                  </p>
                 </div>
               )}
               {fechaEnd && <h3>{fechaEnd}</h3>}
-             
+
               {evento.genre && (
                 <h3>
                   <div>
@@ -238,9 +246,8 @@ const DetallesEvento = () => {
                   <Button text="Editar" type="medium" onClick={editarEvento} />
                 </div>
               )}
-              {showMap && <MapComponent direccion={evento.site} /> }
+              {showMap && <MapComponent direccion={evento.site} />}
             </div>
-            
           </div>
           <div className="detalle-comentarios">
             <div className="nuevocomentario-wrapper">
