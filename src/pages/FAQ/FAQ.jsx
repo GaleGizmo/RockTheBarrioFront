@@ -80,6 +80,10 @@ const faqData = [
     content:
       "Facendo clic no teu nome de usuario ou no teu avatar, abriras a páxina do teu perfil. Nela hai un botón de 'Editar datos' que che permitirá cambiar o teu nome de usuario, o email co que te rexistraches, o teu avatar, e as túas preferencias de notificacións. ",
   },
+  {
+    title: "Hai aplicación para móbiles?",
+    content: "Non hai aplicación coma tal, sen embargo a web está optimizada para uso en pantallas de calquera tamaño. Se tes a aberta a páxina nun smartphone e vas ao menú do navegador, pulsando 'Añadir a pantalla de inicio' crearás un acceso directo á web na pantalla do teléfono, o que a efectos prácticos será coma ter unha aplicación. "
+  }
 ];
 
 const FAQ = () => {
