@@ -76,11 +76,9 @@
   align-items: center;
   gap: 25px;
 }
-/* .buscador-item>label {
-  align-self: flex-start;
-  display: flex;
-  align-items: center;
-} */
+.label-info{
+  position: relative;
+}
 
 .buscador-fav {
   gap: 5px;

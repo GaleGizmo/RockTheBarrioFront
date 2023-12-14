@@ -15,6 +15,7 @@ import useFavorites from "../../shared/useFavorites";
 import { useDispatch } from "react-redux";
 import { setEvento } from "../../redux/eventos/eventos.actions";
 import Modal from "../Modal/Modal";
+import ToolTip from "../ToolTip/ToolTip";
 
 const Evento = ({ evento, user }) => {
   const [hovered, setHovered] = useState(false);
@@ -27,18 +28,15 @@ const Evento = ({ evento, user }) => {
     evento ? evento._id : null,
     user ? user._id : null
   );
-  const handleMouseEnter = () => {
-    setHovered(true);
+  const handleDisplayTooltip = () => {
+    setHovered(!hovered);
   };
 
   const handleShareModal=()=>{
     setShareModal(!shareModal)
   }
 
-  const handleMouseLeave = () => {
-    setHovered(false);
-  };
-  const handleToggleMap = () => {
+    const handleToggleMap = () => {
     setShowMap((showMap) => !showMap);
   };
   const getEvento = () => {
@@ -149,26 +147,23 @@ const Evento = ({ evento, user }) => {
             {user && (
               <div
                 className="favorito-container"
-                onClick={handleFavorites}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
+                onClick={()=>{handleFavorites(); handleDisplayTooltip()}}
+                onMouseEnter={handleDisplayTooltip}
+                onMouseLeave={handleDisplayTooltip}
               >
                 {isFavorite ? (
                   <>
                     <BiCalendarHeart className="favorito" />
                     {hovered && (
-                      <span className="favorito-tooltip">
-                        Engadir/quitar favorito
-                      </span>
+                      <ToolTip content="Quitar favorito" />
                     )}
                   </>
                 ) : (
                   <>
                     <BiCalendarAlt className="favorito" />
                     {hovered && (
-                      <span className="favorito-tooltip">
-                        Engadir/quitar favorito
-                      </span>
+                      <ToolTip content="Engadir favorito" />
+
                     )}
                   </>
                 )}

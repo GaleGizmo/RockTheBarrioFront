@@ -1,0 +1,19 @@
+.favorito-tooltip {
+    width: max-content;
+    display: block;
+    position: absolute;
+    top: -5px;
+    right: 0px;
+    transform: translatey(-100%);
+    background-color: var(--icon-color);
+    color: white;
+    padding: 2px 5px;
+    border-radius: 5px;
+    font-size: 12px;
+  }
+  .termos-tooltip{
+    left:0;
+    font-size: 10px;
+    max-width: 150px;
+    text-align: justify;
+  }

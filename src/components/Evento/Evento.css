@@ -258,23 +258,7 @@
 .favorito-container {
   cursor: pointer;
 }
-.favorito-tooltip {
-  width: max-content;
-  display: none;
-  position: absolute;
-  top: -5px;
-  right: 0px;
-  transform: translatey(-100%);
-  background-color: var(--icon-color);
-  color: white;
-  padding: 2px 5px;
-  border-radius: 5px;
-  font-size: 12px;
-}
 
-.favorito-container:hover .favorito-tooltip {
-  display: block;
-}
 
 .gratuito {
   color: #0c5460;

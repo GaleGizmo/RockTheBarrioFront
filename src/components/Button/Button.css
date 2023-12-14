@@ -25,7 +25,9 @@
   height: fit-content;
   width: fit-content;
   font-size: 0.8rem;
-  padding-bottom: 0;
+  padding-bottom: 1px;
+  padding-top: 0;
+ 
 }
 
 .medium {

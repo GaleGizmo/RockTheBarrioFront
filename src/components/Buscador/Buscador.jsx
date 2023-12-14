@@ -13,6 +13,7 @@ import ConfirmModal from "../ConfirmModal/ConfirmModal";
 import { API } from "../../shared/api";
 import Modal from "../Modal/Modal";
 import SwitchButton from "../SwitchButton/SwitchButton";
+import ToolTip from "../ToolTip/ToolTip";
 
 const Buscador = ({ eventos, user }) => {
   const dispatch = useDispatch();
@@ -32,6 +33,7 @@ const Buscador = ({ eventos, user }) => {
   const [customDates, setCustomDates] = useState(false);
   const [pastEvents, setPastEvents] = useState(false);
   const [showLoader, setShowLoader] = useState(false);
+  const [hovered, setHovered] = useState(false)
 
   let eventosToShow;
   let filteredResults = [];
@@ -193,7 +195,9 @@ const Buscador = ({ eventos, user }) => {
     setShowAdavancedSearch(false);
     dispatch(deleteFilteredEventos());
   };
-
+const handleDisplayTooltip=()=> {
+  setHovered(!hovered)
+}
   return (
     <div className="buscador-container">
       {showLoader && <Modal show={true} showLoader={true} />}
@@ -236,7 +240,12 @@ const Buscador = ({ eventos, user }) => {
                 setSearchWithOr(e.target.checked);
               }}
             />
-            <label>Calquera termo</label>
+            <label className="label-info"
+            onMouseEnter={handleDisplayTooltip}
+            onMouseLeave={handleDisplayTooltip}
+            ><span>Calquera termo </span>
+            {hovered && <ToolTip specificClass="termos-tooltip" content="Devolve todos os resultados que conteñan calquera dos termos introducidos"/>}
+            </label>
           </div>
         </div>
         <div
@@ -244,21 +253,7 @@ const Buscador = ({ eventos, user }) => {
             showAdvancedSearch ? "show-advanced" : ""
           }`}
         >
-          {/* <div className="buscador-checks_item">
-            <label>Calquera</label>
-            <input
-              type="checkbox"
-              checked={searchAll}
-              onChange={(e) => {
-                setSearchAll(e.target.checked);
-                setSearchTitle(false);
-                setSearchArtist(false);
-                setSearchSite(false);
-                setSearchGenre(false);
-              }}
-            />
-          </div> */}
-
+        
           <div className="buscador-checks_item">
             <label>Evento</label>
             <input
