@@ -16,10 +16,11 @@
     font-size: 10px;
     max-width: 150px;
     text-align: justify;
-    z-index: 1100;
+    
   }
   @media (max-width: 520px){
     .termos-tooltip{
-        bottom: -3px;
+        bottom: 0px;
+        height: fit-content;
     }
   }
