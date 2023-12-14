@@ -16,4 +16,5 @@
     font-size: 10px;
     max-width: 150px;
     text-align: justify;
+    z-index: 1100;
   }
