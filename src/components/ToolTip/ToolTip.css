@@ -20,7 +20,7 @@
   }
   @media (max-width: 520px){
     .termos-tooltip{
-        top: auto;
+       
         bottom: 0px;
         max-width: 205px;
     }
