@@ -40,6 +40,7 @@ const Evento = ({ evento, user }) => {
     setShowMap((showMap) => !showMap);
   };
   const getEvento = () => {
+    sessionStorage.setItem("scrollPosition", window.scrollY);
     dispatch(setEvento(evento._id));
   };
   const isLongTitle = evento?.title?.length > 10 && !evento.title.includes(" ");
@@ -78,7 +79,7 @@ const Evento = ({ evento, user }) => {
       <div className="border-card">
       
         <div className="div-image" onClick={getEvento}>
-        <Link to={{ pathname: `/${evento._id}` }}>
+        <Link to={{ pathname: `/${evento._id}` } } >
           {evento.image ? (
             <><img
               src={evento.image}

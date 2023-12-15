@@ -6,6 +6,7 @@ import { RiUser3Fill } from "react-icons/ri";
 import { logout } from "../../redux/usuarios/usuarios.actions";
 import { useSelector } from "react-redux";
 import SwitchIcon from "../SwitchIcon/SwitchIcon";
+import { saveScrollPosition } from "../../shared/saveScrollPosition";
 
 const Navbar = () => {
   const { user } = useSelector((state) => state.usuariosReducer);
@@ -16,11 +17,11 @@ const Navbar = () => {
         <div >
           <div className="header-user">
             <h3 className="h3">
-              Ola, <Link to="/perfil">{user.username}</Link>
+              Ola, <Link to="/perfil" onClick={saveScrollPosition}>{user.username} </Link>
             </h3>
             {user.avatar ? (
               <div className="avatar-container">
-                <Link to="/perfil">
+                <Link to="/perfil" onClick={saveScrollPosition}>
                   <img
                     className="header_avatar"
                     src={user.avatar}

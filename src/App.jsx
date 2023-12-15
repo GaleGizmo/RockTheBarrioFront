@@ -6,8 +6,8 @@ import DateDeAlta from "./pages/DateDeAlta/DateDeAlta";
 import Header from "./components/Header/Header";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Login from "./pages/Login/Login";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+
 
 
 import EditarEvento from "./pages/EditarEvento/EditarEvento";
@@ -27,12 +27,9 @@ import { ToastContainer } from "react-toastify";
 
 function App() {
   const { user } = useSelector((state) => state.usuariosReducer);
-  // const [sesionVerificada, setSesionVerificada] = useState(false);
-  const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(checkSesion());
-  //   setSesionVerificada(true);
-  // }, []);
+ 
+
+  
 
   return (
     <>

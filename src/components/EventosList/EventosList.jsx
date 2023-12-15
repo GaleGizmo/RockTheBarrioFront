@@ -17,8 +17,10 @@ const EventosList = () => {
   const dispatch = useDispatch();
   
 
+
   
   useEffect(() => {
+   
     dispatch(getEventosParaCalendar());
   }, [dispatch]);
 
@@ -65,6 +67,18 @@ const EventosList = () => {
   useEffect(() => {
     dispatch(getEventosDesdeHoy());
   }, [dispatch]);
+
+  useEffect(() => {
+    setTimeout(() => {
+        const scrollPosition = sessionStorage.getItem("scrollPosition");
+    
+        if (scrollPosition) {
+            window.scrollTo(0, parseInt(scrollPosition));
+            sessionStorage.removeItem("scrollPosition");
+        }
+    }, 500);
+}, []); 
+
   return (
     <div className="eventos-list">
       <div className="div-buscador">
