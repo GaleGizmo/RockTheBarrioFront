@@ -223,9 +223,7 @@ img.boleto_imagen {
 }
 
 
-.gratuito:hover {
-  text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.8);
-}
+
 
 .centerDetEv {
   display: flex;

@@ -263,8 +263,8 @@
 .gratuito {
   color: #0c5460;
   font-weight: bold;
-  /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); */
-  transition: text-shadow 0.3s ease-in-out;
+ 
+ 
 }
 .hora-icon {
   margin-bottom: 4px;
@@ -274,9 +274,7 @@
   text-align: right;
 }
 
-.gratuito:hover {
-  text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.8);
-}
+
 
 .truncate {
   white-space: nowrap;

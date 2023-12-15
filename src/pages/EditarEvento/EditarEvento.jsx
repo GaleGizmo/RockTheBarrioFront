@@ -7,7 +7,6 @@ import "./EditarEvento.css";
 
 const EditarEvento = () => {
   const { id } = useParams();
-  console.log(id);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
