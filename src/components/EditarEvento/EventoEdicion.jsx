@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { editEvento } from "../../redux/eventos/eventos.actions";
 import SubirImagen from "../../components/SubirImagen/SubirImagen";
 import Button from "../Button/Button";
+import { utcToZonedTime, format } from "date-fns-tz";
 import "./EventoEdicion.css";
 import { AiFillCloseSquare } from "react-icons/ai";
 
@@ -26,17 +27,15 @@ const EventoEdicion = ({ evento, navigate }) => {
     { label: "Aplazado", value: "delayed" },
     { label: "Nova data", value: "new_date" },
     { label: "Esgotado", value: "soldout" },
-   
   ];
   const handleInputChange = (e) => {
     setValue(e.target.name, e.target.value);
   };
   const adjustTime = (dateString) => {
-    const date = new Date(dateString);
-    date.setHours(date.getHours() + 2);
-
-    // Formatear la hora en un string en formato "HH:mm"
-    const formattedTime = date.toISOString().slice(11, 16);
+    // Convertir la fecha de UTC a la zona horaria local
+    const timeZone = "Europe/Madrid";
+    const localDate = utcToZonedTime(new Date(dateString), timeZone);
+    const formattedTime = format(localDate, "HH:mm", { timeZone });
 
     return formattedTime;
   };
@@ -45,8 +44,11 @@ const EventoEdicion = ({ evento, navigate }) => {
     setIsSubmitting(true);
     const { day_start, time_start } = data;
 
-    // Combinar la fecha y la hora en un objeto Date
-    const combinedDate = new Date(`${day_start}T${time_start}`);
+    // Combinamos la fecha y la hora en un objeto Date
+    let combinedDate = new Date(`${day_start}T${time_start}`);
+
+    const timeZone = "Europe/Madrid";
+    combinedDate = utcToZonedTime(combinedDate, timeZone);
 
     const editedEvento = {
       ...evento,
