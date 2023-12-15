@@ -17,7 +17,7 @@ import { useNavigate } from "react-router-dom";
 const faqData = [
   {
     title: "Que estou vendo ao entrar na web?",
-    content: `A páxina principal amosa un listado de eventos ordeados cronolóxicamente. Hai un buscador á esquerda e un calendario á dereita. En móbiles tanto o calendario (oculto por defecto) coma o buscador están baixo a cabeceira e o calendario amósase clicando neste icono: `,
+    content: `A páxina principal amosa un listado de eventos ordeados cronolóxicamente, partindo da data actual. Hai un buscador á esquerda e un calendario á dereita. En móbiles tanto o calendario (oculto por defecto) coma o buscador están baixo a cabeceira e o calendario amósase clicando neste icono: `,
   },
   {
     title: "Que información hai de cada evento?",
@@ -28,12 +28,12 @@ const faqData = [
   {
     title: "Podo ver información de eventos xa pasados?",
     content:
-      "Si, ainda que a páxina principal amosa por defecto só os eventos futuros, hai dous xeitos de ver información de eventos xa acontecidos: ben a través do calendario ou ben activando o switch na parte inferior do buscador.",
+      "Si. Ainda que a páxina principal amosa por defecto só os eventos futuros, hai dous xeitos de ver información de eventos xa acontecidos: ben a través do calendario ou ben activando o switch na parte inferior do buscador.",
   },
   {
     title: "Que información teño no calendario?",
     content:
-      "No calendario, os días nos que hai un ou máis eventos están marcados de cor laranxa. Se hai maís dun evento nunha data, esa data leva ademáis un signo '+' á dereita do número. Clicando nos días que teñen eventos, amósase un despregable con enlaces á información de cada un dos eventos dese día.",
+      "No calendario, os días nos que hai un ou máis eventos están marcados de cor turquesa. Se hai maís dun evento nunha data, esa data leva ademáis un signo '+' á dereita do número. Clicando nos días que teñen eventos, amósase un despregable con enlaces á información de cada un dos eventos dese día.",
   },
   {
     title: "Como funciona o buscador?",
@@ -53,7 +53,7 @@ const faqData = [
   {
     title: "Non vexo os iconos que dis para engadir a favoritos",
     content:
-      "Para poder engadir un evento a favoritos debes rexistrarte antes na web. Unha vez logueado xa poderás ver o icono para engadir un evento a favoritos, e máis facer búsquedas que incluan só eventos favoritos. ",
+      "Para poder engadir un evento a favoritos debes de te rexistrar primeiro na web. Unha vez logueado xa poderás ver o icono para engadir un evento a favoritos, e máis facer búsquedas que incluan só eventos favoritos. ",
   },
   {
     title: "Que vantaxes ten rexistrarse?",
@@ -63,12 +63,12 @@ const faqData = [
   {
     title: "Cantas notificacións me vas mandar? Non máis spam, por favor!",
     content:
-      "Calma, a frecuencia de notificacións decidirala ti ao te rexistrar. Marcando as casiñas correspondentes podes elexir entre: recibir un email semanal cos eventos programados para esa semana (mándase os luns pola mañá), recibir notificacións puntuais cando se engadan novos eventos, ou non recibir ningunha notificación. ",
+      "Calma, a frecuencia de notificacións decidirala ti no proceso de rexistro. Marcando as casiñas correspondentes poderás elexir entre: recibir un email semanal cos eventos programados para esa semana (mándase os luns pola mañá), recibir notificacións puntuais cando se engadan novos eventos, ou non recibir ningunha notificación. ",
   },
   {
     title: "Pois marco as notificacións semanais, con iso chega, non?",
     content:
-      "En xeral si. Mais dado que algúns locais avisan dos eventos con poucos días de antelación, pode pasar que se engadan eventos durante a semana que non estaban incluidos no email semanal. A solución sería marcar tamén as notificacións puntuais, ou visitar a web regularmente. ",
+      "Si... pero non. Dado que algúns locais avisan dos eventos con poucos días de antelación, pode pasar que se engadan eventos durante a semana que non estaban incluidos no email semanal. A solución sería marcar tamén as notificacións puntuais, ou visitar a web regularmente. ",
   },
   {
     title: "E para que vale engadir eventos a favoritos?",
