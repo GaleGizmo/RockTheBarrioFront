@@ -76,7 +76,7 @@ const notify= (status) =>{
             </div>
       <div className="margin-botonReg">
      
-        <Button text="Editar Datos" type="medium" onClick={onEditClick} />
+        <Button text="Editar Datos" type="small" onClick={onEditClick} />
       </div>
       
     </div>

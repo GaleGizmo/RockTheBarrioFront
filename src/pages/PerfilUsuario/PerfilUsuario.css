@@ -4,7 +4,9 @@
 
 }
 
-
+.delete-account-button{
+    background-color: red;
+}
 
 @media (min-width: 1px) and (max-width: 469.98px) {
 .perfil-container{

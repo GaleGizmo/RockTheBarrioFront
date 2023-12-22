@@ -50,7 +50,8 @@ const PerfilUsuario = () => {
           <Perfil userData={userData} onEditClick={handleEditClick} />
           <Button
             text="Borrar conta"
-            type="medium"
+            type="small delete-account-button"
+          
             onClick={handleDeleteUser}
           />
         </div>
