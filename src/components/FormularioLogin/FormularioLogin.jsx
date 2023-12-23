@@ -15,22 +15,26 @@ const FormularioLogin = () => {
   },[])
   const { register, handleSubmit } = useForm();
 
-  const { error } = useSelector((state) => state.usuariosReducer);
+  const { error, user } = useSelector((state) => state.usuariosReducer);
   
   const navigate = useNavigate();
-  const handleIcon = () => {
-    navigate(-1);
+
+  const onSubmit =  (datos) => {
+    dispatch(login(datos, navigate));
+    
   };
+  
+  
   return (
     <div className="cardLogin">
-    <AiFillCloseSquare className="close-icon" onClick={handleIcon} />
+    <AiFillCloseSquare className="close-icon" onClick={() => navigate(-1)} />
       <div>
         <h1>Iniciar Sesión</h1>
         {error && <p className="error-message">{error}</p>}
         
       </div>
       <form
-        onSubmit={handleSubmit((datos) => dispatch(login(datos, navigate)))}
+        onSubmit={handleSubmit(onSubmit)}
       >
         <div className="div-inputLogin">
           <label>

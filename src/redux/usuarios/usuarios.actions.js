@@ -4,6 +4,7 @@ import store from "../store";
 const { dispatch } = store;
 
 const setUserData = (resultado, navigate) => {
+
   dispatch({
     type: "LOGIN",
     contenido: {
@@ -23,6 +24,7 @@ const login = (datos, navigate) => async () => {
   dispatch({ type: "CLEAR_ERROR" });
   try {
     const resultado = await API.post("/usuario/login", datos);
+
     setUserData(resultado, navigate);
   } catch (error) {
     if (error.response && error.response.data && error.response.data.message) {
@@ -49,7 +51,7 @@ const updateUserSubscriptions = (unsubscribe) => {
     type: "CHANGE_SUBSCRIPTION_SUCCESS",
     contenido: {
       fieldToUpdate: unsubscribe,
-      
+
       message: "Axustes de suscripción modificados",
     },
   });
@@ -196,7 +198,7 @@ const unsubscribeEmail = (email, unsubscribe, userId) => async (dispatch) => {
       email,
       unsubscribe,
     });
-    updateUserSubscriptions( unsubscribe);
+    updateUserSubscriptions(unsubscribe);
     // dispatch({
     //   type: "FORGOT_PASSWORD_SUCCESS",
     //   contenido: "Axustes de suscripción modificados",

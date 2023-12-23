@@ -24,11 +24,14 @@ const getEventosParaCalendar=()=>async ()=>{
 
 }
 const sendEventosDiarios = () => async (dispatch) => {
+ 
   try {
-    await API.get("/evento/sendEventosDiarios/");
-    dispatch({ type: "EVENTOS_ENVIADOS", contenido: "Eventos enviados" });
+    clearMensajes()
+    const response=await API.get("/evento/sendEventosDiarios/");
+    dispatch({ type: "EVENTOS_ENVIADOS", contenido: response.data.message });
   } catch (error) {
-    dispatch({ type: "ERROR_EVENTO", contenido: error.message });
+    dispatch({ type: "ERROR_EVENTO", contenido: error.response.data.message });
+    throw error
   }
 };
 
@@ -121,7 +124,7 @@ const deleteEvento = (eventoId, navigate) => async () => {
   }
 };
 const clearMensajes = () => {
-  return { type: "CLEAR_MENSAJES" };
+  dispatch( { type: "CLEAR_MENSAJES" });
 };
 
 const setEvento = (eventoId) => (dispatch) => {

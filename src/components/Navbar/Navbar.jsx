@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Navbar.css";
 
 import { Link } from "react-router-dom";
@@ -10,6 +10,13 @@ import { saveScrollPosition } from "../../shared/saveScrollPosition";
 
 const Navbar = () => {
   const { user } = useSelector((state) => state.usuariosReducer);
+  useEffect(() => {
+    
+      
+    user &&  console.log(`Bienvenido, ${user.username}!`);
+    
+  }, [user]);
+
 
   return (
     <>
