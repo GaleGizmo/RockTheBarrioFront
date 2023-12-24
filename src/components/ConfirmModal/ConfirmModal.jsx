@@ -2,7 +2,9 @@ import React from "react";
 import Button from "../../components/Button/Button";
 import "./ConfirmModal.css";
 
-const ConfirmModal = ({ show, onCancel, onConfirm, title, p1, p2,buttonText }) => {
+const ConfirmModal = ({ show, onCancel, onConfirm, title, p1, p2,buttonText, deleteAccount }) => {
+  let buttonClass=""
+  deleteAccount ? buttonClass="medium delete-account-button":buttonClass="medium"
   return (
     <>
       {show && (
@@ -23,8 +25,8 @@ const ConfirmModal = ({ show, onCancel, onConfirm, title, p1, p2,buttonText }) =
              <p> {p2}</p>
             </div>
             <div className="modal-footer justify-content-center">
-              <Button text="Cancelar" type="medium" onClick={onCancel} />
-              <Button text={buttonText} type="medium" onClick={onConfirm} />
+              {onCancel && <Button text="Cancelar" type="medium" onClick={onCancel} />}
+              <Button text={buttonText} type={buttonClass} onClick={onConfirm} />
             </div>
           </div>
         </div>

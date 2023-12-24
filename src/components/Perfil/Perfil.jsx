@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../../components/Button/Button";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -6,13 +6,26 @@ import "./Perfil.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { sendEventosDiarios } from "../../redux/eventos/eventos.actions";
+import ConfirmModal from "../ConfirmModal/ConfirmModal";
 
 const Perfil = ({ userData, onEditClick }) => {
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const handleDeleteUser = () => {
+    setShowDeleteModal(true);
+  };
+  const handleDeleteConfirmed = () => {
+    dispatch(deleteUser(userData._id, navigate));
+    setShowDeleteModal(false);
+  };
+
+  const handleDeleteCancelled = () => {
+    setShowDeleteModal(false);
+  };
   const dispatch = useDispatch();
   const { error, eventosEnviados } = useSelector(
     (state) => state.eventosReducer
   );
-  
+
   const sendDiarios = async () => {
     try {
       await new Promise((resolve) => {
@@ -83,23 +96,35 @@ const Perfil = ({ userData, onEditClick }) => {
       </p>
       <div>
         {userData && userData.role === 2 && (
-          <>
+          <div className="botones-eventos">
             <Link to="/crear-evento">
-              <span className="boton-crear">
-                <Button text="Crear evento" type="medium" />
-              </span>
+              <Button text="Crear evento" type="small" />
             </Link>
-            <Button
-              text="Eventos diarios"
-              type="medium"
-              onClick={sendDiarios}
-            />
-          </>
+            <Button text="Eventos diarios" type="small" onClick={sendDiarios} />
+          </div>
         )}
       </div>
       <div className="margin-botonReg">
-        <Button text="Editar Datos" type="small" onClick={onEditClick} />
+        <Button 
+        text="Editar Datos" 
+        type="small" 
+        onClick={onEditClick} />
+        <Button
+          text="Borrar conta"
+          type="small delete-account-button"
+          onClick={handleDeleteUser}
+        />
       </div>
+      <ConfirmModal
+        title="Confirmar borrado"
+        p1="Seguro que desexas borrar a túa conta?"
+        p2="Borraránse tamén todos os comentarios que teñas feito"
+        buttonText="Borrar"
+        show={showDeleteModal}
+        onCancel={handleDeleteCancelled}
+        onConfirm={handleDeleteConfirmed}
+        deleteAccount={true}
+      />
     </div>
   );
 };

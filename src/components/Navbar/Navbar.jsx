@@ -7,13 +7,25 @@ import { logout } from "../../redux/usuarios/usuarios.actions";
 import { useSelector } from "react-redux";
 import SwitchIcon from "../SwitchIcon/SwitchIcon";
 import { saveScrollPosition } from "../../shared/saveScrollPosition";
+import { Slide, Zoom, toast } from "react-toastify";
 
 const Navbar = () => {
   const { user } = useSelector((state) => state.usuariosReducer);
   useEffect(() => {
     
       
-    user &&  console.log(`Bienvenido, ${user.username}!`);
+    user &&  (toast(`Ola, ${user.username}`, {
+      className: "hello-toast",
+      position: "top-center",
+      autoClose: 1000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Zoom,
+      }));
     
   }, [user]);
 
@@ -23,9 +35,7 @@ const Navbar = () => {
       {user ? (
         <div >
           <div className="header-user">
-            <h3 className="h3">
-              Ola, <Link to="/perfil" onClick={saveScrollPosition}>{user.username} </Link>
-            </h3>
+           
             {user.avatar ? (
               <div className="avatar-container">
                 <Link to="/perfil" onClick={saveScrollPosition}>

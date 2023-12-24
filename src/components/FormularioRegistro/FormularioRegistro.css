@@ -67,7 +67,7 @@
   font-size: 0.8rem;
 }
 
-@media (min-width: 520px) {
+
   .cardReg {
     display: flex;
 
@@ -132,7 +132,7 @@
   }
   .margin-botonReg {
     display: flex;
-    flex-direction: column;
+    
     justify-content: center;
     align-items: center;
     gap: 10px;
@@ -147,7 +147,7 @@
     display: flex;
     flex-direction: column;
   }
-}
+
 .div-checkReg label {
   padding-bottom: 2px;
   font-size: 0.9rem;

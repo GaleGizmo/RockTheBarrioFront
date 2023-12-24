@@ -210,9 +210,7 @@ const handleDisplayTooltip=()=> {
         onConfirm={() => {
           setNoResults(false);
         }}
-        onCancel={() => {
-          setNoResults(false);
-        }}
+       
       />
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="buscador-input_wrapper">
