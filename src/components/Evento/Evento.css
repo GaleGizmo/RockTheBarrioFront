@@ -75,7 +75,7 @@
   font-weight: bold;
   font-size: .8rem;
   
-  width: max-content;
+  width: fit-content;
 }
 .card h2 {
   margin-left: 2%;
@@ -88,12 +88,15 @@
   justify-content: space-between;
   align-items: center;
   gap: 3px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .icon-container {
   position: absolute;
   display: flex;
   left: 0;
-  gap: 10px;
+  gap: 15px;
   right: auto;
   font-size: .9rem;
   bottom: 0;
@@ -351,7 +354,7 @@
   .card p {
     font-size: 12px;
     
-    max-width: 100%;
+   
     margin-bottom: 5px;
     
   }

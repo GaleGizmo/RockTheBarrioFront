@@ -105,7 +105,7 @@ const Evento = ({ evento, user }) => {
           {evento.site && evento.site !== "Varios" ? (
             <p className="detalles-site">
             <MapIcon showMap={showMap} onClick={handleToggleMap} />
-              {evento.site.split(",")[0]}{" "}
+              {evento.site.split(",")[0]}
              
             </p>
           ) : (
