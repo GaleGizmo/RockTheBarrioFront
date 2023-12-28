@@ -7,13 +7,11 @@
 h3 .map-icon{
   padding-bottom: 3px;
 }
-.map-icon__active{
+.map-icon__mapOnScreen{
   color: var(--hover-color)
 }
+
 .map-icon__active:hover{
-  cursor:pointer;
-}
-.map-icon:hover{
   filter: brightness(2);
   filter: contrast(2);
   transform: scale(1.2);

@@ -63,7 +63,7 @@ const Evento = ({ evento, user }) => {
   return (
     <div className={`card ${evento.status ? "status " + evento.status : ""}`}>
                 {shareModal && <Modal show="true" evento={evento} handleShareModal={handleShareModal}/>}
-
+                
       {esHoy(evento.date_start) ? (
         <div className="data-label_container esHoy">
           <div className="data-label_esHoy">HOXE</div>
@@ -109,7 +109,11 @@ const Evento = ({ evento, user }) => {
              
             </p>
           ) : (
-            <p>{evento?.site?.split(",")[0]}</p>
+            <p className="detalles-site">
+            <MapIcon  />
+              {evento.site.split(",")[0]}
+             
+            </p>
           )}
 
           {horaStart && (
@@ -183,6 +187,7 @@ const Evento = ({ evento, user }) => {
         </div>
 
       </div>
+    
       {showMap && <MapComponent direccion={evento.site} />}
     </div>
   );

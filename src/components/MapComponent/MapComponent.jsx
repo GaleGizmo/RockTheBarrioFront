@@ -4,7 +4,7 @@ import Map from '../Map/Map';
 
 const MapComponent =  ({ direccion }) => {
     const [location, setLocation] = useState(null);
-  
+
     useEffect(() => {
       const fetchLocation = async () => {
         try {
@@ -27,7 +27,12 @@ const MapComponent =  ({ direccion }) => {
       fetchLocation();
     }, [direccion]);
   
-    return location && <Map location={location} />;
+ 
+    return (
+      <>
+     {location && <Map location={location} />}
+     
+     </>)
   };
   
 export default MapComponent;

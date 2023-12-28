@@ -1,18 +1,23 @@
 import { GoogleMap, Marker } from "@react-google-maps/api";
+import "./Map.css"
 
 const Map = ({ location }) => {
     if (typeof google === 'undefined') {
-        return null; // O muestra un mensaje de error o un indicador de carga
+        return null; 
       }
   
   return (
+
+    <div className="map-container">
     <GoogleMap
-      mapContainerStyle={{ height: "400px", width: "100%", marginTop:"20px" }}
+      mapContainerStyle={{ height: "100%", width: "100%" }}
       center={location}
       zoom={15}
+     
     >
       <Marker position={location} />
-    </GoogleMap>
+    </GoogleMap> 
+    </div>
   );
 };
 

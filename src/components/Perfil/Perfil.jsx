@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./Perfil.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { sendEventosDiarios } from "../../redux/eventos/eventos.actions";
+import { clearMensajes, sendEventosDiarios } from "../../redux/eventos/eventos.actions";
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
 
 const Perfil = ({ userData, onEditClick }) => {
@@ -30,6 +30,7 @@ const Perfil = ({ userData, onEditClick }) => {
     try {
       await new Promise((resolve) => {
         dispatch(sendEventosDiarios());
+        dispatch(clearMensajes())
         resolve();
       });
     } catch (err) {

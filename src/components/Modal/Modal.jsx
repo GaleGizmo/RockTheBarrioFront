@@ -15,6 +15,7 @@ import "./Modal.css";
 import { AiFillCloseSquare, AiOutlineZoomOut } from "react-icons/ai";
 import Loader from "../Loader/Loader";
 
+
 const Modal = ({
   show,
   showLoader,
@@ -22,6 +23,7 @@ const Modal = ({
   imageUrl,
   evento,
   handleShareModal,
+
 }) => {
   let eventoUrl = "";
   if (evento)
@@ -81,6 +83,7 @@ const Modal = ({
             </EmailShareButton>
           </div>
         )}
+       
       </div>
     </>
   );
