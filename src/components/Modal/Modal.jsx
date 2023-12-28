@@ -27,7 +27,7 @@ const Modal = ({
 }) => {
   let eventoUrl = "";
   if (evento)
-    eventoUrl = `https://rock-the-barrio-front-one.vercel.app/${evento._id}`;
+    eventoUrl = `https://www.rockthebarrio.es/${evento._id}`;
   return (
     <>
       {show && (
