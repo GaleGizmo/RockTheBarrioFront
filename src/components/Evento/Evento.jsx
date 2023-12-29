@@ -111,7 +111,7 @@ const Evento = ({ evento, user }) => {
           ) : (
             <p className="detalles-site">
             <MapIcon  />
-              {evento.site.split(",")[0]}
+              {evento.site?.split(",")[0]}
              
             </p>
           )}

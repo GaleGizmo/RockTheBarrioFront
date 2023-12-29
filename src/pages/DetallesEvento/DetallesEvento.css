@@ -247,9 +247,10 @@ img.boleto_imagen {
   transform: scale(1.2);
  margin-left: 5px;
  display: flex;
-  
-  
-}
+    }
+  .favorito-detalle:hover{
+    transform: scale(1.4);
+  }
 @media (min-width: 590px) and (max-width: 1040px) {
   .detalles-container {
     grid-template-columns: minmax(auto, 70%) minmax(250px, auto);
@@ -398,5 +399,8 @@ img.boleto_imagen {
   }
   .zoom-icon{
     font-size: 1.1rem;
+  }
+  .favorito-detalle{
+    margin-left: 0;
   }
 }
