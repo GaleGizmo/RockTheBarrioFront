@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./Navbar.css";
 
 import { Link } from "react-router-dom";
@@ -11,24 +11,27 @@ import { Slide, Zoom, toast } from "react-toastify";
 
 const Navbar = () => {
   const { user } = useSelector((state) => state.usuariosReducer);
+  const [loggedIn, setloggedIn]=useState(false)
   useEffect(() => {
-    
-      
-    user &&  (toast(`Ola, ${user.username}`, {
-      className: "hello-toast",
-      position: "top-center",
-      autoClose: 1000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-      transition: Zoom,
-      }));
-    
-  }, [user]);
-
+    if (user && !loggedIn) {
+      toast(`Ola, ${user.username}`, {
+        className: "hello-toast",
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Zoom,
+      });
+      setloggedIn(true);
+    } else if (!user) {
+      setloggedIn(false);
+    }
+   }, [user]);
+   
 
   return (
     <>
