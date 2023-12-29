@@ -25,4 +25,7 @@
         bottom: 0px;
         max-width: 205px;
     }
+    .favorito-tooltip{
+      display: none;
+    }
   }
