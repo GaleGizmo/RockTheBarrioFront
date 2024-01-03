@@ -138,7 +138,7 @@ const EventoEdicion = ({ evento, navigate }) => {
             className="inputCrearEvento"
             type="checkbox"
             name="payWhatYouWant"
-            defaultValue={evento.payWhatYouWant}
+            defaultChecked={evento.payWhatYouWant}
             onChange={handleInputChange}
             {...register("payWhatYouWant")}
           />
