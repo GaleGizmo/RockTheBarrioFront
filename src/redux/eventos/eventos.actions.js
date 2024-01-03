@@ -65,6 +65,7 @@ const createFormData = (eventoData) => {
     formData.append("status", eventoData.status);
   }
   formData.append("buy_ticket", eventoData.buy_ticket);
+  formData.append("payWhatYouWant", eventoData.payWhatYouWant)
   formData.append("genre", eventoData.genre);
   formData.append("content", eventoData.content);
   formData.append("url", eventoData.url);
@@ -86,8 +87,10 @@ const addEvento = (eventoData, navigate, userId) => async (dispatch) => {
     const resultado = await APIIMAGES.post("/evento", formData, getToken());
     dispatch({ type: "ADD_EVENTO", contenido: resultado.data });
     navigate("/");
+    return Promise.resolve(resultado);
   } catch (error) {
     dispatch({ type: "ERROR_EVENTO", contenido: error.message });
+    return Promise.reject(error);
   }
 };
 

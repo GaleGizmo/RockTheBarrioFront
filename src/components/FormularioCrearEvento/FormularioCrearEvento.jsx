@@ -31,18 +31,21 @@ const FormularioCrearEvento = () => {
   const handleFormSubmit = async (formData) => {
     try {
       setIsSubmitting(true);
-      dispatch(addEvento(formData, navigate, { user: user._id }));
-      setIsSubmitting(false);
+     
+      await dispatch(addEvento(formData, navigate, { user: user._id }));
+      
     } catch (error) {
       setIsSubmitting(false);
       console.error("Error al enviar el evento:", error);
+    } finally {
+      setIsSubmitting(false)
     }
   };
 
   const onSubmit = (data) => {
     setIsSubmitting(true);
     const { day_start, time_start } = data;
-
+    if (data.price > 0) data.payWhatYouWant = false;
     // Combinar la fecha y la hora en un objeto Date
     const combinedDate = new Date(`${day_start}T${time_start}`);
 
@@ -59,7 +62,8 @@ const FormularioCrearEvento = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors }, clearErrors
+    formState: { errors },
+    clearErrors,
   } = useForm();
   const dispatch = useDispatch();
   const [imageFile, setImageFile] = useState();
@@ -69,7 +73,7 @@ const FormularioCrearEvento = () => {
 
   return (
     <div className="cardCrearEvento">
-     <AiFillCloseSquare className="close-icon" onClick={handleIcon} />
+      <AiFillCloseSquare className="close-icon" onClick={handleIcon} />
       <h1>Crear Evento</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="div-inputCrearEvento">
@@ -121,16 +125,14 @@ const FormularioCrearEvento = () => {
             {...register("price", {
               required: true,
               pattern: {
-          value: /^\d+(\.\d{1,2})?$/,
-          message: "Máximo dous decimáis permitidos." 
-        }
+                value: /^\d+(\.\d{1,2})?$/,
+                message: "Máximo dous decimáis permitidos.",
+              },
             })}
             onChange={handlePriceChange}
           />
           {errors.price && (
-            <span className="error-message">
-            {errors.price.message}
-            </span>
+            <span className="error-message">{errors.price.message}</span>
           )}
           {priceError && (
             <span className="error-message">
@@ -138,10 +140,19 @@ const FormularioCrearEvento = () => {
             </span>
           )}
         </div>
-        {showBuyTicketField && (
+        {showBuyTicketField ? (
           <div className="div-inputCrearEvento">
             <label>URL de compra</label>
             <input className="inputCrearEvento" {...register("buy_ticket")} />
+          </div>
+        ) : (
+          <div>
+            <label>Entrada Inversa</label>
+            <input
+              className="inputCrearEvento"
+              type="checkbox"
+              {...register("payWhatYouWant")}
+            />{" "}
           </div>
         )}
         <div className="fechaCrearEvento">
@@ -188,7 +199,7 @@ const FormularioCrearEvento = () => {
           <label>Imaxe</label>
           <SubirImagen
             register={register}
-            evento={true}            
+            evento={true}
             funcion={(e) =>
               setImageFile(URL.createObjectURL(e.target.files[0]))
             }
