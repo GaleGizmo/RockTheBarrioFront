@@ -55,7 +55,7 @@ const EventoEdicion = ({ evento, navigate }) => {
       ...data,
       date_start: combinedDate,
     };
-
+    console.log(editedEvento);
     dispatch(editEvento(evento._id, editedEvento, navigate));
     setIsSubmitting(false);
   };
@@ -131,6 +131,17 @@ const EventoEdicion = ({ evento, navigate }) => {
             {...register("price", { required: true })}
           />
           {errors.price && <span>Prezo é requerido</span>}
+        </div>
+        <div className="div-inputCrearEvento">
+          <label>Entrada Inversa</label>
+          <input
+            className="inputCrearEvento"
+            type="checkbox"
+            name="payWhatYouWant"
+            defaultValue={evento.payWhatYouWant}
+            onChange={handleInputChange}
+            {...register("payWhatYouWant")}
+          />
         </div>
         <div className="div-inputCrearEvento">
           <label>URL de compra</label>

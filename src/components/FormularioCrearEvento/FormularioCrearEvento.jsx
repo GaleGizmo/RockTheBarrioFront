@@ -128,7 +128,9 @@ const FormularioCrearEvento = () => {
                 value: /^\d+(\.\d{1,2})?$/,
                 message: "Máximo dous decimáis permitidos.",
               },
+            
             })}
+            defaultValue={0}
             onChange={handlePriceChange}
           />
           {errors.price && (
