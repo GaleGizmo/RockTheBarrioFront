@@ -123,13 +123,15 @@ const Evento = ({ evento, user }) => {
           )}
           <p className="dias-faltantes">
             {esAnterior(evento.date_start) ? "Fai" : "Dentro de"}{" "}
-            <span className="gratuito">{diasFaltantes} </span>
+            <span className="blue-text">{diasFaltantes} </span>
           </p>
          
-          {evento.price == 0 ? (
+          {evento.price == 0 && evento.payWhatYouWant==false ? (
             <p className="gratuito">GRATUITO</p>
           ) : (
-            evento.price && <p>Prezo: {evento.price} €</p>
+            evento.price>0 ?( <p>Prezo: {evento.price} €</p>):(
+              <p className="gratuito">ENTRADA INVERSA</p>
+            )
           )}
           {evento.genre && <p className="evento-genre">{evento.genre}</p>}
           {evento.commentsCount && evento.commentsCount > 1 ? (

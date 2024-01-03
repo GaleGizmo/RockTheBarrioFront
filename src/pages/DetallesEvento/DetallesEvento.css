@@ -129,7 +129,7 @@ img.boleto_imagen {
   gap: 20px;
   position: relative;
   font-size: calc(1.2rem + 0.4vw);
-  
+  align-items: center;
 }
 
 .cardDetEv p {

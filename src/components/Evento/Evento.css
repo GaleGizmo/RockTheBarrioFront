@@ -25,7 +25,6 @@
 
   width: 100%;
 
-  
   max-height: 300px;
   margin: 0;
 }
@@ -74,8 +73,8 @@
 
   text-align: right;
   font-weight: bold;
-  font-size: .8rem;
-  
+  font-size: 0.8rem;
+
   width: fit-content;
 }
 .card h2 {
@@ -99,7 +98,7 @@
   left: 0;
   gap: 15px;
   right: auto;
-  font-size: .9rem;
+  font-size: 0.9rem;
   bottom: 0;
 }
 
@@ -265,12 +264,18 @@
   cursor: pointer;
 }
 
-
 .gratuito {
   color: #0c5460;
   font-weight: bold;
- 
- 
+  border: 5px solid #0c5460;
+  border-radius: 12px;
+  padding: 1px 5px 3px 5px;
+  display: flex;
+  align-items: center;
+  background-color: #2599a529;
+}
+.blue-text {
+  color: #0c5460;
 }
 .hora-icon {
   margin-bottom: 4px;
@@ -279,8 +284,6 @@
 .hoy {
   text-align: right;
 }
-
-
 
 .truncate {
   white-space: nowrap;
@@ -333,7 +336,6 @@
   }
   .card img {
     max-height: 180px;
-   
   }
 
   .title-artist_container {
@@ -356,10 +358,8 @@
   }
   .card p {
     font-size: 12px;
-    
-   
+
     margin-bottom: 5px;
-    
   }
   .card h2 {
     font-size: 1.4rem;
@@ -379,7 +379,14 @@
     min-height: 20vh;
   }
   .card-nocomments {
+    display: flex;
+    align-items: center;
+   
     margin-left: auto;
+    height: 100%;
+  }
+  .gratuito{
+    border-width: 3px;
   }
 }
 
@@ -392,7 +399,7 @@
     margin: 0px;
     flex-basis: 30%;
   }
-  .icon-container{
+  .icon-container {
     font-size: 1rem;
     gap: 20px;
   }
@@ -411,7 +418,7 @@
 
     height: 200px;
   }
-  
+
   .detalles_container {
     margin-top: 0;
     flex-basis: 35%;
@@ -425,14 +432,10 @@
   }
 
   .card h3 {
-    
-
     text-align: start;
-    
+
     font-size: 1.2rem;
   }
-
-  
 
   .title-artist_container {
     flex-basis: 30%;
@@ -445,12 +448,9 @@
     justify-content: flex-end;
   }
 
- 
   .card p {
     font-size: 0.75rem;
   }
-  
-  
 }
 
 @media (min-width: 1200px) {
@@ -464,7 +464,7 @@
     font-size: 0.85rem;
     text-align: right;
   }
-  .div-image{
+  .div-image {
     margin: 10px;
   }
 }

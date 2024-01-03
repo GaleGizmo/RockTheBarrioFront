@@ -164,9 +164,9 @@ const DetallesEvento = () => {
                   )}{" "}
                 </div>
 
-                {evento.price == 0 ? (
+                {evento.price == 0 && evento.payWhatYouWant == false ? (
                   <div className="gratuito">GRATUITO</div>
-                ) : (
+                ) : (evento.price>0 ? (
                   <div className="detalles_precio">
                     <div>
                       <strong>Prezo: </strong>
@@ -184,11 +184,13 @@ const DetallesEvento = () => {
                         />
                       </a>
                     )}
-                  </div>
+                  </div>):(
+                    <div className="gratuito">ENTRADA INVERSA</div>
+                  )
                 )}
               </h3>
               {esHoy(evento.date_start) ? (
-                <h3 className="gratuito ">
+                <h3 className="blue-text">
                   HOXE <span>{fechaStart.split(",")[1]}h</span>
                 </h3>
               ) : (
@@ -206,7 +208,7 @@ const DetallesEvento = () => {
                   )}
                   <p className="dias-faltantes__detalle">
                     {esAnterior(evento.date_start) ? "Fai" : "Dentro de"}{" "}
-                    <span className="gratuito">{diasFaltantes} </span>
+                    <span className="blue-text">{diasFaltantes} </span>
                   </p>
                 </div>
               )}
