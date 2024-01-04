@@ -387,6 +387,7 @@
   }
   .gratuito{
     border-width: 3px;
+    padding-bottom: 1px;
   }
 }
 
