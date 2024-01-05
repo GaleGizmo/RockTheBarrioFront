@@ -10,6 +10,8 @@ import MapIcon from "../MapIcon/MapIcon";
 import Favorito from "../Favorito/Favorito";
 import { BsInfoCircleFill } from "react-icons/bs";
 import { BsFillShareFill } from "react-icons/bs";
+import { AiFillEuroCircle } from "react-icons/ai";
+import { FaMusic } from "react-icons/fa";
 import MapComponent from "../MapComponent/MapComponent";
 import useFavorites from "../../shared/useFavorites";
 import { useDispatch } from "react-redux";
@@ -118,7 +120,7 @@ const Evento = ({ evento, user }) => {
 
           {horaStart && (
             <div className="evento-hora">
-             <p> <BsClockFill className="hora-icon"/> {horaStart}h</p>
+             <p> <BsClockFill className="icon-style"/> {horaStart}h</p>
             </div>
           )}
           <p className="dias-faltantes">
@@ -129,11 +131,11 @@ const Evento = ({ evento, user }) => {
           {evento.price == 0 && evento.payWhatYouWant==false ? (
             <p className="gratuito">GRATUITO</p>
           ) : (
-            evento.price>0 ?( <p>Prezo: {evento.price} €</p>):(
+            evento.price>0 ?( <p><AiFillEuroCircle className="icon-style icon-price"/> {evento.price}€</p>):(
               <p className="gratuito">ENTRADA INVERSA</p>
             )
           )}
-          {evento.genre && <p className="evento-genre">{evento.genre}</p>}
+          {evento.genre && <p className="evento-genre"> <FaMusic className="icon-style icon-price" /> {evento.genre}</p>}
           {evento.commentsCount && evento.commentsCount > 1 ? (
             <Link to={{ pathname: `/${evento._id}` }}>
               <p className="card-comments" onClick={getEvento}>

@@ -277,9 +277,12 @@
 .blue-text {
   color: #0c5460;
 }
-.hora-icon {
+.icon-style {
   margin-bottom: 4px;
   color: var(--icon-color);
+}
+.icon-price{
+  font-size: 16px;
 }
 .hoy {
   text-align: right;
