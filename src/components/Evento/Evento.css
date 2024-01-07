@@ -267,7 +267,7 @@
 .gratuito {
   color: #0c5460;
   font-weight: bold;
-  border: 5px solid #0c5460;
+  border: 3px solid #0c5460;
   border-radius: 12px;
   padding: 1px 5px 3px 5px;
   display: flex;
@@ -389,7 +389,7 @@
     height: 100%;
   }
   .gratuito{
-    border-width: 3px;
+    
     padding-bottom: 1px;
   }
 }

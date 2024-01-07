@@ -117,7 +117,7 @@
 .boton-buscar > label {
   font-size: 11px;
   width: fit-content;
-  margin-top: auto;
+  margin-bottom: auto;
   display: flex;
   flex-direction: column;
   text-align: end;
