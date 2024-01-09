@@ -69,8 +69,8 @@
   font-size: 1.2rem;
 }
 .card p {
-  margin-bottom: 7px;
-
+  margin-bottom: 3px;
+  flex: 1;
   text-align: right;
   font-weight: bold;
   font-size: 0.8rem;

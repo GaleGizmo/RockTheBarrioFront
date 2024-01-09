@@ -77,8 +77,8 @@ const DetallesEvento = () => {
   useEffect(() => {
     if (evento && evento.content) {
       const formattedContent = evento.content.replace(
-        /[:.](?!\s*-)|\./g,
-        (match) => (match === "." ? ".\n" : ":")
+        /\.(?=\s)|:(?=\s-)/g,
+      (match) => (match === "." ? "./n" : ":/n-")
       );
       setFormattedContent(formattedContent);
     }
