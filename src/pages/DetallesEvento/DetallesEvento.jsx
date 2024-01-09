@@ -78,7 +78,7 @@ const DetallesEvento = () => {
     if (evento && evento.content) {
       const formattedContent = evento.content.replace(
         /\.(?=\s)|:(?=\s-)/g,
-      (match) => (match === "." ? "./n" : ":/n-")
+      (match) => (match === "." ? ".\n" : ":\n-")
       );
       setFormattedContent(formattedContent);
     }
