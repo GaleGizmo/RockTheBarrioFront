@@ -35,6 +35,7 @@
     border-radius: 8px;
 }
 .rrss-container p{
+    flex:none;
     width: 100%;
     text-align: center;
 }

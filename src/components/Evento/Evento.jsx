@@ -135,7 +135,7 @@ const Evento = ({ evento, user }) => {
               <p className="gratuito">ENTRADA INVERSA</p>
             )
           )}
-          {evento.genre && <p className="evento-genre"> <FaMusic className="icon-style icon-price" /> {evento.genre}</p>}
+          {evento.genre ? <p className="evento-genre"> <FaMusic className="icon-style icon-price" /> {evento.genre}</p> : <p></p>}
           {evento.commentsCount && evento.commentsCount > 1 ? (
             <Link to={{ pathname: `/${evento._id}` }}>
               <p className="card-comments" onClick={getEvento}>
