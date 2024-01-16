@@ -27,7 +27,7 @@ const DetallesEvento = () => {
   const [formattedContent, setFormattedContent] = useState("");
   const { loading, evento } = useSelector((reducer) => reducer.eventosReducer);
   useEffect(() => {
-    if (!evento || evento._id !== id) {
+    if (!evento || (evento._id !== id && evento.shortURL !== id)) {
       dispatch(getEventoById(id));
     }
   }, [dispatch, id, evento]);
@@ -152,25 +152,25 @@ const DetallesEvento = () => {
               )}
               <h2>{evento.artist}</h2>
               <h3>
-                <div>
-                  <strong>Lugar: </strong>
+                <div className="detalles_item">
+               <strong>Lugar: </strong>
                   {evento.site && evento.site !== "Varios" ? (
                     <>
-                      {evento.site.split(",")[0]}{" "}
+                     <span> {evento.site.split(",")[0]} </span>
                       <MapIcon showMap={showMap} onClick={handleToggleMap} />
                     </>
                   ) : (
                     <>{evento.site.split(",")[0]}</>
-                  )}{" "}
+                  )}
                 </div>
 
                 {evento.price == 0 && evento.payWhatYouWant == false ? (
                   <div className="gratuito">GRATUITO</div>
                 ) : (evento.price>0 ? (
-                  <div className="detalles_precio">
+                  <div className="detalles_item">
                     <div>
                       <strong>Prezo: </strong>
-                      {evento.price} €
+                      {evento.price}€
                     </div>
                     {evento.buy_ticket && (
                       <a
@@ -197,7 +197,7 @@ const DetallesEvento = () => {
                 <div className="muestra-fecha">
                   <strong>Data: </strong>
                   <h3> {fechaStart}h </h3>
-                  {user && (
+                  {user ? (
                     <span onClick={handleFavorites}>
                       {isFavorite ? (
                         <BiCalendarHeart className="favorito favorito-detalle" />
@@ -205,7 +205,7 @@ const DetallesEvento = () => {
                         <BiCalendarAlt className="favorito favorito-detalle" />
                       )}
                     </span>
-                  )}
+                  ) : (<span ><BiCalendarAlt className="favorito favorito-detalle unavailiable" /></span>)}
                   <p className="dias-faltantes__detalle">
                     {esAnterior(evento.date_start) ? "Fai" : "Dentro de"}{" "}
                     <span className="blue-text">{diasFaltantes} </span>

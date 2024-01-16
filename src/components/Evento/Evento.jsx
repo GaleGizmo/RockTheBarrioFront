@@ -153,7 +153,7 @@ const Evento = ({ evento, user }) => {
           )}
           <div className="div_relleno"></div>
           <div className="icon-container">
-            {user && (
+            {user ? (
               <div
                 className="favorito-container"
                 onClick={()=>{handleFavorites(); handleDisplayTooltip()}}
@@ -177,7 +177,9 @@ const Evento = ({ evento, user }) => {
                   </>
                 )}
               </div>
-            )}
+            ) : (<div className="favorito-container ">
+            <BiCalendarAlt className="favorito unavailiable" />
+            </div>)}
             <span onClick={handleShareModal}><BsFillShareFill className="mas-info" /> </span>
             <Link to={{ pathname: `/${evento._id}` }}>
               <BsInfoCircleFill className="mas-info" onClick={getEvento} />

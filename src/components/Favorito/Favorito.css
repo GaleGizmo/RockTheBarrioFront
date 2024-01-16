@@ -25,13 +25,15 @@
 }
 .favorito {
   transform: scale(1.8);
+  
   color: var(--icon-color);
+  text-align: center;
 }
 .favorito:hover {
   cursor: pointer;
   filter: brightness(2) contrast(2);
   
-  transform: scale(2);
+
 }
 
 .favorito__yes {

@@ -27,7 +27,7 @@ const Modal = ({
 }) => {
   let eventoUrl = "";
   if (evento)
-    eventoUrl = `https://www.rockthebarrio.es/${evento._id}`;
+    eventoUrl = `https://www.rockthebarrio.es/${evento.shortURL}`;
   return (
     <>
       {show && (
