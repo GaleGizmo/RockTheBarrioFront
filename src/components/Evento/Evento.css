@@ -51,15 +51,14 @@
 }
 .detalles_container {
   position: relative;
-
-  flex-grow: 1;
-  max-height: 200px;
+  /* flex-grow: 1; */
+  gap: 5px;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: end;
   margin-right: 1%;
-  flex-basis: 100%;
+  /* flex-basis: 100%; */
   margin-top: 5%;
 }
 .card h3 {
@@ -270,7 +269,7 @@
   border: 3px solid #0c5460;
   border-radius: 12px;
   padding: 1px 5px 3px 5px;
-  display: flex;
+
   align-items: center;
   background-color: #2599a529;
 }
@@ -281,7 +280,7 @@
   margin-bottom: 4px;
   color: var(--icon-color);
 }
-.icon-price{
+.icon-price {
   font-size: 16px;
 }
 .hoy {
@@ -323,15 +322,25 @@
     font-size: 0.8rem;
   }
   .evento-hora {
+    text-align: right;
+    flex: 0 0 auto;
     margin-left: auto;
   }
   .detalles-site {
+    flex-grow: 1 !important;
+    width: 55% !important;
     justify-content: left;
   }
-  .border-card {
+  .evento-precio {
+    text-align: left !important;
+    flex-grow: 1 !important;
+    width: 50% !important;
+    min-width: 127px;
+  }
+  /* .border-card {
     flex-direction: column;
     height: auto;
-  }
+  } */
 
   .div-image {
     max-height: 200px;
@@ -341,18 +350,21 @@
     max-height: 180px;
   }
 
-  .title-artist_container {
+  /* .title-artist_container {
     flex-basis: 100%;
     margin-top: 1%;
-  }
+  } */
   .detalles_container {
+    gap: 0;
     padding-top: 5px;
     flex-basis: 100%;
-    display: grid;
-    grid-template-columns: minmax(auto, 55%) auto;
-    grid-template-rows: auto auto auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    /* display: grid;
+    grid-template-columns: minmax(auto, 55%) auto; */
+
     border-top: 1px solid var(--secondary-shadow);
-    width: 100%;
   }
   .card h3 {
     text-align: center;
@@ -360,8 +372,9 @@
     font-size: 1.2rem;
   }
   .card p {
+    text-align: unset;
     font-size: 12px;
-
+    flex: none;
     margin-bottom: 5px;
   }
   .card h2 {
@@ -382,14 +395,12 @@
     min-height: 20vh;
   }
   .card-nocomments {
-    display: flex;
-    align-items: center;
-   
+    text-align: right !important;
+    width: 50% !important;
+    flex-grow: 1 !important;
     margin-left: auto;
-    height: 100%;
   }
-  .gratuito{
-    
+  .gratuito {
     padding-bottom: 1px;
   }
 }

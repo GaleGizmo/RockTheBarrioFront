@@ -129,10 +129,10 @@ const Evento = ({ evento, user }) => {
           </p>
          
           {evento.price == 0 && evento.payWhatYouWant==false ? (
-            <p className="gratuito">GRATUITO</p>
+            <p className="evento-precio"><span className="gratuito">GRATUITO</span></p>
           ) : (
-            evento.price>0 ?( <p><AiFillEuroCircle className="icon-style icon-price"/> {evento.price}€</p>):(
-              <p className="gratuito">ENTRADA INVERSA</p>
+            evento.price>0 ?( <p className="evento-precio"><AiFillEuroCircle className="icon-style icon-price"/> {evento.price}€</p>):(
+              <p className="evento-precio"><span className="gratuito">ENTRADA INVERSA</span></p>
             )
           )}
           {evento.genre ? <p className="evento-genre"> <FaMusic className="icon-style icon-price" /> {evento.genre}</p> : <p></p>}
