@@ -52,7 +52,7 @@
 .detalles_container {
   position: relative;
   /* flex-grow: 1; */
-  gap: 5px;
+  gap: 4px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -475,10 +475,7 @@
   .status::before {
     font-size: 3em;
   }
-  .card p {
-    font-size: 0.85rem;
-    text-align: right;
-  }
+  
   .div-image {
     margin: 10px;
   }
