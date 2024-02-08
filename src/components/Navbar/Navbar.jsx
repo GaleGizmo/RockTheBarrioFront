@@ -57,13 +57,13 @@ const Navbar = () => {
               </div>
             )}
           </div>
-          <div className="boton-salir">
+          {/* <div className="boton-salir">
             <Link to="/">
               <span className="icono-salir">
                 <SwitchIcon onClick={logout} />
               </span>
             </Link>
-          </div>
+          </div> */}
         </div>
       ) : (
         <>
