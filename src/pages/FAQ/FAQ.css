@@ -10,6 +10,7 @@
 }
 .cardFaq-container h1 {
   margin: 0 auto 20px auto;
+  text-decoration: underline;
 }
 .cardFaq {
   display: flex;

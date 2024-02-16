@@ -46,14 +46,14 @@ const faqData = [
       "Os resultados da búsqueda permañecen en pantalla ata que se clica o botón 'Limpar' do buscador. Clicando no logo da web que está na parte superior esquerda tamén se carga o listado de eventos por defecto.",
   },
   {
-    title: "Como engado eventos a favoritos?",
+    title: "Como engado eventos a favoritos e para que me serve facelo?",
     content:
-      "Tanto na páxina principal como na de detalles de cada evento, pódese engadir un evento a favoritos clicando neste icono: ",
+      "Como usuario rexistrado, cando engadas un evento a favoritos recibirás un recordatorio do mesmo unha semana antes da data do evento, e outro recordatorio o día previo ao evento. Tanto na páxina principal como na de detalles de cada evento, pódese engadir un evento a favoritos clicando neste icono: ",
   },
   {
-    title: "Non vexo os iconos que dis para engadir a favoritos",
+    title: "O icono que dis aparece inhabilitado",
     content:
-      "Para poder engadir un evento a favoritos debes de te rexistrar primeiro na web. Unha vez logueado xa poderás ver o icono para engadir un evento a favoritos, e máis facer búsquedas que incluan só eventos favoritos. ",
+      "Para poder engadir un evento a favoritos debes de te rexistrar primeiro na web. Unha vez logueado activarase o icono para engadir un evento a favoritos, e máis facer búsquedas que incluan só eventos favoritos. ",
   },
   {
     title: "Que vantaxes ten rexistrarse?",
@@ -68,13 +68,9 @@ const faqData = [
   {
     title: "Pois marco as notificacións semanais, con iso chega, non?",
     content:
-      "Si... pero non. Dado que algúns locais avisan dos eventos con poucos días de antelación, pode pasar que se engadan eventos durante a semana que non estaban incluidos no email semanal. A solución sería marcar tamén as notificacións puntuais, ou visitar a web regularmente. ",
+      "Case... Dado que algúns locais avisan dos eventos con poucos días de antelación, pode pasar que se engadan eventos durante a semana que non estaban incluidos no email semanal. A solución sería marcar tamén as notificacións puntuais, ou visitar a web regularmente. ",
   },
-  {
-    title: "E para que vale engadir eventos a favoritos?",
-    content:
-      "Como usuario rexistrado, cando engadas un evento a favoritos recibirás un recordatorio do mesmo unha semana antes da data do evento, e outro recordatorio o día previo ao evento. ",
-  },
+
   {
     title: "Como podo cambiar os datos da miña conta?",
     content:
@@ -96,7 +92,7 @@ const navigate=useNavigate()
           <AiFillCloseSquare className="close-icon" onClick={handleIcon} />
 
       <div className="cardFaq">
-        <h1>Preguntas frecuentes</h1>
+        <h1>PREGUNTAS FRECUENTES</h1>
         <FluentProvider>
           <Accordion collapsible>
             {faqData.map((comentario, index) => (
