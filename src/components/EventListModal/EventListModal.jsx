@@ -2,15 +2,17 @@ import React, { memo } from "react";
 import { Link } from "react-router-dom";
 import "./EventListModal.css";
 
-import { setEvento } from "../../redux/eventos/eventos.actions";
+import { setEvento, toggleCalendar } from "../../redux/eventos/eventos.actions";
 import Button from "../Button/Button";
 import { useDispatch } from "react-redux";
 
-const EventListModal = memo(({ events, position }) => {
+const EventListModal = memo(({ events, position, calendarState, action }) => {
   const { top, left } = position;
   
   const dispatch = useDispatch();
   const getEvento = (id) => {
+   action()
+    dispatch(toggleCalendar(!calendarState))
     dispatch(setEvento(id));
   };
   const modalToLeft = left > window.innerWidth / 2;

@@ -5,6 +5,7 @@ const INITIAL_STATE = {
   loading: false,
   evento: null,
   error: null,
+  isCalendarOpen:false,
   eventosEnviados: "",
 };
 export const eventosReducer = (state = INITIAL_STATE, action) => {
@@ -83,6 +84,11 @@ export const eventosReducer = (state = INITIAL_STATE, action) => {
         return{
           ...state,
           eventosFiltrados:[],
+        }
+      case "TOGGLE_CALENDAR":
+        return{
+          ...state,
+          isCalendarOpen:action.contenido
         }
     default:
       return state;
