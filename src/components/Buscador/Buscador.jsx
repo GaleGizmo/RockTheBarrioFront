@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Buscador.css";
-import { BiChevronsUp, BiSearchAlt } from "react-icons/bi";
+import { BiChevronsUp } from "react-icons/bi";
 import { useForm } from "react-hook-form";
 import Button from "../Button/Button";
 import FilterEvents from "../../customhooks/Filter";
@@ -14,6 +14,7 @@ import { API } from "../../shared/api";
 import Modal from "../Modal/Modal";
 import SwitchButton from "../SwitchButton/SwitchButton";
 import ToolTip from "../ToolTip/ToolTip";
+import { IoIosSearch } from "react-icons/io";
 
 const Buscador = ({ eventos, user }) => {
   const dispatch = useDispatch();
@@ -33,7 +34,7 @@ const Buscador = ({ eventos, user }) => {
   const [customDates, setCustomDates] = useState(false);
   const [pastEvents, setPastEvents] = useState(false);
   const [showLoader, setShowLoader] = useState(false);
-  const [hovered, setHovered] = useState(false)
+  const [hovered, setHovered] = useState(false);
 
   let eventosToShow;
   let filteredResults = [];
@@ -195,11 +196,12 @@ const Buscador = ({ eventos, user }) => {
     setShowAdavancedSearch(false);
     dispatch(deleteFilteredEventos());
   };
-const handleDisplayTooltip=()=> {
-  setHovered(!hovered)
-}
+  const handleDisplayTooltip = () => {
+    setHovered(!hovered);
+  };
   return (
     <div className="buscador-container">
+      
       {showLoader && <Modal show={true} showLoader={true} />}
       <ConfirmModal
         title="Ups!"
@@ -210,7 +212,6 @@ const handleDisplayTooltip=()=> {
         onConfirm={() => {
           setNoResults(false);
         }}
-       
       />
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="buscador-input_wrapper">
@@ -222,7 +223,7 @@ const handleDisplayTooltip=()=> {
             onChange={handleInputChange}
             onKeyDown={handleKeyDown}
           />
-          <BiSearchAlt className="search_icon" onClick={handleSearchClick} />
+          <IoIosSearch className="search_icon" onClick={handleSearchClick} />
           <p onClick={handleShowAdvancedSearch} className="buscador-avanzada">
             {showAdvancedSearch ? "Sinxela" : "Avanzada"}
           </p>
@@ -238,11 +239,18 @@ const handleDisplayTooltip=()=> {
                 setSearchWithOr(e.target.checked);
               }}
             />
-            <label className="label-info"
-            onMouseEnter={handleDisplayTooltip}
-            onMouseLeave={handleDisplayTooltip}
-            ><span>Calquera termo </span>
-            {hovered && <ToolTip specificClass="termos-tooltip" content="Devolve todos os resultados que conteñan calquera dos termos introducidos"/>}
+            <label
+              className="label-info"
+              onMouseEnter={handleDisplayTooltip}
+              onMouseLeave={handleDisplayTooltip}
+            >
+              <span>Calquera termo </span>
+              {hovered && (
+                <ToolTip
+                  specificClass="termos-tooltip"
+                  content="Devolve todos os resultados que conteñan calquera dos termos introducidos"
+                />
+              )}
             </label>
           </div>
         </div>
@@ -251,7 +259,6 @@ const handleDisplayTooltip=()=> {
             showAdvancedSearch ? "show-advanced" : ""
           }`}
         >
-        
           <div className="buscador-checks_item">
             <label>Evento</label>
             <input
@@ -405,16 +412,15 @@ const handleDisplayTooltip=()=> {
           }`}
         >
           <div>
-          <Button text="Limpar" type="small" onClick={cleanFiltered} />{" "}
+            <Button text="Limpar" type="small" onClick={cleanFiltered} />{" "}
             <Button text="Buscar" type="small" onClick={handleSearchClick} />
-            
           </div>
           <label>
             Eventos pasados
             <SwitchButton
-            isOn={pastEvents}
-            handleToggle={() => setPastEvents(!pastEvents)}
-          />
+              isOn={pastEvents}
+              handleToggle={() => setPastEvents(!pastEvents)}
+            />
           </label>
           <BiChevronsUp
             className="chevrons-icon"

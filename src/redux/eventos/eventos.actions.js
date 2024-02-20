@@ -137,7 +137,9 @@ const setEvento = (eventoId) => (dispatch) => {
 const setFilteredEventos =(resultadoFiltrado)=>(dispatch)=>{
   dispatch({ type: "GET_EVENTOSFILTRADOS", contenido: resultadoFiltrado })
 }
-
+const toggleCalendar=(data)=>(dispatch)=>{
+  dispatch({type: "TOGGLE_CALENDAR", contenido:data})
+}
 const deleteFilteredEventos =()=>(dispatch)=>{
   dispatch({type: "DELETE_EVENTOSFILTRADOS"})
 }
@@ -153,5 +155,6 @@ export {
   clearMensajes,
   setEvento,
   setFilteredEventos,
-  deleteFilteredEventos
+  deleteFilteredEventos,
+  toggleCalendar
 };

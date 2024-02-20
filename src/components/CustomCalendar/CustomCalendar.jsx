@@ -3,13 +3,17 @@ import galicianTranslations from "../../shared/galician.json";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "./CustomCalendar.css";
-import { Button, Collapse } from "react-bootstrap";
-import { FaRegCalendarAlt } from "react-icons/fa";
+import {  Collapse } from "react-bootstrap";
+
 import EventListModal from "../EventListModal/EventListModal";
 
 import Legend from "../Legend/Legend";
+import {  useSelector } from "react-redux";
+
 
 function CustomCalendar({ eventos }) {
+ 
+  let {isCalendarOpen} =useSelector((reducer)=>reducer.eventosReducer)
   const eventDates = useMemo(
     () =>
       new Set(
@@ -68,13 +72,6 @@ function CustomCalendar({ eventos }) {
     return classNames.trim();
   };
 
-  const [isMenuOpen, setMenuOpen] = useState(false);
-  const toggleMenu = () => {
-    setMenuOpen(!isMenuOpen);
-    if (isModalOpen) {
-      setModalOpen(false);
-    }
-  };
 
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedEvents, setSelectedEvents] = useState([]);
@@ -133,13 +130,8 @@ function CustomCalendar({ eventos }) {
 
   return (
     <div className="calendar-container">
-      <Button
-        className=" menu-toggle custom-toggle d-lg-none"
-        onClick={toggleMenu}
-      >
-        <FaRegCalendarAlt></FaRegCalendarAlt>
-      </Button>
-      <Collapse in={isMenuOpen} className="d-lg-none">
+     
+      <Collapse in={isCalendarOpen} className="d-lg-none">
         <div className="slide-menu">
           <Calendar
             formatMonthYear={formatMonthYear}
@@ -152,9 +144,7 @@ function CustomCalendar({ eventos }) {
         </div>
       </Collapse>
       <div
-        className={`calendar d-none d-lg-block ${
-          isMenuOpen ? "menu-open" : ""
-        }`}
+        className={`calendar d-none d-lg-block `}
       >
         
         <Calendar
@@ -169,8 +159,9 @@ function CustomCalendar({ eventos }) {
       {isModalOpen && (
         <div ref={modalContentRef}>
         <EventListModal
+          calendarState={isCalendarOpen}
           events={selectedEvents}
-          onClose={toggleModal}
+          action={toggleModal}
           position={modalPosition}
         />
         </div>
