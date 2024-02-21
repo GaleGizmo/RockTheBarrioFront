@@ -61,11 +61,12 @@ h3 a {
   color: var(--link-color);
 }
 .no-logged {
-  transform: scale(2.7);
+  margin-right: 10px;
+  transform: scale(3);
   color: var(--primary-color);
 }
 .no-logged:hover {
-  color: var(--secondary-color);
+  filter: brightness(120%);
 }
 .hello-toast{
      --toastify-color-light: #3eb4b8; 
@@ -105,6 +106,6 @@ h3 a {
     display: none;
   }
   .no-logged {
-    transform: scale(1.8);
+    transform: scale(1.9);
   }
 }
