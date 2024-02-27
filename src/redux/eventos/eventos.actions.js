@@ -133,7 +133,9 @@ const clearMensajes = () => {
 const setEvento = (eventoId) => (dispatch) => {
   dispatch({ type: "GET_EVENTOBYID", contenido: eventoId });
 };
-
+const setFiltradosFromCalendar=()=>(dispatch)=>{
+  dispatch({type: "SET_FILTRADOSFROMCALENDAR"})
+}
 const setFilteredEventos =(resultadoFiltrado)=>(dispatch)=>{
   dispatch({ type: "GET_EVENTOSFILTRADOS", contenido: resultadoFiltrado })
 }
@@ -156,5 +158,6 @@ export {
   setEvento,
   setFilteredEventos,
   deleteFilteredEventos,
-  toggleCalendar
+  toggleCalendar,
+  setFiltradosFromCalendar
 };

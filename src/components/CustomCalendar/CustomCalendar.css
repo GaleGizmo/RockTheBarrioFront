@@ -53,6 +53,7 @@ height: 2.3rem;
 }
 
 .calendar {
+  display: none;
   position: fixed;
   top: 125px;
   margin-left: auto;

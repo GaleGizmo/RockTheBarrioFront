@@ -204,9 +204,9 @@ const Buscador = ({ eventos, user }) => {
       
       {showLoader && <Modal show={true} showLoader={true} />}
       <ConfirmModal
-        title="Ups!"
-        p1="Non se atoparon resultados."
-        p2="Tenta buscar con outros parámetros"
+        title="Non se atoparon resultados"
+        p1="Proba a buscar con outros termos"
+        p2="Lembra que o buscador é sensible aos acentos"
         buttonText="Aceptar"
         show={noResults}
         onConfirm={() => {

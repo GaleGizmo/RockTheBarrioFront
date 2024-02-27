@@ -9,10 +9,12 @@ import CustomCalendar from "../CustomCalendar/CustomCalendar";
 import { Button } from "react-bootstrap";
 import { FaRegCalendarAlt, FaSearch } from "react-icons/fa";
 
+
 const Header = () => {
   let {isCalendarOpen, eventosCalendar}=useSelector((reducer)=>reducer.eventosReducer)
   const dispatch = useDispatch();
   const reloadEvents = () => {
+    
     dispatch(deleteFilteredEventos());
   };
   const showCalendar=()=>{

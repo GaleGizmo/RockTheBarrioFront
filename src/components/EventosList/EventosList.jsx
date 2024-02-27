@@ -15,52 +15,68 @@ import Loader from "../Loader/Loader";
 
 const EventosList = () => {
   const dispatch = useDispatch();
-  
 
-
-  
   useEffect(() => {
-   
     dispatch(getEventosParaCalendar());
   }, [dispatch]);
 
   const [filtroActivo, setFiltroActivo] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [eventosToShow, setEventosToShow] = useState([]);
+  const [messageToShow, setMessageToShow] = useState("");
   const { user } = useSelector((reducer) => reducer.usuariosReducer);
-  let { loading, eventos, eventosFiltrados, eventosCalendar } = useSelector(
-    (reducer) => reducer.eventosReducer
-  );
+  let {
+    loading,
+    eventos,
+    eventosFiltrados,
+    eventosCalendar,
+    filtradosFromCalendar,
+  } = useSelector((reducer) => reducer.eventosReducer);
 
   useEffect(() => {
     if (Array.isArray(eventosFiltrados) && eventosFiltrados.length > 0) {
       setEventosToShow([...eventosFiltrados]);
+      if (filtradosFromCalendar) {
+        if (eventosFiltrados.length > 1) {
+          setMessageToShow(
+            "Hai " + eventosFiltrados.length + " eventos nesta data"
+          );
+        } else {
+          setMessageToShow("Hai 1 evento nesta data");
+        }
+      } else {
+        if (eventosFiltrados.length > 1) {
+          setMessageToShow(
+            "Hai " + eventosFiltrados.length + " resultados da túa búsqueda"
+          );
+        } else {
+          setMessageToShow("Hai 1 resultado da túa búsqueda");
+        }
+      }
+
       setFiltroActivo(true);
     } else {
       setEventosToShow([...eventos]);
-      setFiltroActivo(false)
+      setFiltroActivo(false);
     }
   }, [eventosFiltrados, eventos]);
 
-  
   useEffect(() => {
-   
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
-      const threshold = 10; 
+      const threshold = 10;
 
       if (scrollPosition > threshold) {
         setScrolled(true);
       } else {
         setScrolled(false);
       }
-   
-      }
+    };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -70,14 +86,14 @@ const EventosList = () => {
 
   useEffect(() => {
     setTimeout(() => {
-        const scrollPosition = sessionStorage.getItem("scrollPosition");
-    
-        if (scrollPosition) {
-            window.scrollTo(0, parseInt(scrollPosition));
-            sessionStorage.removeItem("scrollPosition");
-        }
+      const scrollPosition = sessionStorage.getItem("scrollPosition");
+
+      if (scrollPosition) {
+        window.scrollTo(0, parseInt(scrollPosition));
+        sessionStorage.removeItem("scrollPosition");
+      }
     }, 500);
-}, []); 
+  }, []);
 
   return (
     <div className="eventos-list">
@@ -86,12 +102,12 @@ const EventosList = () => {
       </div>
       <div className="eventos">
         {loading ? (
-          <Loader/>
+          <Loader />
         ) : (
           <>
             {filtroActivo && (
-              <p className={`resultados_busqueda ${scrolled ? 'hidden' : ''}`}>
-                Hai {eventosFiltrados.length} resultados para a túa búsqueda 
+              <p className={`resultados_busqueda ${scrolled ? "hidden" : ""}`}>
+                {messageToShow}
               </p>
             )}
             {eventosToShow.map((evento) => (
