@@ -7,6 +7,7 @@ const INITIAL_STATE = {
   error: null,
   isCalendarOpen:false,
   eventosEnviados: "",
+  filtradosFromCalendar:false
 };
 export const eventosReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -79,10 +80,15 @@ export const eventosReducer = (state = INITIAL_STATE, action) => {
           loading: false,
           eventosFiltrados: action.contenido,
         };
-      
+      case "SET_FILTRADOSFROMCALENDAR":
+        return{
+          ...state,
+          filtradosFromCalendar:true
+        }
       case "DELETE_EVENTOSFILTRADOS":
         return{
           ...state,
+          filtradosFromCalendar:false,
           eventosFiltrados:[],
         }
       case "TOGGLE_CALENDAR":

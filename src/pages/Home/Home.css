@@ -24,14 +24,17 @@
   top: 40px;
   z-index: 1000;
   width: fit-content;
-
+  color: var(--primary-color);
   text-align: center;
   border: 5px solid white;
 
   border-radius: 10px;
 
-  /* box-shadow: 2px 2px 4px var(--secondary-shadow); */
+
   background-color: var(--hover-color);
+}
+.listado-container:hover{
+  filter: brightness(120%);
 }
 .listado-text {
   border: 2px solid var(--secondary-color);
