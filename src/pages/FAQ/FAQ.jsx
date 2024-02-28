@@ -33,7 +33,7 @@ const faqData = [
   {
     title: "Que información teño no calendario?",
     content:
-      "No calendario, os días nos que hai un ou máis eventos están marcados de cor turquesa. Se hai maís dun evento nunha data, esa data leva ademáis un signo '+' á dereita do número. Clicando nos días que teñen eventos, amósase un despregable con enlaces á información de cada un dos eventos dese día ordeados por hora de inicio.",
+      "No calendario, os días nos que hai un ou máis eventos están marcados de cor turquesa. Se hai maís dun evento nunha data, esa data leva ademáis un signo '+' á dereita do número. Clicando nos días que teñen eventos, amósanse os eventos dese día ordeados por hora de inicio.",
   },
   {
     title: "Como funciona o buscador?",
