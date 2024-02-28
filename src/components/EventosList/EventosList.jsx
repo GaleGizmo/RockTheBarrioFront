@@ -5,13 +5,13 @@ import {
 } from "../../redux/eventos/eventos.actions";
 import { useDispatch, useSelector } from "react-redux";
 import Evento from "../Evento/Evento";
-
 import "react-calendar/dist/Calendar.css";
 import "./EventosList.css";
-
 import CustomCalendar from "../CustomCalendar/CustomCalendar";
 import Buscador from "../Buscador/Buscador";
 import Loader from "../Loader/Loader";
+import { LiaHandPointLeftSolid } from "react-icons/lia";
+
 
 const EventosList = () => {
   const dispatch = useDispatch();
@@ -97,6 +97,7 @@ const EventosList = () => {
 
   return (
     <div className="eventos-list">
+  {  filtroActivo && <div className="point-icon" > </div>}
       <div className="div-buscador">
         <Buscador eventos={eventos} user={user} />
       </div>
