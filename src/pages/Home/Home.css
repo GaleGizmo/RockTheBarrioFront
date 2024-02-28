@@ -76,6 +76,10 @@
   }
   .listado-container {
     display: none;
+    top:20px;
+  }
+  .listado-container>h1{
+    font-size: 12px;
   }
   .listado-border{
     display: none;

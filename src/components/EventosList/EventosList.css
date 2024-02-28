@@ -37,6 +37,29 @@
   .resultados_busqueda.hidden{
     opacity: 0;
   }
+.point-icon{
+  background-image: url("../../../public/assets/hand-icon.png");
+  position: fixed;
+ 
+  left: 45px;
+  top: 15px;
+  z-index: 1000;
+ 
+  width: 31px;
+  height: 20px;
+  animation: fadeInOut 2s infinite; 
+}
+@keyframes fadeInOut {
+  0% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.2;
+  }
+}
 @media (max-width: 520px) {
   .div-img {
     width: 100%;
@@ -56,6 +79,11 @@
   }
   .resultados_busqueda{
     font-size: 12px;
+  }
+  .point-icon{
+    top: 7px;
+    left: 35px;
+    transform: scale(.8);
   }
 }
 
