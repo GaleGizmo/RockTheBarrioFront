@@ -78,7 +78,7 @@ const DetallesEvento = () => {
     if (evento && evento.content) {
       const formattedContent = evento.content.replace(
         /\.(?=\s)|:(?=\s-)/g,
-      (match) => (match === "." ? ".\n" : ":\n-")
+        (match) => (match === "." ? ".\n" : ":\n-")
       );
       setFormattedContent(formattedContent);
     }
@@ -153,10 +153,10 @@ const DetallesEvento = () => {
               <h2>{evento.artist}</h2>
               <h3>
                 <div className="detalles_item">
-               <strong>Lugar: </strong>
+                  <strong>Lugar: </strong>
                   {evento.site && evento.site !== "Varios" ? (
                     <>
-                     <span> {evento.site.split(",")[0]} </span>
+                      <span> {evento.site.split(",")[0]} </span>
                       <MapIcon showMap={showMap} onClick={handleToggleMap} />
                     </>
                   ) : (
@@ -166,7 +166,7 @@ const DetallesEvento = () => {
 
                 {evento.price == 0 && evento.payWhatYouWant == false ? (
                   <div className="gratuito">GRATUITO</div>
-                ) : (evento.price>0 ? (
+                ) : evento.price > 0 ? (
                   <div className="detalles_item">
                     <div>
                       <strong>Prezo: </strong>
@@ -184,14 +184,14 @@ const DetallesEvento = () => {
                         />
                       </a>
                     )}
-                  </div>):(
-                    <div className="gratuito">ENTRADA INVERSA</div>
-                  )
+                  </div>
+                ) : (
+                  <div className="gratuito">ENTRADA INVERSA</div>
                 )}
               </h3>
               {esHoy(evento.date_start) ? (
                 <h3 className="blue-text">
-                   <span> HOXE {fechaStart.split(",")[1]}h</span>
+                  <span> HOXE {fechaStart.split(",")[1]}h</span>
                 </h3>
               ) : (
                 <div className="muestra-fecha">
@@ -205,7 +205,11 @@ const DetallesEvento = () => {
                         <BiCalendarAlt className="favorito favorito-detalle" />
                       )}
                     </span>
-                  ) : (<span ><BiCalendarAlt className="favorito favorito-detalle unavailiable" /></span>)}
+                  ) : (
+                    <span>
+                      <BiCalendarAlt className="favorito favorito-detalle unavailiable" />
+                    </span>
+                  )}
                   <p className="dias-faltantes__detalle">
                     {esAnterior(evento.date_start) ? "Fai" : "Dentro de"}{" "}
                     <span className="blue-text">{diasFaltantes} </span>
@@ -268,6 +272,7 @@ const DetallesEvento = () => {
               ) : null}
             </div>
           </div>
+
           <Modal
             show={showImageModal}
             onCancel={closeImageModal}
