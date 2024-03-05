@@ -240,7 +240,7 @@
 }
 .card-nocomments {
   color: var(--terciary-color);
-  opacity: 0.7;
+  
 }
 .card a {
   text-decoration: none;
@@ -287,6 +287,7 @@
 }
 .icon-price {
   font-size: 16px;
+  opacity: 1;
 }
 .hoy {
   text-align: right;

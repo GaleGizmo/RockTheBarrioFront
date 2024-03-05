@@ -1,6 +1,6 @@
 import React, {  useState } from "react";
 import "./Evento.css";
-import { BiCalendarHeart, BiCalendarAlt } from "react-icons/bi";
+import { BiCalendarHeart, BiCalendarAlt, BiSolidComment } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import {BsClockFill} from "react-icons/bs"
 import { esAnterior, esHoy } from "../../shared/formatDate";
@@ -42,6 +42,7 @@ const Evento = ({ evento, user }) => {
     setShowMap((showMap) => !showMap);
   };
   const getEvento = () => {
+    
     sessionStorage.setItem("scrollPosition", window.scrollY);
     dispatch(setEvento(evento._id));
   };
@@ -63,7 +64,8 @@ const Evento = ({ evento, user }) => {
   const horaStart = evento?.date_start ? format(fechaEvento, "HH:mm") : null;
   
   return (
-    <div className={`card ${evento.status ? "status " + evento.status : ""}`}>
+   
+    <div className={`card ${evento.status ? "status " + evento.status : ""}`} onClick={getEvento}>
                 {shareModal && <Modal show="true" evento={evento} handleShareModal={handleShareModal}/>}
                 
       {esHoy(evento.date_start) ? (
@@ -136,21 +138,16 @@ const Evento = ({ evento, user }) => {
             )
           )}
           {evento.genre ? <p className="evento-genre"> <FaMusic className="icon-style icon-price" /> {evento.genre}</p> : <p></p>}
-          {evento.commentsCount && evento.commentsCount > 1 ? (
+          {evento.commentsCount && evento.commentsCount > 0 ? (
             <Link to={{ pathname: `/${evento._id}` }}>
               <p className="card-comments" onClick={getEvento}>
-                Hai {evento.commentsCount} comentarios
-              </p>
-            </Link>
-          ) : evento.commentsCount === 1 ? (
-            <Link to={{ pathname: `/${evento._id}` }}>
-              <p className="card-comments" onClick={getEvento}>
-                Hai un comentario
+              <BiSolidComment className="icon-style icon-price"/>  {evento.commentsCount} 
               </p>
             </Link>
           ) : (
-            <p className="card-nocomments">Non hai comentarios</p>
+            <p className="card-nocomments"><BiSolidComment className="icon-style icon-price"/> 0 </p>
           )}
+          
           <div className="div_relleno"></div>
           <div className="icon-container">
             {user ? (
