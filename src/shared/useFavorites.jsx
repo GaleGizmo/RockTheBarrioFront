@@ -18,7 +18,7 @@ const useFavorites = (initialIsFavorite, eventId, userId) => {
 
     setTimeout(() => {
       setShowFavorite(false);
-    }, 1500);
+    }, 3000);
   };
 
   return { isFavorite, handleFavorites, showFavorite };

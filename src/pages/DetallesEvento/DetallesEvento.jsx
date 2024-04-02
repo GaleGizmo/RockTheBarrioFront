@@ -14,7 +14,7 @@ import MapComponent from "../../components/MapComponent/MapComponent";
 import MapIcon from "../../components/MapIcon/MapIcon";
 import { AiFillCloseSquare, AiOutlineZoomIn } from "react-icons/ai";
 import useFavorites from "../../shared/useFavorites";
-import { BiCalendarAlt, BiCalendarHeart } from "react-icons/bi";
+import { BiHeart, BiSolidHeart } from "react-icons/bi";
 import Favorito from "../../components/Favorito/Favorito";
 import { format, formatDistanceToNow, parseISO } from "date-fns";
 import { gl } from "date-fns/locale";
@@ -200,14 +200,14 @@ const DetallesEvento = () => {
                   {user ? (
                     <span onClick={handleFavorites}>
                       {isFavorite ? (
-                        <BiCalendarHeart className="favorito favorito-detalle" />
+                        <BiSolidHeart className="favorito favorito-detalle" />
                       ) : (
-                        <BiCalendarAlt className="favorito favorito-detalle" />
+                        <BiHeart className="favorito favorito-detalle" />
                       )}
                     </span>
                   ) : (
                     <span>
-                      <BiCalendarAlt className="favorito favorito-detalle unavailiable" />
+                      <BiHeart className="favorito favorito-detalle unavailiable" />
                     </span>
                   )}
                   <p className="dias-faltantes__detalle">
