@@ -9,8 +9,8 @@ import {
 import React from "react";
 import "./FAQ.css";
 import { FaRegCalendarAlt } from "react-icons/fa";
-import { BiCalendarAlt } from "react-icons/bi";
-import { BsInfo, BsInfoCircleFill } from "react-icons/bs";
+import {  BiHeart } from "react-icons/bi";
+import {  BsInfoCircleFill } from "react-icons/bs";
 import { AiFillCloseSquare } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 
@@ -107,7 +107,7 @@ const navigate=useNavigate()
                       {comentario.content.split('\n').map((linea, i) => 
                         <p key={i} >{linea} 
                         {index==0 && <FaRegCalendarAlt/>}
-                      {index==6 && (<span className="faq-favIcon"><BiCalendarAlt/></span>)}
+                      {index==6 && (<span className="faq-favIcon"><BiHeart/></span>)}
                       {index==1 && <span  > <BsInfoCircleFill className="faq-infoIcon"/> </span>}</p>
                       )}
                       
