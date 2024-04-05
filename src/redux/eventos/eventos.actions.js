@@ -127,7 +127,7 @@ const deleteEvento = (eventoId, navigate) => async () => {
   }
 };
 const clearMensajes = () => {
-  dispatch( { type: "CLEAR_MENSAJES" });
+  return  { type: "CLEAR_MENSAJES" };
 };
 
 const setEvento = (eventoId) => (dispatch) => {
