@@ -65,7 +65,9 @@
         display: flex;
         flex-direction: column;
       }
-    
+    .infoCrearEvento>textarea{
+      field-sizing: content;
+    }
       .div-inputCrearEvento{
         
         margin-top: 10%;
