@@ -252,7 +252,7 @@ const DetallesEvento = () => {
                   <Button text="Editar" type="medium" onClick={editarEvento} />
                 </div>
               )}
-              {showMap && <MapComponent direccion={evento.site} />}
+              
             </div>
           </div>
           <div className="detalle-comentarios">
@@ -272,7 +272,7 @@ const DetallesEvento = () => {
               ) : null}
             </div>
           </div>
-
+          {showMap && <MapComponent direccion={evento.site} />}
           <Modal
             show={showImageModal}
             onCancel={closeImageModal}

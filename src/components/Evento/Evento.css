@@ -235,11 +235,11 @@
 }
 .card-comments {
   font-weight: bold;
-  animation: brillo 3s infinite;
+  
   margin-left: auto;
 }
-.card-nocomments {
-  color: var(--terciary-color);
+.isComments {
+  animation: brillo 3s infinite;
   
 }
 .card a {
@@ -406,11 +406,12 @@
   .background-logo {
     min-height: 20vh;
   }
-  .card-nocomments {
+ 
+  .card-comments{
+   
     text-align: right !important;
     width: 50% !important;
     flex-grow: 1 !important;
-    margin-left: auto;
   }
   .gratuito {
     padding-bottom: 1px;

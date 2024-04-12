@@ -6,7 +6,7 @@ h3 .map-icon {
   padding-bottom: 3px;
 }
 .map-icon__mapOnScreen {
-  color: var(--hover-color);
+  color: var(--terciary-color);
 }
 
 .map-icon__active:hover {

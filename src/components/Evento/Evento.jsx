@@ -165,14 +165,15 @@ const Evento = ({ evento, user }) => {
             <p></p>
           )}
           {evento.commentsCount && evento.commentsCount > 0 ? (
-            <Link to={{ pathname: `/${evento._id}` }}>
-              <p className="card-comments" onClick={getEvento}>
+           
+              <p className="card-comments isComments" onClick={getEvento}>
+              <Link to={{ pathname: `/${evento._id}` }}>
                 <BiSolidComment className="icon-style icon-price" />{" "}
-                {evento.commentsCount}
+                {evento.commentsCount}</Link>
               </p>
-            </Link>
+            
           ) : (
-            <p className="card-nocomments">
+            <p className="card-comments">
               <BiSolidComment className="icon-style icon-price" /> 0{" "}
             </p>
           )}
