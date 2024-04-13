@@ -15,7 +15,6 @@ import "./Modal.css";
 import { AiFillCloseSquare, AiOutlineZoomOut } from "react-icons/ai";
 import Loader from "../Loader/Loader";
 
-
 const Modal = ({
   show,
   showLoader,
@@ -23,11 +22,13 @@ const Modal = ({
   imageUrl,
   evento,
   handleShareModal,
-
 }) => {
   let eventoUrl = "";
-  if (evento)
+  let textToShare = "";
+  if (evento) {
     eventoUrl = `https://www.rockthebarrio.es/${evento.shortURL}`;
+    textToShare = `${evento?.artist} en ${evento?.site.split(",")[0]}`;
+  }
   return (
     <>
       {show && (
@@ -37,9 +38,7 @@ const Modal = ({
         className={`modal  fade ${show ? "show" : ""}`}
         style={{ display: show ? "flex" : "none" }}
       >
-      {showLoader && (
-        <Loader/>
-      )}
+        {showLoader && <Loader />}
         {imageUrl && (
           <div className="image-container">
             <img
@@ -61,29 +60,28 @@ const Modal = ({
               onClick={handleShareModal}
             />
             <p>Comparte este evento cos teus amigos</p>
-            <WhatsappShareButton url={eventoUrl} title={evento.title}>
+            <WhatsappShareButton url={eventoUrl} title={textToShare}>
               <WhatsappIcon size={32} round />
             </WhatsappShareButton>
-            <FacebookShareButton url={eventoUrl} title={evento.title}>
+            <FacebookShareButton url={eventoUrl} title={textToShare}>
               <FacebookIcon size={32} round />
             </FacebookShareButton>
-            <TwitterShareButton url={eventoUrl} title={evento.title}>
+            <TwitterShareButton url={eventoUrl} title={textToShare}>
               <TwitterIcon size={32} round />
             </TwitterShareButton>
-            <TelegramShareButton url={eventoUrl} title={evento.title}>
+            <TelegramShareButton url={eventoUrl} title={textToShare}>
               <TelegramIcon size={32} round />
             </TelegramShareButton>
 
             <EmailShareButton
               url={eventoUrl}
               body="Mira este evento: "
-              subject={evento.title}
+              subject={textToShare}
             >
               <EmailIcon size={32} round />
             </EmailShareButton>
           </div>
         )}
-       
       </div>
     </>
   );

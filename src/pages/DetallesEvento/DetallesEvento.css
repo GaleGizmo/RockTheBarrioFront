@@ -329,7 +329,7 @@ img.boleto_imagen {
     flex-direction: column;
     gap: 5px;
     font-size: calc(0.8rem + 0.9vw);
-    margin-bottom: 0;
+    margin-bottom: 5px;
   }
   .cardDetEv {
     display: flex;
