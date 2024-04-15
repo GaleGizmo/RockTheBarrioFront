@@ -15,6 +15,7 @@ import Modal from "../Modal/Modal";
 import SwitchButton from "../SwitchButton/SwitchButton";
 import ToolTip from "../ToolTip/ToolTip";
 import { IoIosSearch } from "react-icons/io";
+import { AiTwotoneQuestionCircle } from "react-icons/ai";
 
 const Buscador = ({ eventos, user }) => {
   const dispatch = useDispatch();
@@ -201,7 +202,6 @@ const Buscador = ({ eventos, user }) => {
   };
   return (
     <div className="buscador-container">
-      
       {showLoader && <Modal show={true} showLoader={true} />}
       <ConfirmModal
         title="Non se atoparon resultados"
@@ -243,8 +243,12 @@ const Buscador = ({ eventos, user }) => {
               className="label-info"
               onMouseEnter={handleDisplayTooltip}
               onMouseLeave={handleDisplayTooltip}
+              onClick={handleDisplayTooltip}
             >
-              <span>Calquera termo </span>
+              <span>Calquera termo </span>{" "}
+              <span >
+                <AiTwotoneQuestionCircle />
+              </span>
               {hovered && (
                 <ToolTip
                   specificClass="termos-tooltip"

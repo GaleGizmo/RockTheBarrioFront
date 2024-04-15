@@ -60,10 +60,10 @@ const Modal = ({
               onClick={handleShareModal}
             />
             <p>Comparte este evento cos teus amigos</p>
-            <WhatsappShareButton url={eventoUrl} title={textToShare}>
+            <WhatsappShareButton url={eventoUrl} title={textToShare} >
               <WhatsappIcon size={32} round />
             </WhatsappShareButton>
-            <FacebookShareButton url={eventoUrl} title={textToShare}>
+            <FacebookShareButton url={eventoUrl} title={textToShare} >
               <FacebookIcon size={32} round />
             </FacebookShareButton>
             <TwitterShareButton url={eventoUrl} title={textToShare}>

@@ -20,6 +20,7 @@ import { format, formatDistanceToNow, parseISO } from "date-fns";
 import { gl } from "date-fns/locale";
 import Modal from "../../components/Modal/Modal";
 import Loader from "../../components/Loader/Loader";
+import { Helmet } from "react-helmet";
 
 const DetallesEvento = () => {
   const dispatch = useDispatch();
@@ -104,6 +105,12 @@ const DetallesEvento = () => {
         <Loader />
       ) : (
         <div className="detalles-container">
+          <Helmet>
+           
+            <meta property="og:image" content={evento.image} />
+           
+          </Helmet>
+
           <div
             className={`divCardDetEv  ${
               evento.status ? "status " + evento.status : ""
@@ -252,7 +259,6 @@ const DetallesEvento = () => {
                   <Button text="Editar" type="medium" onClick={editarEvento} />
                 </div>
               )}
-              
             </div>
           </div>
           <div className="detalle-comentarios">
