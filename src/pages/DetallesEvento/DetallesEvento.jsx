@@ -106,9 +106,11 @@ const DetallesEvento = () => {
       ) : (
         <div className="detalles-container">
           <Helmet>
-           
+            <title>{evento.title}</title>
+            <meta property="description" content={`${evento.artist} en ${evento.site.split(",")[0]}`} />
+
+            <meta property="og:description" content={`${evento.artist} en ${evento.site.split(",")[0]}`} />
             <meta property="og:image" content={evento.image} />
-           
           </Helmet>
 
           <div
