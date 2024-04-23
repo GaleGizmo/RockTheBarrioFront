@@ -14,16 +14,17 @@ const useFavorites = (initialIsFavorite, eventId, userId) => {
   let {error}=useSelector((state)=>state.usuariosReducer)
   const handleFavorites = async() => {
     const newFavoriteValue = !isFavorite;
-    setIsFavorite(newFavoriteValue);
+    
     try {
       await dispatch(addToFavorites(eventId, userId, newFavoriteValue));
       // Solo mostrar favorito si addToFavorites tiene éxito
       setShowFavorite(true);
+      setIsFavorite(newFavoriteValue);
       setTimeout(() => {
         setShowFavorite(false);
       }, 3000);
     } catch (err) {
-      toast.error(error, {position: 'top-right'});
+      toast.error(err.message, {position: 'top-right'});
     }
   };
 

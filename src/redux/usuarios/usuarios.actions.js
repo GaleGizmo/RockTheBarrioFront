@@ -215,32 +215,36 @@ const unsubscribeEmail = (email, unsubscribe, userId) => async (dispatch) => {
     return false;
   }
 };
-const addToFavorites = (eventId, userId, add) => async () => {
-  dispatch({ type: "LOADING_USUARIOS" });
-  dispatch({ type: "CLEAR_ERROR" });
-  try {
-    const response=await API.patch(`/usuario/add-favorite`, { eventId, userId, add });
-    const user = JSON.parse(localStorage.getItem("user"));
-    const updatedUser = {
-      ...user,
-      favorites: add
-        ? [...user.favorites, eventId]
-        : user.favorites.filter((id) => id !== eventId),
-    };
-    dispatch({ type: "SET_USER", contenido: updatedUser });
-    localStorage.setItem("user", JSON.stringify(updatedUser));
-    return response
-  } catch (error) {
-    if (error.response && error.response.data && error.response.data.message) {
-      dispatch({
-        type: "ERROR_USUARIO",
-        contenido: error.response.data.message,
-      });
-    } else {
-      dispatch({ type: "ERROR_USUARIO", contenido: "Error descoñecido" });
+const addToFavorites = (eventId, userId, add) => {
+  return async (dispatch) => {
+    dispatch({ type: "LOADING_USUARIOS" });
+    dispatch({ type: "CLEAR_ERROR" });
+    try {
+      const response = await API.patch(`/usuario/add-favorite`, { eventId, userId, add });
+      const user = JSON.parse(localStorage.getItem("user"));
+      const updatedUser = {
+        ...user,
+        favorites: add
+          ? [...user.favorites, eventId]
+          : user.favorites.filter((id) => id !== eventId),
+      };
+      dispatch({ type: "SET_USER", contenido: updatedUser });
+      localStorage.setItem("user", JSON.stringify(updatedUser));
+      return response;
+    } catch (error) {
+      if (error.response && error.response.data && error.response.data.message) {
+        dispatch({
+          type: "ERROR_USUARIO",
+          contenido: error.response.data.message,
+        });
+      } else {
+        dispatch({ type: "ERROR_USUARIO", contenido: "Error descoñecido" });
+      }
+      throw error; 
     }
-  }
+  };
 };
+
 const clearError = () => () => {
   dispatch({ type: "CLEAR_ERROR" });
 };
