@@ -10,7 +10,8 @@ import "./EventosList.css";
 import CustomCalendar from "../CustomCalendar/CustomCalendar";
 import Buscador from "../Buscador/Buscador";
 import Loader from "../Loader/Loader";
-import { LiaHandPointLeftSolid } from "react-icons/lia";
+
+import { Helmet } from "react-helmet";
 
 
 const EventosList = () => {
@@ -97,6 +98,11 @@ const EventosList = () => {
 
   return (
     <div className="eventos-list">
+    <Helmet>
+    <title>ROCK THE BARRIO</title>
+            <meta property="description" content="Descubre todos los eventos musicales en el área de Santiago de Compostela. Consulta el calendario, compra las entradas y recibe toda la información en tu correo electrónico." />
+
+    </Helmet>
   {  filtroActivo && <div className="point-icon" > </div>}
       <div className="div-buscador">
         <Buscador eventos={eventos} user={user} />

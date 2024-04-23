@@ -15,23 +15,27 @@ const getAllComentarios = () => async () => {
     });
   }
 };
-const switchEscribiendoComentario = (writingState) => ({ type: "SWITCH_CREATECOMENTARIO", contenido: writingState });
+const switchEscribiendoComentario = (writingState) => ({
+  type: "SWITCH_CREATECOMENTARIO",
+  contenido: writingState,
+});
 
 const addComentario = (comentarioData, eventId) => async (dispatch) => {
   dispatch({ type: "LOADING_COMENTARIOS" });
   dispatch({ type: "CLEAR_ERRORCOMENTARIOS" });
   try {
     await API.post("/comentario", comentarioData, getToken());
-    // const resultadoGet = await API.get(`/comentario/getbyevent/${eventId}`)
-    // console.log(resultadoGet);
-    // dispatch({ type: "ADD_COMENTARIO", contenido: resultadoGet.data });
-
+   
     getComentariosByEvent(eventId);
   } catch (error) {
-    dispatch({
-      type: "ERROR_COMENTARIOS",
-      contenido: error.response.data.message,
-    });
+    if(error.response && error.response.data && error.response.data.message) {
+      dispatch({
+        type: "ERROR_COMENTARIOS",
+        contenido: error.response.data.message,
+      });
+    } else {
+      dispatch({ type: "ERROR_COMENTARIOS", contenido: "Error descoñecido" });
+    }
   }
 };
 
@@ -72,13 +76,19 @@ const editComentario = (idComentario, comentarioData) => async (dispatch) => {
 
 const deleteComentario = (idComentario) => async () => {
   dispatch({ type: "LOADING_COMENTARIOS" });
-  dispatch({type: "CLEAR_ERRORCOMENTARIOS"})
+  dispatch({ type: "CLEAR_ERRORCOMENTARIOS" });
   try {
-    const resultado = await API.delete(`/comentario/${idComentario}`, getToken());
+    const resultado = await API.delete(
+      `/comentario/${idComentario}`,
+      getToken()
+    );
 
     dispatch({ type: "DELETE_COMENTARIO", contenido: resultado.data });
   } catch (error) {
-    dispatch({ type: "ERROR_COMENTARIOS", contenido: error.response.data.message });
+    dispatch({
+      type: "ERROR_COMENTARIOS",
+      contenido: error.response.data.message,
+    });
   }
 };
 

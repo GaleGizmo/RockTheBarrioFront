@@ -1,6 +1,6 @@
 import React from "react";
 import "./Legal.css";
-
+import { Helmet } from "react-helmet";
 import { AiFillCloseSquare } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 
@@ -11,6 +11,12 @@ const navigate = useNavigate()
   }
   return (
     <div className="cardLegal">
+        <Helmet>
+    <title>TERMOS DE USO</title>
+            <meta property="description" content="Termos de uso da web" />
+
+           
+    </Helmet>
      <AiFillCloseSquare className="close-icon" onClick={handleIcon}/>
       <h1>TERMOS E CONDICIONS</h1>
       <h3>

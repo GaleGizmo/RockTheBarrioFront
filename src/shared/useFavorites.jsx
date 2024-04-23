@@ -1,7 +1,9 @@
 // useFavorites.js
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import 'react-toastify/dist/ReactToastify.css';
 import { addToFavorites } from '../redux/usuarios/usuarios.actions';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const useFavorites = (initialIsFavorite, eventId, userId) => {
@@ -9,16 +11,20 @@ const useFavorites = (initialIsFavorite, eventId, userId) => {
   const [isFavorite, setIsFavorite] = useState(initialIsFavorite);
   const [showFavorite, setShowFavorite] = useState(false);
   const dispatch = useDispatch();
-
-  const handleFavorites = () => {
+  let {error}=useSelector((state)=>state.usuariosReducer)
+  const handleFavorites = async() => {
     const newFavoriteValue = !isFavorite;
     setIsFavorite(newFavoriteValue);
-    dispatch(addToFavorites(eventId, userId, newFavoriteValue));
-    setShowFavorite(true);
-
-    setTimeout(() => {
-      setShowFavorite(false);
-    }, 3000);
+    try {
+      await dispatch(addToFavorites(eventId, userId, newFavoriteValue));
+      // Solo mostrar favorito si addToFavorites tiene éxito
+      setShowFavorite(true);
+      setTimeout(() => {
+        setShowFavorite(false);
+      }, 3000);
+    } catch (err) {
+      toast.error(error, {position: 'top-right'});
+    }
   };
 
   return { isFavorite, handleFavorites, showFavorite };

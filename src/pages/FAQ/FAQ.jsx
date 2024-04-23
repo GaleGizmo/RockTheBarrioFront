@@ -13,6 +13,7 @@ import {  BiHeart } from "react-icons/bi";
 import {  BsInfoCircleFill } from "react-icons/bs";
 import { AiFillCloseSquare } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const faqData = [
   {
@@ -89,6 +90,12 @@ const navigate=useNavigate()
   };
   return (
     <div className="cardFaq-container">
+    <Helmet>
+    <title>FAQ</title>
+            <meta property="description" content="Preguntas frecuentes sobre a web" />
+
+           
+    </Helmet>
           <AiFillCloseSquare className="close-icon" onClick={handleIcon} />
 
       <div className="cardFaq">

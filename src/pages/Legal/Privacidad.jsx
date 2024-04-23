@@ -2,7 +2,7 @@ import React from "react";
 import "./Legal.css";
 import { Link, useNavigate } from "react-router-dom";
 import { AiFillCloseSquare } from "react-icons/ai";
-
+import { Helmet } from "react-helmet";
 
 const Privacidad = () => {
   const navigate = useNavigate();
@@ -11,6 +11,12 @@ const Privacidad = () => {
   };
   return (
     <div className="cardLegal">
+        <Helmet>
+    <title>POLÍTICA DE PRIVACIDADE</title>
+            <meta property="description" content="Política de privacidade da nosa web" />
+
+           
+    </Helmet>
       <AiFillCloseSquare className="close-icon" onClick={handleIcon} />
       <h1>POLITICA DE PRIVACIDADE</h1>
       <h3>Información que recollemos</h3>

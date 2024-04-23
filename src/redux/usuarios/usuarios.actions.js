@@ -4,7 +4,6 @@ import store from "../store";
 const { dispatch } = store;
 
 const setUserData = (resultado, navigate) => {
-
   dispatch({
     type: "LOGIN",
     contenido: {
@@ -220,7 +219,7 @@ const addToFavorites = (eventId, userId, add) => async () => {
   dispatch({ type: "LOADING_USUARIOS" });
   dispatch({ type: "CLEAR_ERROR" });
   try {
-    await API.patch(`/usuario/add-favorite`, { eventId, userId, add });
+    const response=await API.patch(`/usuario/add-favorite`, { eventId, userId, add });
     const user = JSON.parse(localStorage.getItem("user"));
     const updatedUser = {
       ...user,
@@ -230,6 +229,7 @@ const addToFavorites = (eventId, userId, add) => async () => {
     };
     dispatch({ type: "SET_USER", contenido: updatedUser });
     localStorage.setItem("user", JSON.stringify(updatedUser));
+    return response
   } catch (error) {
     if (error.response && error.response.data && error.response.data.message) {
       dispatch({
