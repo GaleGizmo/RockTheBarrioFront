@@ -25,7 +25,7 @@ const useFavorites = (initialIsFavorite, eventId, userId) => {
         setShowFavorite(false);
       }, 3000);
     } catch (err) {
-      toast.error(err.message, {position: 'top-right'});
+      toast.error(error, {position: 'top-right'});
     }
   };
 
