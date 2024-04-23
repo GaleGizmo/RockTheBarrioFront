@@ -18,7 +18,7 @@ import { useDispatch } from "react-redux";
 import { setEvento } from "../../redux/eventos/eventos.actions";
 import Modal from "../Modal/Modal";
 import ToolTip from "../ToolTip/ToolTip";
-import 'react-toastify/dist/ReactToastify.css';
+
 
 const Evento = ({ evento, user }) => {
   const [hovered, setHovered] = useState(false);
