@@ -21,10 +21,12 @@ import { gl } from "date-fns/locale";
 import Modal from "../../components/Modal/Modal";
 import Loader from "../../components/Loader/Loader";
 import { Helmet } from "react-helmet";
+import { BsFillShareFill } from "react-icons/bs";
 
 const DetallesEvento = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
+  const [shareModal, setShareModal] = useState(false);
   const [formattedContent, setFormattedContent] = useState("");
   const { loading, evento } = useSelector((reducer) => reducer.eventosReducer);
   useEffect(() => {
@@ -32,7 +34,9 @@ const DetallesEvento = () => {
       dispatch(getEventoById(id));
     }
   }, [dispatch, id, evento]);
-
+  const handleShareModal = () => {
+    setShareModal(!shareModal);
+  };
   const { user } = useSelector((reducer) => reducer.usuariosReducer);
   const { isFavorite, handleFavorites, showFavorite } = useFavorites(
     user?.favorites?.includes(evento?._id) || false,
@@ -107,9 +111,15 @@ const DetallesEvento = () => {
         <div className="detalles-container">
           <Helmet>
             <title>{evento.title}</title>
-            <meta property="description" content={`${evento.artist} en ${evento.site.split(",")[0]}`} />
+            <meta
+              property="description"
+              content={`${evento.artist} en ${evento.site.split(",")[0]}`}
+            />
 
-            <meta property="og:description" content={`${evento.artist} en ${evento.site.split(",")[0]}`} />
+            <meta
+              property="og:description"
+              content={`${evento.artist} en ${evento.site.split(",")[0]}`}
+            />
             <meta property="og:image" content={evento.image} />
           </Helmet>
 
@@ -119,9 +129,18 @@ const DetallesEvento = () => {
             }`}
           >
             <div className="cardDetEv">
+              {shareModal && (
+                <Modal
+                  show="true"
+                  evento={evento}
+                  handleShareModal={handleShareModal}
+                />
+              )}
+
               <AiFillCloseSquare className="close-icon" onClick={goHome} />
               <h1 className={isLongTitle ? "long-title" : ""}>
                 {evento.title}
+                
               </h1>
               {evento.youtubeVideoId ? (
                 <div className={`youtube-video-container`}>
@@ -159,7 +178,11 @@ const DetallesEvento = () => {
               ) : (
                 <img className="divCardDetEv__noimage"></img>
               )}
-              <h2>{evento.artist}</h2>
+              <h2>{evento.artist}
+              <span onClick={handleShareModal}>
+                    <BsFillShareFill className="favorito compartir-detalle" />{" "}
+                  </span>
+                  </h2>
               <h3>
                 <div className="detalles_item">
                   <strong>Lugar: </strong>
@@ -201,6 +224,7 @@ const DetallesEvento = () => {
               {esHoy(evento.date_start) ? (
                 <h3 className="blue-text">
                   <span> HOXE {fechaStart.split(",")[1]}h</span>
+                  
                 </h3>
               ) : (
                 <div className="muestra-fecha">
@@ -219,6 +243,7 @@ const DetallesEvento = () => {
                       <BiHeart className="favorito favorito-detalle unavailiable" />
                     </span>
                   )}
+                 
                   <p className="dias-faltantes__detalle">
                     {esAnterior(evento.date_start) ? "Fai" : "Dentro de"}{" "}
                     <span className="blue-text">{diasFaltantes} </span>
@@ -232,6 +257,7 @@ const DetallesEvento = () => {
                   <div>
                     <strong>Xénero:</strong> {evento.genre}
                   </div>
+
                   {showFavorite && (
                     <Favorito
                       claseDetalle="tooltip-detalle"

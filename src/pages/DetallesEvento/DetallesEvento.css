@@ -115,8 +115,12 @@ img.boleto_imagen {
 }
 
 .cardDetEv h2 {
+  gap: 5px;
+  display: flex;
+  align-items: center;
   margin-top: 1%;
-  font-size: 2vw;
+  font-size: 2.5vw;
+
   margin-bottom: 25px;
   font-weight: bold;
   /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); */
@@ -211,7 +215,7 @@ img.boleto_imagen {
   background-image: url(/public/assets/no-image.jpg);
   /* background-repeat: space;
   background-size: 30px 35px; */
- 
+
   background-size: cover;
 }
 .nuevocomentario-wrapper {
@@ -242,7 +246,12 @@ img.boleto_imagen {
   display: flex;
   font-size: 1.1em;
 }
+.compartir-detalle {
+  transform: none;
+  font-size: .8em;
+  
 
+}
 .unavailiable {
   color: var(--terciary-color);
   opacity: 0.4;
@@ -250,7 +259,6 @@ img.boleto_imagen {
 .unavailiable:hover {
   cursor: auto;
   filter: none;
-
 }
 @media (min-width: 590px) and (max-width: 1040px) {
   .detalles-container {
@@ -376,7 +384,6 @@ img.boleto_imagen {
   }
   .detalles_item {
     gap: 5px;
-    
   }
   .evento_contenido {
     margin: 10px 5px;

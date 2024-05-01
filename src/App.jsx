@@ -7,18 +7,13 @@ import Header from "./components/Header/Header";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Login from "./pages/Login/Login";
 import { useSelector } from "react-redux";
-
-
-
 import EditarEvento from "./pages/EditarEvento/EditarEvento";
-
 import Footer from "./components/Footer/Footer";
 import ScrollArriba from "./components/ScrollArriba/ScrollArriba";
 import PerfilUsuario from "./pages/PerfilUsuario/PerfilUsuario";
 import Terminos from "./pages/Legal/Terminos";
 import Privacidad from "./pages/Legal/Privacidad";
 import ConfirmarEmail from "./pages/ConfirmarEmail/ConfirmarEmail";
-
 import CambiarPassword from "./pages/CambiarPassword/CambiarPassword";
 import Contacto from "./pages/Contacto/Contacto";
 import FAQ from "./pages/FAQ/FAQ";
@@ -28,8 +23,6 @@ import { ToastContainer } from "react-toastify";
 function App() {
   const { user } = useSelector((state) => state.usuariosReducer);
  
-
-  
 
   return (
     <>
