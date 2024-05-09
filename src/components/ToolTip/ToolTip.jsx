@@ -2,7 +2,7 @@ import React from 'react'
 import "./ToolTip.css"
 const ToolTip = ({content, specificClass}) => {
   return (
-    <span className={`favorito-tooltip ${specificClass}`}>
+    <span className={`base-tooltip ${specificClass}`}>
       {content}
     </span>
   )

@@ -7,7 +7,7 @@ import { esAnterior, esHoy } from "../../shared/formatDate";
 import { format, formatDistanceToNow, parseISO } from "date-fns";
 import { gl } from "date-fns/locale";
 import MapIcon from "../MapIcon/MapIcon";
-import Favorito from "../Favorito/Favorito";
+
 import { BsInfoCircleFill } from "react-icons/bs";
 import { BsFillShareFill } from "react-icons/bs";
 import { AiFillEuroCircle } from "react-icons/ai";
@@ -21,7 +21,7 @@ import ToolTip from "../ToolTip/ToolTip";
 
 
 const Evento = ({ evento, user }) => {
-  const [hovered, setHovered] = useState(false);
+  const [hovered, setHovered] = useState("");
   const [shareModal, setShareModal] = useState(false);
 
   const [showMap, setShowMap] = useState(false);
@@ -31,9 +31,9 @@ const Evento = ({ evento, user }) => {
     evento ? evento._id : null,
     user ? user._id : null
   );
-  const handleDisplayTooltip = () => {
-    setHovered(!hovered);
-  };
+  // const handleDisplayTooltip = () => {
+  //   setHovered(!hovered);
+  // };
 
   const handleShareModal = () => {
     setShareModal(!shareModal);
@@ -186,20 +186,20 @@ const Evento = ({ evento, user }) => {
                 className="favorito-container"
                 onClick={() => {
                   handleFavorites();
-                  handleDisplayTooltip();
+                  // handleDisplayTooltip();
                 }}
-                onMouseEnter={handleDisplayTooltip}
-                onMouseLeave={handleDisplayTooltip}
+                onMouseEnter={()=>setHovered("favorito-tooltip")}
+                onMouseLeave={()=>setHovered("")}
               >
                 {isFavorite ? (
                   <>
                     <BiSolidHeart className="favorito" />
-                    {hovered && <ToolTip content="Quitar favorito" />}
+                  <ToolTip content="Quitar favorito" specificClass={hovered} />
                   </>
                 ) : (
                   <>
                     <BiHeart className="favorito" />
-                    {hovered && <ToolTip content="Engadir favorito" />}
+                     <ToolTip content="Engadir favorito" specificClass={hovered} />
                   </>
                 )}
               </div>
@@ -215,7 +215,8 @@ const Evento = ({ evento, user }) => {
               <BsInfoCircleFill className="mas-info" onClick={getEvento} />
             </Link>
             {showFavorite && (
-              <Favorito  favoriteStatus={isFavorite} />
+             
+              <ToolTip content={isFavorite ?  "Favorito engadido" :"Favorito eliminado"} specificClass={hovered} />
             )}
           </div>
         </div>

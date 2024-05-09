@@ -22,6 +22,7 @@ import Modal from "../../components/Modal/Modal";
 import Loader from "../../components/Loader/Loader";
 import { Helmet } from "react-helmet";
 import { BsFillShareFill } from "react-icons/bs";
+import ToolTip from "../../components/ToolTip/ToolTip";
 
 const DetallesEvento = () => {
   const dispatch = useDispatch();
@@ -140,7 +141,6 @@ const DetallesEvento = () => {
               <AiFillCloseSquare className="close-icon" onClick={goHome} />
               <h1 className={isLongTitle ? "long-title" : ""}>
                 {evento.title}
-                
               </h1>
               {evento.youtubeVideoId ? (
                 <div className={`youtube-video-container`}>
@@ -178,11 +178,7 @@ const DetallesEvento = () => {
               ) : (
                 <img className="divCardDetEv__noimage"></img>
               )}
-              <h2>{evento.artist}
-              <span onClick={handleShareModal}>
-                    <BsFillShareFill className="favorito compartir-detalle" />{" "}
-                  </span>
-                  </h2>
+              <h2>{evento.artist}</h2>
               <h3>
                 <div className="detalles_item">
                   <strong>Lugar: </strong>
@@ -224,31 +220,47 @@ const DetallesEvento = () => {
               {esHoy(evento.date_start) ? (
                 <h3 className="blue-text">
                   <span> HOXE {fechaStart.split(",")[1]}h</span>
-                  
+                  <span onClick={handleShareModal}>
+                      <BsFillShareFill className="favorito compartir-detalle" />{" "}
+                    </span>
                 </h3>
               ) : (
-                <div className="muestra-fecha">
-                  <strong>Data: </strong>
-                  <h3> {fechaStart}h </h3>
-                  {user ? (
-                    <span onClick={handleFavorites}>
-                      {isFavorite ? (
-                        <BiSolidHeart className="favorito favorito-detalle" />
-                      ) : (
-                        <BiHeart className="favorito favorito-detalle" />
-                      )}
+                <h3>
+                  <div className="muestra-fecha">
+                    <strong>Data: </strong>
+                    <span> {fechaStart}h </span>
+                    {user ? (
+                      <span onClick={handleFavorites}>
+                        {isFavorite ? (
+                          <BiSolidHeart className="favorito favorito-detalle" />
+                        ) : (
+                          <BiHeart className="favorito favorito-detalle" />
+                        )}
+                      </span>
+                    ) : (
+                      <span>
+                        <BiHeart className="favorito favorito-detalle unavailiable" />
+                      </span>
+                    )}
+                    {showFavorite && (
+                      <ToolTip
+                        content={
+                          isFavorite
+                            ? "Favorito engadido"
+                            : "Favorito eliminado"
+                        }
+                        specificClass={"favorito-tooltip__detalle"}
+                      />
+                    )}
+                    <span onClick={handleShareModal}>
+                      <BsFillShareFill className="favorito compartir-detalle" />{" "}
                     </span>
-                  ) : (
-                    <span>
-                      <BiHeart className="favorito favorito-detalle unavailiable" />
-                    </span>
-                  )}
-                 
-                  <p className="dias-faltantes__detalle">
-                    {esAnterior(evento.date_start) ? "Fai" : "Dentro de"}{" "}
-                    <span className="blue-text">{diasFaltantes} </span>
-                  </p>
-                </div>
+                    <p className="dias-faltantes__detalle">
+                      {esAnterior(evento.date_start) ? "Fai" : "Dentro de"}{" "}
+                      <span className="blue-text">{diasFaltantes} </span>
+                    </p>
+                  </div>{" "}
+                </h3>
               )}
               {fechaEnd && <h3>{fechaEnd}</h3>}
 
@@ -257,14 +269,6 @@ const DetallesEvento = () => {
                   <div>
                     <strong>Xénero:</strong> {evento.genre}
                   </div>
-
-                  {showFavorite && (
-                    <Favorito
-                      claseDetalle="tooltip-detalle"
-                      evento={evento._id}
-                      favoriteStatus={isFavorite}
-                    />
-                  )}
                 </h3>
               )}
               <div className="evento_contenido">

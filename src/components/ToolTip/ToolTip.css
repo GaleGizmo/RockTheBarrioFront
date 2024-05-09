@@ -1,27 +1,61 @@
+.base-tooltip{
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+  background-color: var(--icon-color);
+  color: white;
+  padding: 2px 5px;
+  border-radius: 5px;
+  position: absolute;
+  width: max-content;
+  font-size: 12px;
+  transform: translatey(-100%);
+}
 .favorito-tooltip {
-    width: max-content;
+    opacity: 0;
+    visibility: visible;
+    
     display: block;
-    position: absolute;
     top: -5px;
     right: 0px;
-    transform: translatey(-100%);
-    background-color: var(--icon-color);
-    color: white;
-    padding: 2px 5px;
-    border-radius: 5px;
-    font-size: 12px;
+ 
+    animation: appearToolTip 0.5s ease-in-out forwards; 
+  }
+  .favorito-tooltip__detalle{
+    opacity: 0;
+    visibility: visible;
+    display: block;
+    top: 0;
+    right:0;
+    animation: appearToolTip 0.5s ease-in-out forwards; 
   }
   .termos-tooltip{
+    opacity: 0;
+    visibility: visible;
+    display: block;
+    top: -5px;
     left:0;
+   
     font-size: 10px;
     max-width: 150px;
     height: fit-content;
     text-align: justify;
-    
+    animation: appearToolTip 0.5s ease-in-out forwards; 
+  }
+  @keyframes appearToolTip {
+    0% {
+      opacity: 0;
+      
+    }
+    100% {
+      opacity: 1;
+     
+    }
   }
   @media (max-width: 520px){
     .termos-tooltip{
-       
+      opacity: 1;
+      visibility: visible;
         bottom: 0px;
         max-width: 205px;
     }

@@ -13,9 +13,9 @@ const useFavorites = (initialIsFavorite, eventId, userId) => {
   const [showFavorite, setShowFavorite] = useState(false);
   const dispatch = useDispatch();
   let {error}=useSelector((state)=>state.usuariosReducer)
+
   const handleFavorites = async() => {
     const newFavoriteValue = !isFavorite;
-    
     try {
       await dispatch(addToFavorites(eventId, userId, newFavoriteValue));
       // Solo mostrar favorito si addToFavorites tiene éxito

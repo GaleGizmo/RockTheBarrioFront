@@ -123,7 +123,18 @@
   transform: translateX(-100px);
   animation: appearCard 0.5s ease-in-out forwards;
 }
+.favorito {
+  transform: scale(1.8);
+  
+  color: var(--icon-color);
+  text-align: center;
+}
+.favorito:hover {
+  cursor: pointer;
+  filter: brightness(2) contrast(2);
+  
 
+}
 .esHoy {
   background-color: var(--event-color);
 }
