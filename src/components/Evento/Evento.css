@@ -285,9 +285,10 @@
   border: 3px solid #0c5460;
   border-radius: 12px;
   padding: 1px 5px 3px 5px;
-
-  align-items: center;
+  
   background-color: #2599a529;
+  line-height: 1;
+ 
 }
 .blue-text {
   color: #0c5460;

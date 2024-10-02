@@ -67,6 +67,14 @@ const FormularioCrearEvento = () => {
   } = useForm();
   const dispatch = useDispatch();
   const [imageFile, setImageFile] = useState();
+  const statusOptions = [
+    { label: "Ok", value: "Ok" },
+    {label: "Borrador", value: "draft"},
+    { label: "Cancelado", value: "cancelled" },
+    { label: "Aplazado", value: "delayed" },
+    { label: "Nova data", value: "new_date" },
+    { label: "Esgotado", value: "soldout" },
+  ];
   const handleIcon = () => {
     navigate(-1);
   };
@@ -198,6 +206,22 @@ const FormularioCrearEvento = () => {
           <input className="inputCrearEvento" {...register("url")} />
         </div>
         <div className="div-inputCrearEvento">
+          <label>Estado:</label>
+          <select
+            className="inputCrearEvento"
+            name="status"
+           
+          
+            {...register("status")}
+          >
+            {statusOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="div-inputCrearEvento">
           <label>Imaxe</label>
           <SubirImagen
             register={register}
@@ -210,7 +234,7 @@ const FormularioCrearEvento = () => {
             <img className="imagen-formulario imagen-crear" src={imageFile} />
           )}
         </div>
-
+         
         <div className="margin-boton">
           <Button
             text="Crear evento"

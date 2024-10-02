@@ -61,6 +61,20 @@ const Buscador = ({ eventos, user }) => {
     }
   }
 
+  async function getDraftEvents(){
+    try {
+      const response = await API.get(`/evento/drafts`);
+      filteredResults = response.data;
+
+      
+      showFilteredResults();
+      
+    } catch (error) {
+      console.error("Error al obtener eventos:", error);
+      throw error;
+    }
+  
+  }
   async function getEventosEntreFechas(filters, userData, startDate, endDate) {
     try {
       const response = await API.post("/evento/eventosEntreFechas", {
@@ -419,6 +433,7 @@ const Buscador = ({ eventos, user }) => {
             <Button text="Limpar" type="small" onClick={cleanFiltered} />{" "}
             <Button text="Buscar" type="small" onClick={handleSearchClick} />
           </div>
+          {user?.role===2 && <Button text="Drafts" type="small" onClick={getDraftEvents} />}
           <label>
             Eventos pasados
             <SwitchButton
