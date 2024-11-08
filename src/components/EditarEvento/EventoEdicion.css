@@ -3,7 +3,7 @@
     height: 100px;
     position: absolute;
     left: 50%;
-    bottom: 7%;
+    bottom: 5%;
     transform: translateX(-50%);
 }
 .avatar{
@@ -14,10 +14,3 @@
     justify-content: center;
     gap: 10px
   }
-@media (max-width: 520px){
-    .imagen-formulario{
-       bottom: 12%;
-        left: 33%;
-        
-    }
-}

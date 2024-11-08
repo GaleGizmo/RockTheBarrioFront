@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { editEvento } from "../../redux/eventos/eventos.actions";
+import { addEvento, editEvento } from "../../redux/eventos/eventos.actions";
 import SubirImagen from "../../components/SubirImagen/SubirImagen";
 import Button from "../Button/Button";
 import { utcToZonedTime, format } from "date-fns-tz";
@@ -11,9 +11,7 @@ import { AiFillCloseSquare } from "react-icons/ai";
 const EventoEdicion = ({ evento, navigate }) => {
   const dispatch = useDispatch();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [selectedStatus, setSelectedStatus] = useState(
-    !evento.status ? "Ok" : evento.status
-  );
+ 
   const {
     register,
     handleSubmit,
@@ -22,7 +20,7 @@ const EventoEdicion = ({ evento, navigate }) => {
   } = useForm();
   const [imageFile, setImageFile] = useState();
   const statusOptions = [
-    { label: "Ok", value: "" },
+    { label: "Ok", value: "Ok" },
     { label: "Cancelado", value: "cancelled" },
     { label: "Aplazado", value: "delayed" },
     { label: "Nova data", value: "new_date" },
@@ -41,25 +39,36 @@ const EventoEdicion = ({ evento, navigate }) => {
   };
 
   const handleSave = (data) => {
+    const editedEvento = prepareData(data, evento);
+    console.log(editedEvento);
+    dispatch(editEvento(evento._id, editedEvento, navigate));
+    setIsSubmitting(false);
+  };
+  const handleClone = ( data) => {
+   if (data.image[0]==undefined && evento.image) {data.image=evento.image}
+    const editedEvento = prepareData(data, evento);
+    console.log(editedEvento);
+    dispatch(addEvento( editedEvento, navigate,{user:evento.user_creator} ));
+    setIsSubmitting(false);
+  };
+  function prepareData(data, evento) {
     setIsSubmitting(true);
     const { day_start, time_start } = data;
-
+  
     // Combinamos la fecha y la hora en un objeto Date
     let combinedDate = new Date(`${day_start}T${time_start}`);
-
+  
     const timeZone = "Europe/Madrid";
     combinedDate = utcToZonedTime(combinedDate, timeZone);
-
+  
     const editedEvento = {
       ...evento,
       ...data,
       date_start: combinedDate,
     };
-    console.log(editedEvento);
-    dispatch(editEvento(evento._id, editedEvento, navigate));
-    setIsSubmitting(false);
-  };
-
+    return editedEvento;
+  }
+  
   const handleCancel = () => {
     navigate(`/detalles-evento/${evento._id}`);
   };
@@ -266,8 +275,9 @@ const EventoEdicion = ({ evento, navigate }) => {
           )}
         </div>
         <div className="edit__botons">
-          <Button type="submit" text="Gardar" isSubmitting={isSubmitting} />
+          <Button type="submit" text="Gardar" isSubmitting={isSubmitting} onClick={handleSubmit(handleSave)}/>
           <Button type="button" text="Cancelar" onClick={handleCancel} />
+          <Button type="button" text="Clonar" isSubmitting={isSubmitting} onClick={handleSubmit(handleClone)} />
         </div>
       </form>
     </div>
@@ -275,3 +285,5 @@ const EventoEdicion = ({ evento, navigate }) => {
 };
 
 export default EventoEdicion;
+
+

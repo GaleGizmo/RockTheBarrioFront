@@ -69,8 +69,10 @@ const createFormData = (eventoData) => {
   formData.append("genre", eventoData.genre);
   formData.append("content", eventoData.content);
   formData.append("url", eventoData.url);
-  if (eventoData.image[0] !== undefined) {
+  if (eventoData.image[0] !== undefined && eventoData.image[0]!=="h") {
     formData.append("image", eventoData.image[0]);
+  } else if (eventoData.image[0]==="h") {
+    formData.append("image", eventoData.image);
   }
   formData.append("user_creator", eventoData.user_creator);
 
@@ -83,7 +85,9 @@ const addEvento = (eventoData, navigate, userId) => async (dispatch) => {
   try {
     eventoData.user_creator = userId.user;
     const formData = createFormData(eventoData);
-
+    formData.forEach((value, key) => {
+      console.log(`${key}: ${value}`);
+    });
     const resultado = await APIIMAGES.post("/evento", formData, getToken());
     dispatch({ type: "ADD_EVENTO", contenido: resultado.data });
     navigate("/");

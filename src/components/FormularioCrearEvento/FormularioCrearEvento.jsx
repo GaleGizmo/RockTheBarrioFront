@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {  useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { addEvento } from "../../redux/eventos/eventos.actions";
@@ -8,11 +8,12 @@ import SubirImagen from "../../components/SubirImagen/SubirImagen";
 import Button from "../Button/Button";
 import { AiFillCloseSquare } from "react-icons/ai";
 
+
 const FormularioCrearEvento = () => {
   const { user } = useSelector((state) => state.usuariosReducer);
   const navigate = useNavigate();
   const [priceError, setPriceError] = useState(false);
-
+  
   const [showBuyTicketField, setShowBuyTicketField] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -78,6 +79,8 @@ const FormularioCrearEvento = () => {
   const handleIcon = () => {
     navigate(-1);
   };
+
+  
 
   return (
     <div className="cardCrearEvento">
@@ -223,6 +226,7 @@ const FormularioCrearEvento = () => {
         </div>
         <div className="div-inputCrearEvento">
           <label>Imaxe</label>
+       
           <SubirImagen
             register={register}
             evento={true}
@@ -230,6 +234,7 @@ const FormularioCrearEvento = () => {
               setImageFile(URL.createObjectURL(e.target.files[0]))
             }
           />
+        
           {imageFile && (
             <img className="imagen-formulario imagen-crear" src={imageFile} />
           )}
