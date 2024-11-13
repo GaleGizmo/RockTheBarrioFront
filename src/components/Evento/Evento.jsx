@@ -10,6 +10,7 @@ import MapIcon from "../MapIcon/MapIcon";
 
 import { BsInfoCircleFill } from "react-icons/bs";
 import { BsFillShareFill } from "react-icons/bs";
+import { AiOutlineCopy } from "react-icons/ai";
 import { AiFillEuroCircle } from "react-icons/ai";
 import { FaMusic } from "react-icons/fa";
 import MapComponent from "../MapComponent/MapComponent";
@@ -18,7 +19,6 @@ import { useDispatch } from "react-redux";
 import { setEvento } from "../../redux/eventos/eventos.actions";
 import Modal from "../Modal/Modal";
 import ToolTip from "../ToolTip/ToolTip";
-
 
 const Evento = ({ evento, user }) => {
   const [hovered, setHovered] = useState("");
@@ -38,7 +38,13 @@ const Evento = ({ evento, user }) => {
   const handleShareModal = () => {
     setShareModal(!shareModal);
   };
-
+  const copyIdToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(evento._id);
+    } catch (error) {
+      console.error("Error al copiar el ID al portapapeles:", error);
+    }
+  };
   const handleToggleMap = () => {
     setShowMap((showMap) => !showMap);
   };
@@ -116,6 +122,11 @@ const Evento = ({ evento, user }) => {
           <h2 className={isLongTitle ? "long-title" : ""}>{evento.title}</h2>
 
           <h3>{evento.artist}</h3>
+          {user.role === 2 && (
+            <span onClick={copyIdToClipboard} className="copy-to-clipboard">
+              <AiOutlineCopy />
+            </span>
+          )}
         </div>
         <div className="detalles_container">
           {evento.site && evento.site !== "Varios" ? (
@@ -166,13 +177,12 @@ const Evento = ({ evento, user }) => {
             <p></p>
           )}
           {evento.commentsCount && evento.commentsCount > 0 ? (
-           
-              <p className="card-comments isComments" onClick={getEvento}>
+            <p className="card-comments isComments" onClick={getEvento}>
               <Link to={{ pathname: `/${evento._id}` }}>
                 <BiSolidComment className="icon-style icon-price" />{" "}
-                {evento.commentsCount}</Link>
-              </p>
-            
+                {evento.commentsCount}
+              </Link>
+            </p>
           ) : (
             <p className="card-comments">
               <BiSolidComment className="icon-style icon-price" /> 0{" "}
@@ -188,18 +198,24 @@ const Evento = ({ evento, user }) => {
                   handleFavorites();
                   // handleDisplayTooltip();
                 }}
-                onMouseEnter={()=>setHovered("favorito-tooltip")}
-                onMouseLeave={()=>setHovered("")}
+                onMouseEnter={() => setHovered("favorito-tooltip")}
+                onMouseLeave={() => setHovered("")}
               >
                 {isFavorite ? (
                   <>
                     <BiSolidHeart className="favorito" />
-                  <ToolTip content="Quitar favorito" specificClass={hovered} />
+                    <ToolTip
+                      content="Quitar favorito"
+                      specificClass={hovered}
+                    />
                   </>
                 ) : (
                   <>
                     <BiHeart className="favorito" />
-                     <ToolTip content="Engadir favorito" specificClass={hovered} />
+                    <ToolTip
+                      content="Engadir favorito"
+                      specificClass={hovered}
+                    />
                   </>
                 )}
               </div>
@@ -215,8 +231,12 @@ const Evento = ({ evento, user }) => {
               <BsInfoCircleFill className="mas-info" onClick={getEvento} />
             </Link>
             {showFavorite && (
-             
-              <ToolTip content={isFavorite ?  "Favorito engadido" :"Favorito eliminado"} specificClass={hovered} />
+              <ToolTip
+                content={
+                  isFavorite ? "Favorito engadido" : "Favorito eliminado"
+                }
+                specificClass={hovered}
+              />
             )}
           </div>
         </div>

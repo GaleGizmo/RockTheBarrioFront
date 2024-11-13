@@ -5,11 +5,19 @@ import "react-toastify/dist/ReactToastify.css";
 import "./Perfil.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { clearMensajes, sendEventosDiarios } from "../../redux/eventos/eventos.actions";
+import {
+  clearMensajes,
+  sendEventosDiarios,
+} from "../../redux/eventos/eventos.actions";
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
+import CorreccionModal from "../CorreccionModal/CorreccionModal";
+import { useNavigate } from 'react-router-dom';
 
 const Perfil = ({ userData, onEditClick }) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showCorrecionModal, setShowCorreccionModal] = useState(false);
+  const [isSubmitting, setIsSubimitting]=useState(false)
+  const navigate = useNavigate();
   const handleDeleteUser = () => {
     setShowDeleteModal(true);
   };
@@ -26,15 +34,26 @@ const Perfil = ({ userData, onEditClick }) => {
     (state) => state.eventosReducer
   );
 
+  const handleCorreccionClick = () => {
+    setShowCorreccionModal(true);
+  };
+  const onCloseModal = () => {
+    setShowCorreccionModal(false);
+  };
+
   const sendDiarios = async () => {
+    setIsSubimitting(true);
     try {
       await new Promise((resolve) => {
         dispatch(sendEventosDiarios());
-        dispatch(clearMensajes())
+        dispatch(clearMensajes());
         resolve();
       });
+      setIsSubimitting(false);
     } catch (err) {
       console.error("Error ao mandar eventos:", err);
+      setIsSubimitting(false);
+    
     }
   };
 
@@ -101,15 +120,17 @@ const Perfil = ({ userData, onEditClick }) => {
             <Link to="/crear-evento">
               <Button text="Crear evento" type="small" />
             </Link>
-            <Button text="Eventos diarios" type="small" onClick={sendDiarios} />
+            <Button text="Mandar diarios" type="small" isSubmitting={isSubmitting} onClick={sendDiarios} />
+            <Button
+              text="Corrección"
+              type="small"
+              onClick={handleCorreccionClick}
+            />
           </div>
         )}
       </div>
       <div className="margin-botonReg">
-        <Button 
-        text="Editar Datos" 
-        type="small" 
-        onClick={onEditClick} />
+        <Button text="Editar Datos" type="small" onClick={onEditClick} />
         <Button
           text="Borrar conta"
           type="small delete-account-button"
@@ -126,6 +147,12 @@ const Perfil = ({ userData, onEditClick }) => {
         onConfirm={handleDeleteConfirmed}
         deleteAccount={true}
       />
+      {showCorrecionModal && (
+        <CorreccionModal
+          showModal={showCorrecionModal}
+          onClose={onCloseModal}
+        />
+      )}
     </div>
   );
 };
