@@ -122,7 +122,7 @@ const Evento = ({ evento, user }) => {
           <h2 className={isLongTitle ? "long-title" : ""}>{evento.title}</h2>
 
           <h3>{evento.artist}</h3>
-          {user.role === 2 && (
+          {user?.role === 2 && (
             <span onClick={copyIdToClipboard} className="copy-to-clipboard">
               <AiOutlineCopy />
             </span>

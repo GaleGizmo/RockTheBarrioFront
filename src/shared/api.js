@@ -8,7 +8,7 @@ export const APIHeaders = {
 };
 
 export const API = axios.create({
-  baseURL: import.meta.env.VITE_APP_BASE_URL_LOCAL,
+  baseURL: import.meta.env.VITE_APP_BASE_URL,
   headers: APIHeaders,
 });
 API.interceptors.request.use(
