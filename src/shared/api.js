@@ -58,6 +58,13 @@ export const getToken =()=>{
 export const sendCorreccion = async (correccion) => {
  
   const response = await API.post(`/evento/correccion`, correccion);
-  console.log(response.data);
+  
+  return response.data;
+};
+
+export const addMessage = async (messageData) => {
+ 
+  const response = await API.post(`/usuario/message`, messageData);
+
   return response.data;
 };

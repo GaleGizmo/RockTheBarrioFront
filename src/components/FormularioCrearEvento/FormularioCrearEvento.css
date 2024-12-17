@@ -15,7 +15,7 @@
         margin-top: 80px;
         margin-left: auto;
         margin-right: auto;
-        /* background-image:linear-gradient(to bottom, rgb(237 132 57), #fff); */
+        background-image: linear-gradient(to bottom, var(--primary-color), var(--hover-color));
         
         
         height:fit-content
@@ -89,6 +89,7 @@
 
   @media (max-width: 520px) {
     .cardCrearEvento {
+     
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -97,7 +98,7 @@
         border: 1px solid #e0e0e0;
         border-radius: 8px;
         box-shadow: 10px 10px 5px var(--secondary-shadow);
-        padding: 20px;
+        padding: 10px;
         margin-bottom: 20px;
         text-align: center;
         height: fit-content;
@@ -109,6 +110,7 @@
         
       }
       .cardCrearEvento {
+        margin-top: 50px;
         opacity: 0;
         transform: translateX(-100px);
         animation: appearCard 0.5s ease-in-out forwards;

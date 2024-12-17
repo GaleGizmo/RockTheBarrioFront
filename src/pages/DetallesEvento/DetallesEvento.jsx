@@ -163,7 +163,7 @@ const DetallesEvento = () => {
                     onClick={openImageModal}
                     onError={(e) => {
                       e.target.style.display = "none"; // Oculta la imagen que no carga
-                      e.target.nextSibling.style.display = "block"; // Muestra el div con los logos
+                      e.target.nextSibling.style.display = "block"; // Muestra el div genérico
                     }}
                   />
                   <div

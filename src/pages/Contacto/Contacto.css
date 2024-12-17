@@ -1,9 +1,9 @@
 .medios-contacto_items{
-    margin-top:30px;
+   
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
 }
 .medios-contacto_items a{
     text-decoration: none;
@@ -12,6 +12,10 @@
 }
 .medios-contacto_title{
     font-size: 2rem;
+}
+.contactForm{
+    margin-top: 5%;
+    width: 100%;
 }
 @media (max-width:520px){
     .medios-contacto_title{

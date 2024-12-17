@@ -64,7 +64,7 @@ const faqData = [
   {
     title: "Cantas notificacións me vas mandar? Non máis spam, por favor!",
     content:
-      "Calma, a frecuencia de notificacións decidirala ti no proceso de rexistro. Marcando as casiñas correspondentes poderás elexir entre: recibir un email semanal cos eventos programados para esa semana (mándase os luns pola mañá), recibir notificacións puntuais cando se engadan novos eventos, ou non recibir ningunha notificación. ",
+      "Calma, a frecuencia de notificacións decidirala ti no proceso de rexistro. Marcando as casiñas correspondentes poderás elexir entre: recibir un email semanal cos eventos programados para esa semana (mándase os luns ás 16h), recibir notificacións puntuais cando se engadan novos eventos, ou non recibir ningunha notificación. ",
   },
   {
     title: "Pois marco as notificacións semanais, con iso chega, non?",

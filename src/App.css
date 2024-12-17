@@ -52,4 +52,7 @@ body {
   color: var(--terciary-color);
   cursor: pointer;
 }
+form {
+  width: 100%;
+}
 

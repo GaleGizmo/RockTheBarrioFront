@@ -49,11 +49,14 @@ const Perfil = ({ userData, onEditClick }) => {
         dispatch(clearMensajes());
         resolve();
       });
-      setIsSubimitting(false);
+      
     } catch (err) {
       console.error("Error ao mandar eventos:", err);
       setIsSubimitting(false);
     
+    }
+    finally{
+      setIsSubimitting(false);
     }
   };
 

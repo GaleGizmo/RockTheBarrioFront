@@ -349,6 +349,9 @@
     margin-left: auto;
     font-size: 0.8rem;
   }
+  .icon-style{
+    margin-bottom: 2px;
+  }
   .evento-hora {
     text-align: right;
     flex: 0 0 auto;
