@@ -239,7 +239,7 @@ const Buscador = ({ eventos, user }) => {
           />
           <IoIosSearch className="search_icon" onClick={handleSearchClick} />
           <p onClick={handleShowAdvancedSearch} className="buscador-avanzada">
-            {showAdvancedSearch ? "Sinxela" : "Avanzada"}
+            {showAdvancedSearch ? "" : "Avanzada"}
           </p>
           <div
             className={`buscador-input_type ${
@@ -270,6 +270,13 @@ const Buscador = ({ eventos, user }) => {
                 />
               )}
             </label>
+            <label className="past-events">
+            Eventos pasados
+            <SwitchButton
+              isOn={pastEvents}
+              handleToggle={() => setPastEvents(!pastEvents)}
+            />
+          </label>
           </div>
         </div>
         <div
@@ -429,18 +436,12 @@ const Buscador = ({ eventos, user }) => {
             showAdvancedSearch ? "show-advanced" : ""
           }`}
         >
-          <div>
+          <div className="botones-buscar-limpiar">
             <Button text="Limpar" type="small" onClick={cleanFiltered} />{" "}
             <Button text="Buscar" type="small" onClick={handleSearchClick} />
           </div>
           {user?.role===2 && <Button text="Drafts" type="small" onClick={getDraftEvents} />}
-          <label>
-            Eventos pasados
-            <SwitchButton
-              isOn={pastEvents}
-              handleToggle={() => setPastEvents(!pastEvents)}
-            />
-          </label>
+       
           <BiChevronsUp
             className="chevrons-icon"
             onClick={() => {
