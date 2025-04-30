@@ -49,6 +49,7 @@ const FormularioCrearEvento = () => {
     if (data.price > 0) data.payWhatYouWant = false;
     // Combinar la fecha y la hora en un objeto Date
     const combinedDate = new Date(`${day_start}T${time_start}`);
+    if (data.content === "" || data.content.trim()=="" ) data.content = "Non hai información deste evento";
 
     // Actualizar el valor de "date_start" en los datos a enviar
     const finalFormData = {
@@ -110,12 +111,10 @@ const FormularioCrearEvento = () => {
         <div className="infoCrearEvento">
           <label>Información</label>
           <textarea
-            {...register("content", { required: true })}
+            {...register("content", { required: false })}
             className="inputCrearEvento"
           />
-          {errors.content && (
-            <span className="error-message">Contido é requerido</span>
-          )}
+          
         </div>
 
         <div className="div-inputCrearEvento">

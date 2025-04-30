@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./Navbar.css";
-
 import { Link } from "react-router-dom";
 import { RiUser3Fill } from "react-icons/ri";
-import { logout } from "../../redux/usuarios/usuarios.actions";
 import { useSelector } from "react-redux";
-import SwitchIcon from "../SwitchIcon/SwitchIcon";
 import { saveScrollPosition } from "../../shared/saveScrollPosition";
-import { Slide, Zoom, toast } from "react-toastify";
+import {  Zoom, toast } from "react-toastify";
 
 const Navbar = () => {
   const { user } = useSelector((state) => state.usuariosReducer);
@@ -57,13 +54,7 @@ const Navbar = () => {
               </div>
             )}
           </div>
-          {/* <div className="boton-salir">
-            <Link to="/">
-              <span className="icono-salir">
-                <SwitchIcon onClick={logout} />
-              </span>
-            </Link>
-          </div> */}
+       
         </div>
       ) : (
         <>
