@@ -71,9 +71,12 @@ const Evento = ({ evento, user }) => {
 
   return (
     <div
-      className={`card ${evento.status ? "status " + evento.status : ""}`}
+      className={`card ${evento.highlighted ? "highlighted" : ""} ${
+        evento.status ? "status " + evento.status : ""
+      }`}
       onClick={getEvento}
     >
+      {evento.highlighted && <div className="highlight-banner">DESTACADO</div>}
       {shareModal && (
         <Modal
           show="true"
