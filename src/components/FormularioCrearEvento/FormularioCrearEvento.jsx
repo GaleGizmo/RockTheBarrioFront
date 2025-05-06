@@ -208,6 +208,14 @@ const FormularioCrearEvento = () => {
           <input className="inputCrearEvento" {...register("url")} />
         </div>
         <div className="div-inputCrearEvento">
+          <label>Destacado</label>
+          <input
+              className="inputCrearEvento"
+              type="checkbox"
+              {...register("highlighted")}
+            />{" "}
+        </div>
+        <div className="div-inputCrearEvento">
           <label>Estado:</label>
           <select
             className="inputCrearEvento"

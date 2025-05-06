@@ -69,6 +69,7 @@ const createFormData = (eventoData) => {
   formData.append("genre", eventoData.genre);
   formData.append("content", eventoData.content);
   formData.append("url", eventoData.url);
+  formData.append("highlighted", eventoData.highlighted);
   if (eventoData.image[0] !== undefined && eventoData.image[0]!=="h") {
     formData.append("image", eventoData.image[0]);
   } else if (eventoData.image[0]==="h") {

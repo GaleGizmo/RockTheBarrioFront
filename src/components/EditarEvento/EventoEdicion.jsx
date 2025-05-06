@@ -11,7 +11,7 @@ import { AiFillCloseSquare } from "react-icons/ai";
 const EventoEdicion = ({ evento, navigate }) => {
   const dispatch = useDispatch();
   const [isSubmitting, setIsSubmitting] = useState(false);
- 
+
   const {
     register,
     handleSubmit,
@@ -44,23 +44,25 @@ const EventoEdicion = ({ evento, navigate }) => {
     dispatch(editEvento(evento._id, editedEvento, navigate));
     setIsSubmitting(false);
   };
-  const handleClone = ( data) => {
-   if (data.image[0]==undefined && evento.image) {data.image=evento.image}
+  const handleClone = (data) => {
+    if (data.image[0] == undefined && evento.image) {
+      data.image = evento.image;
+    }
     const editedEvento = prepareData(data, evento);
     console.log(editedEvento);
-    dispatch(addEvento( editedEvento, navigate,{user:evento.user_creator} ));
+    dispatch(addEvento(editedEvento, navigate, { user: evento.user_creator }));
     setIsSubmitting(false);
   };
   function prepareData(data, evento) {
     setIsSubmitting(true);
     const { day_start, time_start } = data;
-  
+
     // Combinamos la fecha y la hora en un objeto Date
     let combinedDate = new Date(`${day_start}T${time_start}`);
-  
+
     const timeZone = "Europe/Madrid";
     combinedDate = utcToZonedTime(combinedDate, timeZone);
-  
+
     const editedEvento = {
       ...evento,
       ...data,
@@ -68,7 +70,7 @@ const EventoEdicion = ({ evento, navigate }) => {
     };
     return editedEvento;
   }
-  
+
   const handleCancel = () => {
     navigate(`/detalles-evento/${evento._id}`);
   };
@@ -234,6 +236,17 @@ const EventoEdicion = ({ evento, navigate }) => {
           />
         </div>
         <div className="div-inputCrearEvento">
+          <label>Destacado</label>
+          <input
+            className="inputCrearEvento"
+            type="checkbox"
+            name="highlighted"
+            defaultChecked={evento.highlighted}
+            onChange={handleInputChange}
+            {...register("highlighted")}
+          />
+        </div>
+        <div className="div-inputCrearEvento">
           <label>Estado:</label>
           <select
             className="inputCrearEvento"
@@ -275,9 +288,19 @@ const EventoEdicion = ({ evento, navigate }) => {
           )}
         </div>
         <div className="edit__botons">
-          <Button type="submit" text="Gardar" isSubmitting={isSubmitting} onClick={handleSubmit(handleSave)}/>
+          <Button
+            type="submit"
+            text="Gardar"
+            isSubmitting={isSubmitting}
+            onClick={handleSubmit(handleSave)}
+          />
           <Button type="button" text="Cancelar" onClick={handleCancel} />
-          <Button type="button" text="Clonar" isSubmitting={isSubmitting} onClick={handleSubmit(handleClone)} />
+          <Button
+            type="button"
+            text="Clonar"
+            isSubmitting={isSubmitting}
+            onClick={handleSubmit(handleClone)}
+          />
         </div>
       </form>
     </div>
@@ -285,5 +308,3 @@ const EventoEdicion = ({ evento, navigate }) => {
 };
 
 export default EventoEdicion;
-
-
