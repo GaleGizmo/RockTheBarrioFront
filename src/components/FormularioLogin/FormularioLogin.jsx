@@ -56,13 +56,13 @@ const FormularioLogin = () => {
           </label>
         </div>
         <div className="margin-botonLogin">
-          <Button text="Login" type="large" />
+          <Button text="Login" variant="large" type="submit"/>
         </div>
         <div className="margin-link">
           <Link to="/reset-password/forgot">Esquezín o contrasinal</Link>
         </div>
         <div>
-          <p>Aínda non tes conta?  <Link to="/date-de-alta"> <Button text="Rexístrate" type="small"/> </Link></p>
+          <p>Aínda non tes conta?  <Link to="/date-de-alta"> <Button text="Rexístrate" variant="small"/> </Link></p>
         </div>
       </form>
     </div>

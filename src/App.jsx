@@ -19,6 +19,8 @@ import Contacto from "./pages/Contacto/Contacto";
 import FAQ from "./pages/FAQ/FAQ";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import { ToastContainer } from "react-toastify";
+import BorradoresList from "./components/BorradoresList/BorradoresList";
+import EditarBorrador from "./pages/EditarBorrador/EditarBorrador";
 
 function App() {
   const { user } = useSelector((state) => state.usuariosReducer);
@@ -33,6 +35,14 @@ function App() {
 
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route
+            path="/borradores"
+            element={
+              <ProtectedRoute requiredRole={2}>
+                <BorradoresList />
+              </ProtectedRoute>
+            } 
+          />
           <Route path="/contacto" element={<Contacto />} />
           <Route path="/terminos" element={<Terminos />} />
           <Route path="/privacidad" element={<Privacidad />} />
@@ -54,6 +64,14 @@ function App() {
                 <EditarEvento />
               </ProtectedRoute>
             }
+          />
+          <Route 
+          path="editar-borrador/:id"
+          element={
+            <ProtectedRoute requiredRole={2}>
+              <EditarBorrador />
+            </ProtectedRoute>
+          }
           />
           <Route
             path="/date-de-alta"

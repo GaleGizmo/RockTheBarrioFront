@@ -68,3 +68,28 @@ export const addMessage = async (messageData) => {
 
   return response.data;
 };
+
+export const getBorradores = async () => {
+  const response = await API.get(`/borrador`);
+  return response.data;
+}
+export const getBorrador = async (id) => {
+  const response = await API.get(`/borrador/getbyid/${id}`);
+  return response.data;
+};
+export const addBorrador = async (borradorData) => {
+  
+ 
+  try {
+    const response = await APIIMAGES.post(`/borrador`, borradorData);
+    
+    return response;
+  } catch (err) {
+    console.error("Error ao engadir o borrador:", err);
+    throw err;
+  }
+};
+export const editBorrador = async (id, borradorData) => {
+  const response = await APIIMAGES.put(`/borrador/${id}`, borradorData);
+  return response.data;
+};

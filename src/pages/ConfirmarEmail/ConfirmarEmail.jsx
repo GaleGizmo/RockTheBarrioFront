@@ -74,7 +74,7 @@ const ConfirmarEmail = ({ token }) => {
         <div className="margin-botonLogin">
           <Button
             text={token.includes("unsubscribe") ? "Confirmar" : "Enviar correo"}
-            type="large"
+            variant="large"
           />
         </div>
       </form>

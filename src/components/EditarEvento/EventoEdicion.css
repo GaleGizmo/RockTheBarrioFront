@@ -3,7 +3,7 @@
     height: 100px;
     position: absolute;
     left: 50%;
-    bottom: 5%;
+    top:75px;
     transform: translateX(-50%);
 }
 .avatar{

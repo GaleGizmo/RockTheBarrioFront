@@ -22,8 +22,9 @@ const login = (datos, navigate) => async () => {
   dispatch({ type: "LOADING_USUARIOS_LOGIN" });
   dispatch({ type: "CLEAR_ERROR" });
   try {
+   
     const resultado = await API.post("/usuario/login", datos);
-
+  
     setUserData(resultado, navigate);
   } catch (error) {
     if (error.response && error.response.data && error.response.data.message) {

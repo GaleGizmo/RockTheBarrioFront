@@ -25,8 +25,8 @@ const ConfirmModal = ({ show, onCancel, onConfirm, title, p1, p2,buttonText, del
              <p> {p2}</p>
             </div>
             <div className="modal-footer justify-content-center">
-              {onCancel && <Button text="Cancelar" type="medium" onClick={onCancel} />}
-              <Button text={buttonText} type={buttonClass} onClick={onConfirm} />
+              {onCancel && <Button text="Cancelar" variant="medium" onClick={onCancel} />}
+              <Button text={buttonText} variant={buttonClass} onClick={onConfirm} />
             </div>
           </div>
         </div>

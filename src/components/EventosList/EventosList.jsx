@@ -13,7 +13,6 @@ import Loader from "../Loader/Loader";
 
 import { Helmet } from "react-helmet";
 
-
 const EventosList = () => {
   const dispatch = useDispatch();
 
@@ -31,6 +30,7 @@ const EventosList = () => {
     eventos,
     eventosFiltrados,
     eventosCalendar,
+    isSpecialEvent,
     filtradosFromCalendar,
   } = useSelector((reducer) => reducer.eventosReducer);
 
@@ -46,11 +46,11 @@ const EventosList = () => {
           setMessageToShow("Hai 1 evento nesta data");
         }
       } else {
-        if (eventosFiltrados.length > 1) {
+        if (eventosFiltrados.length > 1 ) {
           setMessageToShow(
             "Hai " + eventosFiltrados.length + " resultados da túa búsqueda"
           );
-        } else {
+        } else  {
           setMessageToShow("Hai 1 resultado da túa búsqueda");
         }
       }
@@ -98,12 +98,14 @@ const EventosList = () => {
 
   return (
     <div className="eventos-list">
-    <Helmet>
-    <title>ROCK THE BARRIO</title>
-            <meta property="description" content="Descubre todos los eventos musicales en el área de Santiago de Compostela. Consulta el calendario, compra las entradas y recibe toda la información en tu correo electrónico." />
-
-    </Helmet>
-  {  filtroActivo && <div className="point-icon" > </div>}
+      <Helmet>
+        <title>ROCK THE BARRIO</title>
+        <meta
+          property="description"
+          content="Descubre todos los eventos musicales en el área de Santiago de Compostela. Consulta el calendario, compra las entradas y recibe toda la información en tu correo electrónico."
+        />
+      </Helmet>
+      {filtroActivo && <div className="point-icon"> </div>}
       <div className="div-buscador">
         <Buscador eventos={eventos} user={user} />
       </div>
@@ -112,7 +114,7 @@ const EventosList = () => {
           <Loader />
         ) : (
           <>
-            {filtroActivo && (
+            {filtroActivo && !isSpecialEvent && (
               <p className={`resultados_busqueda ${scrolled ? "hidden" : ""}`}>
                 {messageToShow}
               </p>

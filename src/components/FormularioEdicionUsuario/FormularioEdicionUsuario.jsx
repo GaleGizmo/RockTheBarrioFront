@@ -124,7 +124,7 @@ const FormularioEdicionUsuario = ({ userData }) => {
           <div className="div-inputReg imagenReg">
             <Button
               text="Eliminar avatar"
-              type="small"
+              variant="small"
               onClick={removeAvatar}
             />
             {mostrarSubirImagen && (
@@ -150,10 +150,10 @@ const FormularioEdicionUsuario = ({ userData }) => {
         )}
 
         <div className="botones-edicion-usuario">
-          <Button text="Cancelar" type="medium" onClick={handleCancel} />
+          <Button text="Cancelar" variant="medium" onClick={handleCancel} />
           <Button
             text="Gardar"
-            type="medium"
+            variant="medium"
             onClick={handleSubmit(handleFormSubmit)}
           />
         </div>

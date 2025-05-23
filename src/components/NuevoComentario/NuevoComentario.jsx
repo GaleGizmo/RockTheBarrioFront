@@ -99,7 +99,7 @@ const NuevoComentario = ({ eventoId, user }) => {
               ></textarea>
             </div>
             <div className="divBoton">
-              <Button type="medium" text="Enviar" />
+              <Button variant="medium" text="Enviar" />
             </div>
           </form>
         )}

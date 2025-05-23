@@ -29,7 +29,7 @@ const PerfilUsuario = () => {
           <h1>PERFIL DE USUARIO</h1>
           <div className="close-session">
             <Button
-              type="small"
+              variant="small"
               text="Pechar sesión"
               onClick={logout}
             ></Button>{" "}

@@ -51,7 +51,7 @@ const EventListModal = memo(({ events, position, calendarState, action }) => {
             {" "}
             <Button
               text={truncateTitle(evento.title)}
-              type="small evento-calendar"
+              variant="small evento-calendar"
               onClick={() => getEvento(evento._id)}
             />
           </Link>

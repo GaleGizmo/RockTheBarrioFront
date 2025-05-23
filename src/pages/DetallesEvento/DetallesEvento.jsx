@@ -278,17 +278,17 @@ const DetallesEvento = () => {
               </div>
               {evento.url && (
                 <div className="margin-boton-info">
-                  <Button text="+Info" type="medium" onClick={comprar} />
+                  <Button text="+Info" variant="medium" onClick={comprar} />
                 </div>
               )}
               {user?.role === 2 && (
                 <div className="evento-botonesAdmin">
                   <Button
                     text="Eliminar"
-                    type="medium"
+                    variant="medium"
                     onClick={eliminarEvento}
                   />
-                  <Button text="Editar" type="medium" onClick={editarEvento} />
+                  <Button text="Editar" variant="medium" onClick={editarEvento} />
                 </div>
               )}
             </div>

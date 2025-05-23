@@ -25,20 +25,7 @@ function CustomCalendar({ eventos }) {
       ),
     [eventos]
   );
-  // const modalContentRef = useRef();
 
-  // useEffect(() => {
-  //   const handleClickOutside = (event) => {
-  //     if (modalContentRef.current && !modalContentRef.current.contains(event.target)) {
-  //       setModalOpen(false);
-  //     }
-  //   };
-
-  //   document.addEventListener("mousedown", handleClickOutside);
-  //   return () => {
-  //     document.removeEventListener("mousedown", handleClickOutside);
-  //   };
-  // }, []);
 
   const tileContent = ({ date }) => {
     const currentDate = date.toDateString();
@@ -78,14 +65,7 @@ function CustomCalendar({ eventos }) {
 
 
   const [selectedDate, setSelectedDate] = useState(null);
-  // const [selectedEvents, setSelectedEvents] = useState([]);
-  // const [isModalOpen, setModalOpen] = useState(false);
-  // const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 });
 
-  // const toggleModal = () => {
-  //   setModalOpen(!isModalOpen);
-  // };
-  // const [selectedDateForModal, setSelectedDateForModal] = useState(null);
 
   const handleTileClick = async (date) => {
     dispatch(toggleCalendar(!isCalendarOpen))
@@ -105,40 +85,6 @@ function CustomCalendar({ eventos }) {
     dispatch( setFilteredEventos(eventosDia.data))
     navigate("/")
 
-    // Si se hace clic nuevamente en la misma fecha, cierra el modal
-    // if (
-    //   selectedDateForModal &&
-    //   selectedDateForModal.toDateString() === clickedDate
-    // ) {
-    //   setModalOpen(false);
-    //   setSelectedDateForModal(null);
-    //   return;
-    // }
-  
-    // Si se hace clic en una fecha diferente, busca eventos para esa fecha
-    // const eventsForDate = eventos
-    //   .filter(
-    //     (evento) => new Date(evento.date_start).toDateString() === clickedDate
-    //   )
-    //   .sort(
-    //     (a, b) =>
-    //       new Date(a.date_start).getTime() - new Date(b.date_start).getTime()
-    //   );
-  
-    // Si hay eventos para la fecha, abre el modal
-    // if (eventsForDate && eventsForDate.length > 0) {
-    //   setSelectedDate(date);
-    //   setSelectedDateForModal(date);
-    //   setSelectedEvents(eventsForDate);
-  
-    //   const { clientX, clientY } = event;
-    //   setModalPosition({ top: clientY, left: clientX });
-  
-    //   setModalOpen(true);
-    // } else {
-      // Si no hay eventos para la fecha, cierra el modal
-      // setModalOpen(false);
-    // }
   };
   
   const formatMonthYear = (locale, date) =>
@@ -175,16 +121,7 @@ function CustomCalendar({ eventos }) {
         />
         <Legend/>
       </div>
-      {/* {isModalOpen && (
-        <div ref={modalContentRef}>
-        <EventListModal
-          calendarState={isCalendarOpen}
-          events={selectedEvents}
-          action={toggleModal}
-          position={modalPosition}
-        />
-        </div>
-      )} */}
+  
     </div>
   );
 }

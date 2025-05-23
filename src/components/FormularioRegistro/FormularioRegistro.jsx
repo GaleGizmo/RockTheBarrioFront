@@ -187,7 +187,7 @@ const FormularioRegistro = ({ userData, isEdit }) => {
           <div className="div-inputReg imagenReg">
             <Button
               text="Eliminar avatar"
-              type="small"
+              variant="small"
               onClick={removeAvatar}
             />
             {mostrarSubirImagen && (
@@ -250,7 +250,7 @@ const FormularioRegistro = ({ userData, isEdit }) => {
             </div>
           </div>}
           <div className="botones-edicion-usuario"><Button text="Cancelar" type="medium" onClick={handleCancel} />
-          <Button text={isEdit ? "Gardar" : "Rexistrarse"} type="medium" /> </div>
+          <Button text={isEdit ? "Gardar" : "Rexistrarse"} variant="medium" /> </div>
         </div>
       </form>
     </div>

@@ -47,7 +47,7 @@ const ResetearPassword = ({ token }) => {
           )}
         </div>
         <div className="margin-botonLogin">
-          <Button type="large" text="Restablecer" disabled={isSubmitting} />
+          <Button variant="large" text="Restablecer" disabled={isSubmitting} />
         </div>
       </form>
     </div>

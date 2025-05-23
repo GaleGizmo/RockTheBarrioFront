@@ -1,13 +1,18 @@
+import { getBorradores } from "../../shared/api";
+
 const INITIAL_STATE = {
   eventos: [],
   eventosFiltrados: [],
-  eventosCalendar:[],
+  eventosCalendar: [],
+  borradores: [],
+  borrador: null,
+  isSpecialEvent: false,
   loading: false,
   evento: null,
   error: null,
-  isCalendarOpen:false,
+  isCalendarOpen: false,
   eventosEnviados: "",
-  filtradosFromCalendar:false
+  filtradosFromCalendar: false,
 };
 export const eventosReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -16,7 +21,11 @@ export const eventosReducer = (state = INITIAL_STATE, action) => {
     case "GET_EVENTOS":
       return { ...state, loading: false, eventos: [...action.contenido] };
     case "GET_EVENTOSCALENDAR":
-      return { ...state, loading: false, eventosCalendar: [...action.contenido] };
+      return {
+        ...state,
+        loading: false,
+        eventosCalendar: [...action.contenido],
+      };
     case "GET_EVENTO":
       return { ...state, loading: false, evento: action.contenido };
     case "ADD_EVENTO":
@@ -51,6 +60,55 @@ export const eventosReducer = (state = INITIAL_STATE, action) => {
         loading: false,
         evento: state.eventos.find((evento) => evento._id === action.contenido),
       };
+    case "GET_BORRADORES":
+      return {
+        ...state,
+        loading: false,
+        borradores: action.contenido,
+      };
+    case "GET_BORRADOR":
+      return {
+        ...state,
+        loading: false,
+        borrador: action.contenido,
+      };
+    case "ADD_BORRADOR":
+      return {
+        ...state,
+        loading: false,
+        borradores: [...state.borradores, action.contenido],
+      };
+    case "EDIT_BORRADOR":
+      return {
+        ...state,
+        borradores: state.borradores.map((borrador) =>
+          borrador._id === action.id
+            ? { ...borrador, ...action.datos }
+            : borrador
+        ),
+        borrador:
+          state.borrador._id === action.id
+            ? { ...state.borrador, ...action.datos }
+            : state.borrador,
+        loading: false,
+        error: null,
+      };
+    case "DELETE_BORRADOR":
+      return {
+        ...state,
+        borradores: state.borradores.filter(
+          (borrador) => borrador._id !== action.contenido
+        ),
+      };
+    case "SET_EVENTS_ON_SPECIALEVENT":
+      return {
+        ...state,
+        loading: false,
+        isSpecialEvent: true,
+        eventosFiltrados: state.eventos.filter((evento) =>
+          evento.title.toLowerCase().includes(action.contenido.toLowerCase())
+        ),
+      };
 
     case "EVENTOS_ENVIADOS":
       return {
@@ -60,7 +118,10 @@ export const eventosReducer = (state = INITIAL_STATE, action) => {
       };
     case "CLEAR_EVENTO":
       return { ...state, evento: null };
-      break;
+
+    case "CLEAR_BORRADOR":
+      return { ...state, borrador: null };
+
     case "ERROR_EVENTO":
       return {
         ...state,
@@ -73,29 +134,29 @@ export const eventosReducer = (state = INITIAL_STATE, action) => {
         eventosEnviados: "",
         error: null,
       };
-      case "GET_EVENTOSFILTRADOS":
-        
-        return {
-          ...state,
-          loading: false,
-          eventosFiltrados: action.contenido,
-        };
-      case "SET_FILTRADOSFROMCALENDAR":
-        return{
-          ...state,
-          filtradosFromCalendar:true
-        }
-      case "DELETE_EVENTOSFILTRADOS":
-        return{
-          ...state,
-          filtradosFromCalendar:false,
-          eventosFiltrados:[],
-        }
-      case "TOGGLE_CALENDAR":
-        return{
-          ...state,
-          isCalendarOpen:action.contenido
-        }
+    case "GET_EVENTOSFILTRADOS":
+      return {
+        ...state,
+        loading: false,
+        isSpecialEvent: false,
+        eventosFiltrados: action.contenido,
+      };
+    case "SET_FILTRADOSFROMCALENDAR":
+      return {
+        ...state,
+        filtradosFromCalendar: true,
+      };
+    case "DELETE_EVENTOSFILTRADOS":
+      return {
+        ...state,
+        filtradosFromCalendar: false,
+        eventosFiltrados: [],
+      };
+    case "TOGGLE_CALENDAR":
+      return {
+        ...state,
+        isCalendarOpen: action.contenido,
+      };
     default:
       return state;
   }

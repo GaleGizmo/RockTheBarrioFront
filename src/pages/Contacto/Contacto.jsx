@@ -7,6 +7,7 @@ import "./Contacto.css"
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { addMessage } from "../../shared/api";
+import Button from "../../components/Button/Button";
 
 const Contacto = () => {
   const userData = useSelector((state) => state.usuariosReducer.user);
@@ -157,7 +158,7 @@ const Contacto = () => {
 
       {errors.subject && <p style={{ color: "red" }}>{errors.subject}</p>}
 
-      <button className="boton" type="submit">Enviar</button>
+      <Button text="Enviar" variant="medium"></Button>
     </form>
     </div>
   );

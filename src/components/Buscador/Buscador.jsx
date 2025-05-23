@@ -61,20 +61,6 @@ const Buscador = ({ eventos, user }) => {
     }
   }
 
-  async function getDraftEvents(){
-    try {
-      const response = await API.get(`/evento/drafts`);
-      filteredResults = response.data;
-
-      
-      showFilteredResults();
-      
-    } catch (error) {
-      console.error("Error al obtener eventos:", error);
-      throw error;
-    }
-  
-  }
   async function getEventosEntreFechas(filters, userData, startDate, endDate) {
     try {
       const response = await API.post("/evento/eventosEntreFechas", {
@@ -115,6 +101,16 @@ const Buscador = ({ eventos, user }) => {
         setCustomDates(false);
         initialDate = today;
         finalDate = getNextDayOfWeek(today, 0);
+        break;
+      case "Esta finde":
+        setCustomDates(false);
+        initialDate = getNextDayOfWeek(today, 5);
+        finalDate = getNextDayOfWeek(today, 0);
+        // Si hoy ya es domingo, saltar a la semana siguiente
+        if (today.getDay() === 0) {
+          initialDate.setDate(initialDate.getDate() + 7);
+          finalDate.setDate(finalDate.getDate() + 7);
+        }
         break;
       case "Este mes":
         setCustomDates(false);
@@ -260,7 +256,7 @@ const Buscador = ({ eventos, user }) => {
               onClick={handleDisplayTooltip}
             >
               <span>Calquera termo </span>{" "}
-              <span >
+              <span>
                 <AiTwotoneQuestionCircle />
               </span>
               {hovered && (
@@ -271,12 +267,12 @@ const Buscador = ({ eventos, user }) => {
               )}
             </label>
             <label className="past-events">
-            Eventos pasados
-            <SwitchButton
-              isOn={pastEvents}
-              handleToggle={() => setPastEvents(!pastEvents)}
-            />
-          </label>
+              Eventos pasados
+              <SwitchButton
+                isOn={pastEvents}
+                handleToggle={() => setPastEvents(!pastEvents)}
+              />
+            </label>
           </div>
         </div>
         <div
@@ -385,6 +381,10 @@ const Buscador = ({ eventos, user }) => {
                 Esta semana
               </label>
               <label>
+                <input type="radio" name="dateOption" value="Esta finde" />
+                Esta finde
+              </label>
+              <label>
                 <input
                   type="radio"
                   name="dateOption"
@@ -437,11 +437,10 @@ const Buscador = ({ eventos, user }) => {
           }`}
         >
           <div className="botones-buscar-limpiar">
-            <Button text="Limpar" type="small" onClick={cleanFiltered} />{" "}
-            <Button text="Buscar" type="small" onClick={handleSearchClick} />
+            <Button text="Limpar" variant="small" onClick={cleanFiltered} />{" "}
+            <Button text="Buscar" variant="small" onClick={handleSearchClick} />
           </div>
-          {user?.role===2 && <Button text="Drafts" type="small" onClick={getDraftEvents} />}
-       
+
           <BiChevronsUp
             className="chevrons-icon"
             onClick={() => {

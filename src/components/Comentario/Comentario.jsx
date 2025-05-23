@@ -156,12 +156,12 @@ const Comentario = ({ comentario }) => {
               {editMode ? (
                 <>
                   <Button
-                    type="small"
+                    variant="small"
                     text="Gardar"
                     onClick={() => handleEdit()}
                   />
                   <Button
-                    type="small"
+                    variant="small"
                     text="Cancelar"
                     onClick={() => handleCancelEdit()}
                   />

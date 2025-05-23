@@ -5,6 +5,8 @@ import { RiUser3Fill } from "react-icons/ri";
 import { useSelector } from "react-redux";
 import { saveScrollPosition } from "../../shared/saveScrollPosition";
 import {  Zoom, toast } from "react-toastify";
+import { FiEdit } from "react-icons/fi";
+
 
 const Navbar = () => {
   const { user } = useSelector((state) => state.usuariosReducer);
@@ -35,7 +37,11 @@ const Navbar = () => {
       {user ? (
         <div >
           <div className="header-user">
-           
+           {user && user.role === 2 && (
+              <Link to="/borradores" className="header-drafts">
+                <FiEdit size={24} />
+              </Link>
+            )}
             {user.avatar ? (
               <div className="avatar-container">
                 <Link to="/perfil" onClick={saveScrollPosition}>

@@ -11,7 +11,9 @@ import { AiFillCloseSquare } from "react-icons/ai";
 const EventoEdicion = ({ evento, navigate }) => {
   const dispatch = useDispatch();
   const [isSubmitting, setIsSubmitting] = useState(false);
-
+  const [hasDeletedImage, setHasDeletedImage] = useState(false);
+  const [doPublish, setDoPublish] = useState(false);
+  const isDraft = evento.status === "draft";
   const {
     register,
     handleSubmit,
@@ -25,9 +27,15 @@ const EventoEdicion = ({ evento, navigate }) => {
     { label: "Aplazado", value: "delayed" },
     { label: "Nova data", value: "new_date" },
     { label: "Esgotado", value: "soldout" },
+    { label: "Borrador", value: "draft" },
   ];
   const handleInputChange = (e) => {
     setValue(e.target.name, e.target.value);
+  };
+  const removeImage = () => {
+    setImageFile(null);
+    setValue("image", null);
+    setHasDeletedImage(true);
   };
   const adjustTime = (dateString) => {
     // Convertir la fecha de UTC a la zona horaria local
@@ -41,15 +49,22 @@ const EventoEdicion = ({ evento, navigate }) => {
   const handleSave = (data) => {
     const editedEvento = prepareData(data, evento);
     console.log(editedEvento);
-    dispatch(editEvento(evento._id, editedEvento, navigate));
-    setIsSubmitting(false);
+    if (editedEvento.publish) {
+      dispatch(
+        addEvento(editedEvento, navigate, { user: evento.user_creator })
+      );
+      setIsSubmitting(false);
+    } else {
+      dispatch(editEvento(evento._id, editedEvento, navigate));
+      setIsSubmitting(false);
+    }
   };
   const handleClone = (data) => {
     if (data.image[0] == undefined && evento.image) {
       data.image = evento.image;
     }
     const editedEvento = prepareData(data, evento);
-    console.log(editedEvento);
+
     dispatch(addEvento(editedEvento, navigate, { user: evento.user_creator }));
     setIsSubmitting(false);
   };
@@ -62,6 +77,18 @@ const EventoEdicion = ({ evento, navigate }) => {
 
     const timeZone = "Europe/Madrid";
     combinedDate = utcToZonedTime(combinedDate, timeZone);
+    // Imagen: conservar si no se eliminó ni se subió una nueva
+    if (!hasDeletedImage) {
+      if (
+        !data.image ||
+        data.image.length === 0 ||
+        data.image[0] === undefined
+      ) {
+        data.image = evento.image;
+      }
+    } else {
+      data.image = null;
+    }
 
     const editedEvento = {
       ...evento,
@@ -102,7 +129,7 @@ const EventoEdicion = ({ evento, navigate }) => {
             name="artist"
             defaultValue={evento.artist}
             onChange={handleInputChange}
-            {...register("artist", { required: true })}
+            {...register("artist", { required: !isDraft })}
           />
           {errors.artist && <span>Artista é requerido</span>}
         </div>
@@ -114,7 +141,7 @@ const EventoEdicion = ({ evento, navigate }) => {
             name="site"
             defaultValue={evento.site}
             onChange={handleInputChange}
-            {...register("site", { required: true })}
+            {...register("site", { required: !isDraft })}
           />
           {errors.site && <span>Sitio é requerido</span>}
         </div>
@@ -125,7 +152,7 @@ const EventoEdicion = ({ evento, navigate }) => {
             defaultValue={evento.content}
             onChange={handleInputChange}
             name="content"
-            {...register("content", { required: true })}
+            {...register("content", { required: !isDraft })}
           ></textarea>
           {errors.content && <span>Contido é requerido</span>}
         </div>
@@ -139,7 +166,7 @@ const EventoEdicion = ({ evento, navigate }) => {
             min="0"
             step="any"
             onChange={handleInputChange}
-            {...register("price", { required: true })}
+            {...register("price", { required: !isDraft })}
           />
           {errors.price && <span>Prezo é requerido</span>}
         </div>
@@ -173,7 +200,7 @@ const EventoEdicion = ({ evento, navigate }) => {
             name="day_start"
             defaultValue={evento.date_start.slice(0, 10)}
             onChange={handleInputChange}
-            {...register("day_start", { required: true })}
+            {...register("day_start", { required: !isDraft })}
           />
           {errors.date_start && <span>Data de Inicio é requerida</span>}
         </div>
@@ -185,7 +212,7 @@ const EventoEdicion = ({ evento, navigate }) => {
             name="time_start"
             defaultValue={adjustTime(evento.date_start)}
             onChange={handleInputChange}
-            {...register("time_start", { required: true })}
+            {...register("time_start", { required: !isDraft })}
           />
           {errors.time_start && <span>Hora de inicio es requerida</span>}
         </div>
@@ -262,7 +289,19 @@ const EventoEdicion = ({ evento, navigate }) => {
             ))}
           </select>
         </div>
-
+        {isDraft && (
+          <div className="div-inputCrearEvento">
+            <label>Publicar</label>
+            <input
+              className="inputCrearEvento"
+              type="checkbox"
+              name="publish"
+              defaultChecked={doPublish}
+              onChange={() => setDoPublish(!doPublish)}
+              {...register("publish")}
+            />
+          </div>
+        )}
         <div className="div-inputCrearEvento">
           <label>Imaxe:</label>
           <SubirImagen
@@ -272,7 +311,7 @@ const EventoEdicion = ({ evento, navigate }) => {
               setImageFile(URL.createObjectURL(e.target.files[0]))
             }
           />
-          {evento.image && (
+          {evento.image && !hasDeletedImage && (
             <img
               className="imagen-formulario imagen-evento"
               src={evento.image}
@@ -283,9 +322,17 @@ const EventoEdicion = ({ evento, navigate }) => {
             <img
               className="imagen-formulario"
               src={imageFile}
-              alt="Imagen del evento"
+              alt="Imaxe do evento"
             />
           )}
+          {(evento.image && !hasDeletedImage) ||
+            (imageFile && (
+              <Button
+                text="Eliminar imaxe"
+                variant="small"
+                onClick={removeImage}
+              />
+            ))}
         </div>
         <div className="edit__botons">
           <Button

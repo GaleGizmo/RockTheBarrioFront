@@ -121,22 +121,22 @@ const Perfil = ({ userData, onEditClick }) => {
         {userData && userData.role === 2 && (
           <div className="botones-eventos">
             <Link to="/crear-evento">
-              <Button text="Crear evento" type="small" />
+              <Button text="Crear evento" variant="small" />
             </Link>
-            <Button text="Mandar diarios" type="small" isSubmitting={isSubmitting} onClick={sendDiarios} />
+            <Button text="Mandar diarios" variant="small" isSubmitting={isSubmitting} onClick={sendDiarios} />
             <Button
               text="Corrección"
-              type="small"
+              variant="small"
               onClick={handleCorreccionClick}
             />
           </div>
         )}
       </div>
       <div className="margin-botonReg">
-        <Button text="Editar Datos" type="small" onClick={onEditClick} />
+        <Button text="Editar Datos" variant="small" onClick={onEditClick} />
         <Button
           text="Borrar conta"
-          type="small delete-account-button"
+          variant="small delete-account-button"
           onClick={handleDeleteUser}
         />
       </div>
