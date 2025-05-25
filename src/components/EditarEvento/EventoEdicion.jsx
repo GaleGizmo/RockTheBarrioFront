@@ -325,14 +325,16 @@ const EventoEdicion = ({ evento, navigate }) => {
               alt="Imaxe do evento"
             />
           )}
-          {(evento.image && !hasDeletedImage) ||
-            (imageFile && (
+          {((evento.image && !hasDeletedImage) || imageFile) && (
+            <div className="delete-image-button">
+             
               <Button
                 text="Eliminar imaxe"
                 variant="small"
                 onClick={removeImage}
               />
-            ))}
+            </div>
+          )}
         </div>
         <div className="edit__botons">
           <Button
