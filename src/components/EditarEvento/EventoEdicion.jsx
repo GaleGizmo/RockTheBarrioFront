@@ -60,7 +60,7 @@ const EventoEdicion = ({ evento, navigate }) => {
     }
   };
   const handleClone = (data) => {
-    if (data.image[0] == undefined && evento.image) {
+    if (!data.image && evento.image) {
       data.image = evento.image;
     }
     const editedEvento = prepareData(data, evento);

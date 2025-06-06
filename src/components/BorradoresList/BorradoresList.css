@@ -21,3 +21,9 @@
   justify-content: center;
   gap: 10px;
 }
+.borradores p {
+  font-size: 16px;
+  color: var(--terciary-color);
+  text-align: center;
+  width: 100%;
+}

@@ -1,4 +1,7 @@
-
+  .file-input{
+        position: relative;
+        height: fit-content;
+      }
 @media (min-width: 520px) {
     .cardCrearEvento {
         display: flex;
@@ -28,9 +31,7 @@
       .cardCrearEvento form {
         width: 70%;
       }
-      .file-input{
-        position: relative;
-      }
+    
       @keyframes appearCard {
         0% {
           opacity: 0;
