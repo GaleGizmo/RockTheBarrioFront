@@ -9,6 +9,7 @@ lerna-debug.log*
 captain-definition
 deploy-frontend.tar
 .env
+.env.development
 package-lock.json
 /node_modules
 /img
