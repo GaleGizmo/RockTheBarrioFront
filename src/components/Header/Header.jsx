@@ -36,7 +36,7 @@ const Header = () => {
             />
           </Link>
         </div>
-        {/* <EventoEspecial /> */}
+        <EventoEspecial />
         <Button
           className=" menu-toggle custom-toggle d-lg-none"
           onClick={showCalendar}
