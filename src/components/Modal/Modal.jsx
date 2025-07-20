@@ -26,7 +26,7 @@ const Modal = ({
   let eventoUrl = "";
   let textToShare = "";
   if (evento) {
-    eventoUrl = `https://www.rockthebarrio.es/${evento.shortURL}`;
+    eventoUrl = `https://www.rockthebarrio.es/html/${evento.shortURL}`;
     textToShare = `${evento?.artist} en ${evento?.site.split(",")[0]}`;
   }
   return (
