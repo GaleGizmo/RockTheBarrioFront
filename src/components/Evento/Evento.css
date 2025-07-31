@@ -111,7 +111,6 @@
   font-weight: bold;
   font-size: 0.8rem;
 
-  width: fit-content;
 }
 .card h2 {
   margin-left: 2%;
@@ -375,9 +374,17 @@
   .dias-faltantes {
     display: none;
   }
-  .evento-genre {
-    display: none;
-  }
+  /* .evento-genre {
+    text-align: left !important;
+    flex-grow: 1 !important;
+    width: 100% !important;
+    flex-basis: 100%;
+    margin-top: 0.2em;
+
+    order: 2;
+    clear: both;
+    display: block;
+  } */
   .div_relleno {
     display: block;
   }
@@ -389,40 +396,93 @@
   .icon-style{
     margin-bottom: 2px;
   }
-  .evento-hora {
+  /* .evento-hora {
+    flex-basis: 50%;
+    width: 50%;
     text-align: right;
-    flex: 0 0 auto;
     margin-left: auto;
-  }
-  .detalles-site {
-    flex-grow: 1 !important;
-    width: 55% !important;
-    justify-content: left;
-  }
-  .evento-precio {
-    text-align: left !important;
-    flex-grow: 1 !important;
-    width: 50% !important;
-    min-width: 127px;
-  }
-
-
-  .div-image {
-    max-height: 200px;
-    margin: 0;
-  }
-  .card img {
-    max-height: 180px;
-  }
-
+    margin-bottom: 0;
+    order: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  } */
+  /* .detalles-site {
+    flex-basis: 50% !important;
+   
+    justify-content: flex-start;
+    margin-bottom: 0;
+    order: 0;
+    display: flex;
+    align-items: center;
+  } */
   .detalles_container {
-    gap: 0;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+      "site hora"
+      "genre precio"
+      "comments icons";
+    gap: 0 8px;
     padding-top: 5px;
     flex-basis: 100%;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
     border-top: 1px solid var(--secondary-shadow);
+    align-items: center;
+  }
+  .detalles-site {
+    grid-area: site;
+    min-width: 0;
+    justify-content: flex-start;
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  .evento-hora {
+    grid-area: hora;
+    justify-content: flex-end;
+    display: flex;
+    align-items: center;
+    min-width: max-content;
+    width: auto;
+    text-align: right;
+    margin-left: auto;
+    margin-bottom: 0;
+  }
+  .evento-genre {
+    grid-area: genre;
+    text-align: left !important;
+    width: 100% !important;
+    margin-top: 0.2em;
+    display: block;
+    min-width: 0;
+  }
+  .evento-precio {
+    grid-area: precio;
+    text-align: right !important;
+    min-width: max-content;
+    width: auto;
+  }
+  .card-comments {
+    grid-area: comments;
+    width: auto !important;
+    text-align: left !important;
+    position: absolute;
+  bottom: 0px;
+    margin-left: 0;
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+  .icon-container {
+    grid-area: icons;
+    position: relative;
+    margin-left: auto;
+    font-size: 0.8rem;
+    justify-content: flex-end;
+    gap: 15px;
   }
   .card h3 {
     text-align: center;
@@ -430,7 +490,7 @@
     font-size: 1.2rem;
   }
   .card p {
-    text-align: unset;
+   
     font-size: 12px;
     flex: none;
     margin-bottom: 5px;
@@ -453,12 +513,12 @@
     min-height: 20vh;
   }
  
-  .card-comments{
+  /* .card-comments{
    
-    text-align: right !important;
+    text-align: left !important;
     width: 50% !important;
     flex-grow: 1 !important;
-  }
+  } */
   .gratuito {
     padding-bottom: 1px;
   }
@@ -529,10 +589,21 @@
 
 @media (min-width: 1200px) {
   .title-artist_container{
-    flex-basis: 40%;
+    flex-basis: 35%;
   }
   .detalles_container{
-    flex-basis: 25%;
+    flex-basis: 30%;
+  }
+  .status::before {
+    font-size: 3em;
+  }
+  
+  .div-image {
+    margin: 10px;
+  }
+
+  .detalles_container{
+    flex-basis: 30%;
   }
   .status::before {
     font-size: 3em;

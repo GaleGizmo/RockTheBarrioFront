@@ -157,6 +157,15 @@ const Evento = ({ evento, user }) => {
             <span className="blue-text">{diasFaltantes} </span>
           </p>
 
+          
+          {evento.genre ? (
+            <p className="evento-genre">
+              {" "}
+              <FaMusic className="icon-style icon-price" /> {evento.genre}
+            </p>
+          ) : (
+            <p></p>
+          )}
           {evento.price == 0 && evento.payWhatYouWant == false ? (
             <p className="evento-precio">
               <span className="gratuito">GRATUITO</span>
@@ -170,14 +179,6 @@ const Evento = ({ evento, user }) => {
             <p className="evento-precio">
               <span className="gratuito">ENTRADA INVERSA</span>
             </p>
-          )}
-          {evento.genre ? (
-            <p className="evento-genre">
-              {" "}
-              <FaMusic className="icon-style icon-price" /> {evento.genre}
-            </p>
-          ) : (
-            <p></p>
           )}
           {evento.commentsCount && evento.commentsCount > 0 ? (
             <p className="card-comments isComments" onClick={getEvento}>

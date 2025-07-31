@@ -1,6 +1,6 @@
 .eventos-list {
   display: grid;
-  grid-template-columns: minmax(250px, auto) minmax(460px, 900px) minmax(300px, auto);
+  grid-template-columns: minmax(250px, auto) minmax(550px, 900px) minmax(300px, auto);
   padding: 30px 0;
 
   /* margin: auto; */

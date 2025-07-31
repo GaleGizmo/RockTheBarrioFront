@@ -47,61 +47,12 @@
     text-align: center;
     max-width: none;
   }
-  .highlight-banner {
-    top: 20px;
-    right: -20px;
-  }
-  .dias-faltantes {
-    display: none;
-  }
-  .evento-genre {
-    display: none;
-  }
-  .div_relleno {
-    display: block;
-  }
-  .icon-container {
-    position: relative;
-    margin-left: auto;
-    font-size: 0.8rem;
-  }
-  .icon-style {
-    margin-bottom: 2px;
-  }
-  .evento-hora {
-    text-align: right;
-    flex: 0 0 auto;
-    margin-left: auto;
-  }
-  .detalles-site {
-    flex-grow: 1 !important;
-    width: 55% !important;
-    justify-content: left;
-  }
-  .evento-precio {
-    text-align: left !important;
-    flex-grow: 1 !important;
-    width: 50% !important;
-    min-width: 127px;
-  }
-
-  .div-image {
-    max-height: 200px;
-    margin: 0;
-  }
+  
   .borrador img {
     max-height: 180px;
   }
 
-  .detalles_container {
-    gap: 0;
-    padding-top: 5px;
-    flex-basis: 100%;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    border-top: 1px solid var(--secondary-shadow);
-  }
+  
   .borrador h3 {
     text-align: center;
     align-self: center;
@@ -118,42 +69,14 @@
     width: 100%;
     text-align: center;
   }
-  .long-title {
-    font-size: 10vw !important;
-  }
-  .mas-info {
-    left: 35px;
-  }
-  .data-label_container {
-    left: 8px;
-  }
-  .background-logo {
-    min-height: 20vh;
-  }
-
-  .card-comments {
-    text-align: right !important;
-    width: 50% !important;
-    flex-grow: 1 !important;
-  }
-  .gratuito {
-    padding-bottom: 1px;
-  }
+  
 }
 
 @media (min-width: 721px) {
   .borrador {
     max-width: 85%;
   }
-  .div-image {
-    max-height: 200px;
-    margin: 0px;
-    flex-basis: 30%;
-  }
-  .icon-container {
-    font-size: 1rem;
-    gap: 20px;
-  }
+ 
 }
 
 @media (min-width: 1015px) {
@@ -165,15 +88,7 @@
     width: 100%;
     max-width: 600px;
   }
-  .border-card {
-    flex-direction: row;
-    height: 200px;
-  }
-
-  .detalles_container {
-    margin-top: 0;
-    flex-basis: 31%;
-  }
+  
   .borrador h2 {
     font-weight: bold;
     font-size: 1.3rem;
@@ -187,33 +102,12 @@
     font-size: 1.2rem;
   }
 
-  .title-artist_container {
-    flex-basis: 33%;
-    align-items: start;
-  }
-  .icon-container {
-    position: relative;
-    margin-top: auto;
-    justify-content: flex-end;
-  }
-
+  
   .borrador p {
     font-size: 0.75rem;
   }
 }
 
 @media (min-width: 1200px) {
-  .title-artist_container {
-    flex-basis: 40%;
-  }
-  .detalles_container {
-    flex-basis: 25%;
-  }
-  .status::before {
-    font-size: 3em;
-  }
-
-  .div-image {
-    margin: 10px;
-  }
+  
 }
