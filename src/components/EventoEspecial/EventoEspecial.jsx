@@ -4,14 +4,14 @@ import "./EventoEspecial.css";
 const EventoEspecial = () => {
   const dispatch = useDispatch();
   const showSpecialEvent = () => {
-    dispatch(setEventsOnSpecialEvent("Apóstolo 2025"));
+    dispatch(setEventsOnSpecialEvent("Feito a Man"));
   };
 
   return (
     <div className="evento-especial" onClick={showSpecialEvent}>
       <img
-        src="https://res.cloudinary.com/dwv0trjwd/image/upload/v1752695892/rockthebarrio/banner2_apostolo_2025_lps2s5.jpg"
-        alt="Concertos do Apóstolo 2025"
+        src="https://res.cloudinary.com/dwv0trjwd/image/upload/v1754425915/rockthebarrio/feitoaman_banner_rwgnk1.jpg"
+        alt="Festival Feito a Man"
       />
     </div>
   );
