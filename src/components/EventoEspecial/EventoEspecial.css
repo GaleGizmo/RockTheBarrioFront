@@ -55,7 +55,7 @@
     border-radius: 6px;
     
     left: 50px;
-    width: 100px;
+    max-width: 100px;
 
     z-index: 9999;
   }

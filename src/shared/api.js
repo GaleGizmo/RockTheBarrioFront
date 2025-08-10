@@ -93,3 +93,13 @@ export const editBorrador = async (id, borradorData) => {
   const response = await APIIMAGES.put(`/borrador/${id}`, borradorData);
   return response.data;
 };
+
+export const checkFestival = async () => {
+  const response = await API.get(`/festival/toDisplay`);
+  return response.data;
+};
+
+export const getEventosFromFestival = async (festivalId) => {
+  const response = await API.get(`/festival/getFestivalEventos/${festivalId}`);
+  return response.data;
+};

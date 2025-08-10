@@ -12,11 +12,25 @@ import CustomCalendar from "../CustomCalendar/CustomCalendar";
 import { Button } from "react-bootstrap";
 import { FaRegCalendarAlt, FaSearch } from "react-icons/fa";
 import EventoEspecial from "../EventoEspecial/EventoEspecial";
+import { useEffect } from "react";
+import { checkFestival } from "../../shared/api";
+import { useState } from "react";
 
 const Header = () => {
   let { isCalendarOpen, eventosCalendar } = useSelector(
     (reducer) => reducer.eventosReducer
   );
+  const [showFestival, setShowFestival] = useState(false);
+  const [festivalId, setFestivalId] = useState(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await checkFestival();
+      console.log("Festival data:", data);
+      setShowFestival(data.isFestivalToDisplay);
+      setFestivalId(data.festivalId);
+    };
+    fetchData();
+  }, []);
   const dispatch = useDispatch();
   const reloadEvents = () => {
     dispatch(deleteFilteredEventos());
@@ -36,7 +50,7 @@ const Header = () => {
             />
           </Link>
         </div>
-        <EventoEspecial />
+       { showFestival && <EventoEspecial eventoEspecialId={festivalId} /> }
         <Button
           className=" menu-toggle custom-toggle d-lg-none"
           onClick={showCalendar}

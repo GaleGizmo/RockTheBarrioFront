@@ -100,16 +100,7 @@ export const eventosReducer = (state = INITIAL_STATE, action) => {
           (borrador) => borrador._id !== action.contenido
         ),
       };
-    case "SET_EVENTS_ON_SPECIALEVENT":
-      return {
-        ...state,
-        loading: false,
-        isSpecialEvent: true,
-        eventosFiltrados: state.eventos.filter((evento) =>
-          evento.title.toLowerCase().includes(action.contenido.toLowerCase())
-        ),
-      };
-
+ 
     case "EVENTOS_ENVIADOS":
       return {
         ...state,
@@ -134,12 +125,12 @@ export const eventosReducer = (state = INITIAL_STATE, action) => {
         eventosEnviados: "",
         error: null,
       };
-    case "GET_EVENTOSFILTRADOS":
+    case "SET_EVENTOSFILTRADOS":
       return {
         ...state,
         loading: false,
-        isSpecialEvent: false,
-        eventosFiltrados: action.contenido,
+        isSpecialEvent: action.contenido.isEventoEspecial,
+        eventosFiltrados: action.contenido.eventos,
       };
     case "SET_FILTRADOSFROMCALENDAR":
       return {

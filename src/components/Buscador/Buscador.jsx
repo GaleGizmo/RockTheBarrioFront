@@ -17,6 +17,7 @@ import ToolTip from "../ToolTip/ToolTip";
 import { IoIosSearch } from "react-icons/io";
 import { AiTwotoneQuestionCircle } from "react-icons/ai";
 
+
 const Buscador = ({ eventos, user }) => {
   const dispatch = useDispatch();
   const [showAdvancedSearch, setShowAdavancedSearch] = useState(false);
@@ -49,6 +50,14 @@ const Buscador = ({ eventos, user }) => {
     }
   }
   async function getAllEventos(filters, userData) {
+    // Si no hay búsqueda, ni favoritos ni gratuito, no buscar
+    const isInputEmpty = !filters.input || filters.input.trim() === "" || filters.input.length < 3;
+    const isFavorites = !!filters.favorites;
+    const isFreeEvent = !!filters.freeEvent;
+    if (isInputEmpty && !isFavorites && !isFreeEvent) {
+      setShowLoader(false);
+      return;
+    }
     try {
       const response = await API.get("/evento");
       eventosToShow = response.data;
@@ -196,6 +205,8 @@ const Buscador = ({ eventos, user }) => {
     setSearchWithOr(false);
     setFreeEvent(false);
     setSearchDate(false);
+    setSearchInitialDate(null);
+    setSearchFinalDate(null);
     setSearchArtist(false);
     setSearchTitle(false);
     setSearchSite(false);

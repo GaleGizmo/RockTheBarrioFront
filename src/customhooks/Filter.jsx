@@ -25,7 +25,7 @@ const FilterEvents = (eventos, filtros, user) => {
   const eventosLowerCase = convertEventosToLowerCase(eventos);
   const inputLowerCase = filtros.input.toLowerCase().trim().split(' ').filter(e => String(e).trim());
   let filtered = eventosLowerCase;
-console.log(inputLowerCase);
+
   const filteredEvents = () => {
     filtered = filtered.filter((evento) => {
       let propertiesToSearch=null

@@ -1,4 +1,13 @@
-import { addBorrador, API, APIIMAGES, editBorrador, getBorrador, getBorradores, getToken } from "../../shared/api.js";
+import {
+  addBorrador,
+  API,
+  APIIMAGES,
+  editBorrador,
+  getBorrador,
+  getBorradores,
+  getEventosFromFestival,
+  getToken,
+} from "../../shared/api.js";
 import store from "../store.js";
 
 const { dispatch } = store;
@@ -41,10 +50,24 @@ const getEventoById = (id) => async (dispatch) => {
   }
 };
 
+const getEventosFromFestivalAction = (festivalId) => async (dispatch) => {
+  dispatch({ type: "LOADING_EVENTOS" });
+  dispatch({ type: "DELETE_EVENTOSFILTRADOS" });
+  try {
+    const resultado = await getEventosFromFestival(festivalId);
+    dispatch({
+      type: "SET_EVENTOSFILTRADOS",
+      contenido: { eventos: resultado, isEventoEspecial: true },
+    });
+  } catch (error) {
+    dispatch({ type: "ERROR_EVENTO", contenido: error.message });
+  }
+};
+
 const getBorradoresAction = () => async (dispatch) => {
   dispatch({ type: "LOADING_EVENTOS" });
   try {
-    const resultado = await getBorradores()
+    const resultado = await getBorradores();
     dispatch({ type: "GET_BORRADORES", contenido: resultado });
   } catch (error) {
     dispatch({ type: "ERROR_EVENTO", contenido: error.message });
@@ -106,7 +129,6 @@ const addEvento = (eventoData, navigate, userId) => async (dispatch) => {
     eventoData.user_creator = userId.user;
     const formData = createFormData(eventoData);
     if (eventoData.status === "draft") {
-      
       const addedDraft = await addBorrador(formData);
       console.log("addedDraft", addedDraft);
       navigate("/");
@@ -139,15 +161,13 @@ const editEvento = (id, eventoData, navigate) => {
         navigate("/");
       } else {
         resultado = await APIIMAGES.put(`/evento/${id}`, formData, getToken());
-          dispatch({
-        type: "EDIT_EVENTO",
-        contenido: { id: id, datos: resultado.data },
-      });
+        dispatch({
+          type: "EDIT_EVENTO",
+          contenido: { id: id, datos: resultado.data },
+        });
 
-      navigate(`/evento/${id}`);
+        navigate(`/evento/${id}`);
       }
-
-    
     } catch (error) {
       dispatch({ type: "ERROR_EVENTO", contenido: error.message });
     }
@@ -168,9 +188,7 @@ const deleteEvento = (eventoId, navigate) => async () => {
 const clearMensajes = () => {
   return { type: "CLEAR_MENSAJES" };
 };
-const setEventsOnSpecialEvent = (string) => (dispatch) => {
-  dispatch({ type: "SET_EVENTS_ON_SPECIALEVENT", contenido: string });
-}
+
 const setEvento = (eventoId) => (dispatch) => {
   dispatch({ type: "GET_EVENTOBYID", contenido: eventoId });
 };
@@ -178,7 +196,10 @@ const setFiltradosFromCalendar = () => (dispatch) => {
   dispatch({ type: "SET_FILTRADOSFROMCALENDAR" });
 };
 const setFilteredEventos = (resultadoFiltrado) => (dispatch) => {
-  dispatch({ type: "GET_EVENTOSFILTRADOS", contenido: resultadoFiltrado });
+  dispatch({
+    type: "SET_EVENTOSFILTRADOS",
+    contenido: { eventos: resultadoFiltrado, isEventoEspecial: false },
+  });
 };
 const toggleCalendar = (data) => (dispatch) => {
   dispatch({ type: "TOGGLE_CALENDAR", contenido: data });
@@ -190,6 +211,7 @@ export {
   getEventosDesdeHoy,
   getEventosParaCalendar,
   getEventoById,
+  getEventosFromFestivalAction,
   getBorradoresAction,
   addEvento,
   deleteEvento,
@@ -202,5 +224,5 @@ export {
   toggleCalendar,
   setFiltradosFromCalendar,
   getBorradorById,
-  setEventsOnSpecialEvent,
+  
 };

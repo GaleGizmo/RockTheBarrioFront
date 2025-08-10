@@ -1,10 +1,10 @@
-import { setEventsOnSpecialEvent } from "../../redux/eventos/eventos.actions";
+import { getEventosFromFestivalAction } from "../../redux/eventos/eventos.actions";
 import { useDispatch } from "react-redux";
 import "./EventoEspecial.css";
-const EventoEspecial = () => {
+const EventoEspecial = ({eventoEspecialId}) => {
   const dispatch = useDispatch();
   const showSpecialEvent = () => {
-    dispatch(setEventsOnSpecialEvent("Feito a Man"));
+    dispatch(getEventosFromFestivalAction(eventoEspecialId));
   };
 
   return (
