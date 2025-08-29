@@ -246,7 +246,7 @@ const Evento = ({ evento, user }) => {
         </div>
       </div>
 
-      {showMap && <MapComponent direccion={evento.site} />}
+      {showMap && <MapComponent location={evento.location} />}
     </div>
   );
 };
