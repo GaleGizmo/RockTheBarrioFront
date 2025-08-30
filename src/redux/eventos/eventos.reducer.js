@@ -12,6 +12,7 @@ const INITIAL_STATE = {
   error: null,
   isCalendarOpen: false,
   eventosEnviados: "",
+  successMessage: "",
   filtradosFromCalendar: false,
 };
 export const eventosReducer = (state = INITIAL_STATE, action) => {
@@ -32,7 +33,9 @@ export const eventosReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         loading: false,
-        eventos: [...state.eventos, action.contenido],
+        eventos: [...state.eventos, action.contenido.evento],
+        evento: action.contenido.evento,
+        successMessage: action.contenido.message,
       };
     case "EDIT_EVENTO":
       return {
@@ -123,6 +126,7 @@ export const eventosReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         eventosEnviados: "",
+        successMessage: "",
         error: null,
       };
     case "SET_EVENTOSFILTRADOS":

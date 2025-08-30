@@ -4,7 +4,7 @@ import "./FormularioLogin.css";
 import { login, clearError } from "../../redux/usuarios/usuarios.actions";
 import Button from "../Button/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AiFillCloseSquare } from "react-icons/ai";
 
 const FormularioLogin = () => {

@@ -91,16 +91,11 @@ const createFormData = (eventoData) => {
     formData.append("title", eventoData.title);
     formData.append("artist", eventoData.artist || "");
     formData.append("site", eventoData.site || "");
+    formData.append("location", eventoData.location || "");
     formData.append("price", eventoData.price || 0);
     formData.append("date_start", eventoData.date_start || "");
-    if (eventoData.date_end) {
-      formData.append("date_end", eventoData.date_end);
-    }
-
     formData.append("youtubeVideoId", eventoData.youtubeVideoId || "");
-
     formData.append("status", eventoData.status);
-
     formData.append("buy_ticket", eventoData.buy_ticket || "");
     formData.append("payWhatYouWant", eventoData.payWhatYouWant);
     formData.append("genre", eventoData.genre || "");
@@ -130,13 +125,14 @@ const addEvento = (eventoData, navigate, userId) => async (dispatch) => {
     const formData = createFormData(eventoData);
     if (eventoData.status === "draft") {
       const addedDraft = await addBorrador(formData);
-      console.log("addedDraft", addedDraft);
+      
       navigate("/");
       return Promise.resolve(addedDraft);
     } else {
       const resultado = await APIIMAGES.post("/evento", formData, getToken());
+     
       dispatch({ type: "ADD_EVENTO", contenido: resultado.data });
-      navigate("/");
+      navigate("/" + resultado.data.evento._id, { state: { fromCreate: true } });
       return Promise.resolve(resultado);
     }
   } catch (error) {
@@ -224,5 +220,4 @@ export {
   toggleCalendar,
   setFiltradosFromCalendar,
   getBorradorById,
-  
 };

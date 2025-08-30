@@ -103,3 +103,13 @@ export const getEventosFromFestival = async (festivalId) => {
   const response = await API.get(`/festival/getFestivalEventos/${festivalId}`);
   return response.data;
 };
+
+export const getLocalizaciones = async () => {
+  const response = await API.get(`/localizacion`);
+  return response.data;
+};
+
+export const addLocalizacion = async (localizacionData) => {
+  const response = await API.post(`/localizacion`, { direccion: localizacionData });
+  return response.data;
+};

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import "./DetallesEvento.css";
 import ComentariosList from "../../components/ComentariosList/ComentariosList";
 import { useNavigate, useParams } from "react-router-dom";
@@ -23,8 +24,11 @@ import Loader from "../../components/Loader/Loader";
 import { Helmet } from "react-helmet";
 import { BsFillShareFill } from "react-icons/bs";
 import ToolTip from "../../components/ToolTip/ToolTip";
+import { toast } from "react-toastify";
 
 const DetallesEvento = () => {
+  const location = useLocation();
+  const { successMessage } = useSelector((state) => state.eventosReducer);
   const dispatch = useDispatch();
   const { id } = useParams();
   const [shareModal, setShareModal] = useState(false);
@@ -104,12 +108,27 @@ const DetallesEvento = () => {
     : null;
   const fechaEnd = evento?.date_end ? formatDate(evento.date_end) : null;
 
+  useEffect(() => {
+    if (location.state?.fromCreate && successMessage) {
+      // Mostrar el mensaje de éxito
+      toast.success(successMessage);
+      // Limpia el mensaje tras mostrarlo
+      setTimeout(() => {
+        dispatch({ type: "CLEAR_MENSAJES" });
+      }, 3000); // 3 segundos
+    }
+  }, [location.state, successMessage, dispatch]);
+
   return (
     <>
       {!evento ? (
         <Loader />
       ) : (
         <div className="detalles-container">
+          {location.state?.fromCreate && successMessage && (
+            <div className="success-message">{successMessage}</div>
+          )}
+
           <Helmet>
             <title>{evento.title}</title>
             <meta
@@ -154,7 +173,7 @@ const DetallesEvento = () => {
                     allowFullScreen
                   ></iframe>
                 </div>
-              ) : evento.image ? (
+              ) : evento.image && evento.image !== "undefined" ? (
                 <div className="image-container">
                   <img
                     className={`${evento.status ? evento.status : ""}`}
@@ -166,17 +185,21 @@ const DetallesEvento = () => {
                       e.target.nextSibling.style.display = "block"; // Muestra el div genérico
                     }}
                   />
-                  <div
-                    className="divCardDetEv__noimage"
+                  <img
+                    src="../../../public/assets/no-image.jpg"
+                   
                     style={{ display: "none" }}
-                  ></div>
+                  />
                   <AiOutlineZoomIn
                     className="zoom-icon"
                     onClick={openImageModal}
                   />
                 </div>
               ) : (
-                <img className="divCardDetEv__noimage"></img>
+                <img
+                  src="../../../public/assets/no-image.jpg"
+                  className="divCardDetEv__noimage"
+                ></img>
               )}
               <h2>{evento.artist}</h2>
               <h3>
@@ -221,8 +244,8 @@ const DetallesEvento = () => {
                 <h3 className="blue-text">
                   <span> HOXE {fechaStart.split(",")[1]}h</span>
                   <span onClick={handleShareModal}>
-                      <BsFillShareFill className="favorito compartir-detalle" />{" "}
-                    </span>
+                    <BsFillShareFill className="favorito compartir-detalle" />{" "}
+                  </span>
                 </h3>
               ) : (
                 <h3>
@@ -288,7 +311,11 @@ const DetallesEvento = () => {
                     variant="medium"
                     onClick={eliminarEvento}
                   />
-                  <Button text="Editar" variant="medium" onClick={editarEvento} />
+                  <Button
+                    text="Editar"
+                    variant="medium"
+                    onClick={editarEvento}
+                  />
                 </div>
               )}
             </div>

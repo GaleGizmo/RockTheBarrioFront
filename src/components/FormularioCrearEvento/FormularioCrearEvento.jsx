@@ -7,14 +7,35 @@ import { useNavigate } from "react-router-dom";
 import SubirImagen from "../../components/SubirImagen/SubirImagen";
 import Button from "../Button/Button";
 import { AiFillCloseSquare } from "react-icons/ai";
+import { useEffect } from "react";
+import { getLocalizaciones, addLocalizacion } from "../../shared/api";
+import LocalizacionSelector from "../LocalizacionSelector/LocalizacionSelector";
 
 const FormularioCrearEvento = () => {
   const { user } = useSelector((state) => state.usuariosReducer);
   const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+    clearErrors,
+    watch,
+  } = useForm();
   const [priceError, setPriceError] = useState(false);
 
   const [showBuyTicketField, setShowBuyTicketField] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [locations, setLocations] = useState([]);
+
+  useEffect(() => {
+    const fetchLocations = async () => {
+      const data = await getLocalizaciones();
+     
+      setLocations(data);
+    };
+    fetchLocations();
+  }, []);
 
   const handlePriceChange = (event) => {
     const price = event.target.value;
@@ -27,7 +48,10 @@ const FormularioCrearEvento = () => {
       setPriceError(true);
     }
   };
-
+  const handleLocalizacionChange = ({ site, location }) => {
+    setValue("site", site);
+    setValue("location", location);
+  };
   const handleFormSubmit = async (formData) => {
     try {
       setIsSubmitting(true);
@@ -44,7 +68,7 @@ const FormularioCrearEvento = () => {
   const onSubmit = (data) => {
     setIsSubmitting(true);
     const { day_start, time_start } = data;
- 
+
     if (data.price > 0) data.payWhatYouWant = false;
     // Combinar la fecha y la hora en un objeto Date
     const combinedDate = new Date(`${day_start}T${time_start}`);
@@ -57,18 +81,13 @@ const FormularioCrearEvento = () => {
       ...data,
       date_start: combinedDate,
     };
+    console.log(finalFormData);
 
     // Enviar los datos al backend
 
     handleFormSubmit(finalFormData);
   };
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    clearErrors,
-    watch,
-  } = useForm();
+
   const status = watch("status");
   const isDraft = status === "draft";
   const dispatch = useDispatch();
@@ -119,10 +138,11 @@ const FormularioCrearEvento = () => {
         </div>
 
         <div className="div-inputCrearEvento">
-          <label>Lugar</label>
-          <input
-            className="inputCrearEvento"
-            {...register("site", { required: !isDraft })}
+          <LocalizacionSelector
+            locations={locations}
+            setLocations={setLocations}
+            onChange={handleLocalizacionChange}
+            addLocalizacion={addLocalizacion}
           />
           {errors.site && (
             <span className="error-message">Lugar é requerido</span>
@@ -158,17 +178,13 @@ const FormularioCrearEvento = () => {
             <input className="inputCrearEvento" {...register("buy_ticket")} />
           </div>
         ) : (
-          <div>
+          <div className="div-checkbox">
             <label>Entrada Inversa</label>
-            <input
-              className="inputCrearEvento"
-              type="checkbox"
-              {...register("payWhatYouWant")}
-            />{" "}
+            <input type="checkbox" {...register("payWhatYouWant")} />{" "}
           </div>
         )}
         <div className="fechaCrearEvento">
-          <label>Data de Inicio</label>
+          <label>Data do Evento</label>
           <input
             className="inputCrearEvento"
             type="date"
@@ -176,7 +192,7 @@ const FormularioCrearEvento = () => {
             {...register("day_start", { required: !isDraft })}
           />
           {errors.day_start && (
-            <span className="error-message">Data de Inicio é requerida</span>
+            <span className="error-message">Data é requerida</span>
           )}
           <label>Hora de Inicio</label>
           <input
@@ -192,14 +208,7 @@ const FormularioCrearEvento = () => {
             <span className="error-message">Hora de Inicio é requerida</span>
           )}
         </div>
-        <div className="fechaCrearEvento">
-          <label>Data de Fin</label>
-          <input
-            className="inputCrearEvento"
-            type="date"
-            {...register("date_end")}
-          />
-        </div>
+        
         <div className="div-inputCrearEvento">
           <label>Xénero</label>
           <input className="inputCrearEvento" {...register("genre")} />
@@ -213,7 +222,7 @@ const FormularioCrearEvento = () => {
           <input className="inputCrearEvento" {...register("url")} />
         </div>
         <div className="div-inputCrearEvento">
-          <label>Destacado</label>
+          <label>Evento Destacado</label>
           <input
             className="inputCrearEvento"
             type="checkbox"

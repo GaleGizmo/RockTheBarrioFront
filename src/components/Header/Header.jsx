@@ -10,7 +10,7 @@ import {
 
 import CustomCalendar from "../CustomCalendar/CustomCalendar";
 import { Button } from "react-bootstrap";
-import { FaRegCalendarAlt, FaSearch } from "react-icons/fa";
+import { FaRegCalendarAlt } from "react-icons/fa";
 import EventoEspecial from "../EventoEspecial/EventoEspecial";
 import { useEffect } from "react";
 import { checkFestival } from "../../shared/api";
@@ -25,7 +25,6 @@ const Header = () => {
   useEffect(() => {
     const fetchData = async () => {
       const data = await checkFestival();
-      console.log("Festival data:", data);
       setShowFestival(data.isFestivalToDisplay);
       setFestivalId(data.festivalId);
     };

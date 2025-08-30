@@ -149,7 +149,7 @@ img.boleto_imagen {
   border: 2px solid black;
   border-radius: 10px;
   /* width: 100%; */
-  max-height: 25vw;
+  max-height: 35vw;
   object-fit: cover;
   max-width: 500px;
 }
@@ -211,14 +211,14 @@ img.boleto_imagen {
   flex-direction: column;
 }
 .divCardDetEv__noimage {
-  /* background-color: var(--primary-color); */
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+  border: 2px solid black;
+  border-radius: 10px;
   width: 60%;
   min-height: 25vh;
-  background-image: url(/public/assets/no-image.jpg);
-  /* background-repeat: space;
-  background-size: 30px 35px; */
-
-  background-size: cover;
+  background-image: url("../../../public/assets/no-image.jpg");
+  background-position: center;
+  background-size: contain;
 }
 .nuevocomentario-wrapper {
   position: sticky;
@@ -244,17 +244,14 @@ img.boleto_imagen {
 }
 .favorito-detalle {
   transform: none;
-  
+
   display: flex;
- 
 }
 .compartir-detalle {
   transform: none;
-  font-size: .8em;
+  font-size: 0.8em;
   display: flex;
   align-items: center;
-  
-
 }
 .unavailiable {
   color: var(--terciary-color);
@@ -316,7 +313,7 @@ img.boleto_imagen {
   .cardDetEv h1 {
     font-size: 3vw;
   }
-  .blue-text{
+  .blue-text {
     flex-direction: row !important;
   }
 }
@@ -419,8 +416,8 @@ img.boleto_imagen {
   }
   h3 .map-icon {
     padding-bottom: 2px;
-}
-  .blue-text{
+  }
+  .blue-text {
     flex-direction: row !important;
   }
 }
