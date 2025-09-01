@@ -99,6 +99,11 @@ export const checkFestival = async () => {
   return response.data;
 };
 
+export const getFestivalData = async (festivalId) => {
+  const response = await API.get(`/festival/getFestival/${festivalId}`);
+  return response.data;
+};
+
 export const getEventosFromFestival = async (festivalId) => {
   const response = await API.get(`/festival/getFestivalEventos/${festivalId}`);
   return response.data;

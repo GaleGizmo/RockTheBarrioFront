@@ -1,18 +1,16 @@
 import { getEventosFromFestivalAction } from "../../redux/eventos/eventos.actions";
 import { useDispatch } from "react-redux";
 import "./EventoEspecial.css";
-const EventoEspecial = ({eventoEspecialId}) => {
+
+const EventoEspecial = ({ eventoData }) => {
   const dispatch = useDispatch();
   const showSpecialEvent = () => {
-    dispatch(getEventosFromFestivalAction(eventoEspecialId));
+    dispatch(getEventosFromFestivalAction(eventoData._id));
   };
 
   return (
     <div className="evento-especial" onClick={showSpecialEvent}>
-      <img
-        src="https://res.cloudinary.com/dwv0trjwd/image/upload/v1754425915/rockthebarrio/feitoaman_banner_rwgnk1.jpg"
-        alt="Festival Feito a Man"
-      />
+      <img src={eventoData.image} alt={eventoData.name} />
     </div>
   );
 };

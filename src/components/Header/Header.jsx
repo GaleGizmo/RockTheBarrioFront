@@ -13,7 +13,7 @@ import { Button } from "react-bootstrap";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import EventoEspecial from "../EventoEspecial/EventoEspecial";
 import { useEffect } from "react";
-import { checkFestival } from "../../shared/api";
+import { checkFestival, getFestivalData } from "../../shared/api";
 import { useState } from "react";
 
 const Header = () => {
@@ -21,15 +21,21 @@ const Header = () => {
     (reducer) => reducer.eventosReducer
   );
   const [showFestival, setShowFestival] = useState(false);
-  const [festivalId, setFestivalId] = useState(null);
+  const [festival, setFestival] = useState(null);
+
   useEffect(() => {
     const fetchData = async () => {
       const data = await checkFestival();
-      setShowFestival(data.isFestivalToDisplay);
-      setFestivalId(data.festivalId);
+      if (data.isFestivalToDisplay) {
+        
+        const festivalData = await getFestivalData(data.festivalId);
+        setFestival(festivalData);
+        setShowFestival(data.isFestivalToDisplay);
+      }
     };
     fetchData();
   }, []);
+
   const dispatch = useDispatch();
   const reloadEvents = () => {
     dispatch(deleteFilteredEventos());
@@ -49,7 +55,7 @@ const Header = () => {
             />
           </Link>
         </div>
-       { showFestival && <EventoEspecial eventoEspecialId={festivalId} /> }
+        {showFestival && <EventoEspecial eventoData={festival} />}
         <Button
           className=" menu-toggle custom-toggle d-lg-none"
           onClick={showCalendar}

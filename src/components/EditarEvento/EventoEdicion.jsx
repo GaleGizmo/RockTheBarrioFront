@@ -7,6 +7,9 @@ import Button from "../Button/Button";
 import { utcToZonedTime, format } from "date-fns-tz";
 import "./EventoEdicion.css";
 import { AiFillCloseSquare } from "react-icons/ai";
+import { getLocalizaciones, addLocalizacion } from "../../shared/api";
+import LocalizacionSelector from "../LocalizacionSelector/LocalizacionSelector";
+import { useEffect } from "react";
 
 const EventoEdicion = ({ evento, navigate }) => {
   const dispatch = useDispatch();
@@ -29,6 +32,22 @@ const EventoEdicion = ({ evento, navigate }) => {
     { label: "Esgotado", value: "soldout" },
     { label: "Borrador", value: "draft" },
   ];
+  //manejo de localizaciones
+  const [locations, setLocations] = useState([]);
+  
+    useEffect(() => {
+      const fetchLocations = async () => {
+        const data = await getLocalizaciones();
+       
+        setLocations(data);
+      };
+      fetchLocations();
+    }, []);
+     const handleLocalizacionChange = ({ site, location }) => {
+    setValue("site", site);
+    setValue("location", location);
+  };
+
   const handleInputChange = (e) => {
     setValue(e.target.name, e.target.value);
   };
@@ -134,16 +153,15 @@ const EventoEdicion = ({ evento, navigate }) => {
           {errors.artist && <span>Artista é requerido</span>}
         </div>
         <div className="div-inputCrearEvento">
-          <label>Lugar:</label>
-          <input
-            className="inputCrearEvento"
-            type="text"
-            name="site"
-            defaultValue={evento.site}
-            onChange={handleInputChange}
-            {...register("site", { required: !isDraft })}
+          <LocalizacionSelector
+            locations={locations}
+            setLocations={setLocations}
+            onChange={handleLocalizacionChange}
+            addLocalizacion={addLocalizacion}
           />
-          {errors.site && <span>Sitio é requerido</span>}
+          {errors.site && (
+            <span className="error-message">Lugar é requerido</span>
+          )}
         </div>
         <div className="infoCrearEvento">
           <label>Contido:</label>
