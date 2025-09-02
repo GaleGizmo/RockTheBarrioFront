@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import { getEventoById } from "../../redux/eventos/eventos.actions";
-import EventoEdicion from "../../components/EditarEvento/EventoEdicion";
+import EventoEdicion from "../../components/EventoEdicion/EventoEdicion";
 import "./EditarEvento.css";
 
 const EditarEvento = () => {

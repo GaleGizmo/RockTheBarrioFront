@@ -5,13 +5,12 @@ import { resetPassword } from "../../redux/usuarios/usuarios.actions";
 import Button from "../Button/Button";
 import { useNavigate } from "react-router-dom";
 
-
 const ResetearPassword = ({ token }) => {
   const dispatch = useDispatch();
   const { register, handleSubmit, watch, setError } = useForm();
   const { error } = useSelector((state) => state.usuariosReducer);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     const { password, confirmPassword } = data;
@@ -34,20 +33,33 @@ const ResetearPassword = ({ token }) => {
         <div className="div-inputLogin">
           <label>
             Novo Contrasinal
-            <input className="inputLogin"{...register("password", { required: true })} type="password" />
+            <input
+              className="inputLogin"
+              {...register("password", { required: true })}
+              type="password"
+            />
           </label>
         </div>
         <div className="div-inputLogin">
           <label>
             Confirmar Contrasinal
-            <input className="inputLogin"{...register("confirmPassword", { required: true })} type="password" />
+            <input
+              className="inputLogin"
+              {...register("confirmPassword", { required: true })}
+              type="password"
+            />
           </label>
           {watch("password") !== watch("confirmPassword") && (
             <p className="error-message">Os contrasinais non coinciden</p>
           )}
         </div>
         <div className="margin-botonLogin">
-          <Button variant="large" text="Restablecer" disabled={isSubmitting} />
+          <Button
+            type="submit"
+            variant="large"
+            text="Restablecer"
+            disabled={isSubmitting}
+          />
         </div>
       </form>
     </div>

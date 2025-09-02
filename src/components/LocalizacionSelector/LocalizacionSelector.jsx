@@ -1,24 +1,31 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import Button from "../Button/Button";
+import { useEffect } from "react";
 
 const LocalizacionSelector = ({
   locations,
   setLocations,
+  defaultLocationId,
   onChange,
   addLocalizacion,
 }) => {
-  const [selectedId, setSelectedId] = useState("");
+  const [selectedId, setSelectedId] = useState(defaultLocationId || "");
   const [showInput, setShowInput] = useState(false);
   const [newLocName, setNewLocName] = useState("");
   const [isVarios, setIsVarios] = useState(false);
-
+ 
   const handleSelectChange = (e) => {
     const id = e.target.value;
     const loc = locations.find((l) => l._id === id);
     setSelectedId(id);
     onChange({ site: loc ? loc.name : "", location: id });
   };
+  useEffect(() => {
+    if (defaultLocationId) {
+      setSelectedId(defaultLocationId);
+    }
+  }, [defaultLocationId]);
 
   const handleAddLoc = async () => {
     if (newLocName.trim()) {

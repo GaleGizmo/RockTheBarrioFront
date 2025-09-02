@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import "./NuevoComentario.css";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Button from "../Button/Button";
 import {
   addComentario,
@@ -21,15 +21,14 @@ const NuevoComentario = ({ eventoId, user }) => {
       dispatch(switchEscribiendoComentario(false));
     };
   }, [dispatch]);
-  
+
   useEffect(() => {
-    if (error){
-      toast.error(error, {position: 'top-right'});
+    if (error) {
+      toast.error(error, { position: "top-right" });
     }
   }, [error]);
   const { register, handleSubmit, reset } = useForm();
 
-  
   const [value, setValue] = useState(0);
   const handleChange = (event) => {
     const newValue =
@@ -50,7 +49,7 @@ const NuevoComentario = ({ eventoId, user }) => {
     };
 
     dispatch(addComentario(comentarioData, eventoId));
-   
+
     reset();
   };
 
@@ -58,7 +57,12 @@ const NuevoComentario = ({ eventoId, user }) => {
     <>
       <div className="nuevo-comentario">
         <h2 className="h2NC" onClick={toggleComentarios}>
-          Engadir comentario: {escribiendoComentario ? (<AiFillCloseCircle className="edit_close"/>) : (<AiTwotoneEdit className="edit_icon" />)}
+          Engadir comentario:{" "}
+          {escribiendoComentario ? (
+            <AiFillCloseCircle className="edit_close" />
+          ) : (
+            <AiTwotoneEdit className="edit_icon" />
+          )}
         </h2>
         {escribiendoComentario && (
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -99,7 +103,7 @@ const NuevoComentario = ({ eventoId, user }) => {
               ></textarea>
             </div>
             <div className="divBoton">
-              <Button variant="medium" text="Enviar" />
+              <Button type="submit" variant="medium" text="Enviar" />
             </div>
           </form>
         )}

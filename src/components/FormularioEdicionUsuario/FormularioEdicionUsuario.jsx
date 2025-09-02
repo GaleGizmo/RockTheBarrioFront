@@ -150,8 +150,14 @@ const FormularioEdicionUsuario = ({ userData }) => {
         )}
 
         <div className="botones-edicion-usuario">
-          <Button text="Cancelar" variant="medium" onClick={handleCancel} />
           <Button
+            type="button"
+            text="Cancelar"
+            variant="medium"
+            onClick={handleCancel}
+          />
+          <Button
+            type="submit"
             text="Gardar"
             variant="medium"
             onClick={handleSubmit(handleFormSubmit)}

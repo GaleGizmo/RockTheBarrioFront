@@ -20,7 +20,7 @@ const FormularioRegistro = ({ userData, isEdit }) => {
   }, []);
   const [mostrarSubirImagen, setMostrarSubirImagen] = useState(false);
 
-  const [imageFile, setImageFile] = useState(isEdit ? userData.avatar:null);
+  const [imageFile, setImageFile] = useState(isEdit ? userData.avatar : null);
   const [selectedFile, setSelectedFile] = useState(null);
   // const [newsletter, setNewsletter] = useState(true);
   // const [newEvent, setNewevent] = useState(false);
@@ -74,9 +74,11 @@ const FormularioRegistro = ({ userData, isEdit }) => {
     }
     formData.delete("image");
     console.log(Array.from(formData.entries()));
-    if (isEdit){ dispatch(updateUser(formData, userData._id, navigate));}
-    else 
-   { dispatch(registerUser(formData, navigate));}
+    if (isEdit) {
+      dispatch(updateUser(formData, userData._id, navigate));
+    } else {
+      dispatch(registerUser(formData, navigate));
+    }
   };
   const passwordRegex =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
@@ -84,8 +86,7 @@ const FormularioRegistro = ({ userData, isEdit }) => {
     navigate(-1);
   };
   return (
-    <div className={`cardReg ${isEdit ? 'isEdit' : ''}`}>
-
+    <div className={`cardReg ${isEdit ? "isEdit" : ""}`}>
       <AiFillCloseSquare className="close-icon" onClick={handleIcon} />
       {isEdit ? <h1>EDITAR USUARIO</h1> : <h1> DATE DE ALTA </h1>}
       <p className="error-message">{error}</p>
@@ -169,7 +170,6 @@ const FormularioRegistro = ({ userData, isEdit }) => {
             className="checkReg"
             name="newsletter"
             type="checkbox"
-            
             defaultChecked={isEdit ? userData.newsletter : true}
           />
         </div>
@@ -179,7 +179,7 @@ const FormularioRegistro = ({ userData, isEdit }) => {
             {...register("newevent")}
             className="checkReg"
             type="checkbox"
-           name="newevent"
+            name="newevent"
             defaultChecked={isEdit ? userData.newevent : false}
           />
         </div>
@@ -194,7 +194,7 @@ const FormularioRegistro = ({ userData, isEdit }) => {
               <SubirImagen register={register} funcion={handleImageSelection} />
             )}
 
-            <label htmlFor="file-input" >
+            <label htmlFor="file-input">
               <img
                 className="imagen-avatar"
                 src={imageFile}
@@ -213,44 +213,57 @@ const FormularioRegistro = ({ userData, isEdit }) => {
         )}
 
         <div className="margin-botonReg">
-         {!isEdit && <div className="div-checkReg">
-            <div>
-              <label>
-                Acepto os <Link to="/terminos">Termos e Condicións</Link>
-              </label>
-              <input
-                {...register("terminos", { required: true })}
-                className="checkReg"
-                type="checkbox"
-              />
-              <p>
-                {errors.terminos && (
-                  <span className="error-message">
-                    Debes aceptar os Termos e Condicións
-                  </span>
-                )}
-              </p>
+          {!isEdit && (
+            <div className="div-checkReg">
+              <div>
+                <label>
+                  Acepto os <Link to="/terminos">Termos e Condicións</Link>
+                </label>
+                <input
+                  {...register("terminos", { required: true })}
+                  className="checkReg"
+                  type="checkbox"
+                />
+                <p>
+                  {errors.terminos && (
+                    <span className="error-message">
+                      Debes aceptar os Termos e Condicións
+                    </span>
+                  )}
+                </p>
+              </div>
+              <div>
+                <label>
+                  Acepto a <Link to="/privacidad">Política de Privacidade</Link>
+                </label>
+                <input
+                  {...register("privacidad", { required: true })}
+                  className="checkReg"
+                  type="checkbox"
+                />
+                <p>
+                  {errors.privacidad && (
+                    <span className="error-message">
+                      Debes aceptar a Política de Privacidade
+                    </span>
+                  )}
+                </p>
+              </div>
             </div>
-            <div>
-              <label>
-                Acepto a <Link to="/privacidad">Política de Privacidade</Link>
-              </label>
-              <input
-                {...register("privacidad", { required: true })}
-                className="checkReg"
-                type="checkbox"
-              />
-              <p>
-                {errors.privacidad && (
-                  <span className="error-message">
-                    Debes aceptar a Política de Privacidade
-                  </span>
-                )}
-              </p>
-            </div>
-          </div>}
-          <div className="botones-edicion-usuario"><Button text="Cancelar" type="medium" onClick={handleCancel} />
-          <Button text={isEdit ? "Gardar" : "Rexistrarse"} variant="medium" /> </div>
+          )}
+          <div className="botones-edicion-usuario">
+            <Button
+              text="Cancelar"
+              type="button"
+              variant="medium"
+              onClick={handleCancel}
+            />
+            <Button
+              type="submit"
+              text={isEdit ? "Gardar" : "Rexistrarse"}
+              variant="medium"
+            />{" "}
+          </div>
         </div>
       </form>
     </div>

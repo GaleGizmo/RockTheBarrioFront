@@ -12,7 +12,7 @@ const CorreccionModal = ({ showModal, onClose }) => {
   const [mensaje, setMensaje] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  
+
   const [messageForToast, setMessageForToast] = useState(null);
 
   // Maneja el envío del formulario
@@ -20,7 +20,6 @@ const CorreccionModal = ({ showModal, onClose }) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
-   
 
     try {
       const response = await sendCorreccion({ eventoId, asunto, mensaje });
@@ -28,9 +27,8 @@ const CorreccionModal = ({ showModal, onClose }) => {
       setEventoId("");
       setAsunto("");
       setMensaje("");
-     
     } catch (err) {
-      setError("Error al enviar el mensaje. Por favor, intenta nuevamente.");
+      setError("Erro ao enviar a mensaxe. Por favor, intenta novamente.");
     } finally {
       setLoading(false);
     }
@@ -47,7 +45,9 @@ const CorreccionModal = ({ showModal, onClose }) => {
         progress: undefined,
         theme: "colored",
       });
-      setMessageForToast(null);
+      setTimeout(() => {
+        setMessageForToast(null);
+      }, 3000);
     }
   }, [messageForToast]);
   return (
@@ -98,7 +98,6 @@ const CorreccionModal = ({ showModal, onClose }) => {
             </div>
           </form>
           {error && <p style={{ color: "red" }}>{error}</p>}
-         
         </div>
       )}
     </>

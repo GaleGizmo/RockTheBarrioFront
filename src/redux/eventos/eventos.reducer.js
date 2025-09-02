@@ -11,7 +11,6 @@ const INITIAL_STATE = {
   evento: null,
   error: null,
   isCalendarOpen: false,
-  eventosEnviados: "",
   successMessage: "",
   filtradosFromCalendar: false,
 };
@@ -108,7 +107,7 @@ export const eventosReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         loading: false,
-        eventosEnviados: action.contenido,
+        successMessage: action.contenido,
       };
     case "CLEAR_EVENTO":
       return { ...state, evento: null };
@@ -125,7 +124,6 @@ export const eventosReducer = (state = INITIAL_STATE, action) => {
     case "CLEAR_MENSAJES":
       return {
         ...state,
-        eventosEnviados: "",
         successMessage: "",
         error: null,
       };

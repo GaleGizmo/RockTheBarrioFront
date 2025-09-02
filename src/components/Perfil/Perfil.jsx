@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Button from "../../components/Button/Button";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./Perfil.css";
 import { Link } from "react-router-dom";
@@ -11,12 +11,12 @@ import {
 } from "../../redux/eventos/eventos.actions";
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
 import CorreccionModal from "../CorreccionModal/CorreccionModal";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const Perfil = ({ userData, onEditClick }) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showCorrecionModal, setShowCorreccionModal] = useState(false);
-  const [isSubmitting, setIsSubimitting]=useState(false)
+  const [isSubmitting, setIsSubimitting] = useState(false);
   const navigate = useNavigate();
   const handleDeleteUser = () => {
     setShowDeleteModal(true);
@@ -30,7 +30,7 @@ const Perfil = ({ userData, onEditClick }) => {
     setShowDeleteModal(false);
   };
   const dispatch = useDispatch();
-  const { error, eventosEnviados } = useSelector(
+  const { error, successMessage } = useSelector(
     (state) => state.eventosReducer
   );
 
@@ -43,22 +43,15 @@ const Perfil = ({ userData, onEditClick }) => {
 
   const sendDiarios = async () => {
     setIsSubimitting(true);
-    try {
-      await new Promise((resolve) => {
-        dispatch(sendEventosDiarios());
-        dispatch(clearMensajes());
-        resolve();
-      });
-      
-    } catch (err) {
-      console.error("Error ao mandar eventos:", err);
-      setIsSubimitting(false);
-    
-    }
-    finally{
-      setIsSubimitting(false);
-    }
+    dispatch(sendEventosDiarios());
+    dispatch(clearMensajes());
   };
+
+  useEffect(() => {
+    if (isSubmitting && (successMessage || error)) {
+      setIsSubimitting(false);
+    }
+  }, [successMessage, error, isSubmitting]);
 
   useEffect(() => {
     if (error) {
@@ -73,8 +66,8 @@ const Perfil = ({ userData, onEditClick }) => {
         theme: "dark",
       });
     }
-    if (eventosEnviados) {
-      toast.success(eventosEnviados, {
+    if (successMessage) {
+      toast.success(successMessage, {
         position: "bottom-center",
         autoClose: 3000,
         hideProgressBar: true,
@@ -85,7 +78,7 @@ const Perfil = ({ userData, onEditClick }) => {
         theme: "colored",
       });
     }
-  }, [error, eventosEnviados]);
+  }, [error, successMessage]);
 
   return (
     <div>
@@ -123,7 +116,12 @@ const Perfil = ({ userData, onEditClick }) => {
             <Link to="/crear-evento">
               <Button text="Crear evento" variant="small" />
             </Link>
-            <Button text="Mandar diarios" variant="small" isSubmitting={isSubmitting} onClick={sendDiarios} />
+            <Button
+              text="Mandar diarios"
+              variant="small"
+              isSubmitting={isSubmitting}
+              onClick={sendDiarios}
+            />
             <Button
               text="Corrección"
               variant="small"

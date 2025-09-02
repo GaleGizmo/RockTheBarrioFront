@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { addEvento, editEvento } from "../../redux/eventos/eventos.actions";
-import SubirImagen from "../../components/SubirImagen/SubirImagen";
+import SubirImagen from "../SubirImagen/SubirImagen";
 import Button from "../Button/Button";
 import { utcToZonedTime, format } from "date-fns-tz";
 import "./EventoEdicion.css";
@@ -34,16 +34,17 @@ const EventoEdicion = ({ evento, navigate }) => {
   ];
   //manejo de localizaciones
   const [locations, setLocations] = useState([]);
-  
-    useEffect(() => {
-      const fetchLocations = async () => {
-        const data = await getLocalizaciones();
-       
-        setLocations(data);
-      };
-      fetchLocations();
-    }, []);
-     const handleLocalizacionChange = ({ site, location }) => {
+
+  useEffect(() => {
+    const fetchLocations = async () => {
+      const data = await getLocalizaciones();
+
+      setLocations(data);
+    };
+    fetchLocations();
+  }, []);
+
+  const handleLocalizacionChange = ({ site, location }) => {
     setValue("site", site);
     setValue("location", location);
   };
@@ -108,7 +109,9 @@ const EventoEdicion = ({ evento, navigate }) => {
     } else {
       data.image = null;
     }
-
+    if (!data.location) {
+      data.location = evento.location._id;
+    }
     const editedEvento = {
       ...evento,
       ...data,
@@ -154,6 +157,7 @@ const EventoEdicion = ({ evento, navigate }) => {
         </div>
         <div className="div-inputCrearEvento">
           <LocalizacionSelector
+            defaultLocationId={evento.location._id}
             locations={locations}
             setLocations={setLocations}
             onChange={handleLocalizacionChange}
@@ -345,7 +349,6 @@ const EventoEdicion = ({ evento, navigate }) => {
           )}
           {((evento.image && !hasDeletedImage) || imageFile) && (
             <div className="delete-image-button">
-             
               <Button
                 text="Eliminar imaxe"
                 variant="small"

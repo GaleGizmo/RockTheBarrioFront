@@ -9,7 +9,7 @@ import MapIcon from "../MapIcon/MapIcon";
 import { AiFillEuroCircle } from "react-icons/ai";
 import { FaMusic } from "react-icons/fa";
 import MapComponent from "../MapComponent/MapComponent";
-import EventoEdicion from "../EditarEvento/EventoEdicion";
+import EventoEdicion from "../EventoEdicion/EventoEdicion";
 
 const Borrador = ({ borrador, user }) => {
   const [showMap, setShowMap] = useState(false);

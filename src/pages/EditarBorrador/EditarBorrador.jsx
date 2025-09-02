@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { getBorradorById } from "../../redux/eventos/eventos.actions";
 import { useEffect } from "react";
-import EventoEdicion from "../../components/EditarEvento/EventoEdicion";
+import EventoEdicion from "../../components/EventoEdicion/EventoEdicion";
 
 const EditarBorrador = () => {
     const { id } = useParams();
