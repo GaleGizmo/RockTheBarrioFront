@@ -4,7 +4,6 @@ export const APIHeaders = {
   Accept: "application/json",
   "Content-Type": "application/json",
   "Access-Control-Allow-Origin": "*",
- 
 };
 
 export const API = axios.create({
@@ -27,7 +26,6 @@ export const APIHeaders2 = {
   Accept: "application/json",
   "Content-Type": "multipart/form-data",
   "Access-Control-Allow-Origin": "*",
-  
 };
 
 export const APIIMAGES = axios.create({
@@ -46,43 +44,44 @@ APIIMAGES.interceptors.request.use(
     return Promise.reject(error);
   }
 );
-export const getToken =()=>{
-  const token=localStorage.getItem("token")
+export const getToken = () => {
+  const token = localStorage.getItem("token");
   const config = {
     headers: {
-      "Authorization": `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   };
-  return config
-}
+  return config;
+};
 export const sendCorreccion = async (correccion) => {
- 
   const response = await API.post(`/evento/correccion`, correccion);
-  
+
   return response.data;
 };
 
 export const addMessage = async (messageData) => {
- 
   const response = await API.post(`/usuario/message`, messageData);
 
   return response.data;
 };
 
+export const sendDiarios = async () => {
+  const response = await API.get("/evento/sendEventosDiarios/");
+  return response;
+};
+
 export const getBorradores = async () => {
   const response = await API.get(`/borrador`);
   return response.data;
-}
+};
 export const getBorrador = async (id) => {
   const response = await API.get(`/borrador/getbyid/${id}`);
   return response.data;
 };
 export const addBorrador = async (borradorData) => {
-  
- 
   try {
     const response = await APIIMAGES.post(`/borrador`, borradorData);
-    
+
     return response;
   } catch (err) {
     console.error("Error ao engadir o borrador:", err);
@@ -115,6 +114,8 @@ export const getLocalizaciones = async () => {
 };
 
 export const addLocalizacion = async (localizacionData) => {
-  const response = await API.post(`/localizacion`, { direccion: localizacionData });
+  const response = await API.post(`/localizacion`, {
+    direccion: localizacionData,
+  });
   return response.data;
 };

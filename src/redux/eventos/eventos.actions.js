@@ -7,6 +7,7 @@ import {
   getBorradores,
   getEventosFromFestival,
   getToken,
+  sendDiarios,
 } from "../../shared/api.js";
 import store from "../store.js";
 
@@ -30,10 +31,10 @@ const getEventosParaCalendar = () => async () => {
 const sendEventosDiarios = () => async (dispatch) => {
   try {
     clearMensajes();
-    const response = await API.get("/evento/sendEventosDiarios/");
-    dispatch({ type: "EVENTOS_ENVIADOS", contenido: response.data.message });
+    const response = await sendDiarios();
+    dispatch({ type: "EVENTOS_ENVIADOS", contenido: response.message });
   } catch (error) {
-    dispatch({ type: "ERROR_EVENTO", contenido: error.response.data.message });
+    dispatch({ type: "ERROR_EVENTO", contenido: error.response.message });
     throw error;
   }
 };
@@ -125,14 +126,16 @@ const addEvento = (eventoData, navigate, userId) => async (dispatch) => {
     const formData = createFormData(eventoData);
     if (eventoData.status === "draft") {
       const addedDraft = await addBorrador(formData);
-      
+
       navigate("/");
       return Promise.resolve(addedDraft);
     } else {
       const resultado = await APIIMAGES.post("/evento", formData, getToken());
-     
+
       dispatch({ type: "ADD_EVENTO", contenido: resultado.data });
-      navigate("/" + resultado.data.evento._id, { state: { fromCreate: true } });
+      navigate("/" + resultado.data.evento._id, {
+        state: { fromCreate: true },
+      });
       return Promise.resolve(resultado);
     }
   } catch (error) {

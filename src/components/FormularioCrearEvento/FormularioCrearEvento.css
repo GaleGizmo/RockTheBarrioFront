@@ -72,7 +72,8 @@
 
   .infoCrearEvento {
     margin-top: 7%;
-
+    min-height: 100px;
+    padding-bottom: 10px;
     display: flex;
     flex-direction: column;
   }
