@@ -7,32 +7,36 @@ import "./ComentariosList.css";
 import Loader from "../Loader/Loader";
 
 const ComentariosList = ({ eventoId, hayUser }) => {
-
-
-      useEffect(() => {
-        getComentariosByEvent(eventoId);
-      }, []);
-
+  useEffect(() => {
+    getComentariosByEvent(eventoId);
+  }, []);
 
   const { loading, comentarios, escribiendoComentario } = useSelector(
     (reducer) => reducer.comentariosReducer
   );
 
   return (
-    <div className={`comentarios-container ${hayUser ? 'hayUser' : ''} ${escribiendoComentario ? 'estaEscribiendo':''}`}>
-      {loading && (
-        <Loader/>
-      )}
-
-      
-      {comentarios.length ? (
-        comentarios.map((comentario) => {
-          return <Comentario comentario={comentario} key={comentario._id} />;
-        })
+    <>
+      {loading ? (
+        <Loader />
       ) : (
-        <p className="texto-aviso">Aínda non hai comentarios </p>
+        <div
+          className={`comentarios-container ${hayUser ? "hayUser" : ""} ${
+            escribiendoComentario ? "estaEscribiendo" : ""
+          }`}
+        >
+          {comentarios.length ? (
+            comentarios.map((comentario) => {
+              return (
+                <Comentario comentario={comentario} key={comentario._id} />
+              );
+            })
+          ) : (
+            <p className="texto-aviso">Aínda non hai comentarios </p>
+          )}
+        </div>
       )}
-    </div>
+    </>
   );
 };
 

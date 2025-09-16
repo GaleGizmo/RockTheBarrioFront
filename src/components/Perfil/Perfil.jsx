@@ -18,6 +18,16 @@ const Perfil = ({ userData, onEditClick }) => {
   const [showCorrecionModal, setShowCorreccionModal] = useState(false);
   const [isSubmitting, setIsSubimitting] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  // Limpiar mensajes de éxito y error al desmontar el componente
+  useEffect(() => {
+    dispatch(clearMensajes());
+    return () => {
+      dispatch(clearMensajes());
+    };
+  }, []);
+
   const handleDeleteUser = () => {
     setShowDeleteModal(true);
   };
@@ -29,7 +39,6 @@ const Perfil = ({ userData, onEditClick }) => {
   const handleDeleteCancelled = () => {
     setShowDeleteModal(false);
   };
-  const dispatch = useDispatch();
   const { error, successMessage } = useSelector(
     (state) => state.eventosReducer
   );
@@ -44,7 +53,7 @@ const Perfil = ({ userData, onEditClick }) => {
   const sendDiarios = async () => {
     setIsSubimitting(true);
     dispatch(sendEventosDiarios());
-    dispatch(clearMensajes());
+  
   };
 
   useEffect(() => {

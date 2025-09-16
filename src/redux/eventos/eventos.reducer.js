@@ -107,6 +107,7 @@ export const eventosReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         loading: false,
+        error: null,
         successMessage: action.contenido,
       };
     case "CLEAR_EVENTO":

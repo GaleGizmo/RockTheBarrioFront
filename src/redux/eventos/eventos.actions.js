@@ -32,7 +32,8 @@ const sendEventosDiarios = () => async (dispatch) => {
   try {
     clearMensajes();
     const response = await sendDiarios();
-    dispatch({ type: "EVENTOS_ENVIADOS", contenido: response.message });
+    console.log("sendEventosDiarios response", response);
+    dispatch({ type: "EVENTOS_ENVIADOS", contenido: response.data.message });
   } catch (error) {
     dispatch({ type: "ERROR_EVENTO", contenido: error.response.message });
     throw error;
@@ -79,7 +80,7 @@ const getBorradorById = (id) => async (dispatch) => {
   dispatch({ type: "LOADING_EVENTOS" });
   try {
     const resultado = await getBorrador(id);
-    console.log("resultado", resultado);
+
     dispatch({ type: "GET_BORRADOR", contenido: resultado });
   } catch (error) {
     dispatch({ type: "ERROR_EVENTO", contenido: error.message });
@@ -103,6 +104,7 @@ const createFormData = (eventoData) => {
     formData.append("content", eventoData.content);
     formData.append("url", eventoData.url || "");
     formData.append("highlighted", eventoData.highlighted);
+    formData.append("festival", eventoData.festival || "");
     if (eventoData.image && eventoData.image[0] !== "h") {
       formData.append("image", eventoData.image[0]);
     } else if (eventoData.image && eventoData.image[0] === "h") {

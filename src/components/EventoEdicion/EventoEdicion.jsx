@@ -7,7 +7,7 @@ import Button from "../Button/Button";
 import { utcToZonedTime, format } from "date-fns-tz";
 import "./EventoEdicion.css";
 import { AiFillCloseSquare } from "react-icons/ai";
-import { getLocalizaciones, addLocalizacion } from "../../shared/api";
+import { getLocalizaciones, addLocalizacion, getNextFestivals } from "../../shared/api";
 import LocalizacionSelector from "../LocalizacionSelector/LocalizacionSelector";
 import { useEffect } from "react";
 
@@ -34,14 +34,19 @@ const EventoEdicion = ({ evento, navigate }) => {
   ];
   //manejo de localizaciones
   const [locations, setLocations] = useState([]);
+  const [nextFestivals, setNextFestivals] = useState([]);
 
   useEffect(() => {
     const fetchLocations = async () => {
       const data = await getLocalizaciones();
-
       setLocations(data);
     };
+    const fetchNextFestivals = async () => {
+      const data = await getNextFestivals();
+      setNextFestivals(data);
+    };
     fetchLocations();
+    fetchNextFestivals();
   }, []);
 
   const handleLocalizacionChange = ({ site, location }) => {
@@ -215,7 +220,7 @@ const EventoEdicion = ({ evento, navigate }) => {
           />
         </div>
         <div className="fechaCrearEvento">
-          <label>Data de inicio:</label>
+          <label>Data do evento:</label>
           <input
             className="inputCrearEvento"
             type="date"
@@ -224,7 +229,7 @@ const EventoEdicion = ({ evento, navigate }) => {
             onChange={handleInputChange}
             {...register("day_start", { required: !isDraft })}
           />
-          {errors.date_start && <span>Data de Inicio é requerida</span>}
+          {errors.date_start && <span>Data do evento é requerida</span>}
         </div>
         <div className="fechaCrearEvento">
           <label>Hora de inicio:</label>
@@ -236,21 +241,26 @@ const EventoEdicion = ({ evento, navigate }) => {
             onChange={handleInputChange}
             {...register("time_start", { required: !isDraft })}
           />
-          {errors.time_start && <span>Hora de inicio es requerida</span>}
+          {errors.time_start && <span>Hora de inicio é requerida</span>}
         </div>
-        {evento.date_end && (
-          <div className="fechaCrearEvento">
-            <label>Data de fin:</label>
-            <input
-              className="inputCrearEvento"
-              type="date"
-              name="date_end"
-              defaultValue={evento.date_end ? evento.date_end.slice(0, 10) : ""}
-              onChange={handleInputChange}
-              {...register("date_end")}
-            />
-          </div>
-        )}
+   
+        <div className="div-inputCrearEvento">
+          <label>Festival</label>
+          <select
+            className="inputCrearEvento"
+            name="festival"
+            defaultValue={evento.festival || ""}
+            onChange={handleInputChange}
+            {...register("festival")}
+          >
+            <option value="">Ningún</option>
+            {nextFestivals.map((festival) => (
+              <option key={festival._id} value={festival._id}>
+                {festival.name}
+              </option>
+            ))}
+          </select>
+        </div>
         <div className="div-inputCrearEvento">
           <label>Xénero:</label>
           <input

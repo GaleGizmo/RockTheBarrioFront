@@ -8,7 +8,11 @@ import SubirImagen from "../../components/SubirImagen/SubirImagen";
 import Button from "../Button/Button";
 import { AiFillCloseSquare } from "react-icons/ai";
 import { useEffect } from "react";
-import { getLocalizaciones, addLocalizacion } from "../../shared/api";
+import {
+  getLocalizaciones,
+  addLocalizacion,
+  getNextFestivals,
+} from "../../shared/api";
 import LocalizacionSelector from "../LocalizacionSelector/LocalizacionSelector";
 
 const FormularioCrearEvento = () => {
@@ -27,14 +31,21 @@ const FormularioCrearEvento = () => {
   const [showBuyTicketField, setShowBuyTicketField] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [locations, setLocations] = useState([]);
+  const [nextFestivals, setNextFestivals] = useState([]);
 
   useEffect(() => {
     const fetchLocations = async () => {
       const data = await getLocalizaciones();
-     
+
       setLocations(data);
     };
+    const fetchNextFestivals = async () => {
+      const data = await getNextFestivals();
+
+      setNextFestivals(data);
+    };
     fetchLocations();
+    fetchNextFestivals();
   }, []);
 
   const handlePriceChange = (event) => {
@@ -81,7 +92,6 @@ const FormularioCrearEvento = () => {
       ...data,
       date_start: combinedDate,
     };
-    console.log(finalFormData);
 
     // Enviar los datos al backend
 
@@ -208,7 +218,22 @@ const FormularioCrearEvento = () => {
             <span className="error-message">Hora de Inicio é requerida</span>
           )}
         </div>
-        
+        <div className="div-inputCrearEvento">
+          <label>Festival</label>
+          <select
+            className="inputCrearEvento"
+            name="festival"
+            {...register("festival")}
+          >
+            <option value="">Ningún</option>
+            {nextFestivals.map((festival) => (
+              <option key={festival._id} value={festival._id}>
+                {festival.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
         <div className="div-inputCrearEvento">
           <label>Xénero</label>
           <input className="inputCrearEvento" {...register("genre")} />
