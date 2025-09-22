@@ -23,6 +23,13 @@ const EventoEdicion = ({ evento, navigate }) => {
     setValue,
     formState: { errors },
   } = useForm();
+
+  // Sincronizar el valor del select festival con el evento cargado
+  useEffect(() => {
+    if (evento.festival) {
+      setValue("festival", evento.festival);
+    }
+  }, [evento.festival, setValue]);
   const [imageFile, setImageFile] = useState();
   const statusOptions = [
     { label: "Ok", value: "Ok" },

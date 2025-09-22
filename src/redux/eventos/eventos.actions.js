@@ -104,7 +104,9 @@ const createFormData = (eventoData) => {
     formData.append("content", eventoData.content);
     formData.append("url", eventoData.url || "");
     formData.append("highlighted", eventoData.highlighted);
-    formData.append("festival", eventoData.festival || "");
+    if (eventoData.festival && eventoData.festival !== "") {
+      formData.append("festival", eventoData.festival);
+    }
     if (eventoData.image && eventoData.image[0] !== "h") {
       formData.append("image", eventoData.image[0]);
     } else if (eventoData.image && eventoData.image[0] === "h") {
@@ -132,6 +134,7 @@ const addEvento = (eventoData, navigate, userId) => async (dispatch) => {
       navigate("/");
       return Promise.resolve(addedDraft);
     } else {
+      
       const resultado = await APIIMAGES.post("/evento", formData, getToken());
 
       dispatch({ type: "ADD_EVENTO", contenido: resultado.data });
@@ -149,9 +152,10 @@ const addEvento = (eventoData, navigate, userId) => async (dispatch) => {
 const editEvento = (id, eventoData, navigate) => {
   return async (dispatch) => {
     dispatch({ type: "LOADING_EVENTOS" });
-    console.log("id", id, "eventoData", eventoData);
+    
     try {
       const formData = createFormData(eventoData);
+      
       let resultado;
       if (eventoData.status === "draft") {
         resultado = await editBorrador(id, eventoData);
