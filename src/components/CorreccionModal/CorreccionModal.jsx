@@ -10,7 +10,7 @@ const CorreccionModal = ({ showModal, onClose }) => {
   const [eventoId, setEventoId] = useState("");
   const [asunto, setAsunto] = useState("");
   const [mensaje, setMensaje] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(null);
 
   const [messageForToast, setMessageForToast] = useState(null);
@@ -18,7 +18,7 @@ const CorreccionModal = ({ showModal, onClose }) => {
   // Maneja el envío del formulario
   const handleSend = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    setSubmitting(true);
     setError(null);
 
     try {
@@ -28,9 +28,10 @@ const CorreccionModal = ({ showModal, onClose }) => {
       setAsunto("");
       setMensaje("");
     } catch (err) {
+      setSubmitting(false);
       setError("Erro ao enviar a mensaxe. Por favor, intenta novamente.");
     } finally {
-      setLoading(false);
+      setSubmitting(false);
     }
   };
   useEffect(() => {
@@ -79,7 +80,7 @@ const CorreccionModal = ({ showModal, onClose }) => {
               />
             </div>
             <div>
-              <label htmlFor="message">Texto de la Corrección: </label>
+              <label htmlFor="message">Texto da Corrección: </label>
               <textarea
                 className="inputCrearEvento"
                 id="message"
@@ -89,8 +90,8 @@ const CorreccionModal = ({ showModal, onClose }) => {
               ></textarea>
             </div>
             <div className="botones-edicion-usuario">
-              <button className="boton small" type="submit" disabled={loading}>
-                {loading ? "Enviando..." : "Enviar Mensaje"}
+              <button className="boton small" type="submit" disabled={submitting}>
+                {submitting ? "Enviando..." : "Enviar Corrección"}
               </button>
               <button className="boton small" type="button" onClick={onClose}>
                 Cancelar
