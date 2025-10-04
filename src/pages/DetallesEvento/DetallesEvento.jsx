@@ -11,9 +11,13 @@ import {
 import Button from "../../components/Button/Button";
 import NuevoComentario from "../../components/NuevoComentario/NuevoComentario";
 import { esAnterior, esHoy, formatDate } from "../../shared/formatDate";
-import MapComponent from "../../components/MapComponent/MapComponent";
+import MapPortal from "../../components/MapPortal/MapPortal";
 import MapIcon from "../../components/MapIcon/MapIcon";
-import { AiFillCloseSquare, AiFillEuroCircle, AiOutlineZoomIn } from "react-icons/ai";
+import {
+  AiFillCloseSquare,
+  AiFillEuroCircle,
+  AiOutlineZoomIn,
+} from "react-icons/ai";
 import useFavorites from "../../shared/useFavorites";
 import { BiHeart, BiSolidHeart } from "react-icons/bi";
 import { IoTicket } from "react-icons/io5";
@@ -215,7 +219,7 @@ const DetallesEvento = () => {
                     <>{evento.site.split(",")[0]}</>
                   )}
                 </div>
-
+                
                 {evento.price == 0 && evento.payWhatYouWant == false ? (
                   <div className="gratuito">GRATUITO</div>
                 ) : evento.price > 0 ? (
@@ -238,6 +242,11 @@ const DetallesEvento = () => {
                   <div className="gratuito">ENTRADA INVERSA</div>
                 )}
               </h3>
+              <MapPortal
+                location={evento.location}
+                isOpen={showMap}
+                onClose={handleToggleMap}
+              />
               {esHoy(evento.date_start) ? (
                 <h3 className="blue-text">
                   <span> HOXE {fechaStart.split(",")[1]}h</span>
@@ -297,6 +306,7 @@ const DetallesEvento = () => {
                   <p key={index}>{sentence}</p>
                 ))}
               </div>
+
               {evento.url && (
                 <div className="margin-boton-info">
                   <Button text="+Info" variant="medium" onClick={comprar} />
@@ -318,6 +328,7 @@ const DetallesEvento = () => {
               )}
             </div>
           </div>
+
           {loading ? (
             <Loader />
           ) : (
@@ -339,7 +350,7 @@ const DetallesEvento = () => {
               </div>
             </div>
           )}
-          {showMap && <MapComponent location={evento.location} />}
+
           <Modal
             show={showImageModal}
             onCancel={closeImageModal}

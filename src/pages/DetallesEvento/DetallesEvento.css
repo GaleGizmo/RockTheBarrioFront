@@ -26,6 +26,15 @@
   transform: translateX(-100px);
   animation: appearCard 0.5s ease-in-out forwards;
 }
+.map-wrapper-detalle {
+  width: 90%;
+  margin: 20px auto;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--secondary-color);
+  background-color: #fff;
+}
+
 .detalle-comentarios {
   margin-top: 80px;
   position: relative;
@@ -153,6 +162,14 @@ img.boleto_imagen {
   object-fit: cover;
   max-width: 500px;
 }
+
+/* Estilo específico para el contenedor del mapa en DetallesEvento */
+.cardDetEv .map-container {
+  max-width: 500px;
+  width: 90%;
+  margin: 20px auto;
+}
+
 .image-container {
   height: 90%;
   max-height: 90%;
@@ -303,6 +320,7 @@ img.boleto_imagen {
   }
   .cardDetEv h3 {
     gap: 5px;
+    width: 100%;
     font-size: calc(1rem + 0.2vw);
     flex-direction: column;
   }
@@ -314,10 +332,16 @@ img.boleto_imagen {
   }
   .blue-text {
     flex-direction: row !important;
+    justify-content: center;
   }
 }
 
 @media (max-width: 589px) {
+  .map-wrapper-detalle {
+    width: 95%;
+    margin: 15px auto;
+  }
+
   .detalles-container {
     display: flex;
     flex-direction: column;
@@ -356,8 +380,6 @@ img.boleto_imagen {
     text-align: center;
     width: 100%;
     margin-top: 55px;
-    margin-left: 2.5%;
-    margin-right: 2.5%;
     gap: 1px;
     /* background-image: linear-gradient(to bottom, rgb(237 132 57), #fff); */
   }
@@ -380,8 +402,7 @@ img.boleto_imagen {
     display: flex;
     justify-content: center;
     width: 90%;
-    margin-left: 5%;
-    margin-bottom: 0;
+    margin: 0 auto;
   }
   img.boleto_imagen {
     width: 75%;
