@@ -12,7 +12,7 @@ import { BsInfoCircleFill } from "react-icons/bs";
 import { BsFillShareFill } from "react-icons/bs";
 import { AiOutlineCopy } from "react-icons/ai";
 import { AiFillEuroCircle } from "react-icons/ai";
-import { FaMusic } from "react-icons/fa";
+import { FaBuyNLarge, FaMusic } from "react-icons/fa";
 import MapComponent from "../MapComponent/MapComponent";
 import useFavorites from "../../shared/useFavorites";
 import { useDispatch } from "react-redux";
@@ -62,6 +62,12 @@ const Evento = ({ evento, user }) => {
       locale: gl,
     });
   }
+
+  const buyEvento = () => {
+    if (evento.price > 0 && evento.buy_ticket) {
+      window.open(evento.buy_ticket, "_blank", "noopener,noreferrer");
+    }
+  };
   const fechaStart = evento?.date_start
     ? format(fechaEvento, "EEE, dd, MMM ", {
         locale: gl,
@@ -133,8 +139,8 @@ const Evento = ({ evento, user }) => {
         </div>
         <div className="detalles_container">
           {evento.site && evento.site !== "Varios" ? (
-            <p className="detalles-site">
-              <MapIcon showMap={showMap} onClick={handleToggleMap} />
+            <p className="detalles-site" onClick={handleToggleMap}>
+              <MapIcon showMap={showMap} />
               {evento.site.split(",")[0]}
             </p>
           ) : (
@@ -157,7 +163,6 @@ const Evento = ({ evento, user }) => {
             <span className="blue-text">{diasFaltantes} </span>
           </p>
 
-          
           {evento.genre ? (
             <p className="evento-genre">
               {" "}
@@ -171,7 +176,7 @@ const Evento = ({ evento, user }) => {
               <span className="gratuito">GRATUITO</span>
             </p>
           ) : evento.price > 0 ? (
-            <p className="evento-precio">
+            <p className="evento-precio" onClick={buyEvento}>
               <AiFillEuroCircle className="icon-style icon-price" />{" "}
               {evento.price}€
             </p>

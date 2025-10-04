@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import "./DetallesEvento.css";
 import ComentariosList from "../../components/ComentariosList/ComentariosList";
@@ -13,10 +13,10 @@ import NuevoComentario from "../../components/NuevoComentario/NuevoComentario";
 import { esAnterior, esHoy, formatDate } from "../../shared/formatDate";
 import MapComponent from "../../components/MapComponent/MapComponent";
 import MapIcon from "../../components/MapIcon/MapIcon";
-import { AiFillCloseSquare, AiOutlineZoomIn } from "react-icons/ai";
+import { AiFillCloseSquare, AiFillEuroCircle, AiOutlineZoomIn } from "react-icons/ai";
 import useFavorites from "../../shared/useFavorites";
 import { BiHeart, BiSolidHeart } from "react-icons/bi";
-import Favorito from "../../components/Favorito/Favorito";
+import { IoTicket } from "react-icons/io5";
 import { format, formatDistanceToNow, parseISO } from "date-fns";
 import { gl } from "date-fns/locale";
 import Modal from "../../components/Modal/Modal";
@@ -222,7 +222,7 @@ const DetallesEvento = () => {
                   <div className="detalles_item">
                     <div>
                       <strong>Prezo: </strong>
-                      {evento.price}€
+                      {evento.price}
                     </div>
                     {evento.buy_ticket && (
                       <a
@@ -230,10 +230,7 @@ const DetallesEvento = () => {
                         href={evento.buy_ticket}
                         target="blank"
                       >
-                        <img
-                          src="/assets/boleto.png"
-                          className="boleto_imagen"
-                        />
+                        <AiFillEuroCircle className="favorito compartir-detalle" />
                       </a>
                     )}
                   </div>
@@ -342,7 +339,7 @@ const DetallesEvento = () => {
               </div>
             </div>
           )}
-          {showMap && <MapComponent direccion={evento.site} />}
+          {showMap && <MapComponent location={evento.location} />}
           <Modal
             show={showImageModal}
             onCancel={closeImageModal}
