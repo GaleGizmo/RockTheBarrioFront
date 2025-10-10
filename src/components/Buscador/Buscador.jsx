@@ -20,6 +20,9 @@ import { AiTwotoneQuestionCircle } from "react-icons/ai";
 
 const Buscador = ({ eventos, user }) => {
   const dispatch = useDispatch();
+
+  const isAdmin = user && user.role === 2;
+
   const [showAdvancedSearch, setShowAdavancedSearch] = useState(false);
   const [noResults, setNoResults] = useState(false);
   const [searchAll, setSearchAll] = useState(true);
@@ -34,7 +37,7 @@ const Buscador = ({ eventos, user }) => {
   const [searchInitialDate, setSearchInitialDate] = useState("");
   const [searchFinalDate, setSearchFinalDate] = useState("");
   const [customDates, setCustomDates] = useState(false);
-  const [pastEvents, setPastEvents] = useState(false);
+  const [pastEvents, setPastEvents] = useState(isAdmin);
   const [showLoader, setShowLoader] = useState(false);
   const [hovered, setHovered] = useState(false);
 
