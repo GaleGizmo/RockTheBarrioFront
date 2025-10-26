@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import formatContent from "../../utils/formatContent.jsx";
 import { useLocation } from "react-router-dom";
 import "./DetallesEvento.css";
 import ComentariosList from "../../components/ComentariosList/ComentariosList";
@@ -20,7 +21,6 @@ import {
 } from "react-icons/ai";
 import useFavorites from "../../shared/useFavorites";
 import { BiHeart, BiSolidHeart } from "react-icons/bi";
-import { IoTicket } from "react-icons/io5";
 import { format, formatDistanceToNow, parseISO } from "date-fns";
 import { gl } from "date-fns/locale";
 import Modal from "../../components/Modal/Modal";
@@ -36,7 +36,6 @@ const DetallesEvento = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const [shareModal, setShareModal] = useState(false);
-  const [formattedContent, setFormattedContent] = useState("");
   const { loading, evento } = useSelector((reducer) => reducer.eventosReducer);
   useEffect(() => {
     if (!evento || (evento._id !== id && evento.shortURL !== id)) {
@@ -88,15 +87,7 @@ const DetallesEvento = () => {
   const goHome = () => {
     navigate("/");
   };
-  useEffect(() => {
-    if (evento && evento.content) {
-      const formattedContent = evento.content.replace(
-        /\.(?=\s)|:(?=\s-)/g,
-        (match) => (match === "." ? ".\n" : ":\n-")
-      );
-      setFormattedContent(formattedContent);
-    }
-  }, [evento]);
+  // ahora usamos formatContent(evento.content) directamente al renderizar
   const fechaEvento =
     evento && evento.date_start ? parseISO(evento.date_start) : null;
   const diasFaltantes = fechaEvento
@@ -302,9 +293,7 @@ const DetallesEvento = () => {
                 </h3>
               )}
               <div className="evento_contenido">
-                {formattedContent.split("\n").map((sentence, index) => (
-                  <p key={index}>{sentence}</p>
-                ))}
+                {formatContent(evento?.content)}
               </div>
 
               {evento.url && (

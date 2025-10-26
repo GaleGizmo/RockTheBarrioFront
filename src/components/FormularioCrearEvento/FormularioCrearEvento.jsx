@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { addEvento } from "../../redux/eventos/eventos.actions";
 import "./FormularioCrearEvento.css";
+import formatContent from "../../utils/formatContent.jsx";
 import { useNavigate } from "react-router-dom";
 import SubirImagen from "../../components/SubirImagen/SubirImagen";
 import Button from "../Button/Button";
@@ -145,6 +146,13 @@ const FormularioCrearEvento = () => {
             {...register("content", { required: false })}
             className="inputCrearEvento"
           />
+
+          <div className="previewWrapper">
+            <strong>Vista previa:</strong>
+            <div className="previewContent">
+              {formatContent(watch("content"))}
+            </div>
+          </div>
         </div>
 
         <div className="div-inputCrearEvento">
