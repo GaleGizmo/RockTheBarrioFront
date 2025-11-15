@@ -3,11 +3,10 @@ import "./Evento.css";
 import { BiHeart, BiSolidHeart, BiSolidComment } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { BsClockFill } from "react-icons/bs";
-import { esAnterior, esHoy } from "../../shared/formatDate";
-import { format, formatDistanceToNow, parseISO } from "date-fns";
+import { esAnterior, esHoy, calcularDiasFaltantes } from "../../shared/formatDate";
+import { format, parseISO } from "date-fns";
 import { gl } from "date-fns/locale";
 import MapIcon from "../MapIcon/MapIcon";
-
 import { BsInfoCircleFill } from "react-icons/bs";
 import { BsFillShareFill } from "react-icons/bs";
 import { AiOutlineCopy } from "react-icons/ai";
@@ -19,6 +18,8 @@ import { useDispatch } from "react-redux";
 import { setEvento } from "../../redux/eventos/eventos.actions";
 import Modal from "../Modal/Modal";
 import ToolTip from "../ToolTip/ToolTip";
+import { isLongTitle } from "../../utils/textUtils";
+import { handleImageError } from "../../utils/imageHelpers";
 
 const Evento = ({ evento, user }) => {
   const [hovered, setHovered] = useState("");
@@ -31,9 +32,6 @@ const Evento = ({ evento, user }) => {
     evento ? evento._id : null,
     user ? user._id : null
   );
-  // const handleDisplayTooltip = () => {
-  //   setHovered(!hovered);
-  // };
 
   const handleShareModal = () => {
     setShareModal(!shareModal);
@@ -52,16 +50,9 @@ const Evento = ({ evento, user }) => {
     sessionStorage.setItem("scrollPosition", window.scrollY);
     dispatch(setEvento(evento._id));
   };
-  const isLongTitle = evento?.title?.length > 10 && !evento.title.includes(" ");
 
   const fechaEvento = evento?.date_start ? parseISO(evento.date_start) : null;
-  let diasFaltantes = null;
-  if (fechaEvento) {
-    diasFaltantes = formatDistanceToNow(fechaEvento, {
-      unit: "day",
-      locale: gl,
-    });
-  }
+  const diasFaltantes = evento?.date_start ? calcularDiasFaltantes(evento.date_start) : null;
 
   const buyEvento = () => {
     if (evento.price > 0 && evento.buy_ticket) {
@@ -111,10 +102,7 @@ const Evento = ({ evento, user }) => {
                 <img
                   src={evento.image}
                   alt={evento.title}
-                  onError={(e) => {
-                    e.target.style.display = "none"; // Oculta la imagen que no  carga
-                    e.target.nextSibling.style.display = "block"; // Muestra el div genérico
-                  }}
+                  onError={handleImageError}
                 />
                 <div
                   className="background-logo"
@@ -128,7 +116,7 @@ const Evento = ({ evento, user }) => {
         </div>
 
         <div className="title-artist_container">
-          <h2 className={isLongTitle ? "long-title" : ""}>{evento.title}</h2>
+          <h2 className={isLongTitle(evento.title) ? "long-title" : ""}>{evento.title}</h2>
 
           <h3>{evento.artist}</h3>
           {user?.role === 2 && (

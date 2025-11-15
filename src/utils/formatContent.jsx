@@ -1,17 +1,14 @@
 import React from 'react';
 
 // Convierte el texto raw en nodos React aplicando:
-// 1) la transformación de puntuación que ya existía en DetallesEvento
-//    (reemplaza ". " por ".\n" y ": -" por ":\n-")
-// 2) formateo inline: **bold** -> <strong>, *italic* -> <em>
+// 1) Usa || como marcador para saltos de línea explícitos
+// 2) Usa ||| para generar un espacio vertical (párrafo vacío)
+// 3) formateo inline: **bold** -> <strong>, *italic* -> <em>
 // Devuelve un array de <p>...</p> que puedes insertar directamente en el JSX.
 export default function formatContent(content) {
   if (!content) return null;
 
-  // 1) aplicar el reemplazo de puntuación equivalente al useEffect original
-  const preformatted = content.replace(/\.(?=\s)|:(?=\s-)/g, (match) =>
-    match === '.' ? '.\n' : ':\n-'
-  );
+  const preformatted = content.replace(/\|\|\|/g, '\n\n').replace(/\|\|/g, '\n');
 
   // token regex para detectar **bold** o *italic*
   const tokenRegex = /(\*\*[^*]+?\*\*|\*[^*]+?\*)/g;
@@ -32,9 +29,9 @@ export default function formatContent(content) {
     });
   };
 
-  // 2) dividir por saltos de línea y envolver cada línea en un <p>
+  // Dividir por saltos de línea y envolver cada línea en un <p>
   const lines = preformatted.split('\n');
   return lines.map((line, idx) => (
-    <p key={idx}>{renderInline(line)}</p>
+    <p key={idx}>{line ? renderInline(line) : '\u00A0'}</p>
   ));
 }

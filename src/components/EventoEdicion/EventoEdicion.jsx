@@ -7,9 +7,14 @@ import Button from "../Button/Button";
 import { utcToZonedTime, format } from "date-fns-tz";
 import "./EventoEdicion.css";
 import { AiFillCloseSquare } from "react-icons/ai";
-import { getLocalizaciones, addLocalizacion, getNextFestivals } from "../../shared/api";
+import {
+  getLocalizaciones,
+  addLocalizacion,
+  getNextFestivals,
+} from "../../shared/api";
 import LocalizacionSelector from "../LocalizacionSelector/LocalizacionSelector";
 import { useEffect } from "react";
+import formatContent from "../../utils/formatContent.jsx";
 
 const EventoEdicion = ({ evento, navigate }) => {
   const dispatch = useDispatch();
@@ -21,6 +26,7 @@ const EventoEdicion = ({ evento, navigate }) => {
     register,
     handleSubmit,
     setValue,
+    watch,
     formState: { errors },
   } = useForm();
 
@@ -189,6 +195,13 @@ const EventoEdicion = ({ evento, navigate }) => {
             {...register("content", { required: !isDraft })}
           ></textarea>
           {errors.content && <span>Contido é requerido</span>}
+
+          <div className="previewWrapper">
+            <strong>Vista previa:</strong>
+            <div className="previewContent">
+              {formatContent(watch("content"))}
+            </div>
+          </div>
         </div>
         <div className="div-inputCrearEvento">
           <label>Prezo:</label>
@@ -250,7 +263,7 @@ const EventoEdicion = ({ evento, navigate }) => {
           />
           {errors.time_start && <span>Hora de inicio é requerida</span>}
         </div>
-   
+
         <div className="div-inputCrearEvento">
           <label>Festival</label>
           <select

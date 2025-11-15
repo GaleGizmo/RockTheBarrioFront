@@ -40,3 +40,31 @@ export function esHoy(fecha) {
   );
   return fechaIntroducidaFormateada === fechaActualFormateada;
 }
+
+import { format, formatDistanceToNow, parseISO } from "date-fns";
+import { gl } from "date-fns/locale";
+
+/**
+ * Formatea la fecha de un evento con formato largo
+ * @param {string} dateString - La fecha en formato ISO
+ * @returns {string} - La fecha formateada (ej: "15 novembro, 20:00")
+ */
+export function formatearFechaEvento(dateString) {
+  if (!dateString) return null;
+  const fechaEvento = parseISO(dateString);
+  return format(fechaEvento, " dd MMMM, HH:mm", { locale: gl });
+}
+
+/**
+ * Calcula los días faltantes para un evento
+ * @param {string} dateString - La fecha en formato ISO
+ * @returns {string} - Los días faltantes en formato legible (ej: "3 días")
+ */
+export function calcularDiasFaltantes(dateString) {
+  if (!dateString) return null;
+  const fechaEvento = parseISO(dateString);
+  return formatDistanceToNow(fechaEvento, {
+    unit: "day",
+    locale: gl,
+  });
+}
