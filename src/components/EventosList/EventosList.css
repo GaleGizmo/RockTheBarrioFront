@@ -1,7 +1,7 @@
 .eventos-list {
   display: grid;
-  grid-template-columns: minmax(250px, auto) minmax(550px, 900px) minmax(300px, auto);
-  padding: 30px 0;
+  grid-template-columns: minmax(250px, 300px) minmax(550px, auto);
+  padding: 60px 0;
 
   /* margin: auto; */
 }
@@ -16,51 +16,58 @@
 }
 .eventos {
   display: flex;
-  flex-direction: column;
-  padding: 95px 15px;
+  flex-direction: row;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 40px 15px;
+  justify-content: center;
   align-items: center;
-  
 }
-.resultados_busqueda{
-  background-color: var(--primary-color);
-  letter-spacing: 1px;
-  font-weight: 600;
-  padding: 5px;
-  color: var(--hover-color);
-  border: 1px solid var(--secondary-color);
-  border-radius: 8px;
- opacity:1;
-   width: auto;
-   transition: opacity 0.5s ease-in-out;
-  margin: 0 auto 10px auto;
+.resultados_busqueda {
+  opacity: 1;
+  width: 100%;
+  transition: opacity 0.5s ease-in-out;
+ 
+  .span-resultado {
+    display: block;
+    width: fit-content;
+    background-color: var(--primary-color);
+    letter-spacing: 1px;
+     margin: 0 auto 10px auto;
+    font-weight: 600;
+    padding: 5px;
+    color: var(--hover-color);
+    border: 1px solid var(--secondary-color);
+    border-radius: 8px;
   }
-  .resultados_busqueda.hidden{
-    opacity: 0;
+}
+
+.resultados_busqueda.hidden {
+  opacity: 0;
+}
+@keyframes moveRightToLeft {
+  0% {
+    transform: translateX(0);
   }
-  @keyframes moveRightToLeft {
-    0% {
-      transform: translateX(0);
-    }
-    50% {
-      transform: translateX(-5px); 
-    }
-    100% {
-      transform: translateX(0);
-    }
+  50% {
+    transform: translateX(-5px);
   }
-.point-icon{
+  100% {
+    transform: translateX(0);
+  }
+}
+.point-icon {
   background-image: url("../../../public/assets/hand-icon.gif");
   position: fixed;
- 
+
   left: 50px;
   top: 15px;
   z-index: 1000;
- 
+
   width: 31px;
   height: 20px;
-  animation: moveRightToLeft 2s infinite; 
+  animation: moveRightToLeft 2s infinite;
 }
-
 
 @media (max-width: 520px) {
   .div-img {
@@ -76,16 +83,16 @@
     margin-top: 0px;
     padding-top: 0;
   }
-  .div-buscador{
+  .div-buscador {
     padding-left: 0;
   }
-  .resultados_busqueda{
+  .resultados_busqueda {
     font-size: 12px;
   }
-  .point-icon{
+  .point-icon {
     top: 7px;
     left: 40px;
-    transform: scale(.8);
+    transform: scale(0.8);
   }
 }
 

@@ -27,7 +27,6 @@ const Header = () => {
     const fetchData = async () => {
       const data = await checkFestival();
       if (data.isFestivalToDisplay) {
-        
         const festivalData = await getFestivalData(data.festivalId);
         setFestival(festivalData);
         setShowFestival(data.isFestivalToDisplay);
@@ -57,7 +56,7 @@ const Header = () => {
         </div>
         {showFestival && <EventoEspecial eventoData={festival} />}
         <Button
-          className=" menu-toggle custom-toggle d-lg-none"
+          className="menu-toggle custom-toggle "
           onClick={showCalendar}
         >
           <FaRegCalendarAlt></FaRegCalendarAlt>

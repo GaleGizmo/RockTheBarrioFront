@@ -109,7 +109,7 @@ function CustomCalendar({ eventos }) {
         </div>
       </Collapse>
       <div
-        className={`calendar d-lg-block `}
+        className={`calendar `}
       >
         
         <Calendar

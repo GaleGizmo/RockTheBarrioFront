@@ -46,11 +46,11 @@ const EventosList = () => {
           setMessageToShow("Hai 1 evento nesta data");
         }
       } else {
-        if (eventosFiltrados.length > 1 ) {
+        if (eventosFiltrados.length > 1) {
           setMessageToShow(
             "Hai " + eventosFiltrados.length + " resultados da túa búsqueda"
           );
-        } else  {
+        } else {
           setMessageToShow("Hai 1 resultado da túa búsqueda");
         }
       }
@@ -108,6 +108,7 @@ const EventosList = () => {
       {filtroActivo && <div className="point-icon"> </div>}
       <div className="div-buscador">
         <Buscador eventos={eventos} user={user} />
+        <CustomCalendar eventos={eventosCalendar} />
       </div>
       <div className="eventos">
         {loading ? (
@@ -116,7 +117,7 @@ const EventosList = () => {
           <>
             {filtroActivo && !isSpecialEvent && (
               <p className={`resultados_busqueda ${scrolled ? "hidden" : ""}`}>
-                {messageToShow}
+                <span className="span-resultado">{messageToShow}</span>
               </p>
             )}
             {eventosToShow.map((evento) => (
@@ -125,9 +126,7 @@ const EventosList = () => {
           </>
         )}
       </div>
-      <div className="div-calendario">
-        <CustomCalendar eventos={eventosCalendar} />
-      </div>
+      <div className="div-calendario"></div>
     </div>
   );
 };

@@ -148,7 +148,7 @@ img.boleto_imagen {
   display: flex;
   gap: 20px;
   position: relative;
-  font-size: calc(1.2rem + 0.4vw);
+  font-size: calc(1.2rem + 0.1vw);
   align-items: center;
 }
 

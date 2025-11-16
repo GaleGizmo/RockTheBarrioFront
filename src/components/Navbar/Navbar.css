@@ -108,6 +108,8 @@ h3 a {
   .no-logged {
     transform: scale(1.9);
   }
+}
+@media (max-width: 992px), (max-height: 700px) {
  .header-drafts{
     margin-right: 40px;
   }}
