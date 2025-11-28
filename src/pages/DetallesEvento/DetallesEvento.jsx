@@ -184,11 +184,8 @@ const DetallesEvento = () => {
                     />
                   </div>
                 ) : (
-                  <div className="image-container">
-                    <img
-                      src="../../../public/assets/no-image.jpg"
-                     
-                    ></img>
+                  <div className="divCardDetEv__noimage">
+                
                   </div>
                 )}
                 <div className="detalles-info">

@@ -243,11 +243,11 @@ img.boleto_imagen {
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
   border: 2px solid black;
   border-radius: 10px;
-  width: 60%;
+  width: 50%;
   min-height: 25vh;
   background-image: url("../../../public/assets/no-image.jpg");
   background-position: center;
-  background-size: contain;
+  background-size: cover;
 }
 .nuevocomentario-wrapper {
   position: sticky;
