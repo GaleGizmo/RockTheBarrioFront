@@ -18,11 +18,11 @@ const Home = () => {
   return (
     <div className="home">
       <div className="listado-border">
-        <h1 className="listado-text">PROXIMOS EVENTOS</h1>
+        <h1 className="listado-text">CONCERTOS EN SANTIAGO DE COMPOSTELA</h1>
       </div>
       <Link to="/" >
         <div className="listado-container" onClick={reloadEvents}>
-          <h1 className="listado-text">PROXIMOS EVENTOS</h1>
+          <h1 className="listado-text">CONCERTOS EN SANTIAGO DE COMPOSTELA</h1>
         </div>{" "}
       </Link>
       <EventosList />

@@ -118,17 +118,56 @@ const DetallesEvento = () => {
           )}
 
           <Helmet>
-            <title>{evento.title}</title>
+            <title>{`${evento.title} | Concierto en Santiago de Compostela`}</title>
             <meta
-              property="description"
-              content={`${evento.artist} en ${evento.site.split(",")[0]}`}
+              name="description"
+              content={`${evento.artist} en ${evento.site.split(",")[0]}. Concierto en Santiago de Compostela.`}
             />
+            <link rel="canonical" href={`https://rockthebarrio.es/${evento.shortURL || evento._id}`} />
 
+            {/* Open Graph */}
+            <meta property="og:type" content="event" />
+            <meta property="og:title" content={evento.title} />
             <meta
               property="og:description"
               content={`${evento.artist} en ${evento.site.split(",")[0]}`}
             />
             <meta property="og:image" content={evento.image} />
+            <meta property="og:url" content={`https://rockthebarrio.es/${evento.shortURL || evento._id}`} />
+
+            {/* Schema.org JSON-LD para eventos musicales */}
+            <script type="application/ld+json">
+              {JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "MusicEvent",
+                "name": evento.title,
+                "performer": {
+                  "@type": "MusicGroup",
+                  "name": evento.artist
+                },
+                "startDate": evento.date_start,
+                "location": {
+                  "@type": "Place",
+                  "name": evento.site?.split(",")[0] || "Santiago de Compostela",
+                  "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Santiago de Compostela",
+                    "addressRegion": "Galicia",
+                    "addressCountry": "ES"
+                  }
+                },
+                "image": evento.image,
+                "url": `https://rockthebarrio.es/${evento.shortURL || evento._id}`,
+                "offers": evento.price ? {
+                  "@type": "Offer",
+                  "price": evento.price,
+                  "priceCurrency": "EUR",
+                  "availability": "https://schema.org/InStock",
+                  "url": evento.url || `https://rockthebarrio.es/${evento.shortURL || evento._id}`
+                } : undefined,
+                "description": `${evento.artist} en concierto en ${evento.site?.split(",")[0] || "Santiago de Compostela"}`
+              })}
+            </script>
           </Helmet>
 
           <div

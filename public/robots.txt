@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# Bloquear rutas privadas/admin
+Disallow: /editar-evento/
+Disallow: /editar-borrador/
+Disallow: /borradores
+Disallow: /date-de-alta
+Disallow: /login
+Disallow: /recuperar-password
+Disallow: /reset-password/
+
+# Sitemap
+Sitemap: https://backend.app.rockthebarrio.es/sitemap.xml
