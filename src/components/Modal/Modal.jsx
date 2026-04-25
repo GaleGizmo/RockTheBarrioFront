@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   EmailShareButton,
   EmailIcon,
@@ -23,6 +23,21 @@ const Modal = ({
   evento,
   handleShareModal,
 }) => {
+  const [mounted, setMounted] = useState(false);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    if (show) {
+      setMounted(true);
+      const timer = setTimeout(() => setVisible(true), 20);
+      return () => clearTimeout(timer);
+    } else {
+      setVisible(false);
+      const timer = setTimeout(() => setMounted(false), 300);
+      return () => clearTimeout(timer);
+    }
+  }, [show]);
+
   let eventoUrl = "";
   let textToShare = "";
   if (evento?.shortURL) {
@@ -31,12 +46,12 @@ const Modal = ({
   }
   return (
     <>
-      {show && (
+      {mounted && (
         <div className="modal-backdrop fade show" style={{ zIndex: "1050" }} />
       )}
       <div
-        className={`modal  fade ${show ? "show" : ""}`}
-        style={{ display: show ? "flex" : "none" }}
+        className={`modal fade ${visible ? "show" : ""}`}
+        style={{ display: mounted ? "flex" : "none" }}
       >
         {showLoader && <Loader />}
         {imageUrl && (
@@ -60,10 +75,10 @@ const Modal = ({
               onClick={handleShareModal}
             />
             <p>Comparte este evento cos teus amigos</p>
-            <WhatsappShareButton url={eventoUrl} title={textToShare} >
+            <WhatsappShareButton url={eventoUrl} title={textToShare}>
               <WhatsappIcon size={32} round />
             </WhatsappShareButton>
-            <FacebookShareButton url={eventoUrl} title={textToShare} >
+            <FacebookShareButton url={eventoUrl} title={textToShare}>
               <FacebookIcon size={32} round />
             </FacebookShareButton>
             <TwitterShareButton url={eventoUrl} title={textToShare}>

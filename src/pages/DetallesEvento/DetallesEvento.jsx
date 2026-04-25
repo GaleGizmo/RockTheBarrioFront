@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import formatContent from "../../utils/formatContent.jsx";
 import { useLocation } from "react-router-dom";
 import "./DetallesEvento.css";
-import ComentariosList from "../../components/ComentariosList/ComentariosList";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -10,7 +9,6 @@ import {
   getEventoById,
 } from "../../redux/eventos/eventos.actions";
 import Button from "../../components/Button/Button";
-import NuevoComentario from "../../components/NuevoComentario/NuevoComentario";
 import {
   esAnterior,
   esHoy,
@@ -24,6 +22,8 @@ import {
   AiFillCloseSquare,
   AiFillEuroCircle,
   AiOutlineZoomIn,
+  AiOutlineLeft,
+  AiOutlineRight,
 } from "react-icons/ai";
 import useFavorites from "../../shared/useFavorites";
 import { BiHeart, BiSolidHeart } from "react-icons/bi";
@@ -80,6 +80,15 @@ const DetallesEvento = () => {
     window.open(evento.url, "_blank");
   };
   const [showMap, setShowMap] = useState(false);
+
+  const { eventos, eventosFiltrados } = useSelector((state) => state.eventosReducer);
+  const listaNavegacion = eventosFiltrados.length > 0 ? eventosFiltrados : eventos;
+  const indexActual = listaNavegacion.findIndex(
+    (e) => e._id === evento?._id
+  );
+  const eventoPrevio = indexActual > 0 ? listaNavegacion[indexActual - 1] : null;
+  const eventoSiguiente = indexActual < listaNavegacion.length - 1 ? listaNavegacion[indexActual + 1] : null;
+  const navegarA = (ev) => navigate(`/${ev.shortURL || ev._id}`);
 
   const handleToggleMap = () => {
     setShowMap((showMap) => !showMap);
@@ -176,6 +185,24 @@ const DetallesEvento = () => {
             }`}
           >
             <div className="cardDetEv">
+              {eventoPrevio && (
+                <button
+                  className="nav-arrow nav-arrow--left"
+                  onClick={() => navegarA(eventoPrevio)}
+                  title={eventoPrevio.title}
+                >
+                  <AiOutlineLeft />
+                </button>
+              )}
+              {eventoSiguiente && (
+                <button
+                  className="nav-arrow nav-arrow--right"
+                  onClick={() => navegarA(eventoSiguiente)}
+                  title={eventoSiguiente.title}
+                >
+                  <AiOutlineRight />
+                </button>
+              )}
               {shareModal && (
                 <Modal
                   show="true"
@@ -357,28 +384,6 @@ const DetallesEvento = () => {
               )}
             </div>
           </div>
-
-          {loading ? (
-            <Loader />
-          ) : (
-            <div className="detalle-comentarios">
-              <div className="nuevocomentario-wrapper">
-                {user ? (
-                  <NuevoComentario eventoId={evento._id} user={user} />
-                ) : (
-                  <p className="texto-aviso">
-                    Tes que te rexistrar para poder comentar
-                  </p>
-                )}
-                <h2 className="texto-aviso">COMENTARIOS DO EVENTO</h2>
-              </div>
-              <div className="comentarioslist-wrapper">
-                {evento ? (
-                  <ComentariosList eventoId={evento._id} hayUser={user} />
-                ) : null}
-              </div>
-            </div>
-          )}
 
           <Modal
             show={showImageModal}

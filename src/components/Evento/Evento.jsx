@@ -173,18 +173,7 @@ const Evento = ({ evento, user }) => {
               <span className="gratuito">ENTRADA INVERSA</span>
             </p>
           )}
-          {evento.commentsCount && evento.commentsCount > 0 ? (
-            <p className="card-comments isComments" onClick={getEvento}>
-              <Link to={{ pathname: `/${evento._id}` }}>
-                <BiSolidComment className="icon-style icon-price" />{" "}
-                {evento.commentsCount}
-              </Link>
-            </p>
-          ) : (
-            <p className="card-comments">
-              <BiSolidComment className="icon-style icon-price" /> 0{" "}
-            </p>
-          )}
+
 
           <div className="div_relleno"></div>
           <div className="icon-container">
