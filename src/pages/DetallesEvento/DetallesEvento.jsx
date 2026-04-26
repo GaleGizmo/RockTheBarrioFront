@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   deleteEvento,
   getEventoById,
+  getEventoByIdSilent,
 } from "../../redux/eventos/eventos.actions";
 import Button from "../../components/Button/Button";
 import {
@@ -43,12 +44,21 @@ const DetallesEvento = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const [shareModal, setShareModal] = useState(false);
-  const { loading, evento } = useSelector((reducer) => reducer.eventosReducer);
+  const { loading, evento, eventos, eventosFiltrados } = useSelector((reducer) => reducer.eventosReducer);
   useEffect(() => {
     if (!evento || (evento._id !== id && evento.shortURL !== id)) {
-      dispatch(getEventoById(id));
+      // Intentar resolver desde Redux primero
+      const enRedux = [...eventosFiltrados, ...eventos].find(
+        (e) => e._id === id || e.shortURL === id
+      );
+      if (enRedux) {
+        dispatch({ type: "GET_EVENTO", contenido: enRedux });
+        dispatch(getEventoByIdSilent(id));
+      } else {
+        dispatch(getEventoById(id));
+      }
     }
-  }, [dispatch, id, evento]);
+  }, [dispatch, id]);
   const handleShareModal = () => {
     setShareModal(!shareModal);
   };
@@ -84,7 +94,6 @@ const DetallesEvento = () => {
   };
   const [showMap, setShowMap] = useState(false);
 
-  const { eventos, eventosFiltrados } = useSelector((state) => state.eventosReducer);
   const listaNavegacion = eventosFiltrados.length > 0 ? eventosFiltrados : eventos;
   const indexActual = listaNavegacion.findIndex(
     (e) => e._id === evento?._id
