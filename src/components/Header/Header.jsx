@@ -8,7 +8,6 @@ import {
   toggleCalendar,
 } from "../../redux/eventos/eventos.actions";
 
-import CustomCalendar from "../CustomCalendar/CustomCalendar";
 import { Button } from "react-bootstrap";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import EventoEspecial from "../EventoEspecial/EventoEspecial";
@@ -17,7 +16,7 @@ import { checkFestival, getFestivalData } from "../../shared/api";
 import { useState } from "react";
 
 const Header = () => {
-  let { isCalendarOpen, eventosCalendar } = useSelector(
+  let { isCalendarOpen } = useSelector(
     (reducer) => reducer.eventosReducer
   );
   const [showFestival, setShowFestival] = useState(false);
@@ -66,9 +65,6 @@ const Header = () => {
           <Navbar />
         </div>
       </div>
-      <div className="div-calendario d-lg-none">
-        <CustomCalendar eventos={eventosCalendar} />
-      </div>{" "}
     </>
   );
 };

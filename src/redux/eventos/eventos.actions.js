@@ -197,6 +197,15 @@ const clearMensajes = () => {
 const setEvento = (eventoId) => (dispatch) => {
   dispatch({ type: "GET_EVENTOBYID", contenido: eventoId });
 };
+
+const getEventoByIdSilent = (id) => async (dispatch) => {
+  try {
+    const resultado = await API.get(`/evento/getbyid/${id}`);
+    dispatch({ type: "GET_EVENTO", contenido: resultado.data });
+  } catch (error) {
+    dispatch({ type: "ERROR_EVENTO", contenido: error.message });
+  }
+};
 const setFiltradosFromCalendar = () => (dispatch) => {
   dispatch({ type: "SET_FILTRADOSFROMCALENDAR" });
 };
@@ -216,6 +225,7 @@ export {
   getEventosDesdeHoy,
   getEventosParaCalendar,
   getEventoById,
+  getEventoByIdSilent,
   getEventosFromFestivalAction,
   getBorradoresAction,
   addEvento,
