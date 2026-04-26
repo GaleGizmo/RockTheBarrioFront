@@ -1,11 +1,8 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useMemo, useState } from "react";
 import galicianTranslations from "../../shared/galician.json";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "./CustomCalendar.css";
-import {  Collapse } from "react-bootstrap";
-
-import EventListModal from "../EventListModal/EventListModal";
 
 import Legend from "../Legend/Legend";
 import {  useDispatch, useSelector } from "react-redux";
@@ -68,7 +65,10 @@ function CustomCalendar({ eventos }) {
 
 
   const handleTileClick = async (date) => {
-    dispatch(toggleCalendar(!isCalendarOpen))
+    const isSmallScreen = window.innerWidth < 992;
+    if (isSmallScreen) {
+      dispatch(toggleCalendar(false));
+    }
     setSelectedDate(date)
     let startDate=new Date(date)
     
@@ -95,8 +95,7 @@ function CustomCalendar({ eventos }) {
 
   return (
     <div className="calendar-container">
-     
-      <Collapse in={isCalendarOpen} className="d-lg-none">
+      {isCalendarOpen && (
         <div className="slide-menu">
           <Calendar
             formatMonthYear={formatMonthYear}
@@ -105,12 +104,10 @@ function CustomCalendar({ eventos }) {
             tileClassName={tileClassName}
             onClickDay={(date) => handleTileClick(date)}
           />
-          <Legend/>
+          <Legend />
         </div>
-      </Collapse>
-      <div
-        className={`calendar `}
-      >
+      )}
+      <div className="calendar">
         
         <Calendar
           formatMonthYear={formatMonthYear}

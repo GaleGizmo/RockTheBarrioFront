@@ -26,7 +26,6 @@
   color: var(--event-color);
 }
 
-
 .btn:focus {
   box-shadow: none;
 }
@@ -38,6 +37,10 @@
 .slide-menu {
   position: fixed;
   top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   backdrop-filter: blur(10px);
   right: 0;
   bottom: 0;
@@ -95,6 +98,15 @@
   }
 }
 
+@media (min-width: 521px) and (max-width: 991px) {
+  .react-calendar {
+    width: 80%;
+  }
+  .calendar-container {
+    z-index: 2;
+  }
+}
+
 @media (min-width: 992px) and (min-height: 700px) {
   .calendar {
     display: block;
@@ -102,10 +114,16 @@
   .menu-toggle.custom-toggle {
     display: none;
   }
+  .slide-menu {
+    display: none;
+  }
 }
 @media (min-width: 991px) and (max-height: 699px) {
   .menu-toggle.custom-toggle {
     top: 20px;
-    right: 75px;
+    right: 60px;
+  }
+  .calendar-container {
+    z-index: 2;
   }
 }

@@ -38,7 +38,9 @@
 .card.highlighted {
   border: 2px solid #ffcc00;
   box-shadow: 0 0 10px #ffcc00;
-  animation: appearCard 0.5s ease-in-out forwards, glow 3s ease-in-out infinite;
+  animation:
+    appearCard 0.5s ease-in-out forwards,
+    glow 3s ease-in-out infinite;
 }
 
 @keyframes glow {
@@ -81,20 +83,17 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  
 }
 .copy-to-clipboard {
   margin-top: auto;
   cursor: pointer;
 }
 .detalles_container {
-  position: relative;
   gap: 4px;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: end;
-  margin-right: 1%;
   margin-top: 5%;
 }
 .card h3 {
@@ -104,7 +103,7 @@
   font-size: 1.2rem;
 }
 .card p {
-  margin-bottom: 3px;
+  margin-bottom: 0;
   flex: 1;
   text-align: right;
   font-weight: bold;
@@ -125,8 +124,15 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.dias-faltantes {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.dias-faltantes span {
+  width: max-content;
+}
 .icon-container {
-  position: absolute;
   display: flex;
   left: 0;
   gap: 15px;
@@ -205,7 +211,9 @@
   z-index: 1;
   overflow: hidden;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-  animation: scaleDown 0.3s 2s forwards, bounce 0.1s 2.3s forwards;
+  animation:
+    scaleDown 0.3s 2s forwards,
+    bounce 0.1s 2.3s forwards;
 }
 @keyframes scaleDown {
   from {
@@ -254,7 +262,6 @@
   font-weight: bold;
 }
 .background-logo {
-
   border: 1px solid var(--secondary-color);
   border-radius: 8px;
   width: 100%;
@@ -263,7 +270,6 @@
   background-image: url("../../../public/assets/no-image.jpg");
   background-position: center;
   background-size: cover;
-
 }
 @keyframes appearCard {
   0% {
@@ -297,8 +303,8 @@
 }
 
 .mas-info {
-  transform: scale(1.5);
   color: var(--icon-color);
+  font-size: 1.5rem;
 }
 .mas-info:hover {
   cursor: pointer;
@@ -386,17 +392,11 @@
   .div_relleno {
     display: block;
   }
-  .icon-container {
-    position: relative;
-    margin-left: auto;
-    font-size: 0.8rem;
-  }
   .icon-style {
     margin-bottom: 2px;
   }
 
   .detalles_container {
-    position: relative;
     display: grid;
     grid-template-columns: 1fr auto;
     grid-template-rows: auto auto auto;
@@ -483,6 +483,7 @@
   }
   .mas-info {
     left: 35px;
+    font-size: 1.2rem;
   }
   .data-label_container {
     left: 14px;
@@ -497,9 +498,7 @@
 }
 
 @media (min-width: 721px) {
-
   .div-image {
-   
     margin: 0px;
     flex-basis: 30%;
   }
@@ -568,9 +567,6 @@
   }
   .status::before {
     font-size: 3em;
-  }
-  .detalles_container {
-    flex-basis: 30%;
   }
   .status::before {
     font-size: 3em;

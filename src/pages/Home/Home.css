@@ -2,6 +2,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  height: 100dvh;
 }
 .listado-container {
   position: fixed;
@@ -57,7 +58,11 @@
     font-size: 34px;
   }
 }
-
+@media (min-width: 993px) and (max-width: 1360px) {
+  .listado-text {
+    font-size: 2vw;
+  }
+}
 @media (min-width: 521px) and (max-width: 992px) {
   .listado-container {
      display: none;
