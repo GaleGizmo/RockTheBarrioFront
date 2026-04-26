@@ -71,6 +71,10 @@ const DetallesEvento = () => {
   const [showImageModal, setShowImageModal] = useState(false);
   const [imageFailed, setImageFailed] = useState(false);
 
+  useEffect(() => {
+    setImageFailed(false);
+  }, [evento?._id]);
+
   const SVG_FALLBACK = "/assets/rockthebarrio_pegata_azul.svg";
 
   const openImageModal = () => {
@@ -246,6 +250,7 @@ const DetallesEvento = () => {
                 ) : evento.image && evento.image !== "undefined" ? (
                   <div className="image-container">
                     <img
+                      key={evento._id}
                       className={`${evento.status ? evento.status : ""}`}
                       src={evento.image}
                       alt={evento.title}
@@ -254,7 +259,7 @@ const DetallesEvento = () => {
                     />
                     <img
                       src={SVG_FALLBACK}
-                      style={{ display: "none", cursor: "zoom-in" }}
+                      style={{ display: imageFailed ? "block" : "none", cursor: "zoom-in" }}
                       onClick={openImageModal}
                     />
                     <AiOutlineZoomIn
