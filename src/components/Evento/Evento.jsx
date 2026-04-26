@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import { createPortal } from "react-dom";
 import "./Evento.css";
 import { BiHeart, BiSolidHeart, BiSolidComment } from "react-icons/bi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BsClockFill } from "react-icons/bs";
 import { esAnterior, esHoy, calcularDiasFaltantes } from "../../shared/formatDate";
 import { format, parseISO } from "date-fns";
@@ -10,7 +11,7 @@ import MapIcon from "../MapIcon/MapIcon";
 import { BsInfoCircleFill } from "react-icons/bs";
 import { BsFillShareFill } from "react-icons/bs";
 import { AiOutlineCopy } from "react-icons/ai";
-import { AiFillEuroCircle } from "react-icons/ai";
+import { AiFillEuroCircle, AiOutlineZoomIn } from "react-icons/ai";
 import { FaBuyNLarge, FaMusic } from "react-icons/fa";
 import MapComponent from "../MapComponent/MapComponent";
 import useFavorites from "../../shared/useFavorites";
@@ -24,9 +25,11 @@ import { handleImageError } from "../../utils/imageHelpers";
 const Evento = ({ evento, user }) => {
   const [hovered, setHovered] = useState("");
   const [shareModal, setShareModal] = useState(false);
+  const [showImageModal, setShowImageModal] = useState(false);
 
   const [showMap, setShowMap] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { isFavorite, handleFavorites, showFavorite } = useFavorites(
     user?.favorites?.includes(evento._id) || false,
     evento ? evento._id : null,
@@ -43,18 +46,21 @@ const Evento = ({ evento, user }) => {
       console.error("Error al copiar el ID al portapapeles:", error);
     }
   };
-  const handleToggleMap = () => {
+  const handleToggleMap = (e) => {
+    e.stopPropagation();
     setShowMap((showMap) => !showMap);
   };
   const getEvento = () => {
     sessionStorage.setItem("scrollPosition", window.scrollY);
     dispatch(setEvento(evento._id));
+    navigate(`/${evento._id}`);
   };
 
   const fechaEvento = evento?.date_start ? parseISO(evento.date_start) : null;
   const diasFaltantes = evento?.date_start ? calcularDiasFaltantes(evento.date_start) : null;
 
-  const buyEvento = () => {
+  const buyEvento = (e) => {
+    e.stopPropagation();
     if (evento.price > 0 && evento.buy_ticket) {
       window.open(evento.buy_ticket, "_blank", "noopener,noreferrer");
     }
@@ -81,6 +87,30 @@ const Evento = ({ evento, user }) => {
           handleShareModal={handleShareModal}
         />
       )}
+      {showImageModal && createPortal(
+        <>
+          <div
+            className="modal-backdrop fade show"
+            style={{ zIndex: 1050 }}
+            onClick={(e) => { e.stopPropagation(); setShowImageModal(false); }}
+          />
+          <div
+            className="modal fade show"
+            style={{ display: "flex", zIndex: 1051 }}
+            onClick={(e) => { e.stopPropagation(); setShowImageModal(false); }}
+          >
+            <div className="image-container" onClick={(e) => e.stopPropagation()}>
+              <img
+                src={evento.image}
+                alt={evento.title}
+                className="modal-image"
+                onClick={() => setShowImageModal(false)}
+              />
+            </div>
+          </div>
+        </>,
+        document.body
+      )}
 
       {esHoy(evento.date_start) ? (
         <div className="data-label_container esHoy">
@@ -95,24 +125,28 @@ const Evento = ({ evento, user }) => {
       )}
 
       <div className="border-card">
-        <div className="div-image" onClick={getEvento}>
-          <Link to={{ pathname: `/${evento._id}` }}>
-            {evento.image ? (
-              <>
-                <img
-                  src={evento.image}
-                  alt={evento.title}
-                  onError={handleImageError}
-                />
-                <div
-                  className="background-logo"
-                  style={{ display: "none" }}
-                ></div>{" "}
-              </>
-            ) : (
-              <div className="background-logo"></div>
-            )}
-          </Link>
+        <div className="div-image">
+          {evento.image ? (
+            <>
+              <img
+                src={evento.image}
+                alt={evento.title}
+                onError={handleImageError}
+                onClick={(e) => { e.stopPropagation(); setShowImageModal(true); }}
+                style={{ cursor: "zoom-in" }}
+              />
+              <AiOutlineZoomIn
+                className="card-zoom-icon"
+                onClick={(e) => { e.stopPropagation(); setShowImageModal(true); }}
+              />
+              <div
+                className="background-logo"
+                style={{ display: "none" }}
+              ></div>{" "}
+            </>
+          ) : (
+            <div className="background-logo"></div>
+          )}
         </div>
 
         <div className="title-artist_container">
@@ -120,7 +154,7 @@ const Evento = ({ evento, user }) => {
 
           <h3>{evento.artist}</h3>
           {user?.role === 2 && (
-            <span onClick={copyIdToClipboard} className="copy-to-clipboard">
+            <span onClick={(e) => { e.stopPropagation(); copyIdToClipboard(); }} className="copy-to-clipboard">
               <AiOutlineCopy />
             </span>
           )}
@@ -186,9 +220,9 @@ const Evento = ({ evento, user }) => {
             {user ? (
               <div
                 className="favorito-container"
-                onClick={() => {
+                onClick={(e) => {
+                  e.stopPropagation();
                   handleFavorites();
-                  // handleDisplayTooltip();
                 }}
                 onMouseEnter={() => setHovered("favorito-tooltip")}
                 onMouseLeave={() => setHovered("")}
@@ -216,11 +250,14 @@ const Evento = ({ evento, user }) => {
                 <BiHeart className="favorito unavailiable" />
               </div>
             )}
-            <span onClick={handleShareModal}>
+            <span onClick={(e) => { e.stopPropagation(); handleShareModal(); }}>
               <BsFillShareFill className="mas-info" />{" "}
             </span>
-            <Link to={{ pathname: `/${evento._id}` }}>
-              <BsInfoCircleFill className="mas-info" onClick={getEvento} />
+            <Link
+              to={{ pathname: `/${evento._id}` }}
+              onClick={(e) => { e.stopPropagation(); sessionStorage.setItem("scrollPosition", window.scrollY); dispatch(setEvento(evento._id)); }}
+            >
+              <BsInfoCircleFill className="mas-info" />
             </Link>
             {showFavorite && (
               <ToolTip

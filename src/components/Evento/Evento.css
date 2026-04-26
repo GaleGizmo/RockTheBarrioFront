@@ -58,11 +58,10 @@
 .div-image {
   flex-basis: 20%;
   flex-grow: 1;
-
   width: 100%;
-
   max-height: 300px;
   margin: 0;
+  position: relative;
 }
 .card img {
   max-height: 300px;
@@ -301,9 +300,24 @@
   text-decoration: none;
 }
 
-.div-image:hover {
+.card:hover {
   border-color: var(--event-color);
-  filter: contrast(150%);
+  box-shadow: 4px 4px 8px var(--secondary-shadow);
+  background-color: var(--event-hover-color);
+  cursor: pointer;
+}
+.card.highlighted:hover {
+  box-shadow: 0 0 20px #ffcc00;
+}
+.card-zoom-icon {
+  position: absolute;
+  bottom: 6px;
+  right: 6px;
+  font-size: 1.3rem;
+  color: white;
+  filter: drop-shadow(0px 0px 3px #000);
+  opacity: 0.8;
+  pointer-events: none;
 }
 
 .div_relleno {
