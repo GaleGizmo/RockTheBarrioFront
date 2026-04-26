@@ -132,6 +132,14 @@
 .dias-faltantes span {
   width: max-content;
 }
+.evento-precio {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.evento-precio .icon-style {
+ margin-bottom: 0;
+}
 .icon-container {
   display: flex;
   left: 0;
@@ -345,6 +353,21 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.evento-genre-wrapper {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+.evento-genre {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: default;
+  width: 100%;
+  min-width: 0;
+  margin-bottom: 0;
+}
 @keyframes brillo {
   0% {
     filter: brightness(100%);
@@ -429,17 +452,18 @@
     margin-left: auto;
     margin-bottom: 0;
   }
-  .evento-genre {
+  .evento-genre-wrapper {
     grid-area: genre;
+    min-width: 0;
+  }
+  .evento-genre {
     text-align: left !important;
-    width: 100% !important;
     margin-top: 0.2em;
     display: block;
-    min-width: 0;
   }
   .evento-precio {
     grid-area: precio;
-    text-align: right !important;
+    justify-content: flex-end;
     min-width: max-content;
     width: auto;
   }
@@ -527,6 +551,7 @@
   .detalles_container {
     margin-top: 0;
     flex-basis: 31%;
+    min-width: 0;
   }
   .card h2 {
     font-weight: bold;

@@ -152,10 +152,16 @@ const Evento = ({ evento, user }) => {
           </p>
 
           {evento.genre ? (
-            <p className="evento-genre">
-              {" "}
-              <FaMusic className="icon-style icon-price" /> {evento.genre}
-            </p>
+            <div
+              className="evento-genre-wrapper"
+              onMouseEnter={() => setHovered("genre-tooltip")}
+              onMouseLeave={() => setHovered("")}
+            >
+              <p className="evento-genre">
+                <FaMusic className="icon-style icon-price" /> {evento.genre}
+              </p>
+              <ToolTip content={evento.genre} specificClass={hovered === "genre-tooltip" ? "genre-tooltip" : ""} />
+            </div>
           ) : (
             <p></p>
           )}
