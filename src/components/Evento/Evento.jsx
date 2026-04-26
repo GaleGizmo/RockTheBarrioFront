@@ -26,6 +26,10 @@ const Evento = ({ evento, user }) => {
   const [hovered, setHovered] = useState("");
   const [shareModal, setShareModal] = useState(false);
   const [showImageModal, setShowImageModal] = useState(false);
+  const [imageFailed, setImageFailed] = useState(false);
+
+  const SVG_FALLBACK = "/assets/rockthebarrio_pegata_azul.svg";
+  const modalImageUrl = !evento.image || imageFailed ? SVG_FALLBACK : evento.image;
 
   const [showMap, setShowMap] = useState(false);
   const dispatch = useDispatch();
@@ -101,7 +105,7 @@ const Evento = ({ evento, user }) => {
           >
             <div className="image-container" onClick={(e) => e.stopPropagation()}>
               <img
-                src={evento.image}
+                src={modalImageUrl}
                 alt={evento.title}
                 className="modal-image"
                 onClick={() => setShowImageModal(false)}
@@ -131,21 +135,26 @@ const Evento = ({ evento, user }) => {
               <img
                 src={evento.image}
                 alt={evento.title}
-                onError={handleImageError}
+                onError={(e) => { handleImageError(e); setImageFailed(true); }}
                 onClick={(e) => { e.stopPropagation(); setShowImageModal(true); }}
                 style={{ cursor: "zoom-in" }}
               />
+              <div
+                className="background-logo"
+                style={{ display: "none", cursor: "zoom-in" }}
+                onClick={(e) => { e.stopPropagation(); setShowImageModal(true); }}
+              ></div>
               <AiOutlineZoomIn
                 className="card-zoom-icon"
                 onClick={(e) => { e.stopPropagation(); setShowImageModal(true); }}
               />
-              <div
-                className="background-logo"
-                style={{ display: "none" }}
-              ></div>{" "}
             </>
           ) : (
-            <div className="background-logo"></div>
+            <div
+              className="background-logo"
+              style={{ cursor: "zoom-in" }}
+              onClick={(e) => { e.stopPropagation(); setShowImageModal(true); }}
+            ></div>
           )}
         </div>
 

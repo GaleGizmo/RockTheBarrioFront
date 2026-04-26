@@ -265,7 +265,7 @@ img.boleto_imagen {
   border-radius: 10px;
   width: 50%;
   min-height: 25vh;
-  background-image: url("../../../public/assets/no-image.jpg");
+  background-image: url("../../../public/assets/rockthebarrio_pegata_azul.svg");
   background-position: center;
   background-size: cover;
 }

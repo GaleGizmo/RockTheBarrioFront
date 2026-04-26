@@ -59,6 +59,9 @@ const DetallesEvento = () => {
     user ? user._id : null
   );
   const [showImageModal, setShowImageModal] = useState(false);
+  const [imageFailed, setImageFailed] = useState(false);
+
+  const SVG_FALLBACK = "/assets/rockthebarrio_pegata_azul.svg";
 
   const openImageModal = () => {
     setShowImageModal(true);
@@ -238,11 +241,12 @@ const DetallesEvento = () => {
                       src={evento.image}
                       alt={evento.title}
                       onClick={openImageModal}
-                      onError={handleImageError}
+                      onError={(e) => { handleImageError(e); setImageFailed(true); }}
                     />
                     <img
-                      src="../../../public/assets/no-image.jpg"
-                      style={{ display: "none" }}
+                      src={SVG_FALLBACK}
+                      style={{ display: "none", cursor: "zoom-in" }}
+                      onClick={openImageModal}
                     />
                     <AiOutlineZoomIn
                       className="zoom-icon"
@@ -388,7 +392,7 @@ const DetallesEvento = () => {
           <Modal
             show={showImageModal}
             onCancel={closeImageModal}
-            imageUrl={evento.image}
+            imageUrl={imageFailed ? SVG_FALLBACK : evento.image}
           />
         </div>
       )}
