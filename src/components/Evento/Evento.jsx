@@ -241,7 +241,7 @@ const Evento = ({ evento, user }) => {
                     <BiSolidHeart className="favorito" />
                     <ToolTip
                       content="Quitar favorito"
-                      specificClass={hovered}
+                      specificClass={hovered === "favorito-tooltip" ? "favorito-tooltip" : ""}
                     />
                   </>
                 ) : (
@@ -249,7 +249,7 @@ const Evento = ({ evento, user }) => {
                     <BiHeart className="favorito" />
                     <ToolTip
                       content="Engadir favorito"
-                      specificClass={hovered}
+                      specificClass={hovered === "favorito-tooltip" ? "favorito-tooltip" : ""}
                     />
                   </>
                 )}
@@ -273,7 +273,7 @@ const Evento = ({ evento, user }) => {
                 content={
                   isFavorite ? "Favorito engadido" : "Favorito eliminado"
                 }
-                specificClass={hovered}
+                specificClass="favorito-tooltip"
               />
             )}
           </div>

@@ -121,7 +121,7 @@
 @media (min-width: 991px) and (max-height: 699px) {
   .menu-toggle.custom-toggle {
     top: 20px;
-    right: 60px;
+    right: 75px;
   }
   .calendar-container {
     z-index: 2;
