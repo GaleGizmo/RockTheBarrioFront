@@ -9,6 +9,7 @@ import {
   getEventoById,
   getEventoByIdSilent,
 } from "../../redux/eventos/eventos.actions";
+import ConfirmModal from "../../components/ConfirmModal/ConfirmModal";
 import Button from "../../components/Button/Button";
 import {
   esAnterior,
@@ -87,7 +88,12 @@ const DetallesEvento = () => {
 
   const navigate = useNavigate();
 
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+
   const eliminarEvento = () => {
+    setShowDeleteModal(true);
+  };
+  const handleDeleteConfirmed = () => {
     dispatch(deleteEvento(evento._id, navigate));
   };
   const editarEvento = () => {
@@ -132,6 +138,16 @@ const DetallesEvento = () => {
 
   return (
     <>
+      <ConfirmModal
+        show={showDeleteModal}
+        title="Eliminar evento"
+        p1={`¿Seguro que queres eliminar "${evento?.title}"?`}
+        p2="Esta acción non se pode desfacer."
+        buttonText="Eliminar"
+        deleteAccount={true}
+        onCancel={() => setShowDeleteModal(false)}
+        onConfirm={handleDeleteConfirmed}
+      />
       {loading ? (
         <Loader />
       ) : !evento ? (
@@ -390,7 +406,7 @@ const DetallesEvento = () => {
                 <div className="evento-botonesAdmin">
                   <Button
                     text="Eliminar"
-                    variant="medium"
+                    variant="medium delete-evento-button"
                     onClick={eliminarEvento}
                   />
                   <Button

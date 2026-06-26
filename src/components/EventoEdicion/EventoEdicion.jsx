@@ -68,8 +68,15 @@ const EventoEdicion = ({ evento, navigate }) => {
     fetchNextFestivals();
   }, []);
 
+  useEffect(() => {
+    if (evento.site) {
+      setValue("site", evento.site);
+      setValue("location", evento.location?._id || evento.location || "");
+    }
+  }, [evento.site, evento.location, setValue]);
+
   const handleLocalizacionChange = ({ site, location }) => {
-    setValue("site", site);
+    setValue("site", site, { shouldValidate: true });
     setValue("location", location);
   };
 
@@ -198,6 +205,12 @@ const EventoEdicion = ({ evento, navigate }) => {
             setLocations={setLocations}
             onChange={handleLocalizacionChange}
             addLocalizacion={addLocalizacion}
+          />
+          <input
+            {...register("site", { required: !isDraft })}
+            tabIndex={-1}
+            aria-hidden="true"
+            style={{ opacity: 0, height: 0, width: 0, position: "absolute", pointerEvents: "none" }}
           />
           {errors.site && (
             <span className="error-message">Lugar é requerido</span>

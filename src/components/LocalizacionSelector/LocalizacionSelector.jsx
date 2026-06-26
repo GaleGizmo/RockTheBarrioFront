@@ -52,6 +52,8 @@ const LocalizacionSelector = ({
     if (e.target.checked) {
       setSelectedId("");
       onChange({ site: "Varios", location: "" });
+    } else {
+      onChange({ site: "", location: "" });
     }
   };
 

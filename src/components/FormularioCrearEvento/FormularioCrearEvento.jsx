@@ -123,203 +123,224 @@ const FormularioCrearEvento = () => {
 
   return (
     <>
-    <EventoConfirmModal
-      show={showConfirmModal}
-      onCancel={() => setShowConfirmModal(false)}
-      onConfirm={handleConfirm}
-      data={pendingData}
-      festivals={nextFestivals}
-      actionLabel="Crear evento"
-      imagePreview={imageFile}
-      isSubmitting={isSubmitting}
-    />
-    <div className="cardCrearEvento">
-      <AiFillCloseSquare className="close-icon" onClick={handleIcon} />
-      <h1>Crear Evento</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="div-inputCrearEvento">
-          <label>Título</label>
-          <input
-            className="inputCrearEvento"
-            {...register("title", { required: true })}
-          />
-          {errors.title && (
-            <span className="error-message">Título é requerido</span>
-          )}
-        </div>
-        <div className="div-inputCrearEvento">
-          <label>Artista/s</label>
-          <input
-            className="inputCrearEvento"
-            {...register("artist", { required: !isDraft })}
-          />
-          {errors.artist && (
-            <span className="error-message">Artista é requerido</span>
-          )}
-        </div>
-        <div className="infoCrearEvento">
-          <label>Información</label>
-          <textarea
-            {...register("content", { required: false })}
-            className="inputCrearEvento"
-          />
+      <EventoConfirmModal
+        show={showConfirmModal}
+        onCancel={() => setShowConfirmModal(false)}
+        onConfirm={handleConfirm}
+        data={pendingData}
+        festivals={nextFestivals}
+        actionLabel="Crear evento"
+        imagePreview={imageFile}
+        isSubmitting={isSubmitting}
+      />
+      <div className="cardCrearEvento">
+        <AiFillCloseSquare className="close-icon" onClick={handleIcon} />
+        <h1>Crear Evento</h1>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="div-inputCrearEvento">
+            <label>Título</label>
+            <input
+              className="inputCrearEvento"
+              {...register("title", { required: true })}
+            />
+            {errors.title && (
+              <span className="error-message">Título é requerido</span>
+            )}
+          </div>
+          <div className="div-inputCrearEvento">
+            <label>Artista/s</label>
+            <input
+              className="inputCrearEvento"
+              {...register("artist", { required: !isDraft })}
+            />
+            {errors.artist && (
+              <span className="error-message">Artista é requerido</span>
+            )}
+          </div>
+          <div className="infoCrearEvento">
+            <label>Información</label>
+            <textarea
+              {...register("content", { required: false })}
+              className="inputCrearEvento"
+            />
 
-          <div className="previewWrapper">
-            <strong>Vista previa:</strong>
-            <div className="previewContent">
-              {formatContent(watch("content"))}
+            <div className="previewWrapper">
+              <strong>Vista previa:</strong>
+              <div className="previewContent">
+                {formatContent(watch("content"))}
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="div-inputCrearEvento">
-          <LocalizacionSelector
-            locations={locations}
-            setLocations={setLocations}
-            onChange={handleLocalizacionChange}
-            addLocalizacion={addLocalizacion}
-          />
-          {errors.site && (
-            <span className="error-message">Lugar é requerido</span>
-          )}
-        </div>
-        <div className="div-inputCrearEvento">
-          <label>Prezo</label>
-          <input
-            className="inputCrearEvento"
-            type="text"
-            {...register("price", {
-              required: !isDraft,
-              pattern: {
-                value: /^\d+(\.\d{1,2})?$/,
-                message: "Máximo dous decimáis permitidos.",
-              },
-            })}
-            defaultValue={0}
-            onChange={handlePriceChange}
-          />
-          {errors.price && (
-            <span className="error-message">{errors.price.message}</span>
-          )}
-          {priceError && (
-            <span className="error-message">
-              Por favor, introduce un número válido
-            </span>
-          )}
-        </div>
-        {showBuyTicketField ? (
           <div className="div-inputCrearEvento">
-            <label>URL de compra</label>
-            <input className="inputCrearEvento" {...register("buy_ticket")} />
+            <LocalizacionSelector
+              locations={locations}
+              setLocations={setLocations}
+              onChange={handleLocalizacionChange}
+              addLocalizacion={addLocalizacion}
+            />
+            <input
+              {...register("site", { required: !isDraft })}
+              tabIndex={-1}
+              aria-hidden="true"
+              style={{
+                opacity: 0,
+                height: 0,
+                width: 0,
+                position: "absolute",
+                pointerEvents: "none",
+              }}
+            />
+            {errors.site && (
+              <span className="error-message">Lugar é requerido</span>
+            )}
           </div>
-        ) : (
-          <div className="div-checkbox">
-            <label>Entrada Inversa</label>
-            <input type="checkbox" {...register("payWhatYouWant")} />{" "}
+          <div className="div-inputCrearEvento">
+            <label>Prezo</label>
+            <input
+              className="inputCrearEvento"
+              type="text"
+              {...register("price", {
+                required: !isDraft,
+                pattern: {
+                  value: /^\d+(\.\d{1,2})?$/,
+                  message: "Máximo dous decimáis permitidos.",
+                },
+              })}
+              defaultValue={0}
+              onChange={handlePriceChange}
+            />
+            {errors.price && (
+              <span className="error-message">{errors.price.message}</span>
+            )}
+            {priceError && (
+              <span className="error-message">
+                Por favor, introduce un número válido
+              </span>
+            )}
           </div>
-        )}
-        <div className="fechaCrearEvento">
-          <label>Data do Evento</label>
-          <input
-            className="inputCrearEvento"
-            type="date"
-            defaultValue={new Date().toISOString().split("T")[0]}
-            {...register("day_start", { required: !isDraft })}
-          />
-          {errors.day_start && (
-            <span className="error-message">Data é requerida</span>
+          {showBuyTicketField ? (
+            <div className="div-inputCrearEvento">
+              <label>URL de compra</label>
+              <input className="inputCrearEvento" {...register("buy_ticket")} />
+            </div>
+          ) : (
+            <div className="div-checkbox">
+              <label>Entrada Inversa</label>
+              <input type="checkbox" {...register("payWhatYouWant")} />{" "}
+            </div>
           )}
-          <label>Hora de Inicio</label>
-          <input
-            className="inputCrearEvento"
-            type="time"
-            defaultValue={new Date().toLocaleTimeString("es-ES", {
-              hour: "2-digit",
-              minute: "2-digit",
-            })}
-            {...register("time_start", { required: !isDraft })}
-          />
-          {errors.time_start && (
-            <span className="error-message">Hora de Inicio é requerida</span>
-          )}
-        </div>
-        <div className="div-inputCrearEvento">
-          <label>Festival</label>
-          <select
-            className="inputCrearEvento"
-            name="festival"
-            {...register("festival")}
-          >
-            <option value="">Ningún</option>
-            {nextFestivals.map((festival) => (
-              <option key={festival._id} value={festival._id}>
-                {festival.name}
-              </option>
-            ))}
-          </select>
-        </div>
+          <div className="fechaCrearEvento">
+            <label>Data do Evento</label>
+            <input
+              className="inputCrearEvento"
+              type="date"
+              defaultValue={new Date().toISOString().split("T")[0]}
+              {...register("day_start", { required: !isDraft })}
+            />
+            {errors.day_start && (
+              <span className="error-message">Data é requerida</span>
+            )}
+            <label>Hora de Inicio</label>
+            <input
+              className="inputCrearEvento"
+              type="time"
+              defaultValue={new Date().toLocaleTimeString("es-ES", {
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
+              {...register("time_start", { required: !isDraft })}
+            />
+            {errors.time_start && (
+              <span className="error-message">Hora de Inicio é requerida</span>
+            )}
+          </div>
+          <div className="div-inputCrearEvento">
+            <label>Festival</label>
+            <select
+              className="inputCrearEvento"
+              name="festival"
+              {...register("festival")}
+            >
+              <option value="">Ningún</option>
+              {nextFestivals.map((festival) => (
+                <option key={festival._id} value={festival._id}>
+                  {festival.name}
+                </option>
+              ))}
+            </select>
+          </div>
 
-        <div className="div-inputCrearEvento">
-          <label>Xénero</label>
-          <input className="inputCrearEvento" {...register("genre")} />
-        </div>
-        <div className="div-inputCrearEvento">
-          <label>YouTube ID</label>
-          <input className="inputCrearEvento" {...register("youtubeVideoId")} />
-        </div>
-        <div className="div-inputCrearEvento">
-          <label>URL</label>
-          <input className="inputCrearEvento" {...register("url")} />
-        </div>
-        <div className="div-inputCrearEvento">
-          <label>Evento Destacado</label>
-          <input
-            className="inputCrearEvento"
-            type="checkbox"
-            {...register("highlighted")}
-          />{" "}
-        </div>
-        <div className="div-inputCrearEvento">
-          <label>Estado:</label>
-          <select
-            className="inputCrearEvento"
-            name="status"
-            {...register("status")}
-          >
-            {statusOptions.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="div-inputCrearEvento">
-          <label>Imaxe</label>
+          <div className="div-inputCrearEvento">
+            <label>Xénero</label>
+            <input className="inputCrearEvento" {...register("genre")} />
+          </div>
+          <div className="div-inputCrearEvento">
+            <label>YouTube ID</label>
+            <input
+              className="inputCrearEvento"
+              {...register("youtubeVideoId")}
+            />
+          </div>
+          <div className="div-inputCrearEvento">
+            <label>Máis Info</label>
+            <input className="inputCrearEvento" {...register("url")} />
+          </div>
+          <div className="div-inputCrearEvento">
+            <label>Evento Destacado</label>
+            <input
+              className="inputCrearEvento"
+              type="checkbox"
+              {...register("highlighted")}
+            />{" "}
+          </div>
+          <div className="div-inputCrearEvento">
+            <label>Estado:</label>
+            <select
+              className="inputCrearEvento"
+              name="status"
+              {...register("status")}
+            >
+              {statusOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="div-inputCrearEvento">
+            <label>Imaxe</label>
 
-          <SubirImagen
-            register={register}
-            evento={true}
-            funcion={(e) =>
-              setImageFile(URL.createObjectURL(e.target.files[0]))
-            }
-          />
+            <SubirImagen
+              register={register}
+              evento={true}
+              funcion={(e) =>
+                setImageFile(URL.createObjectURL(e.target.files[0]))
+              }
+            />
 
-          {imageFile && (
-            <img className="imagen-formulario imagen-crear" src={imageFile} />
-          )}
-        </div>
+            {imageFile && (
+              <img className="imagen-formulario imagen-crear" src={imageFile} />
+            )}
+          </div>
 
-        <div className="margin-boton">
-          <Button
-            type="submit"
-            text="Crear evento"
-            variant="large"
-            isSubmitting={isSubmitting}
-            onClick={handleSubmit}
-          />
-        </div>
-      </form>
-    </div>
+          <div className="margin-boton">
+            <Button
+              type="button"
+              text="Cancelar"
+              variant="medium"
+              onClick={handleIcon}
+            />
+            <Button
+              type="submit"
+              text="Crear evento"
+              variant="medium"
+              isSubmitting={isSubmitting}
+              onClick={handleSubmit}
+            />
+          </div>
+        </form>
+      </div>
     </>
   );
 };

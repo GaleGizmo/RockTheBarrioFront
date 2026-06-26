@@ -3,6 +3,10 @@
   justify-content: center;
 }
 
+.delete-evento-button {
+  background-color: red;
+}
+
 .nav-arrow {
   position: absolute;
   top: 50%;
