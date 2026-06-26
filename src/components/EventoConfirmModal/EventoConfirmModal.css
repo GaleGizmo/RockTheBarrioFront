@@ -1,0 +1,36 @@
+.evento-confirm-dialog {
+  max-width: 600px;
+}
+
+.evento-confirm-body {
+  max-height: 60vh;
+  overflow-y: auto;
+  padding: 1rem;
+}
+
+.evento-confirm-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.evento-confirm-label {
+  font-weight: bold;
+  padding: 6px 12px 6px 0;
+  width: 35%;
+  vertical-align: top;
+  color: var(--secondary-color);
+  border-bottom: 1px solid #eee;
+}
+
+.evento-confirm-value {
+  padding: 6px 0;
+  word-break: break-word;
+  border-bottom: 1px solid #eee;
+}
+
+.evento-confirm-img {
+  max-width: 180px;
+  max-height: 120px;
+  object-fit: cover;
+  border-radius: 4px;
+}

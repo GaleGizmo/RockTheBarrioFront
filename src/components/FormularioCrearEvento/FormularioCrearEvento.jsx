@@ -15,6 +15,7 @@ import {
   getNextFestivals,
 } from "../../shared/api";
 import LocalizacionSelector from "../LocalizacionSelector/LocalizacionSelector";
+import EventoConfirmModal from "../EventoConfirmModal/EventoConfirmModal";
 
 const FormularioCrearEvento = () => {
   const { user } = useSelector((state) => state.usuariosReducer);
@@ -33,6 +34,8 @@ const FormularioCrearEvento = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [locations, setLocations] = useState([]);
   const [nextFestivals, setNextFestivals] = useState([]);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [pendingData, setPendingData] = useState(null);
 
   useEffect(() => {
     const fetchLocations = async () => {
@@ -78,7 +81,6 @@ const FormularioCrearEvento = () => {
   };
 
   const onSubmit = (data) => {
-    setIsSubmitting(true);
     const { day_start, time_start } = data;
 
     if (data.price > 0) data.payWhatYouWant = false;
@@ -94,9 +96,13 @@ const FormularioCrearEvento = () => {
       date_start: combinedDate,
     };
 
-    // Enviar los datos al backend
+    setPendingData(finalFormData);
+    setShowConfirmModal(true);
+  };
 
-    handleFormSubmit(finalFormData);
+  const handleConfirm = () => {
+    setShowConfirmModal(false);
+    handleFormSubmit(pendingData);
   };
 
   const status = watch("status");
@@ -116,6 +122,17 @@ const FormularioCrearEvento = () => {
   };
 
   return (
+    <>
+    <EventoConfirmModal
+      show={showConfirmModal}
+      onCancel={() => setShowConfirmModal(false)}
+      onConfirm={handleConfirm}
+      data={pendingData}
+      festivals={nextFestivals}
+      actionLabel="Crear evento"
+      imagePreview={imageFile}
+      isSubmitting={isSubmitting}
+    />
     <div className="cardCrearEvento">
       <AiFillCloseSquare className="close-icon" onClick={handleIcon} />
       <h1>Crear Evento</h1>
@@ -303,6 +320,7 @@ const FormularioCrearEvento = () => {
         </div>
       </form>
     </div>
+    </>
   );
 };
 

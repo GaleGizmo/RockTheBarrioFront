@@ -15,12 +15,16 @@ import {
 import LocalizacionSelector from "../LocalizacionSelector/LocalizacionSelector";
 import { useEffect } from "react";
 import formatContent from "../../utils/formatContent.jsx";
+import EventoConfirmModal from "../EventoConfirmModal/EventoConfirmModal";
 
 const EventoEdicion = ({ evento, navigate }) => {
   const dispatch = useDispatch();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [hasDeletedImage, setHasDeletedImage] = useState(false);
   const [doPublish, setDoPublish] = useState(false);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [pendingData, setPendingData] = useState(null);
+  const [pendingAction, setPendingAction] = useState(null);
   const isDraft = evento.status === "draft";
   const {
     register,
@@ -30,12 +34,17 @@ const EventoEdicion = ({ evento, navigate }) => {
     formState: { errors },
   } = useForm();
 
+  //manejo de localizaciones
+  const [locations, setLocations] = useState([]);
+  const [nextFestivals, setNextFestivals] = useState([]);
+
   // Sincronizar el valor del select festival con el evento cargado
   useEffect(() => {
-    if (evento.festival) {
-      setValue("festival", evento.festival);
+    if (nextFestivals.length > 0 && evento.festival) {
+      const festivalId = evento.festival?._id || evento.festival;
+      setValue("festival", festivalId);
     }
-  }, [evento.festival, setValue]);
+  }, [nextFestivals, evento.festival, setValue]);
   const [imageFile, setImageFile] = useState();
   const statusOptions = [
     { label: "Ok", value: "Ok" },
@@ -45,9 +54,6 @@ const EventoEdicion = ({ evento, navigate }) => {
     { label: "Esgotado", value: "soldout" },
     { label: "Borrador", value: "draft" },
   ];
-  //manejo de localizaciones
-  const [locations, setLocations] = useState([]);
-  const [nextFestivals, setNextFestivals] = useState([]);
 
   useEffect(() => {
     const fetchLocations = async () => {
@@ -86,28 +92,29 @@ const EventoEdicion = ({ evento, navigate }) => {
 
   const handleSave = (data) => {
     const editedEvento = prepareData(data, evento);
-    console.log(editedEvento);
-    if (editedEvento.publish) {
-      dispatch(
-        addEvento(editedEvento, navigate, { user: evento.user_creator })
-      );
-      setIsSubmitting(false);
-    } else {
-      dispatch(editEvento(evento._id, editedEvento, navigate));
-      setIsSubmitting(false);
-    }
+    setPendingData(editedEvento);
+    setPendingAction("save");
+    setShowConfirmModal(true);
   };
   const handleClone = (data) => {
     if (!data.image && evento.image) {
       data.image = evento.image;
     }
     const editedEvento = prepareData(data, evento);
-
-    dispatch(addEvento(editedEvento, navigate, { user: evento.user_creator }));
-    setIsSubmitting(false);
+    setPendingData(editedEvento);
+    setPendingAction("clone");
+    setShowConfirmModal(true);
+  };
+  const handleConfirm = () => {
+    setShowConfirmModal(false);
+    setIsSubmitting(true);
+    if (pendingAction === "clone" || pendingData.publish) {
+      dispatch(addEvento(pendingData, navigate, { user: evento.user_creator }));
+    } else {
+      dispatch(editEvento(evento._id, pendingData, navigate));
+    }
   };
   function prepareData(data, evento) {
-    setIsSubmitting(true);
     const { day_start, time_start } = data;
 
     // Combinamos la fecha y la hora en un objeto Date
@@ -128,7 +135,7 @@ const EventoEdicion = ({ evento, navigate }) => {
       data.image = null;
     }
     if (!data.location) {
-      data.location = evento.location._id;
+      data.location = evento.location?._id;
     }
     const editedEvento = {
       ...evento,
@@ -145,6 +152,17 @@ const EventoEdicion = ({ evento, navigate }) => {
     navigate(-1);
   };
   return (
+    <>
+    <EventoConfirmModal
+      show={showConfirmModal}
+      onCancel={() => setShowConfirmModal(false)}
+      onConfirm={handleConfirm}
+      data={pendingData}
+      festivals={nextFestivals}
+      actionLabel={pendingAction === "clone" ? "Clonar" : "Gardar"}
+      imagePreview={imageFile}
+      isSubmitting={isSubmitting}
+    />
     <div className="cardCrearEvento">
       <AiFillCloseSquare className="close-icon" onClick={handleIcon} />
       <h1>Editar Evento</h1>
@@ -175,7 +193,7 @@ const EventoEdicion = ({ evento, navigate }) => {
         </div>
         <div className="div-inputCrearEvento">
           <LocalizacionSelector
-            defaultLocationId={evento.location._id}
+            defaultLocationId={evento.location?._id}
             locations={locations}
             setLocations={setLocations}
             onChange={handleLocalizacionChange}
@@ -269,7 +287,7 @@ const EventoEdicion = ({ evento, navigate }) => {
           <select
             className="inputCrearEvento"
             name="festival"
-            defaultValue={evento.festival || ""}
+            defaultValue={evento.festival?._id || evento.festival || ""}
             onChange={handleInputChange}
             {...register("festival")}
           >
@@ -404,6 +422,7 @@ const EventoEdicion = ({ evento, navigate }) => {
         </div>
       </form>
     </div>
+    </>
   );
 };
 
