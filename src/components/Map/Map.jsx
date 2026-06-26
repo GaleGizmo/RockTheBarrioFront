@@ -2,7 +2,7 @@ import { GoogleMap, Marker } from "@react-google-maps/api";
 import { useState, useEffect } from "react";
 import "./Map.css";
 
-const Map = ({ location }) => {
+const Map = ({ location, onClose }) => {
   const [isGoogleLoaded, setIsGoogleLoaded] = useState(typeof google !== "undefined");
 
   useEffect(() => {
@@ -23,33 +23,40 @@ const Map = ({ location }) => {
   }
 
   return (
-    <div className="map-container">
-      <GoogleMap
-        mapContainerStyle={{
-          width: "100%",
-          height: "100%"
-        }}
-        options={{
-          fullscreenControl: true,
-          streetViewControl: true,
-          mapTypeControl: true,
-          zoomControl: true,
-          styles: [
-            {
-              featureType: "all",
-              elementType: "all",
-              stylers: [
-                { saturation: 0 },
-                { lightness: 0 }
-              ]
-            }
-          ]
-        }}
-        center={location}
-        zoom={16}
-      >
-        <Marker position={location} />
-      </GoogleMap>
+    <div className="map-wrapper" onClick={(e) => e.stopPropagation()}>
+      {onClose && (
+        <div className="map-header">
+          <button className="map-close-btn" onClick={(e) => { e.stopPropagation(); onClose(); }} title="Pechar mapa">× Pechar mapa</button>
+        </div>
+      )}
+      <div className="map-container">
+        <GoogleMap
+          mapContainerStyle={{
+            width: "100%",
+            height: "100%"
+          }}
+          options={{
+            fullscreenControl: true,
+            streetViewControl: false,
+            mapTypeControl: false,
+            zoomControl: true,
+            styles: [
+              {
+                featureType: "all",
+                elementType: "all",
+                stylers: [
+                  { saturation: 0 },
+                  { lightness: 0 }
+                ]
+              }
+            ]
+          }}
+          center={location}
+          zoom={16}
+        >
+          <Marker position={location} />
+        </GoogleMap>
+      </div>
     </div>
   );
 };

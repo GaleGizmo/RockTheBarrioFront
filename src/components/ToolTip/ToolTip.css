@@ -60,6 +60,14 @@
   right: 0;
   animation: appearToolTip 0.2s ease-in-out forwards;
 }
+.site-tooltip {
+  opacity: 0;
+  visibility: visible;
+  display: block;
+  top: 0;
+  left: 0;
+  animation: appearToolTip 0.2s ease-in-out forwards;
+}
 @media (max-width: 520px) {
   .termos-tooltip {
     opacity: 1;

@@ -170,14 +170,22 @@ const Evento = ({ evento, user }) => {
         </div>
         <div className="detalles_container">
           {evento.site && evento.site !== "Varios" ? (
-            <p className="detalles-site" onClick={handleToggleMap}>
+            <p className="detalles-site" onClick={handleToggleMap}
+              onMouseEnter={() => setHovered("site-tooltip")}
+              onMouseLeave={() => setHovered("")}
+            >
               <MapIcon showMap={showMap} />
-              {evento.site.split(",")[0]}
+              <span className="detalles-site-text">{evento.site.split(",")[0]}</span>
+              <ToolTip content={evento.site.split(",")[0]} specificClass={hovered === "site-tooltip" ? "site-tooltip" : ""} />
             </p>
           ) : (
-            <p className="detalles-site">
+            <p className="detalles-site"
+              onMouseEnter={() => setHovered("site-tooltip")}
+              onMouseLeave={() => setHovered("")}
+            >
               <MapIcon />
-              {evento.site?.split(",")[0]}
+              <span className="detalles-site-text">{evento.site?.split(",")[0]}</span>
+              <ToolTip content={evento.site?.split(",")[0]} specificClass={hovered === "site-tooltip" ? "site-tooltip" : ""} />
             </p>
           )}
 
@@ -280,7 +288,7 @@ const Evento = ({ evento, user }) => {
         </div>
       </div>
 
-      {showMap && <MapComponent location={evento.location} />}
+      {showMap && <MapComponent location={evento.location} onClose={() => setShowMap(false)} />}
     </div>
   );
 };

@@ -1,10 +1,38 @@
-.map-container {
-  border: 2px solid var(--secondary-color);
+.map-wrapper {
   width: 90%;
   max-width: 500px;
   margin: 20px auto;
-  position: relative;
+  border: 2px solid var(--secondary-color);
   border-radius: 8px;
+  overflow: hidden;
+}
+
+.map-header {
+  display: flex;
+  justify-content: flex-end;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #ddd;
+  padding: 4px 6px;
+}
+
+.map-close-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.8rem;
+  color: #555;
+  padding: 2px 6px;
+  border-radius: 4px;
+  line-height: 1.4;
+}
+
+.map-close-btn:hover {
+  background: #e0e0e0;
+  color: #000;
+}
+
+.map-container {
+  position: relative;
   background-color: #f5f5f5;
 }
 
