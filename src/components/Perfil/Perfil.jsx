@@ -123,6 +123,7 @@ const Perfil = ({ userData, onEditClick }) => {
         {userData && userData.role === 2 && (
           <div className="botones-eventos">
             <Button text="Crear evento" variant="small" onClick={() => navigate('/crear-evento')} />
+            <Button text="Crear festival" variant="small" onClick={() => navigate('/crear-festival')} />
             <Button
               text="Mandar diarios"
               variant="small"

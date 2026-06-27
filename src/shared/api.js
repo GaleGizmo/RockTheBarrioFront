@@ -104,7 +104,7 @@ export const getFestivalData = async (festivalId) => {
 };
 
 export const createFestival = async (festivalData) => {
-  const response = await API.post(`/festival/createFestival`, festivalData);
+  const response = await APIIMAGES.post(`/festival/createFestival`, festivalData);
   return response.data;
 };
 

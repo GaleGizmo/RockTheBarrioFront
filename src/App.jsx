@@ -21,6 +21,7 @@ import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import { ToastContainer } from "react-toastify";
 import BorradoresList from "./components/BorradoresList/BorradoresList";
 import EditarBorrador from "./pages/EditarBorrador/EditarBorrador";
+import CrearFestival from "./pages/CrearFestival/CrearFestival";
 
 function App() {
   const { user } = useSelector((state) => state.usuariosReducer);
@@ -84,6 +85,14 @@ function App() {
             element={
               <ProtectedRoute requiredRole={2}>
                 <CrearEvento />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/crear-festival"
+            element={
+              <ProtectedRoute requiredRole={2}>
+                <CrearFestival />
               </ProtectedRoute>
             }
           />
