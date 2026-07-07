@@ -22,13 +22,14 @@ import { ToastContainer } from "react-toastify";
 import BorradoresList from "./components/BorradoresList/BorradoresList";
 import EditarBorrador from "./pages/EditarBorrador/EditarBorrador";
 import CrearFestival from "./pages/CrearFestival/CrearFestival";
+import { FestivalProvider } from "./context/FestivalContext";
 
 function App() {
   const { user } = useSelector((state) => state.usuariosReducer);
  
 
   return (
-    <>
+    <FestivalProvider>
       <div className="app">
       <ToastContainer />
         <Header />
@@ -113,7 +114,7 @@ function App() {
 
         <Footer />
       </div>
-    </>
+    </FestivalProvider>
   );
 }
 

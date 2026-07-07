@@ -40,7 +40,7 @@ const EventosList = () => {
       if (filtradosFromCalendar) {
         if (eventosFiltrados.length > 1) {
           setMessageToShow(
-            "Hai " + eventosFiltrados.length + " eventos nesta data"
+            "Hai " + eventosFiltrados.length + " eventos nesta data",
           );
         } else {
           setMessageToShow("Hai 1 evento nesta data");
@@ -48,7 +48,7 @@ const EventosList = () => {
       } else {
         if (eventosFiltrados.length > 1) {
           setMessageToShow(
-            "Hai " + eventosFiltrados.length + " resultados da túa búsqueda"
+            "Hai " + eventosFiltrados.length + " resultados da túa búsqueda",
           );
         } else {
           setMessageToShow("Hai 1 resultado da túa búsqueda");

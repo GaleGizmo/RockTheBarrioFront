@@ -7,10 +7,12 @@ import pdf from "/assets/cookies.pdf";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { deleteFilteredEventos } from "../../redux/eventos/eventos.actions";
+import { useFestival } from "../../context/FestivalContext";
 
 
 const Home = () => {
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
+  const { showFestival } = useFestival();
   const reloadEvents = () => {
     
       dispatch(deleteFilteredEventos());
@@ -18,11 +20,13 @@ const Home = () => {
   return (
     <div className="home">
     
-      <Link to="/" >
-        <div className="listado-container" onClick={reloadEvents}>
-          <h1 className="listado-text">CONCERTOS EN SANTIAGO DE COMPOSTELA</h1>
-        </div>{" "}
-      </Link>
+      {!showFestival && (
+        <Link to="/">
+          <div className="listado-container" onClick={reloadEvents}>
+            <h1 className="listado-text">CONCERTOS EN SANTIAGO DE COMPOSTELA</h1>
+          </div>{" "}
+        </Link>
+      )}
       <EventosList />
       <BsArrowUp
         className="scroll-up"

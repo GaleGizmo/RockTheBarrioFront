@@ -14,6 +14,7 @@ import EventoEspecial from "../EventoEspecial/EventoEspecial";
 import { useEffect } from "react";
 import { checkFestival, getFestivalData } from "../../shared/api";
 import { useState } from "react";
+import { useFestival } from "../../context/FestivalContext";
 
 const Header = () => {
   let { isCalendarOpen } = useSelector(
@@ -21,6 +22,7 @@ const Header = () => {
   );
   const [showFestival, setShowFestival] = useState(false);
   const [festival, setFestival] = useState(null);
+  const { setShowFestival: setFestivalContext } = useFestival();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,6 +31,7 @@ const Header = () => {
         const festivalData = await getFestivalData(data.festivalId);
         setFestival(festivalData);
         setShowFestival(data.isFestivalToDisplay);
+        setFestivalContext(data.isFestivalToDisplay);
       }
     };
     fetchData();
