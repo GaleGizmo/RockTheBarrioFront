@@ -65,10 +65,7 @@ function CustomCalendar({ eventos }) {
 
 
   const handleTileClick = async (date) => {
-    const isSmallScreen = window.innerWidth < 992;
-    if (isSmallScreen) {
-      dispatch(toggleCalendar(false));
-    }
+    dispatch(toggleCalendar(false));
     setSelectedDate(date)
     let startDate=new Date(date)
     
