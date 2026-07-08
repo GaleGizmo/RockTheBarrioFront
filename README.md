@@ -2,14 +2,14 @@
 
 ## Características principales
 
-Esta aplicación es una plataforma en línea que recopila los eventos musicales de Santiago de Compostela. Permite a los usuarios descubrir, registrar y comentar los conciertos incluidos en la aplicación.
+Esta aplicación es una plataforma en línea que recopila los eventos musicales del área de Santiago de Compostela. Permite a los usuarios descubrir, registrar y ubicar físicamente los conciertos incluidos en la aplicación.
 
 ### Página de inicio
 
 La página de inicio muestra un listado completo de eventos y conciertos en el área de Santiago, ordenados temporalmente, con información como fecha, lugar y nombre del artista o banda. Los usuarios pueden ver el lugar del evento en Google Maps y añadir cada evento a una lista de favoritos. 
 Esta página muestra a su vez un calendario desde el que se puede acceder a los eventos de un día específico y un buscador de eventos con posibilidad de hacer búsquedas cruzadas.
 
-### Página de un evento específico y comentarios de los usuarios
+### Página de un evento específico
 
 Cuando selecciona un evento específico mediante el botón de Info, el usuario es redirigido a una página dedicada a ese evento, donde hay detalles adicionales como videos de youtube del artista, enlace a la compra de entradas (si procede), descripción detallada del evento y enlaces a urls relacionadas con el evento o el artista. 
 
