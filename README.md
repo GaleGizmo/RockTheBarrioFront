@@ -11,8 +11,7 @@ Esta página muestra a su vez un calendario desde el que se puede acceder a los 
 
 ### Página de un evento específico y comentarios de los usuarios
 
-Cuando selecciona un evento específico mediante el botón de Info, el usuario es redirigido a una página dedicada a ese evento, donde hay detalles adicionales como videos de youtube del artista, enlace a la compra de entradas (si procede), descripción detallada del evento y enlaces a urls relacionadas con el evento o el artista. Los usuarios registrados pueden crear y editar comentarios, reseñas y valoraciones.
-
+Cuando selecciona un evento específico mediante el botón de Info, el usuario es redirigido a una página dedicada a ese evento, donde hay detalles adicionales como videos de youtube del artista, enlace a la compra de entradas (si procede), descripción detallada del evento y enlaces a urls relacionadas con el evento o el artista. 
 
 ### Página de login
 
@@ -22,11 +21,9 @@ En esta página el usuario puede loguearse o, en caso de no estar registrado, ac
 
 Para acceder a todas las funciones, los usuarios deben registrarse proporcionando información básica en la página de registro. Una vez registrados, los usuarios podrán:
 
-        -Añadir eventos a su lista de favoritos, lo que les permite recibir un email cuando se aceque la fecha del evento.
+        -Añadir eventos a su lista de favoritos, lo que les permite recibir un email cuando se acerque la fecha del evento.
         
-        -Añadir comentarios a los eventos.
-        
-        -Recibir cada lunes un email con el listado de eventos semanal.
+        -Recibir cada lunes un email con el listado semanal de eventos.
         
         -Recibir un email cuando se añadan nuevos eventos.
 
@@ -46,9 +43,9 @@ En resumen, esta aplicación brinda a los usuarios la oportunidad de descubrir y
 
 ## Despliegue
 
-### Para probar la beta de la aplicación utiliza el siguiente enlace: 
+### Pudedes acceder al despliegue de este front en: 
 
-[ROCK-THE-BARRIO.VERCEL](https://rock-the-barrio-front-one.vercel.app)
+[ROCK THE BARRIO](https://www.rockthebarrio.es)
 
 
 
