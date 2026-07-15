@@ -23,10 +23,83 @@
   width: 80%;
 }
 
+@keyframes logoPulse {
+  0%, 60%, 100% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(1.20);
+  }
+}
+
+.title-filtered img {
+  animation: logoPulse 2.5s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@media (max-width: 991px) {
+  .title-filtered img {
+    animation: logoPulseSmall 2.5s ease-in-out infinite;
+  }
+}
+
+@keyframes logoPulseSmall {
+  0%, 60%, 100% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(1.10);
+  }
+}
+
 .link:hover {
   filter: contrast(150%);
   text-decoration-line: none;
 }
+.festivales-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.festival-slide {
+  display: flex;
+  animation: festivalFadeIn 0.4s ease;
+}
+
+@keyframes festivalFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.carousel-btn {
+  display: none;
+  background: none;
+  border: none;
+  padding: 0 2px;
+  cursor: pointer;
+  color: var(--primary-color);
+  font-size: 14px;
+  line-height: 1;
+}
+
+@media (max-width: 1015px) {
+  .festivales-container {
+    gap: 0;
+  }
+  .festival-slide {
+    display: none;
+  }
+  .festival-slide.active {
+    display: flex;
+    animation: festivalFadeIn 0.4s ease;
+  }
+  .carousel-btn {
+    display: flex;
+    align-items: center;
+  }
+}
+
 .header-drafts{
   color: var(--primary-color);
   display: flex;

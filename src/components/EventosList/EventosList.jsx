@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   getEventosDesdeHoy,
   getEventosParaCalendar,
+  setFiltroActivo,
 } from "../../redux/eventos/eventos.actions";
 import { useDispatch, useSelector } from "react-redux";
 import Evento from "../Evento/Evento";
@@ -20,7 +21,6 @@ const EventosList = () => {
     dispatch(getEventosParaCalendar());
   }, [dispatch]);
 
-  const [filtroActivo, setFiltroActivo] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [eventosToShow, setEventosToShow] = useState([]);
   const [messageToShow, setMessageToShow] = useState("");
@@ -32,6 +32,7 @@ const EventosList = () => {
     eventosCalendar,
     isSpecialEvent,
     filtradosFromCalendar,
+    filtroActivo,
   } = useSelector((reducer) => reducer.eventosReducer);
 
   useEffect(() => {
@@ -55,10 +56,10 @@ const EventosList = () => {
         }
       }
 
-      setFiltroActivo(true);
+      dispatch(setFiltroActivo(true));
     } else {
       setEventosToShow([...eventos]);
-      setFiltroActivo(false);
+      dispatch(setFiltroActivo(false));
     }
   }, [eventosFiltrados, eventos]);
 
@@ -105,7 +106,6 @@ const EventosList = () => {
           content="Descubre todos los eventos musicales en el área de Santiago de Compostela. Consulta el calendario, compra las entradas y recibe toda la información en tu correo electrónico."
         />
       </Helmet>
-      {filtroActivo && <div className="point-icon"> </div>}
       <div className="div-buscador">
         <Buscador eventos={eventos} user={user} />
         <CustomCalendar eventos={eventosCalendar} />

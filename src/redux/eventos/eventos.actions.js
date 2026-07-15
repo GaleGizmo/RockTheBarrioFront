@@ -221,6 +221,9 @@ const toggleCalendar = (data) => (dispatch) => {
 const deleteFilteredEventos = () => (dispatch) => {
   dispatch({ type: "DELETE_EVENTOSFILTRADOS" });
 };
+const setFiltroActivo = (value) => (dispatch) => {
+  dispatch({ type: "SET_FILTRO_ACTIVO", contenido: value });
+};
 export {
   getEventosDesdeHoy,
   getEventosParaCalendar,
@@ -237,6 +240,7 @@ export {
   setFilteredEventos,
   deleteFilteredEventos,
   toggleCalendar,
+  setFiltroActivo,
   setFiltradosFromCalendar,
   getBorradorById,
 };
