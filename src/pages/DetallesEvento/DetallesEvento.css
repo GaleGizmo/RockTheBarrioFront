@@ -101,7 +101,7 @@
   overflow: hidden;
   width: 100%;
   max-width: 50%;
-  padding-top: 34.72%; 
+  padding-top: 34.72%;
 }
 
 .youtube-video-container iframe {
@@ -272,6 +272,7 @@ img.boleto_imagen {
   background-image: url("../../../public/assets/rockthebarrio_pegata_azul.svg");
   background-position: center;
   background-size: cover;
+  margin: 0 auto;
 }
 .centerDetEv {
   display: flex;

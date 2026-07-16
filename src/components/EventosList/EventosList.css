@@ -2,8 +2,7 @@
   display: grid;
   grid-template-columns: minmax(250px, 300px) minmax(550px, auto);
   padding: 60px 0;
-
-  /* margin: auto; */
+  height: 100%;
 }
 .div-buscador {
   position: relative;
@@ -28,13 +27,13 @@
   opacity: 1;
   width: 100%;
   transition: opacity 0.5s ease-in-out;
- 
+
   .span-resultado {
     display: block;
     width: fit-content;
     background-color: var(--primary-color);
     letter-spacing: 1px;
-     margin: 0 auto 10px auto;
+    margin: 0 auto 10px auto;
     font-weight: 600;
     padding: 5px;
     color: var(--hover-color);
