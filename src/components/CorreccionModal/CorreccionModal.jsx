@@ -1,12 +1,13 @@
 // src/components/MessageSender.js
 import React, { useState } from "react";
 import "./CorreccionModal.css";
-
 import { sendCorreccion } from "../../shared/api";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 const CorreccionModal = ({ showModal, onClose }) => {
+  const { t } = useTranslation();
   const [eventoId, setEventoId] = useState("");
   const [asunto, setAsunto] = useState("");
   const [mensaje, setMensaje] = useState("");
@@ -29,7 +30,7 @@ const CorreccionModal = ({ showModal, onClose }) => {
       setMensaje("");
     } catch (err) {
       setSubmitting(false);
-      setError("Erro ao enviar a mensaxe. Por favor, intenta novamente.");
+      setError(t('correccion.error'));
     } finally {
       setSubmitting(false);
     }
@@ -55,10 +56,10 @@ const CorreccionModal = ({ showModal, onClose }) => {
     <>
       {showModal && (
         <div className="correccion-modal-container">
-          <h3>Enviar Corrección de Evento</h3>
+          <h3>{t('correccion.title')}</h3>
           <form onSubmit={handleSend}>
             <div>
-              <label htmlFor="eventoId">EventoId: </label>
+              <label htmlFor="eventoId">{t('correccion.eventoId')} </label>
               <input
                 className="inputCrearEvento"
                 type="text"
@@ -69,7 +70,7 @@ const CorreccionModal = ({ showModal, onClose }) => {
               />
             </div>
             <div>
-              <label htmlFor="subject">Asunto: </label>
+              <label htmlFor="subject">{t('correccion.subject')} </label>
               <input
                 className="inputCrearEvento"
                 type="text"
@@ -80,7 +81,7 @@ const CorreccionModal = ({ showModal, onClose }) => {
               />
             </div>
             <div>
-              <label htmlFor="message">Texto da Corrección: </label>
+              <label htmlFor="message">{t('correccion.messageLabel')} </label>
               <textarea
                 className="inputCrearEvento"
                 id="message"
@@ -91,10 +92,10 @@ const CorreccionModal = ({ showModal, onClose }) => {
             </div>
             <div className="botones-edicion-usuario">
               <button className="boton small" type="submit" disabled={submitting}>
-                {submitting ? "Enviando..." : "Enviar Corrección"}
+                {submitting ? t('buttons.sending') : t('correccion.send')}
               </button>
               <button className="boton small" type="button" onClick={onClose}>
-                Cancelar
+                {t('buttons.cancel')}
               </button>{" "}
             </div>
           </form>

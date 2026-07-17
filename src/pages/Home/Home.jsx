@@ -8,11 +8,13 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { deleteFilteredEventos } from "../../redux/eventos/eventos.actions";
 import { useFestival } from "../../context/FestivalContext";
+import { useTranslation } from "react-i18next";
 
 
 const Home = () => {
   const dispatch = useDispatch();
   const { showFestival } = useFestival();
+  const { t } = useTranslation();
   const reloadEvents = () => {
     
       dispatch(deleteFilteredEventos());
@@ -23,7 +25,7 @@ const Home = () => {
       {!showFestival && (
         <Link to="/">
           <div className="listado-container" onClick={reloadEvents}>
-            <h1 className="listado-text">CONCERTOS EN SANTIAGO DE COMPOSTELA</h1>
+            <h1 className="listado-text">{t('home.title')}</h1>
           </div>{" "}
         </Link>
       )}
@@ -36,16 +38,13 @@ const Home = () => {
       />
       <CookieConsent
         location="bottom"
-        buttonText="Aceptar"
+        buttonText={t('home.cookieAccept')}
         visible="byCookieValue"
         style={{ zIndex: 10000 }}
       >
-        Empregamos cookies neste sitio web para lle dar a mellor experiencia
-        recordando as súas preferencias e visitas repetidas. Ao facer clic en
-        "Aceptar", vostede acepta o uso destas cookies. Pode descargar a nosa
-        Política de Cookies{" "}
+        {t('home.cookieText')}{" "}
         <a href={pdf} target="blank">
-          aquí
+          {t('home.cookieHere')}
         </a>
       </CookieConsent>
     </div>

@@ -7,9 +7,11 @@ import { createFestival } from "../../shared/api";
 import SubirImagen from "../SubirImagen/SubirImagen";
 import Button from "../Button/Button";
 import "./FormularioCrearFestival.css";
+import { useTranslation } from "react-i18next";
 
 const FormularioCrearFestival = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [imagePreview, setImagePreview] = useState(null);
 
@@ -45,13 +47,13 @@ const FormularioCrearFestival = () => {
   return (
     <div className="cardCrearFestival">
       <AiFillCloseSquare className="close-icon" onClick={() => navigate(-1)} />
-      <h1>Crear Festival</h1>
+      <h1>{t('createFestival.title')}</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="div-inputCrearFestival">
-          <label>Nome</label>
+          <label>{t('createFestival.name')}</label>
           <input
             className="inputCrearFestival"
-            {...register("name", { required: "O nome é requerido" })}
+            {...register("name", { required: t('createFestival.nameRequired') })}
           />
           {errors.name && (
             <span className="error-message">{errors.name.message}</span>
@@ -59,11 +61,11 @@ const FormularioCrearFestival = () => {
         </div>
 
         <div className="div-inputCrearFestival">
-          <label>Descrición</label>
+          <label>{t('createFestival.description')}</label>
           <textarea
             className="inputCrearFestival"
             rows={4}
-            {...register("description", { required: "A descrición é requerida" })}
+            {...register("description", { required: t('createFestival.descriptionRequired') })}
           />
           {errors.description && (
             <span className="error-message">{errors.description.message}</span>
@@ -71,23 +73,23 @@ const FormularioCrearFestival = () => {
         </div>
 
         <div className="fechaCrearFestival">
-          <label>Data de inicio</label>
+          <label>{t('createFestival.startDate')}</label>
           <input
             className="inputCrearFestival"
             type="date"
             defaultValue={new Date().toISOString().split("T")[0]}
-            {...register("startDate", { required: "A data de inicio é requerida" })}
+            {...register("startDate", { required: t('createFestival.startDateRequired') })}
           />
           {errors.startDate && (
             <span className="error-message">{errors.startDate.message}</span>
           )}
 
-          <label>Data de fin</label>
+          <label>{t('createFestival.endDate')}</label>
           <input
             className="inputCrearFestival"
             type="date"
             defaultValue={new Date().toISOString().split("T")[0]}
-            {...register("endDate", { required: "A data de fin é requerida" })}
+            {...register("endDate", { required: t('createFestival.endDateRequired') })}
           />
           {errors.endDate && (
             <span className="error-message">{errors.endDate.message}</span>
@@ -95,12 +97,12 @@ const FormularioCrearFestival = () => {
         </div>
 
         <div className="div-checkbox">
-          <label>Publicar</label>
+          <label>{t('forms.publish')}</label>
           <input type="checkbox" {...register("toBeFeatured")} />
         </div>
 
         <div className="div-inputCrearFestival">
-          <label>Imaxe</label>
+          <label>{t('forms.image')}</label>
           <SubirImagen
             register={register}
             evento={true}
@@ -117,7 +119,7 @@ const FormularioCrearFestival = () => {
             <img
               className="imagen-formulario"
               src={imagePreview}
-              alt="Vista previa"
+              alt={t('createFestival.title')}
             />
           )}
         </div>
@@ -125,13 +127,13 @@ const FormularioCrearFestival = () => {
         <div className="margin-boton">
           <Button
             type="button"
-            text="Cancelar"
+            text={t('buttons.cancel')}
             variant="medium"
             onClick={() => navigate(-1)}
           />
           <Button
             type="submit"
-            text="Crear"
+            text={t('buttons.confirm')}
             variant="medium"
             isSubmitting={isSubmitting}
           />

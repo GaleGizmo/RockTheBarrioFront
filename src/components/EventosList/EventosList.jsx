@@ -11,11 +11,12 @@ import "./EventosList.css";
 import CustomCalendar from "../CustomCalendar/CustomCalendar";
 import Buscador from "../Buscador/Buscador";
 import Loader from "../Loader/Loader";
-
 import { Helmet } from "react-helmet";
+import { useTranslation } from "react-i18next";
 
 const EventosList = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   useEffect(() => {
     dispatch(getEventosParaCalendar());
@@ -39,21 +40,13 @@ const EventosList = () => {
     if (Array.isArray(eventosFiltrados) && eventosFiltrados.length > 0) {
       setEventosToShow([...eventosFiltrados]);
       if (filtradosFromCalendar) {
-        if (eventosFiltrados.length > 1) {
-          setMessageToShow(
-            "Hai " + eventosFiltrados.length + " eventos nesta data",
-          );
-        } else {
-          setMessageToShow("Hai 1 evento nesta data");
-        }
+        setMessageToShow(
+          t('buscador.calResults', { count: eventosFiltrados.length })
+        );
       } else {
-        if (eventosFiltrados.length > 1) {
-          setMessageToShow(
-            "Hai " + eventosFiltrados.length + " resultados da túa búsqueda",
-          );
-        } else {
-          setMessageToShow("Hai 1 resultado da túa búsqueda");
-        }
+        setMessageToShow(
+          t('buscador.results', { count: eventosFiltrados.length })
+        );
       }
 
       dispatch(setFiltroActivo(true));

@@ -5,13 +5,16 @@ import { useNavigate } from "react-router-dom";
 import { BsClockFill } from "react-icons/bs";
 import { format, parseISO } from "date-fns";
 import { gl } from "date-fns/locale";
+import { es } from "date-fns/locale";
 import MapIcon from "../MapIcon/MapIcon";
 import { AiFillEuroCircle } from "react-icons/ai";
 import { FaMusic } from "react-icons/fa";
 import MapComponent from "../MapComponent/MapComponent";
 import EventoEdicion from "../EventoEdicion/EventoEdicion";
+import { useTranslation } from "react-i18next";
 
 const Borrador = ({ borrador, user }) => {
+  const { i18n } = useTranslation();
   const [showMap, setShowMap] = useState(false);
   
   const navigate = useNavigate();
@@ -21,9 +24,11 @@ const Borrador = ({ borrador, user }) => {
   };
   const isLongTitle = borrador?.title?.length > 10 && !borrador.title.includes(" ");
 
+  const dateLocale = i18n.language?.startsWith("es") ? es : gl;
+
   const fechaEvento = borrador?.date_start ? parseISO(borrador.date_start) : null;
   const fechaStart = borrador?.date_start
-    ? format(fechaEvento, "EEE, dd, MMM ", { locale: gl })
+    ? format(fechaEvento, "EEE, dd, MMM ", { locale: dateLocale })
     : null;
   const horaStart = borrador?.date_start ? format(fechaEvento, "HH:mm") : null;
 

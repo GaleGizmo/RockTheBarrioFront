@@ -7,6 +7,7 @@ import { BsClockFill } from "react-icons/bs";
 import { esAnterior, esHoy, calcularDiasFaltantes } from "../../shared/formatDate";
 import { format, parseISO } from "date-fns";
 import { gl } from "date-fns/locale";
+import { es } from "date-fns/locale";
 import MapIcon from "../MapIcon/MapIcon";
 import { BsInfoCircleFill } from "react-icons/bs";
 import { BsFillShareFill } from "react-icons/bs";
@@ -21,8 +22,10 @@ import Modal from "../Modal/Modal";
 import ToolTip from "../ToolTip/ToolTip";
 import { isLongTitle } from "../../utils/textUtils";
 import { handleImageError } from "../../utils/imageHelpers";
+import { useTranslation } from "react-i18next";
 
 const Evento = ({ evento, user }) => {
+  const { t, i18n } = useTranslation();
   const [hovered, setHovered] = useState("");
   const [shareModal, setShareModal] = useState(false);
   const [showImageModal, setShowImageModal] = useState(false);
@@ -61,7 +64,9 @@ const Evento = ({ evento, user }) => {
   };
 
   const fechaEvento = evento?.date_start ? parseISO(evento.date_start) : null;
-  const diasFaltantes = evento?.date_start ? calcularDiasFaltantes(evento.date_start) : null;
+  const diasFaltantes = evento?.date_start
+    ? calcularDiasFaltantes(evento.date_start, i18n.language)
+    : null;
 
   const buyEvento = (e) => {
     e.stopPropagation();
@@ -69,9 +74,18 @@ const Evento = ({ evento, user }) => {
       window.open(evento.buy_ticket, "_blank", "noopener,noreferrer");
     }
   };
+  const dateLocale = i18n.language?.startsWith("es") ? es : gl;
+  const statusLabelMap = {
+    soldout: t("forms.statusOptions.soldout"),
+    delayed: t("forms.statusOptions.delayed"),
+    cancelled: t("forms.statusOptions.cancelled"),
+    new_date: t("forms.statusOptions.newDate"),
+  };
+  const statusLabel = statusLabelMap[evento?.status] || "";
+
   const fechaStart = evento?.date_start
     ? format(fechaEvento, "EEE, dd, MMM ", {
-        locale: gl,
+        locale: dateLocale,
       })
     : null;
   const horaStart = evento?.date_start ? format(fechaEvento, "HH:mm") : null;
@@ -81,9 +95,10 @@ const Evento = ({ evento, user }) => {
       className={`card ${evento.highlighted ? "highlighted" : ""} ${
         evento.status ? "status " + evento.status : ""
       }`}
+      data-status-label={statusLabel}
       onClick={getEvento}
     >
-      {evento.highlighted && <div className="highlight-banner">DESTACADO</div>}
+      {evento.highlighted && <div className="highlight-banner">{t('events.featured')}</div>}
       {shareModal && (
         <Modal
           show="true"
@@ -118,7 +133,7 @@ const Evento = ({ evento, user }) => {
 
       {esHoy(evento.date_start) ? (
         <div className="data-label_container esHoy">
-          <div className="data-label_esHoy">HOXE</div>
+          <div className="data-label_esHoy">{t('events.today')}</div>
         </div>
       ) : (
         <div className="data-label_container">
@@ -198,7 +213,7 @@ const Evento = ({ evento, user }) => {
             </div>
           )}
           <p className="dias-faltantes">
-            <span className="dias-faltantes_label">{esAnterior(evento.date_start) ? "Fai" : "En"}</span>
+            <span className="dias-faltantes_label">{esAnterior(evento.date_start) ? t('events.ago') : t('events.in')}</span>
             <span className="blue-text"> {diasFaltantes} </span>
           </p>
 
@@ -218,7 +233,7 @@ const Evento = ({ evento, user }) => {
           )}
           {evento.price == 0 && evento.payWhatYouWant == false ? (
             <p className="evento-precio">
-              <span className="gratuito">GRATUITO</span>
+              <span className="gratuito">{t('events.free')}</span>
             </p>
           ) : evento.price > 0 ? (
             <p className="evento-precio" onClick={buyEvento}>
@@ -227,7 +242,7 @@ const Evento = ({ evento, user }) => {
             </p>
           ) : (
             <p className="evento-precio">
-              <span className="gratuito">ENTRADA INVERSA</span>
+              <span className="gratuito">{t('events.payWhatYouWant')}</span>
             </p>
           )}
 
@@ -248,7 +263,7 @@ const Evento = ({ evento, user }) => {
                   <>
                     <BiSolidHeart className="favorito" />
                     <ToolTip
-                      content="Quitar favorito"
+                      content={t('events.removeFavorite')}
                       specificClass={hovered === "favorito-tooltip" ? "favorito-tooltip" : ""}
                     />
                   </>
@@ -256,7 +271,7 @@ const Evento = ({ evento, user }) => {
                   <>
                     <BiHeart className="favorito" />
                     <ToolTip
-                      content="Engadir favorito"
+                      content={t('events.addFavorite')}
                       specificClass={hovered === "favorito-tooltip" ? "favorito-tooltip" : ""}
                     />
                   </>

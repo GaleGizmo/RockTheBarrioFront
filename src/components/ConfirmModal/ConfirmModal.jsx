@@ -1,8 +1,10 @@
 import React from "react";
 import Button from "../../components/Button/Button";
 import "./ConfirmModal.css";
+import { useTranslation } from "react-i18next";
 
 const ConfirmModal = ({ show, onCancel, onConfirm, title, p1, p2,buttonText, deleteAccount }) => {
+  const { t } = useTranslation();
   let buttonClass=""
   deleteAccount ? buttonClass="medium delete-account-button":buttonClass="medium"
   return (
@@ -25,7 +27,7 @@ const ConfirmModal = ({ show, onCancel, onConfirm, title, p1, p2,buttonText, del
              <p> {p2}</p>
             </div>
             <div className="modal-footer justify-content-center">
-              {onCancel && <Button text="Cancelar" variant="medium" onClick={onCancel} />}
+              {onCancel && <Button text={t('buttons.cancel')} variant="medium" onClick={onCancel} />}
               <Button text={buttonText} variant={buttonClass} onClick={onConfirm} />
             </div>
           </div>

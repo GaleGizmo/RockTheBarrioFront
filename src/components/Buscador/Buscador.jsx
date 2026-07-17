@@ -16,10 +16,12 @@ import SwitchButton from "../SwitchButton/SwitchButton";
 import ToolTip from "../ToolTip/ToolTip";
 import { IoIosSearch } from "react-icons/io";
 import { AiTwotoneQuestionCircle } from "react-icons/ai";
+import { useTranslation } from "react-i18next";
 
 
 const Buscador = ({ eventos, user }) => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const isAdmin = user && user.role === 2;
 
@@ -228,10 +230,10 @@ const Buscador = ({ eventos, user }) => {
     <div className="buscador-container">
       {showLoader && <Modal show={true} showLoader={true} />}
       <ConfirmModal
-        title="Non se atoparon resultados"
-        p1="Proba a buscar con outros termos"
-        p2="Lembra que o buscador é sensible aos acentos"
-        buttonText="Aceptar"
+        title={t('buscador.noResults')}
+        p1={t('buscador.noResultsHint1')}
+        p2={t('buscador.noResultsHint2')}
+        buttonText={t('buttons.accept')}
         show={noResults}
         onConfirm={() => {
           setNoResults(false);
@@ -241,7 +243,7 @@ const Buscador = ({ eventos, user }) => {
         <div className="buscador-input_wrapper">
           <input
             type="text"
-            placeholder="Buscar..."
+            placeholder={t('buscador.placeholder')}
             className="buscador-input"
             {...register("input")}
             onChange={handleInputChange}
@@ -249,7 +251,7 @@ const Buscador = ({ eventos, user }) => {
           />
           <IoIosSearch className="search_icon" onClick={handleSearchClick} />
           <p onClick={handleShowAdvancedSearch} className="buscador-avanzada">
-            {showAdvancedSearch ? "" : "Avanzada"}
+            {showAdvancedSearch ? "" : t('buscador.advanced')}
           </p>
           <div
             className={`buscador-input_type ${
@@ -269,19 +271,19 @@ const Buscador = ({ eventos, user }) => {
               onMouseLeave={handleDisplayTooltip}
               onClick={handleDisplayTooltip}
             >
-              <span>Calquera termo </span>{" "}
+              <span>{t('buscador.anyTerm')} </span>{" "}
               <span>
                 <AiTwotoneQuestionCircle />
               </span>
               {hovered && (
                 <ToolTip
                   specificClass="termos-tooltip"
-                  content="Devolve todos os resultados que conteñan calquera dos termos introducidos"
+                  content={t('buscador.anyTermTooltip')}
                 />
               )}
             </label>
             <label className="past-events">
-              Eventos pasados
+              {t('buscador.pastEvents')}
               <SwitchButton
                 isOn={pastEvents}
                 handleToggle={() => setPastEvents(!pastEvents)}
@@ -295,7 +297,7 @@ const Buscador = ({ eventos, user }) => {
           }`}
         >
           <div className="buscador-checks_item">
-            <label>Evento</label>
+            <label>{t('buscador.event')}</label>
             <input
               type="checkbox"
               checked={searchTitle}
@@ -306,7 +308,7 @@ const Buscador = ({ eventos, user }) => {
             />
           </div>
           <div className="buscador-checks_item">
-            <label>Artista</label>
+            <label>{t('buscador.artist')}</label>
             <input
               type="checkbox"
               checked={searchArtist}
@@ -317,7 +319,7 @@ const Buscador = ({ eventos, user }) => {
             />
           </div>
           <div className="buscador-checks_item">
-            <label>Lugar</label>
+            <label>{t('buscador.place')}</label>
             <input
               type="checkbox"
               checked={searchSite}
@@ -328,7 +330,7 @@ const Buscador = ({ eventos, user }) => {
             />
           </div>
           <div className="buscador-checks_item">
-            <label>Xénero</label>
+            <label>{t('buscador.genre')}</label>
             <input
               type="checkbox"
               checked={searchGenre}
@@ -349,7 +351,7 @@ const Buscador = ({ eventos, user }) => {
               showAdvancedSearch ? "show-advanced" : ""
             }`}
           >
-            <label>Gratuito</label>
+            <label>{t('buscador.free')}</label>
             <input
               type="checkbox"
               {...register("freeEvent")}
@@ -362,7 +364,7 @@ const Buscador = ({ eventos, user }) => {
               showAdvancedSearch ? "show-advanced" : ""
             }`}
           >
-            <label>Só favoritos</label>
+            <label>{t('buscador.favoritesOnly')}</label>
             <input
               type="checkbox"
               checked={favoritesOnly}
@@ -378,7 +380,7 @@ const Buscador = ({ eventos, user }) => {
           }`}
         >
           <div className=" buscador-datalabel">
-            <label>Data</label>
+            <label>{t('buscador.date')}</label>
             <input
               type="checkbox"
               checked={searchDate}
@@ -392,11 +394,11 @@ const Buscador = ({ eventos, user }) => {
             >
               <label>
                 <input type="radio" name="dateOption" value="Esta semana" />
-                Esta semana
+                {t('buscador.thisWeek')}
               </label>
               <label>
                 <input type="radio" name="dateOption" value="Esta finde" />
-                Esta finde
+                {t('buscador.thisWeekend')}
               </label>
               <label>
                 <input
@@ -404,25 +406,24 @@ const Buscador = ({ eventos, user }) => {
                   name="dateOption"
                   value="A vindeira semana"
                 />
-                A vindeira semana
+                {t('buscador.nextWeek')}
               </label>
               <label>
                 <input type="radio" name="dateOption" value="Este mes" />
-                Este mes
+                {t('buscador.thisMonth')}
               </label>
 
               <label>
-                <input type="radio" name="dateOption" value="O vindeiro mes" />O
-                vindeiro mes
+                <input type="radio" name="dateOption" value="O vindeiro mes" />{t('buscador.nextMonth')}
               </label>
               <label>
                 <input type="radio" name="dateOption" value="Persoalizado" />
-                Persoalizado
+                {t('buscador.custom')}
               </label>
               {customDates && (
                 <div>
                   <label>
-                    Data inicial:
+                    {t('buscador.startDate')}
                     <input
                       type="date"
                       onChange={(e) =>
@@ -431,7 +432,7 @@ const Buscador = ({ eventos, user }) => {
                     />
                   </label>
                   <label>
-                    Data final:
+                    {t('buscador.endDate')}
                     <input
                       type="date"
                       onChange={(e) =>
@@ -451,8 +452,8 @@ const Buscador = ({ eventos, user }) => {
           }`}
         >
           <div className="botones-buscar-limpiar">
-            <Button text="Limpar" variant="small" onClick={cleanFiltered} />{" "}
-            <Button text="Buscar" variant="small" onClick={handleSearchClick} />
+            <Button text={t('buttons.clear')} variant="small" onClick={cleanFiltered} />{" "}
+            <Button text={t('buttons.search')} variant="small" onClick={handleSearchClick} />
           </div>
 
           <BiChevronsUp

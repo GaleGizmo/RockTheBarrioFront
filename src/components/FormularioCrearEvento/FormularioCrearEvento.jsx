@@ -16,10 +16,12 @@ import {
 } from "../../shared/api";
 import LocalizacionSelector from "../LocalizacionSelector/LocalizacionSelector";
 import EventoConfirmModal from "../EventoConfirmModal/EventoConfirmModal";
+import { useTranslation } from "react-i18next";
 
 const FormularioCrearEvento = () => {
   const { user } = useSelector((state) => state.usuariosReducer);
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const {
     register,
     handleSubmit,
@@ -110,12 +112,12 @@ const FormularioCrearEvento = () => {
   const dispatch = useDispatch();
   const [imageFile, setImageFile] = useState();
   const statusOptions = [
-    { label: "Ok", value: "Ok" },
-    { label: "Borrador", value: "draft" },
-    { label: "Cancelado", value: "cancelled" },
-    { label: "Aplazado", value: "delayed" },
-    { label: "Nova data", value: "new_date" },
-    { label: "Esgotado", value: "soldout" },
+    { label: t('forms.statusOptions.ok'), value: "Ok" },
+    { label: t('forms.statusOptions.draft'), value: "draft" },
+    { label: t('forms.statusOptions.cancelled'), value: "cancelled" },
+    { label: t('forms.statusOptions.delayed'), value: "delayed" },
+    { label: t('forms.statusOptions.newDate'), value: "new_date" },
+    { label: t('forms.statusOptions.soldout'), value: "soldout" },
   ];
   const handleIcon = () => {
     navigate(-1);
@@ -129,43 +131,42 @@ const FormularioCrearEvento = () => {
         onConfirm={handleConfirm}
         data={pendingData}
         festivals={nextFestivals}
-        actionLabel="Crear evento"
         imagePreview={imageFile}
         isSubmitting={isSubmitting}
       />
       <div className="cardCrearEvento">
         <AiFillCloseSquare className="close-icon" onClick={handleIcon} />
-        <h1>Crear Evento</h1>
+        <h1>{t('createEvent.title')}</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="div-inputCrearEvento">
-            <label>Título</label>
+            <label>{t('forms.title')}</label>
             <input
               className="inputCrearEvento"
               {...register("title", { required: true })}
             />
             {errors.title && (
-              <span className="error-message">Título é requerido</span>
+              <span className="error-message">{t('forms.titleRequired')}</span>
             )}
           </div>
           <div className="div-inputCrearEvento">
-            <label>Artista/s</label>
+            <label>{t('forms.artist')}</label>
             <input
               className="inputCrearEvento"
               {...register("artist", { required: !isDraft })}
             />
             {errors.artist && (
-              <span className="error-message">Artista é requerido</span>
+              <span className="error-message">{t('forms.artistRequired')}</span>
             )}
           </div>
           <div className="infoCrearEvento">
-            <label>Información</label>
+            <label>{t('forms.information')}</label>
             <textarea
               {...register("content", { required: false })}
               className="inputCrearEvento"
             />
 
             <div className="previewWrapper">
-              <strong>Vista previa:</strong>
+              <strong>{t('forms.previewLabel')}</strong>
               <div className="previewContent">
                 {formatContent(watch("content"))}
               </div>
@@ -192,11 +193,11 @@ const FormularioCrearEvento = () => {
               }}
             />
             {errors.site && (
-              <span className="error-message">Lugar é requerido</span>
+              <span className="error-message">{t('forms.locationRequired')}</span>
             )}
           </div>
           <div className="div-inputCrearEvento">
-            <label>Prezo</label>
+            <label>{t('forms.price')}</label>
             <input
               className="inputCrearEvento"
               type="text"
@@ -204,7 +205,7 @@ const FormularioCrearEvento = () => {
                 required: !isDraft,
                 pattern: {
                   value: /^\d+(\.\d{1,2})?$/,
-                  message: "Máximo dous decimáis permitidos.",
+                  message: t('forms.priceDecimals'),
                 },
               })}
               defaultValue={0}
@@ -215,23 +216,23 @@ const FormularioCrearEvento = () => {
             )}
             {priceError && (
               <span className="error-message">
-                Por favor, introduce un número válido
+                {t('forms.priceInvalid')}
               </span>
             )}
           </div>
           {showBuyTicketField ? (
             <div className="div-inputCrearEvento">
-              <label>URL de compra</label>
+              <label>{t('forms.buyUrl')}</label>
               <input className="inputCrearEvento" {...register("buy_ticket")} />
             </div>
           ) : (
             <div className="div-checkbox">
-              <label>Entrada Inversa</label>
+              <label>{t('forms.reverseTicket')}</label>
               <input type="checkbox" {...register("payWhatYouWant")} />{" "}
             </div>
           )}
           <div className="fechaCrearEvento">
-            <label>Data do Evento</label>
+            <label>{t('forms.date')}</label>
             <input
               className="inputCrearEvento"
               type="date"
@@ -239,9 +240,9 @@ const FormularioCrearEvento = () => {
               {...register("day_start", { required: !isDraft })}
             />
             {errors.day_start && (
-              <span className="error-message">Data é requerida</span>
+              <span className="error-message">{t('forms.dateRequired')}</span>
             )}
-            <label>Hora de Inicio</label>
+            <label>{t('forms.time')}</label>
             <input
               className="inputCrearEvento"
               type="time"
@@ -252,17 +253,17 @@ const FormularioCrearEvento = () => {
               {...register("time_start", { required: !isDraft })}
             />
             {errors.time_start && (
-              <span className="error-message">Hora de Inicio é requerida</span>
+              <span className="error-message">{t('forms.timeRequired')}</span>
             )}
           </div>
           <div className="div-inputCrearEvento">
-            <label>Festival</label>
+            <label>{t('forms.festival')}</label>
             <select
               className="inputCrearEvento"
               name="festival"
               {...register("festival")}
             >
-              <option value="">Ningún</option>
+              <option value="">{t('forms.none')}</option>
               {nextFestivals.map((festival) => (
                 <option key={festival._id} value={festival._id}>
                   {festival.name}
@@ -272,22 +273,22 @@ const FormularioCrearEvento = () => {
           </div>
 
           <div className="div-inputCrearEvento">
-            <label>Xénero</label>
+            <label>{t('forms.genre')}</label>
             <input className="inputCrearEvento" {...register("genre")} />
           </div>
           <div className="div-inputCrearEvento">
-            <label>YouTube ID</label>
+            <label>{t('forms.youtubeId')}</label>
             <input
               className="inputCrearEvento"
               {...register("youtubeVideoId")}
             />
           </div>
           <div className="div-inputCrearEvento">
-            <label>Máis Info</label>
+            <label>{t('forms.moreInfoLabel')}</label>
             <input className="inputCrearEvento" {...register("url")} />
           </div>
           <div className="div-inputCrearEvento">
-            <label>Evento Destacado</label>
+            <label>{t('forms.featuredEvent')}</label>
             <input
               className="inputCrearEvento"
               type="checkbox"
@@ -295,7 +296,7 @@ const FormularioCrearEvento = () => {
             />{" "}
           </div>
           <div className="div-inputCrearEvento">
-            <label>Estado:</label>
+            <label>{t('forms.statusLabel')}</label>
             <select
               className="inputCrearEvento"
               name="status"
@@ -309,7 +310,7 @@ const FormularioCrearEvento = () => {
             </select>
           </div>
           <div className="div-inputCrearEvento">
-            <label>Imaxe</label>
+            <label>{t('forms.image')}</label>
 
             <SubirImagen
               register={register}
@@ -327,13 +328,13 @@ const FormularioCrearEvento = () => {
           <div className="margin-boton">
             <Button
               type="button"
-              text="Cancelar"
+              text={t('buttons.cancel')}
               variant="medium"
               onClick={handleIcon}
             />
             <Button
               type="submit"
-              text="Crear evento"
+              text={t('buttons.submitEvent')}
               variant="medium"
               isSubmitting={isSubmitting}
               onClick={handleSubmit}

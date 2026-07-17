@@ -1,5 +1,12 @@
-export function formatDate(dateString, locale) {
+import { format, formatDistanceToNow, parseISO } from "date-fns";
+import { gl, es } from "date-fns/locale";
+
+const getDateFnsLocale = (localeKey) =>
+  String(localeKey || "gl").startsWith("es") ? es : gl;
+
+export function formatDate(dateString, locale = "gl") {
   const dateObj = new Date(dateString);
+  const localeKey = String(locale || "gl").startsWith("es") ? "es-ES" : "gl-ES";
   const opciones = {
     weekday: "short",
     year: "numeric",
@@ -7,10 +14,9 @@ export function formatDate(dateString, locale) {
     day: "numeric",
     hour: "numeric",
     minute: "numeric",
-    locale
    
   };
-  return dateObj.toLocaleDateString(locale, opciones);
+  return dateObj.toLocaleDateString(localeKey, opciones);
 }
 
 export function esAnterior(fecha){
@@ -23,36 +29,24 @@ export function esAnterior(fecha){
 export function esHoy(fecha) {
   const fechaActual = new Date();
   const fechaIntroducida = new Date(fecha);
-  const opciones = {
-    weekday: "short",
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-    locale: "gl",
-  };
-  const fechaIntroducidaFormateada = fechaIntroducida.toLocaleDateString(
-    "gl",
-    opciones
+  return (
+    fechaIntroducida.getFullYear() === fechaActual.getFullYear() &&
+    fechaIntroducida.getMonth() === fechaActual.getMonth() &&
+    fechaIntroducida.getDate() === fechaActual.getDate()
   );
-  const fechaActualFormateada = fechaActual.toLocaleDateString(
-    "gl",
-    opciones
-  );
-  return fechaIntroducidaFormateada === fechaActualFormateada;
 }
-
-import { format, formatDistanceToNow, parseISO } from "date-fns";
-import { gl } from "date-fns/locale";
 
 /**
  * Formatea la fecha de un evento con formato largo
  * @param {string} dateString - La fecha en formato ISO
  * @returns {string} - La fecha formateada (ej: "15 novembro, 20:00")
  */
-export function formatearFechaEvento(dateString) {
+export function formatearFechaEvento(dateString, locale = "gl") {
   if (!dateString) return null;
   const fechaEvento = parseISO(dateString);
-  return format(fechaEvento, " dd MMMM, HH:mm", { locale: gl });
+  return format(fechaEvento, " dd MMMM, HH:mm", {
+    locale: getDateFnsLocale(locale),
+  });
 }
 
 /**
@@ -60,11 +54,11 @@ export function formatearFechaEvento(dateString) {
  * @param {string} dateString - La fecha en formato ISO
  * @returns {string} - Los días faltantes en formato legible (ej: "3 días")
  */
-export function calcularDiasFaltantes(dateString) {
+export function calcularDiasFaltantes(dateString, locale = "gl") {
   if (!dateString) return null;
   const fechaEvento = parseISO(dateString);
   return formatDistanceToNow(fechaEvento, {
     unit: "day",
-    locale: gl,
+    locale: getDateFnsLocale(locale),
   });
 }

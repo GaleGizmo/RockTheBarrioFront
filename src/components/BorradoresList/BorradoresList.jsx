@@ -1,17 +1,15 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import Loader from "../Loader/Loader";
 import { Helmet } from "react-helmet";
-
-
 import "./BorradoresList.css";
 import { getBorradoresAction } from "../../redux/eventos/eventos.actions";
 import Borrador from "../Borrador/Borrador";
+import { useTranslation } from "react-i18next";
 
 const BorradoresList = () => {
   const dispatch = useDispatch();
-
+  const { t } = useTranslation();
   const { user } = useSelector((state) => state.usuariosReducer);
   const { borradores, loading } = useSelector((state) => state.eventosReducer);
 
@@ -28,7 +26,7 @@ const BorradoresList = () => {
           content="Lista de borradores de eventos que aún no se han publicado en ROCK THE BARRIO."
         />
       </Helmet>
-      <h2 className="titulo-borradores">Borradores de eventos</h2>
+      <h2 className="titulo-borradores">{t('borradores.title')}</h2>
       <div className="borradores">
         {loading ? (
           <Loader />
@@ -37,7 +35,7 @@ const BorradoresList = () => {
             <Borrador user={user} borrador={borrador} key={borrador._id} />
           ))
         ) : (
-          <p>Non hai borradores dispoñibles.</p>
+          <p>{t('borradores.empty')}</p>
         )}
       </div>
     </div>

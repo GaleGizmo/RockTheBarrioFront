@@ -12,6 +12,7 @@ import {
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
 import CorreccionModal from "../CorreccionModal/CorreccionModal";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Perfil = ({ userData, onEditClick }) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -19,6 +20,7 @@ const Perfil = ({ userData, onEditClick }) => {
   const [isSubmitting, setIsSubimitting] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   // Limpiar mensajes de éxito y error al desmontar el componente
   useEffect(() => {
@@ -92,10 +94,10 @@ const Perfil = ({ userData, onEditClick }) => {
   return (
     <div>
       <p>
-        Email: <span className="perfil__user-data">{userData.email}</span>
+        {t('profile.email')}: <span className="perfil__user-data">{userData.email}</span>
       </p>
       <p>
-        Usuario: <span className="perfil__user-data">{userData.username}</span>{" "}
+        {t('profile.username')}: <span className="perfil__user-data">{userData.username}</span>{" "}
       </p>
       {userData.avatar && (
         <div className="perfil-avatar">
@@ -103,35 +105,35 @@ const Perfil = ({ userData, onEditClick }) => {
         </div>
       )}
       <p>
-        Email con novos eventos:{" "}
+        {t('profile.newEventEmail')}:{" "}
         {userData.newevent ? (
-          <span className="perfil__user-data green">Si</span>
+          <span className="perfil__user-data green">{t('profile.yes')}</span>
         ) : (
-          <span className="perfil__user-data red">Non</span>
+          <span className="perfil__user-data red">{t('profile.no')}</span>
         )}
       </p>
 
       <p>
-        Email con eventos da semana:{" "}
+        {t('profile.newsletterEmail')}:{" "}
         {userData.newsletter ? (
-          <span className="perfil__user-data green">Si</span>
+          <span className="perfil__user-data green">{t('profile.yes')}</span>
         ) : (
-          <span className="perfil__user-data red">Non</span>
+          <span className="perfil__user-data red">{t('profile.no')}</span>
         )}
       </p>
       <div>
         {userData && userData.role === 2 && (
           <div className="botones-eventos">
-            <Button text="Crear evento" variant="small" onClick={() => navigate('/crear-evento')} />
-            <Button text="Crear festival" variant="small" onClick={() => navigate('/crear-festival')} />
+            <Button text={t('buttons.createEvent')} variant="small" onClick={() => navigate('/crear-evento')} />
+            <Button text={t('buttons.createFestival')} variant="small" onClick={() => navigate('/crear-festival')} />
             <Button
-              text="Mandar diarios"
+              text={t('buttons.sendDaily')}
               variant="small"
               isSubmitting={isSubmitting}
               onClick={sendDiarios}
             />
             <Button
-              text="Corrección"
+              text={t('buttons.correction')}
               variant="small"
               onClick={handleCorreccionClick}
             />
@@ -139,18 +141,18 @@ const Perfil = ({ userData, onEditClick }) => {
         )}
       </div>
       <div className="margin-botonReg">
-        <Button text="Editar Datos" variant="small" onClick={onEditClick} />
+        <Button text={t('buttons.editData')} variant="small" onClick={onEditClick} />
         <Button
-          text="Borrar conta"
+          text={t('buttons.deleteAccount')}
           variant="small delete-account-button"
           onClick={handleDeleteUser}
         />
       </div>
       <ConfirmModal
-        title="Confirmar borrado"
-        p1="Seguro que desexas borrar a túa conta?"
-        p2="Borraránse tamén todos os comentarios que teñas feito"
-        buttonText="Borrar"
+        title={t('profile.deleteTitle')}
+        p1={t('profile.deleteQuestion')}
+        p2={t('profile.deleteWarning')}
+        buttonText={t('profile.deleteButton')}
         show={showDeleteModal}
         onCancel={handleDeleteCancelled}
         onConfirm={handleDeleteConfirmed}

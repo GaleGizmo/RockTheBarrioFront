@@ -212,11 +212,12 @@
   font-size: 14px;
 }
 
-.status::before {
+.status[data-status-label]:not([data-status-label=""])::before {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) rotate(-30deg);
+  content: attr(data-status-label);
   opacity: 0;
   color: white;
   padding: 10px 20px;
@@ -253,22 +254,18 @@
   }
 }
 .soldout::before {
-  content: "ESGOTADO";
   background-color: var(--soldout-color);
   letter-spacing: 0.2em;
 }
 .delayed::before {
   letter-spacing: 0.2em;
-  content: "APRAZADO";
   background-color: var(--delayed-color);
 }
 .cancelled::before {
   letter-spacing: 0.2em;
-  content: "CANCELADO";
   background-color: var(--cancelled-color);
 }
 .new_date::before {
-  content: "NOVA  DATA";
   background-color: var(--new_date-color);
   letter-spacing: 0.2em;
 }

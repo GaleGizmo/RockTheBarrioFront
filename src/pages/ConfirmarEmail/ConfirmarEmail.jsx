@@ -10,9 +10,11 @@ import Button from "../../components/Button/Button";
 import "./ConfirmarEmail.css";
 import { useNavigate } from "react-router-dom";
 import { AiFillCloseSquare } from "react-icons/ai";
+import { useTranslation } from "react-i18next";
 
 const ConfirmarEmail = ({ token }) => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   useEffect(() => {
     dispatch(clearError());
   }, []);
@@ -49,7 +51,7 @@ const ConfirmarEmail = ({ token }) => {
     <div className="cardLogin recuperar">
       <AiFillCloseSquare className="close-icon" onClick={handleIcon} />
       <div>
-        <h1>Confirmar Email</h1>
+        <h1>{t('confirmEmail.title')}</h1>
         {error && <p className="error-message">{error}</p>}
         {successMessage && <p className="success-message">{successMessage}</p>}
       </div>
@@ -59,28 +61,26 @@ const ConfirmarEmail = ({ token }) => {
             <input
               {...register("email")}
               type="email"
-              placeholder="Correo electrónico"
+              placeholder={t('confirmEmail.emailPlaceholder')}
               className="inputLogin"
             />
           </label>
         </div>
         {token === "unsubscribenewsletter" && (
           <p>
-            Ao premer en <strong>Confirmar</strong> deixarás de recibir os
-            eventos semanais
+            {t('confirmEmail.unsubscribeNewsletterBefore')} <strong>{t('buttons.confirm')}</strong> {t('confirmEmail.unsubscribeNewsletterAfterNewsletter')}
           </p>
         )}
         {token === "unsubscribenewevent" && (
           <p>
-            Ao premer en <strong>Confirmar</strong> deixarás de recibir os
-            emails de evento
+            {t('confirmEmail.unsubscribeNewsletterBefore')} <strong>{t('buttons.confirm')}</strong> {t('confirmEmail.unsubscribeNewsletterAfterNewEvent')}
           </p>
         )}
 
         <div className="margin-botonLogin">
           <Button
             type="submit"
-            text={token.includes("unsubscribe") ? "Confirmar" : "Enviar correo"}
+            text={token.includes("unsubscribe") ? t('buttons.confirm') : t('confirmEmail.sendEmail')}
             variant="large"
           />
         </div>

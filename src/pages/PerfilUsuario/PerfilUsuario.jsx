@@ -7,11 +7,13 @@ import { logout } from "../../redux/usuarios/usuarios.actions";
 import { AiFillCloseSquare } from "react-icons/ai";
 import FormularioRegistro from "../../components/FormularioRegistro/FormularioRegistro";
 import Button from "../../components/Button/Button";
+import { useTranslation } from "react-i18next";
 
 const PerfilUsuario = () => {
   const userData = useSelector((state) => state.usuariosReducer.user);
   const [isEditing, setIsEditing] = useState(false);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -26,11 +28,11 @@ const PerfilUsuario = () => {
       {!isEditing && (
         <div className="cardReg perfil-container">
           <AiFillCloseSquare className="close-icon" onClick={goHome} />
-          <h1>PERFIL DE USUARIO</h1>
+          <h1>{t('profile.title')}</h1>
           <div className="close-session">
             <Button
               variant="small"
-              text="Pechar sesión"
+              text={t('buttons.closeSession')}
               onClick={logout}
             ></Button>{" "}
           </div>

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import Button from "../Button/Button";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 const LocalizacionSelector = ({
   locations,
@@ -10,6 +11,7 @@ const LocalizacionSelector = ({
   onChange,
   addLocalizacion,
 }) => {
+  const { t } = useTranslation();
   const [selectedId, setSelectedId] = useState(defaultLocationId || "");
   const [showInput, setShowInput] = useState(false);
   const [newLocName, setNewLocName] = useState("");
@@ -92,11 +94,11 @@ const LocalizacionSelector = ({
               className="inputCrearEvento"
               value={newLocName}
               onChange={(e) => setNewLocName(e.target.value)}
-              placeholder="Nova localización"
+              placeholder={t('forms.newLocation')}
             />
             <Button
               type="button"
-              text="Gardar"
+              text={t('buttons.save')}
               variant="medium"
               onClick={handleAddLoc}
             />
@@ -104,7 +106,7 @@ const LocalizacionSelector = ({
         )}
       </div>
       <label className="div-checkbox">
-        Varias
+        {t('forms.various')}
         <input
           type="checkbox"
           checked={isVarios}

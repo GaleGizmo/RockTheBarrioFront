@@ -38,19 +38,23 @@ import { toast } from "react-toastify";
 import { isLongTitle } from "../../utils/textUtils";
 import { handleImageError } from "../../utils/imageHelpers";
 import { goToHome } from "../../utils/navigationHelpers";
+import { useTranslation } from "react-i18next";
 
 const DetallesEvento = () => {
   const location = useLocation();
+  const { t, i18n } = useTranslation();
   const { successMessage } = useSelector((state) => state.eventosReducer);
   const dispatch = useDispatch();
   const { id } = useParams();
   const [shareModal, setShareModal] = useState(false);
-  const { loading, evento, eventos, eventosFiltrados } = useSelector((reducer) => reducer.eventosReducer);
+  const { loading, evento, eventos, eventosFiltrados } = useSelector(
+    (reducer) => reducer.eventosReducer,
+  );
   useEffect(() => {
     if (!evento || (evento._id !== id && evento.shortURL !== id)) {
       // Intentar resolver desde Redux primero
       const enRedux = [...eventosFiltrados, ...eventos].find(
-        (e) => e._id === id || e.shortURL === id
+        (e) => e._id === id || e.shortURL === id,
       );
       if (enRedux) {
         dispatch({ type: "GET_EVENTO", contenido: enRedux });
@@ -67,7 +71,7 @@ const DetallesEvento = () => {
   const { isFavorite, handleFavorites, showFavorite } = useFavorites(
     user?.favorites?.includes(evento?._id) || false,
     evento ? evento._id : null,
-    user ? user._id : null
+    user ? user._id : null,
   );
   const [showImageModal, setShowImageModal] = useState(false);
   const [imageFailed, setImageFailed] = useState(false);
@@ -104,12 +108,15 @@ const DetallesEvento = () => {
   };
   const [showMap, setShowMap] = useState(false);
 
-  const listaNavegacion = eventosFiltrados.length > 0 ? eventosFiltrados : eventos;
-  const indexActual = listaNavegacion.findIndex(
-    (e) => e._id === evento?._id
-  );
-  const eventoPrevio = indexActual > 0 ? listaNavegacion[indexActual - 1] : null;
-  const eventoSiguiente = indexActual < listaNavegacion.length - 1 ? listaNavegacion[indexActual + 1] : null;
+  const listaNavegacion =
+    eventosFiltrados.length > 0 ? eventosFiltrados : eventos;
+  const indexActual = listaNavegacion.findIndex((e) => e._id === evento?._id);
+  const eventoPrevio =
+    indexActual > 0 ? listaNavegacion[indexActual - 1] : null;
+  const eventoSiguiente =
+    indexActual < listaNavegacion.length - 1
+      ? listaNavegacion[indexActual + 1]
+      : null;
   const navegarA = (ev) => navigate(`/${ev.shortURL || ev._id}`);
 
   const handleToggleMap = () => {
@@ -118,12 +125,21 @@ const DetallesEvento = () => {
 
   // Usar funciones de utils
   const diasFaltantes = evento?.date_start
-    ? calcularDiasFaltantes(evento.date_start)
+    ? calcularDiasFaltantes(evento.date_start, i18n.language)
     : null;
   const fechaStart = evento?.date_start
-    ? formatearFechaEvento(evento.date_start)
+    ? formatearFechaEvento(evento.date_start, i18n.language)
     : null;
-  const fechaEnd = evento?.date_end ? formatDate(evento.date_end) : null;
+  const fechaEnd = evento?.date_end
+    ? formatDate(evento.date_end, i18n.language)
+    : null;
+  const statusLabelMap = {
+    soldout: t("forms.statusOptions.soldout"),
+    delayed: t("forms.statusOptions.delayed"),
+    cancelled: t("forms.statusOptions.cancelled"),
+    new_date: t("forms.statusOptions.newDate"),
+  };
+  const statusLabel = statusLabelMap[evento?.status] || "";
 
   useEffect(() => {
     if (location.state?.fromCreate && successMessage) {
@@ -140,10 +156,10 @@ const DetallesEvento = () => {
     <>
       <ConfirmModal
         show={showDeleteModal}
-        title="Eliminar evento"
-        p1={`¿Seguro que queres eliminar "${evento?.title}"?`}
-        p2="Esta acción non se pode desfacer."
-        buttonText="Eliminar"
+        title={t("detalles.deleteTitle")}
+        p1={t("detalles.deleteQuestion", { title: evento?.title })}
+        p2={t("detalles.deleteWarning")}
+        buttonText={t("buttons.eliminate")}
         deleteAccount={true}
         onCancel={() => setShowDeleteModal(false)}
         onConfirm={handleDeleteConfirmed}
@@ -151,7 +167,7 @@ const DetallesEvento = () => {
       {loading ? (
         <Loader />
       ) : !evento ? (
-        <div>No se encontró el evento.</div>
+        <div>{t("events.noEvent")}</div>
       ) : (
         <div className="detalles-container">
           {location.state?.fromCreate && successMessage && (
@@ -164,7 +180,10 @@ const DetallesEvento = () => {
               name="description"
               content={`${evento.artist} en ${evento.site.split(",")[0]}. Concierto en Santiago de Compostela.`}
             />
-            <link rel="canonical" href={`https://rockthebarrio.es/${evento.shortURL || evento._id}`} />
+            <link
+              rel="canonical"
+              href={`https://rockthebarrio.es/${evento.shortURL || evento._id}`}
+            />
 
             {/* Open Graph */}
             <meta property="og:type" content="event" />
@@ -174,39 +193,46 @@ const DetallesEvento = () => {
               content={`${evento.artist} en ${evento.site.split(",")[0]}`}
             />
             <meta property="og:image" content={evento.image} />
-            <meta property="og:url" content={`https://rockthebarrio.es/${evento.shortURL || evento._id}`} />
+            <meta
+              property="og:url"
+              content={`https://rockthebarrio.es/${evento.shortURL || evento._id}`}
+            />
 
             {/* Schema.org JSON-LD para eventos musicales */}
             <script type="application/ld+json">
               {JSON.stringify({
                 "@context": "https://schema.org",
                 "@type": "MusicEvent",
-                "name": evento.title,
-                "performer": {
+                name: evento.title,
+                performer: {
                   "@type": "MusicGroup",
-                  "name": evento.artist
+                  name: evento.artist,
                 },
-                "startDate": evento.date_start,
-                "location": {
+                startDate: evento.date_start,
+                location: {
                   "@type": "Place",
-                  "name": evento.site?.split(",")[0] || "Santiago de Compostela",
-                  "address": {
+                  name: evento.site?.split(",")[0] || "Santiago de Compostela",
+                  address: {
                     "@type": "PostalAddress",
-                    "addressLocality": "Santiago de Compostela",
-                    "addressRegion": "Galicia",
-                    "addressCountry": "ES"
-                  }
+                    addressLocality: "Santiago de Compostela",
+                    addressRegion: "Galicia",
+                    addressCountry: "ES",
+                  },
                 },
-                "image": evento.image,
-                "url": `https://rockthebarrio.es/${evento.shortURL || evento._id}`,
-                "offers": evento.price ? {
-                  "@type": "Offer",
-                  "price": evento.price,
-                  "priceCurrency": "EUR",
-                  "availability": "https://schema.org/InStock",
-                  "url": evento.url || `https://rockthebarrio.es/${evento.shortURL || evento._id}`
-                } : undefined,
-                "description": `${evento.artist} en concierto en ${evento.site?.split(",")[0] || "Santiago de Compostela"}`
+                image: evento.image,
+                url: `https://rockthebarrio.es/${evento.shortURL || evento._id}`,
+                offers: evento.price
+                  ? {
+                      "@type": "Offer",
+                      price: evento.price,
+                      priceCurrency: "EUR",
+                      availability: "https://schema.org/InStock",
+                      url:
+                        evento.url ||
+                        `https://rockthebarrio.es/${evento.shortURL || evento._id}`,
+                    }
+                  : undefined,
+                description: `${evento.artist} en concierto en ${evento.site?.split(",")[0] || "Santiago de Compostela"}`,
               })}
             </script>
           </Helmet>
@@ -215,6 +241,7 @@ const DetallesEvento = () => {
             className={`divCardDetEv  ${
               evento.status ? "status " + evento.status : ""
             }`}
+            data-status-label={statusLabel}
           >
             <div className="cardDetEv">
               {eventoPrevio && (
@@ -271,11 +298,17 @@ const DetallesEvento = () => {
                       src={evento.image}
                       alt={evento.title}
                       onClick={openImageModal}
-                      onError={(e) => { handleImageError(e); setImageFailed(true); }}
+                      onError={(e) => {
+                        handleImageError(e);
+                        setImageFailed(true);
+                      }}
                     />
                     <img
                       src={SVG_FALLBACK}
-                      style={{ display: imageFailed ? "block" : "none", cursor: "zoom-in" }}
+                      style={{
+                        display: imageFailed ? "block" : "none",
+                        cursor: "zoom-in",
+                      }}
                       onClick={openImageModal}
                     />
                     <AiOutlineZoomIn
@@ -284,15 +317,13 @@ const DetallesEvento = () => {
                     />
                   </div>
                 ) : (
-                  <div className="divCardDetEv__noimage">
-                
-                  </div>
+                  <div className="divCardDetEv__noimage"></div>
                 )}
                 <div className="detalles-info">
                   <h2>{evento.artist}</h2>
                   <h3>
                     <div className="detalles_item">
-                      <strong>Lugar: </strong>
+                      <strong>{t("detalles.place")} </strong>
                       {evento.site && (
                         <>
                           <span> {evento.site} </span>
@@ -308,11 +339,11 @@ const DetallesEvento = () => {
                   </h3>
                   <h3>
                     {evento.price == 0 && evento.payWhatYouWant == false ? (
-                      <div className="gratuito">GRATUITO</div>
+                      <div className="gratuito">{t("events.free")}</div>
                     ) : evento.price > 0 ? (
                       <div className="detalles_item">
                         <div>
-                          <strong>Prezo: </strong>
+                          <strong>{t("detalles.price")} </strong>
                           {evento.price} {!evento.buy_ticket ? "€" : ""}
                         </div>
                         {evento.buy_ticket && (
@@ -326,7 +357,9 @@ const DetallesEvento = () => {
                         )}
                       </div>
                     ) : (
-                      <div className="gratuito">ENTRADA INVERSA</div>
+                      <div className="gratuito">
+                        {t("events.payWhatYouWant")}
+                      </div>
                     )}
                   </h3>
                   <MapPortal
@@ -336,17 +369,21 @@ const DetallesEvento = () => {
                   />
                   {esHoy(evento.date_start) ? (
                     <h3 className="blue-text">
-                      <span> HOXE {fechaStart.split(",")[1]}h</span>
-                   
+                      <span>
+                        {" "}
+                        {t("events.today")} {fechaStart.split(",")[1]}h
+                      </span>
                     </h3>
                   ) : (
                     <h3>
                       <div className="muestra-fecha">
-                        <strong>Data: </strong>
+                        <strong>{t("detalles.date")} </strong>
                         <span> {fechaStart}h </span>
 
                         <p className="dias-faltantes__detalle">
-                          {esAnterior(evento.date_start) ? "Fai" : "Dentro de"}{" "}
+                          {esAnterior(evento.date_start)
+                            ? t("detalles.ago")
+                            : t("detalles.in")}{" "}
                           <span className="blue-text">{diasFaltantes} </span>
                         </p>
                       </div>{" "}
@@ -357,7 +394,7 @@ const DetallesEvento = () => {
                   {evento.genre && (
                     <h3>
                       <div className="detalles_item">
-                        <strong>Xénero:</strong> {evento.genre}
+                        <strong>{t("detalles.genre")}</strong> {evento.genre}
                       </div>
                     </h3>
                   )}
@@ -380,8 +417,8 @@ const DetallesEvento = () => {
                         <ToolTip
                           content={
                             isFavorite
-                              ? "Favorito engadido"
-                              : "Favorito eliminado"
+                              ? t("detalles.favoriteAdded")
+                              : t("detalles.favoriteRemoved")
                           }
                           specificClass={"favorito-tooltip__detalle"}
                         />
@@ -399,18 +436,22 @@ const DetallesEvento = () => {
 
               {evento.url && (
                 <div className="margin-boton-info">
-                  <Button text="+Info" variant="medium" onClick={comprar} />
+                  <Button
+                    text={t("buttons.moreInfo")}
+                    variant="medium"
+                    onClick={comprar}
+                  />
                 </div>
               )}
               {user?.role === 2 && (
                 <div className="evento-botonesAdmin">
                   <Button
-                    text="Eliminar"
+                    text={t("buttons.eliminate")}
                     variant="medium delete-evento-button"
                     onClick={eliminarEvento}
                   />
                   <Button
-                    text="Editar"
+                    text={t("buttons.editEvent")}
                     variant="medium"
                     onClick={editarEvento}
                   />

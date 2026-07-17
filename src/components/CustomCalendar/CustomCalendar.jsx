@@ -1,19 +1,21 @@
 import React, { useMemo, useState } from "react";
-import galicianTranslations from "../../shared/galician.json";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "./CustomCalendar.css";
-
 import Legend from "../Legend/Legend";
 import {  useDispatch, useSelector } from "react-redux";
 import { API } from "../../shared/api";
 import { setFilteredEventos, setFiltradosFromCalendar, toggleCalendar } from "../../redux/eventos/eventos.actions";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 
 function CustomCalendar({ eventos }) {
   const dispatch=useDispatch()
   const navigate=useNavigate()
+  const { t } = useTranslation();
+  const monthNames = t('calendar.monthNames', { returnObjects: true });
+  const dayNames = t('calendar.dayNames', { returnObjects: true });
   let {isCalendarOpen} =useSelector((reducer)=>reducer.eventosReducer)
   const eventDates = useMemo(
     () =>
@@ -85,10 +87,10 @@ function CustomCalendar({ eventos }) {
   };
   
   const formatMonthYear = (locale, date) =>
-    `${galicianTranslations.monthNames[date.getMonth()]} ${date.getFullYear()}`;
+    `${monthNames[date.getMonth()]} ${date.getFullYear()}`;
 
   const formatShortWeekday = (locale, date) =>
-    galicianTranslations.dayNames[date.getDay()].substring(0, 3);
+    dayNames[date.getDay()].substring(0, 3);
 
   return (
     <div className="calendar-container">

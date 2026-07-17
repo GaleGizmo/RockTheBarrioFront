@@ -12,9 +12,11 @@ import Button from "../Button/Button";
 import SubirImagen from "../SubirImagen/SubirImagen";
 import { AiFillCloseSquare } from "react-icons/ai";
 import DropzoneComponent from "../Dropzone/Dropzone";
+import { useTranslation } from "react-i18next";
 
 const FormularioRegistro = ({ userData, isEdit }) => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   useEffect(() => {
     dispatch(clearError());
   }, []);
@@ -22,8 +24,6 @@ const FormularioRegistro = ({ userData, isEdit }) => {
 
   const [imageFile, setImageFile] = useState(isEdit ? userData.avatar : null);
   const [selectedFile, setSelectedFile] = useState(null);
-  // const [newsletter, setNewsletter] = useState(true);
-  // const [newEvent, setNewevent] = useState(false);
 
   const mostrarSubirImagenHandler = () => {
     setMostrarSubirImagen(true);
@@ -88,17 +88,21 @@ const FormularioRegistro = ({ userData, isEdit }) => {
   return (
     <div className={`cardReg ${isEdit ? "isEdit" : ""}`}>
       <AiFillCloseSquare className="close-icon" onClick={handleIcon} />
-      {isEdit ? <h1>EDITAR USUARIO</h1> : <h1> DATE DE ALTA </h1>}
+      {isEdit ? (
+        <h1>{t("register.titleEdit")}</h1>
+      ) : (
+        <h1>{t("register.titleNew")}</h1>
+      )}
       <p className="error-message">{error}</p>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="div-inputReg">
-          <label className="margin-label">E-mail</label>
+          <label className="margin-label">{t("register.email")}</label>
           <input
             {...register("email", {
-              required: "Email é requerido",
+              required: t("register.emailRequired"),
               pattern: {
                 value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-                message: "Formato de email incorrecto",
+                message: t("register.emailFormat"),
               },
             })}
             type="email"
@@ -111,17 +115,17 @@ const FormularioRegistro = ({ userData, isEdit }) => {
           )}
         </div>
         <div className="div-inputReg">
-          <label className="margin-label">Usuario</label>
+          <label className="margin-label">{t("register.username")}</label>
           <input
             {...register("username", {
-              required: "Usuario é requerido",
+              required: t("register.usernameRequired"),
               minLength: {
                 value: 2,
-                message: "Mínimo dous caracteres",
+                message: t("register.usernameMinLength"),
               },
               maxLength: {
                 value: 20,
-                message: "Non máis de 20 caracteres",
+                message: t("register.usernameMaxLength"),
               },
             })}
             className="inputReg"
@@ -133,38 +137,44 @@ const FormularioRegistro = ({ userData, isEdit }) => {
         {!isEdit && (
           <>
             <div className="div-inputReg">
-              <label className="margin-labelReg">Contrasinal</label>
+              <label className="margin-labelReg">
+                {t("register.password")}
+              </label>
               <input
                 {...register("password", { required: true })}
                 type="password"
                 className="inputReg"
               />
               {errors.password && (
-                <span className="error-message">Contrasinal é requerido</span>
+                <span className="error-message">
+                  {t("register.passwordRequired")}
+                </span>
               )}
             </div>
             <div className="div-inputReg">
-              <label className="margin-labelReg">Confirma Contrasinal</label>
+              <label className="margin-labelReg">
+                {t("register.confirmPassword")}
+              </label>
               <input
                 {...register("confirmPassword", {
                   required: true,
                   validate: (value) =>
                     value === getValues("password") ||
-                    "Os contrasinais non coinciden",
+                    t("register.passwordMismatch"),
                 })}
                 type="password"
                 className="inputReg"
               />
               {errors.confirmPassword && (
                 <span className="error-message">
-                  {errors.confirmPassword.message}
+                  {t("register.passwordMismatch")}
                 </span>
               )}
             </div>
           </>
         )}
         <div className="div-inputReg">
-          <label>Email cos eventos da semana</label>
+          <label>{t("register.newsletter")}</label>
           <input
             {...register("newsletter")}
             className="checkReg"
@@ -174,7 +184,7 @@ const FormularioRegistro = ({ userData, isEdit }) => {
           />
         </div>
         <div className="div-inputReg">
-          <label>Email con novos eventos engadidos</label>
+          <label>{t("register.newevent")}</label>
           <input
             {...register("newevent")}
             className="checkReg"
@@ -186,7 +196,7 @@ const FormularioRegistro = ({ userData, isEdit }) => {
         {imageFile ? (
           <div className="div-inputReg imagenReg">
             <Button
-              text="Eliminar avatar"
+              text={t("buttons.removeAvatar")}
               variant="small"
               onClick={removeAvatar}
             />
@@ -215,9 +225,10 @@ const FormularioRegistro = ({ userData, isEdit }) => {
         <div className="margin-botonReg">
           {!isEdit && (
             <div className="div-checkReg">
-              <div>
+              <div className="checkelement">
                 <label>
-                  Acepto os <Link to="/terminos">Termos e Condicións</Link>
+                  {t("register.acceptTerms")}{" "}
+                  <Link to="/terminos">{t("register.TermsAndConditions")}</Link>
                 </label>
                 <input
                   {...register("terminos", { required: true })}
@@ -227,14 +238,15 @@ const FormularioRegistro = ({ userData, isEdit }) => {
                 <p>
                   {errors.terminos && (
                     <span className="error-message">
-                      Debes aceptar os Termos e Condicións
+                      {t("register.termsRequired")}
                     </span>
                   )}
                 </p>
               </div>
-              <div>
+              <div className="checkelement">
                 <label>
-                  Acepto a <Link to="/privacidad">Política de Privacidade</Link>
+                  {t("register.acceptPolicy")}{" "}
+                  <Link to="/privacidad">{t("register.PrivacyPolicy")}</Link>
                 </label>
                 <input
                   {...register("privacidad", { required: true })}
@@ -244,7 +256,7 @@ const FormularioRegistro = ({ userData, isEdit }) => {
                 <p>
                   {errors.privacidad && (
                     <span className="error-message">
-                      Debes aceptar a Política de Privacidade
+                      {t("register.policyRequired")}
                     </span>
                   )}
                 </p>
@@ -253,14 +265,14 @@ const FormularioRegistro = ({ userData, isEdit }) => {
           )}
           <div className="botones-edicion-usuario">
             <Button
-              text="Cancelar"
+              text={t("buttons.cancel")}
               type="button"
               variant="medium"
               onClick={handleCancel}
             />
             <Button
               type="submit"
-              text={isEdit ? "Gardar" : "Rexistrarse"}
+              text={isEdit ? t("buttons.save") : t("buttons.register")}
               variant="medium"
             />{" "}
           </div>

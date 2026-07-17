@@ -1,0 +1,36 @@
+{
+	"title": "POLITICA DE PRIVACIDAD",
+	"metaDescription": "Política de privacidad de nuestra web",
+	"sections": {
+		"collectedInfo": {
+			"heading": "Información que recopilamos",
+			"content": "Recopilamos información personal de los usuarios cuando se registran en nuestro sitio web, cuando se suscriben a nuestra newsletter o cuando nos envían un correo electrónico. La información personal que recopilamos incluye su correo electrónico, dirección IP y cualquier otra información que proporcione voluntariamente."
+		},
+		"howWeUse": {
+			"heading": "Cómo utilizamos tu información",
+			"content": "Utilizamos la información personal que recopilamos para proporcionarte los servicios que has solicitado, para mejorar nuestro sitio web y para comunicarnos contigo. También podemos utilizar tu información personal para enviarte información sobre nuestros productos y servicios."
+		},
+		"sharing": {
+			"heading": "Con quién compartimos tu información",
+			"content": "No compartimos tu información personal con terceros sin tu consentimiento. Sin embargo, podemos compartir tu información personal con terceros para proporcionarte los servicios que has solicitado, para mejorar nuestro sitio web o para cumplir con la ley."
+		},
+		"rights": {
+			"heading": "Tus derechos",
+			"contentBeforeEmail": "Tienes derecho a acceder, corregir o eliminar tu información personal. También tienes derecho a oponerte al uso de tu información personal. Para ejercer estos derechos, puedes contactarnos en",
+			"contentAfterEmail": "."
+		},
+		"security": {
+			"heading": "Seguridad",
+			"content": "Adoptamos medidas para proteger tu información personal. Estas medidas incluyen el uso de firewalls y cifrado para proteger tu información personal del acceso no autorizado."
+		},
+		"policyChanges": {
+			"heading": "Cambios en la política de privacidad",
+			"content": "Podemos actualizar esta política de privacidad de vez en cuando. Si realizamos algún cambio importante en esta política de privacidad, se te notificará por correo electrónico o mediante un aviso en nuestro sitio web."
+		},
+		"contact": {
+			"heading": "Contacto",
+			"contentBeforeEmail": "Si tienes alguna pregunta sobre esta política de privacidad, puedes contactarnos en",
+			"contentAfterEmail": "."
+		}
+	}
+}

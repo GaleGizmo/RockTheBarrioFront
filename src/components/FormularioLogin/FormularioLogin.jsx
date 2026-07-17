@@ -6,9 +6,11 @@ import Button from "../Button/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { AiFillCloseSquare } from "react-icons/ai";
+import { useTranslation } from "react-i18next";
 
 const FormularioLogin = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   useEffect(() => {
     dispatch(clearError());
   }, []);
@@ -26,7 +28,7 @@ const FormularioLogin = () => {
     <div className="cardLogin">
       <AiFillCloseSquare className="close-icon" onClick={() => navigate(-1)} />
       <div>
-        <h1>Iniciar Sesión</h1>
+        <h1>{t('login.title')}</h1>
         {error && <p className="error-message">{error}</p>}
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -34,7 +36,7 @@ const FormularioLogin = () => {
           <label>
             <input
               {...register("username")}
-              placeholder="Usuario ou email"
+              placeholder={t('login.userOrEmail')}
               className="inputLogin"
             />
           </label>
@@ -44,23 +46,23 @@ const FormularioLogin = () => {
             <input
               {...register("password")}
               type="password"
-              placeholder="Contrasinal"
+              placeholder={t('login.password')}
               className="inputLogin"
             />
           </label>
         </div>
         <div className="margin-botonLogin">
-          <Button text="Login" variant="large" type="submit" />
+          <Button text={t('buttons.login')} variant="large" type="submit" />
         </div>
         <div className="margin-link">
-          <Link to="/reset-password/forgot">Esquezín o contrasinal</Link>
+          <Link to="/reset-password/forgot">{t('login.forgotPassword')}</Link>
         </div>
         <div>
           <p>
-            Aínda non tes conta?{" "}
+            {t('login.noAccount')}{" "}
             <Link to="/date-de-alta">
               {" "}
-              <Button text="Rexístrate" variant="small" />{" "}
+              <Button text={t('buttons.register')} variant="small" />{" "}
             </Link>
           </p>
         </div>

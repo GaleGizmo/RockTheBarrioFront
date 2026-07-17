@@ -16,9 +16,11 @@ import LocalizacionSelector from "../LocalizacionSelector/LocalizacionSelector";
 import { useEffect } from "react";
 import formatContent from "../../utils/formatContent.jsx";
 import EventoConfirmModal from "../EventoConfirmModal/EventoConfirmModal";
+import { useTranslation } from "react-i18next";
 
 const EventoEdicion = ({ evento, navigate }) => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [hasDeletedImage, setHasDeletedImage] = useState(false);
   const [doPublish, setDoPublish] = useState(false);
@@ -47,12 +49,12 @@ const EventoEdicion = ({ evento, navigate }) => {
   }, [nextFestivals, evento.festival, setValue]);
   const [imageFile, setImageFile] = useState();
   const statusOptions = [
-    { label: "Ok", value: "Ok" },
-    { label: "Cancelado", value: "cancelled" },
-    { label: "Aplazado", value: "delayed" },
-    { label: "Nova data", value: "new_date" },
-    { label: "Esgotado", value: "soldout" },
-    { label: "Borrador", value: "draft" },
+    { label: t('forms.statusOptions.ok'), value: "Ok" },
+    { label: t('forms.statusOptions.cancelled'), value: "cancelled" },
+    { label: t('forms.statusOptions.delayed'), value: "delayed" },
+    { label: t('forms.statusOptions.newDate'), value: "new_date" },
+    { label: t('forms.statusOptions.soldout'), value: "soldout" },
+    { label: t('forms.statusOptions.draft'), value: "draft" },
   ];
 
   useEffect(() => {
@@ -166,16 +168,16 @@ const EventoEdicion = ({ evento, navigate }) => {
       onConfirm={handleConfirm}
       data={pendingData}
       festivals={nextFestivals}
-      actionLabel={pendingAction === "clone" ? "Clonar" : "Gardar"}
+      actionLabel={pendingAction === "clone" ? t('buttons.clone') : t('buttons.save')}
       imagePreview={imageFile}
       isSubmitting={isSubmitting}
     />
     <div className="cardCrearEvento">
       <AiFillCloseSquare className="close-icon" onClick={handleIcon} />
-      <h1>Editar Evento</h1>
+      <h1>{t('editEvent.title')}</h1>
       <form onSubmit={handleSubmit(handleSave)}>
         <div className="div-inputCrearEvento">
-          <label>Título:</label>
+          <label>{t('forms.title')}:</label>
           <input
             className="inputCrearEvento"
             type="text"
@@ -184,10 +186,10 @@ const EventoEdicion = ({ evento, navigate }) => {
             onChange={handleInputChange}
             {...register("title", { required: true })}
           />
-          {errors.title && <span>Título é requerido</span>}
+          {errors.title && <span>{t('forms.titleRequired')}</span>}
         </div>
         <div className="div-inputCrearEvento">
-          <label>Artista:</label>
+          <label>{t('forms.artist')}:</label>
           <input
             className="inputCrearEvento"
             type="text"
@@ -196,7 +198,7 @@ const EventoEdicion = ({ evento, navigate }) => {
             onChange={handleInputChange}
             {...register("artist", { required: !isDraft })}
           />
-          {errors.artist && <span>Artista é requerido</span>}
+          {errors.artist && <span>{t('forms.artistRequired')}</span>}
         </div>
         <div className="div-inputCrearEvento">
           <LocalizacionSelector
@@ -213,11 +215,11 @@ const EventoEdicion = ({ evento, navigate }) => {
             style={{ opacity: 0, height: 0, width: 0, position: "absolute", pointerEvents: "none" }}
           />
           {errors.site && (
-            <span className="error-message">Lugar é requerido</span>
+            <span className="error-message">{t('forms.locationRequired')}</span>
           )}
         </div>
         <div className="infoCrearEvento">
-          <label>Contido:</label>
+          <label>{t('forms.content')}:</label>
           <textarea
             className="inputCrearEvento"
             defaultValue={evento.content}
@@ -225,17 +227,17 @@ const EventoEdicion = ({ evento, navigate }) => {
             name="content"
             {...register("content", { required: !isDraft })}
           ></textarea>
-          {errors.content && <span>Contido é requerido</span>}
+          {errors.content && <span>{t('forms.contentRequired')}</span>}
 
           <div className="previewWrapper">
-            <strong>Vista previa:</strong>
+            <strong>{t('forms.previewLabel')}</strong>
             <div className="previewContent">
               {formatContent(watch("content"))}
             </div>
           </div>
         </div>
         <div className="div-inputCrearEvento">
-          <label>Prezo:</label>
+          <label>{t('forms.price')}:</label>
           <input
             className="inputCrearEvento"
             type="number"
@@ -246,10 +248,10 @@ const EventoEdicion = ({ evento, navigate }) => {
             onChange={handleInputChange}
             {...register("price", { required: !isDraft })}
           />
-          {errors.price && <span>Prezo é requerido</span>}
+          {errors.price && <span>{t('forms.priceRequired')}</span>}
         </div>
         <div className="div-inputCrearEvento">
-          <label>Entrada Inversa</label>
+          <label>{t('forms.reverseTicket')}</label>
           <input
             className="inputCrearEvento"
             type="checkbox"
@@ -260,7 +262,7 @@ const EventoEdicion = ({ evento, navigate }) => {
           />
         </div>
         <div className="div-inputCrearEvento">
-          <label>URL de compra</label>
+          <label>{t('forms.buyUrl')}</label>
           <input
             className="inputCrearEvento"
             type="text"
@@ -271,7 +273,7 @@ const EventoEdicion = ({ evento, navigate }) => {
           />
         </div>
         <div className="fechaCrearEvento">
-          <label>Data do evento:</label>
+          <label>{t('forms.eventDate')}</label>
           <input
             className="inputCrearEvento"
             type="date"
@@ -280,10 +282,10 @@ const EventoEdicion = ({ evento, navigate }) => {
             onChange={handleInputChange}
             {...register("day_start", { required: !isDraft })}
           />
-          {errors.date_start && <span>Data do evento é requerida</span>}
+          {errors.date_start && <span>{t('forms.dateRequired')}</span>}
         </div>
         <div className="fechaCrearEvento">
-          <label>Hora de inicio:</label>
+          <label>{t('forms.startTime')}</label>
           <input
             className="inputCrearEvento"
             type="time"
@@ -292,11 +294,11 @@ const EventoEdicion = ({ evento, navigate }) => {
             onChange={handleInputChange}
             {...register("time_start", { required: !isDraft })}
           />
-          {errors.time_start && <span>Hora de inicio é requerida</span>}
+          {errors.time_start && <span>{t('forms.timeRequired')}</span>}
         </div>
 
         <div className="div-inputCrearEvento">
-          <label>Festival</label>
+          <label>{t('forms.festival')}</label>
           <select
             className="inputCrearEvento"
             name="festival"
@@ -304,7 +306,7 @@ const EventoEdicion = ({ evento, navigate }) => {
             onChange={handleInputChange}
             {...register("festival")}
           >
-            <option value="">Ningún</option>
+            <option value="">{t('forms.none')}</option>
             {nextFestivals.map((festival) => (
               <option key={festival._id} value={festival._id}>
                 {festival.name}
@@ -313,7 +315,7 @@ const EventoEdicion = ({ evento, navigate }) => {
           </select>
         </div>
         <div className="div-inputCrearEvento">
-          <label>Xénero:</label>
+          <label>{t('forms.genre')}:</label>
           <input
             className="inputCrearEvento"
             type="text"
@@ -324,7 +326,7 @@ const EventoEdicion = ({ evento, navigate }) => {
           />
         </div>
         <div className="div-inputCrearEvento">
-          <label>YouTube ID:</label>
+          <label>{t('forms.youtubeId')}:</label>
           <input
             className="inputCrearEvento"
             type="text"
@@ -335,7 +337,7 @@ const EventoEdicion = ({ evento, navigate }) => {
           />
         </div>
         <div className="div-inputCrearEvento">
-          <label>Máis Info:</label>
+          <label>{t('forms.moreInfoLabel')}:</label>
           <input
             className="inputCrearEvento"
             type="text"
@@ -346,7 +348,7 @@ const EventoEdicion = ({ evento, navigate }) => {
           />
         </div>
         <div className="div-inputCrearEvento">
-          <label>Destacado</label>
+          <label>{t('forms.featured')}</label>
           <input
             className="inputCrearEvento"
             type="checkbox"
@@ -357,7 +359,7 @@ const EventoEdicion = ({ evento, navigate }) => {
           />
         </div>
         <div className="div-inputCrearEvento">
-          <label>Estado:</label>
+          <label>{t('forms.statusLabel')}</label>
           <select
             className="inputCrearEvento"
             name="status"
@@ -374,7 +376,7 @@ const EventoEdicion = ({ evento, navigate }) => {
         </div>
         {isDraft && (
           <div className="div-inputCrearEvento">
-            <label>Publicar</label>
+            <label>{t('forms.publish')}</label>
             <input
               className="inputCrearEvento"
               type="checkbox"
@@ -386,7 +388,7 @@ const EventoEdicion = ({ evento, navigate }) => {
           </div>
         )}
         <div className="div-inputCrearEvento">
-          <label>Imaxe:</label>
+          <label>{t('forms.image')}:</label>
           <SubirImagen
             register={register}
             evento={true}
@@ -411,7 +413,7 @@ const EventoEdicion = ({ evento, navigate }) => {
           {((evento.image && !hasDeletedImage) || imageFile) && (
             <div className="delete-image-button">
               <Button
-                text="Eliminar imaxe"
+                text={t('buttons.deleteImage')}
                 variant="small"
                 onClick={removeImage}
               />
@@ -421,14 +423,14 @@ const EventoEdicion = ({ evento, navigate }) => {
         <div className="edit__botons">
           <Button
             type="submit"
-            text="Gardar"
+            text={t('buttons.save')}
             isSubmitting={isSubmitting}
             onClick={handleSubmit(handleSave)}
           />
-          <Button type="button" text="Cancelar" onClick={handleCancel} />
+          <Button type="button" text={t('buttons.cancel')} onClick={handleCancel} />
           <Button
             type="button"
-            text="Clonar"
+            text={t('buttons.clone')}
             isSubmitting={isSubmitting}
             onClick={handleSubmit(handleClone)}
           />

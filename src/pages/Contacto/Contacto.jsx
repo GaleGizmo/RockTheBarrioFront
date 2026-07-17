@@ -8,10 +8,12 @@ import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { addMessage } from "../../shared/api";
 import Button from "../../components/Button/Button";
+import { useTranslation } from "react-i18next";
 
 const Contacto = () => {
   const userData = useSelector((state) => state.usuariosReducer.user);
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const handleIcon = () => {
     navigate(-1);
   };
@@ -82,7 +84,7 @@ const Contacto = () => {
   return (
     <div className="cardLegal">
       <AiFillCloseSquare className="close-icon" onClick={handleIcon} />
-      <h1 className="medios-contacto_title">MEDIOS DE CONTACTO</h1>
+      <h1 className="medios-contacto_title">{t('contacto.title')}</h1>
       <div className="medios-contacto_items">
         <h2>
           <BiMailSend />
@@ -105,11 +107,11 @@ const Contacto = () => {
         </h2>
       </div>
       <form className="cardCrearEvento contactForm" onSubmit={handleSubmit}>
-        <h2>Formulario de contacto</h2>
+        <h2>{t('contacto.formTitle')}</h2>
 
         <div className="div-inputCrearEvento contactForm">
           <label htmlFor="name">
-            Nome <span style={{ color: "grey" }}>(opcional)</span>:
+            {t('contacto.name')} <span style={{ color: "grey" }}>{t('contacto.optional')}</span>:
           </label>
           <input
             className="inputCrearEvento"
@@ -123,7 +125,7 @@ const Contacto = () => {
 
         <div className="div-inputCrearEvento contactForm">
           <label htmlFor="email">
-            Email <span style={{ color: "grey" }}>(opcional)</span>:
+            {t('contacto.email')} <span style={{ color: "grey" }}>{t('contacto.optional')}</span>:
           </label>
           <input
             className="inputCrearEvento"
@@ -137,7 +139,7 @@ const Contacto = () => {
 
         <div className="div-inputCrearEvento contactForm">
           <label htmlFor="type">
-            Asunto <span style={{ color: "red" }}>*</span>:
+            {t('contacto.subject')} <span style={{ color: "red" }}>*</span>:
           </label>
           <select
             className="inputCrearEvento"
@@ -146,19 +148,19 @@ const Contacto = () => {
             value={formData.type}
             onChange={handleInputChange}
           >
-            <option value="">Elixe unha opción</option>
-            <option value="Erro en evento">Erro en evento</option>
-            <option value="Engade un evento">Engade un evento</option>
-            <option value="Suxerencia">Suxerencia</option>
-            <option value="Problema coa web">Problema coa web</option>
-            <option value="Outros">Outros</option>
+            <option value="">{t('contacto.chooseOption')}</option>
+            <option value="Erro en evento">{t('contacto.eventError')}</option>
+            <option value="Engade un evento">{t('contacto.addEvent')}</option>
+            <option value="Suxerencia">{t('contacto.suggestion')}</option>
+            <option value="Problema coa web">{t('contacto.webProblem')}</option>
+            <option value="Outros">{t('contacto.others')}</option>
           </select>
           {errors.type && <p style={{ color: "red" }}>{errors.type}</p>}
         </div>
 
         <div className="infoCrearEvento contactForm">
           <label htmlFor="content">
-            Mensaxe <span style={{ color: "red" }}>*</span>:
+            {t('contacto.message')} <span style={{ color: "red" }}>*</span>:
           </label>
           <textarea
             className="inputCrearEvento"
@@ -172,7 +174,7 @@ const Contacto = () => {
 
         {errors.subject && <p style={{ color: "red" }}>{errors.subject}</p>}
 
-        <Button type="submit" text="Enviar" variant="medium"></Button>
+        <Button type="submit" text={t('buttons.send')} variant="medium"></Button>
       </form>
     </div>
   );

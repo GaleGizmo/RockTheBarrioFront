@@ -3,10 +3,13 @@ import React from "react";
 import { useDropzone } from "react-dropzone";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useTranslation } from "react-i18next"; 
 
 const DropzoneComponent = ({ setImageFile, setSelectedFile }) => {
+
+  const { t } = useTranslation();
   const notify = () =>
-    toast.error("Arquivo non válido", {
+    toast.error(t("forms.dropZone.invalidFile"), {
       position: "bottom-center",
       autoClose: 2000,
       hideProgressBar: true,
@@ -22,13 +25,13 @@ const DropzoneComponent = ({ setImageFile, setSelectedFile }) => {
     if (!acceptedFileTypes.includes(file.type)) {
       return {
         code: "filetype-not-allowed",
-        message: `Solo archivos de tipo: JPEG, PNG y GIF.`,
+        message: t("forms.dropZone.invalidFileType"),
       };
     }
     if (file.size > 2 * 1024 * 1024) {
       return {
         code: "size-too-large",
-        message: `El tamaño máximo de archivo es de 2MB.`,
+        message: t("forms.dropZone.invalidFileSize"),
       };
     }
     return null;
@@ -67,13 +70,13 @@ const DropzoneComponent = ({ setImageFile, setSelectedFile }) => {
       <div {...getRootProps()}>
         <input {...getInputProps()} />
         {isDragActive ? (
-          <p>Solta a imaxe eiquí...</p>
+          <p>{t("forms.dropZone.dropHere")}</p>
         ) : (
-          <p>Fai clic ou arrastra unha imaxe eiquí</p>
+          <p>{t("forms.dropZone.clickToSelect")}</p>
         )}
       </div>
       
-      <p className="warning">Só arquivos PNG, JPG ou GIF &lt; 2MB</p>
+      <p className="warning">{t("forms.dropZone.imageConstraints")}</p>
     
     </div>
   );

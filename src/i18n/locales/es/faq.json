@@ -1,0 +1,66 @@
+{
+  "title": "PREGUNTAS FRECUENTES",
+  "items": [
+    {
+      "title": "¿Qué estoy viendo al entrar en la web?",
+      "content": "La página principal muestra un listado de eventos ordenados cronológicamente, partiendo de la fecha actual. Hay un buscador a la izquierda y un calendario a la derecha. En móviles tanto el calendario (oculto por defecto) como el buscador están bajo la cabecera y el calendario se muestra haciendo clic en este icono: "
+    },
+    {
+      "title": "¿Qué información hay de cada evento?",
+      "content": "En la página principal se muestra para cada evento: nombre del evento, artista(s), lugar, fecha, género musical, precio (si procede) y número de comentarios de los usuarios. Se pueden ver más detalles de cada evento, así como los comentarios (si los hay) haciendo click en la imagen del evento o en el icono de Info:"
+    },
+    {
+      "title": "¿Puedo acceder a la compra de entradas desde la ficha del evento?",
+      "content": "Sí. Cuando el concierto es de pago, el icono al lado del precio lleva a la página de compra de entradas."
+    },
+    {
+      "title": "¿Puedo ver el lugar donde se celebra el evento?",
+      "content": "Sí. Cuando se hace click en el nombre del lugar, se muestra un mapa con la localización del mismo."
+    },
+
+    {
+      "title": "¿Puedo ver información de eventos ya pasados?",
+      "content": "Sí. Aunque la página principal muestra por defecto solo los eventos futuros, hay dos formas de ver información de eventos ya ocurridos: bien a través del calendario o bien activando el switch en la parte inferior del buscador."
+    },
+    {
+      "title": "¿Qué información tengo en el calendario?",
+      "content": "En el calendario, los días en los que hay uno o más eventos están marcados en color turquesa. Si hay más de un evento en una fecha, esa fecha lleva además un signo '+' a la derecha del número. Haciendo clic en los días que tienen eventos, se muestran los eventos de ese día ordenados por hora de inicio."
+    },
+    {
+      "title": "¿Cómo funciona el buscador?",
+      "content": "Por defecto, la palabra que se introduzca se busca en todos los campos principales de los eventos: nombre del evento, artista, lugar y género.\n Cuando se introduce más de un término de búsqueda se devuelven los resultados que contengan todos los términos, salvo que se marque la casilla \"Cualquier término\" lo que hará que se devuelvan todos los eventos que contengan al menos una de las palabras.\n Para agilizar la búsqueda es aconsejable marcar el campo concreto en el que se quiere buscar. Además, se puede restringir la búsqueda solo a eventos gratuitos, que hayan tenido lugar en unas fechas concretas, o los que el usuario tenga añadidos a favoritos. El resultado de la búsqueda, salvo que se active el switch \"Eventos pasados\", devolverá solo los eventos a partir de la fecha actual. "
+    },
+    {
+      "title": "¿Cómo vuelvo a la lista de eventos por defecto?",
+      "content": "Los resultados de la búsqueda permanecen en pantalla hasta que se hace clic en el botón 'Limpiar' del buscador. Haciendo clic en el logo de la web que está en la parte superior izquierda también se carga el listado de eventos por defecto."
+    },
+    {
+      "title": "¿Cómo añado eventos a favoritos y para qué me sirve hacerlo?",
+      "content": "Como usuario registrado, cuando añadas un evento a favoritos recibirás un recordatorio del mismo una semana antes de la fecha del evento, y otro recordatorio el día previo al evento. Tanto en la página principal como en la de detalles de cada evento, se puede añadir un evento a favoritos haciendo clic en este icono: "
+    },
+    {
+      "title": "El icono que dices aparece deshabilitado",
+      "content": "Para poder añadir un evento a favoritos debes registrarte primero en la web. Una vez logueado se activará el icono para añadir un evento a favoritos, y también hacer búsquedas que incluyan solo eventos favoritos. "
+    },
+    {
+      "title": "¿Qué ventajas tiene registrarse?",
+      "content": "Aunque la información de los eventos está disponible para cualquiera que visite la web, los usuarios registrados tienen acceso a: notificación de eventos vía email, añadir comentarios y valoraciones a los eventos, y añadir eventos a favoritos."
+    },
+    {
+      "title": "¿Cuántas notificaciones me vas a mandar? ¡No más spam, por favor!",
+      "content": "Calma, la frecuencia de notificaciones la decidirás tú en el proceso de registro. Marcando las casillas correspondientes podrás elegir entre: recibir un email semanal con los eventos programados para esa semana (se envía los lunes a las 16h), recibir notificaciones puntuales cuando se añadan nuevos eventos, o no recibir ninguna notificación. "
+    },
+    {
+      "title": "Pues marco las notificaciones semanales, con eso llega, ¿no?",
+      "content": "Casi... Dado que algunos locales avisan de los eventos con pocos días de antelación, puede pasar que se añadan eventos durante la semana que no estaban incluidos en el email semanal. La solución sería marcar también las notificaciones puntuales, o visitar la web regularmente. "
+    },
+    {
+      "title": "¿Cómo puedo cambiar los datos de mi cuenta?",
+      "content": "Haciendo clic en tu nombre de usuario o en tu avatar, abrirás la página de tu perfil. En ella hay un botón de 'Editar datos' que te permitirá cambiar tu nombre de usuario, el email con el que te registraste, tu avatar, y tus preferencias de notificaciones. "
+    },
+    {
+      "title": "¿Hay aplicación para móviles?",
+      "content": "No hay aplicación como tal, sin embargo la web está optimizada para uso en pantallas de cualquier tamaño. Si tienes abierta la página en un smartphone y vas al menú del navegador, pulsando 'Añadir a pantalla de inicio' crearás un acceso directo a la web en la pantalla del teléfono, lo que a efectos prácticos será como tener una aplicación. "
+    }
+  ]
+}
