@@ -17,10 +17,11 @@ import { useEffect } from "react";
 import formatContent from "../../utils/formatContent.jsx";
 import EventoConfirmModal from "../EventoConfirmModal/EventoConfirmModal";
 import { useTranslation } from "react-i18next";
+import { getLocalizedField, updateLocalizedField } from "../../utils/localizedFields";
 
 const EventoEdicion = ({ evento, navigate }) => {
   const dispatch = useDispatch();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [hasDeletedImage, setHasDeletedImage] = useState(false);
   const [doPublish, setDoPublish] = useState(false);
@@ -146,6 +147,10 @@ const EventoEdicion = ({ evento, navigate }) => {
     if (!data.location) {
       data.location = evento.location?._id;
     }
+
+    data.title = updateLocalizedField(evento.title, data.title, i18n.language);
+    data.content = updateLocalizedField(evento.content, data.content, i18n.language);
+
     const editedEvento = {
       ...evento,
       ...data,
@@ -182,7 +187,7 @@ const EventoEdicion = ({ evento, navigate }) => {
             className="inputCrearEvento"
             type="text"
             name="title"
-            defaultValue={evento.title}
+            defaultValue={getLocalizedField(evento.title, i18n.language)}
             onChange={handleInputChange}
             {...register("title", { required: true })}
           />
@@ -222,7 +227,7 @@ const EventoEdicion = ({ evento, navigate }) => {
           <label>{t('forms.content')}:</label>
           <textarea
             className="inputCrearEvento"
-            defaultValue={evento.content}
+            defaultValue={getLocalizedField(evento.content, i18n.language)}
             onChange={handleInputChange}
             name="content"
             {...register("content", { required: !isDraft })}

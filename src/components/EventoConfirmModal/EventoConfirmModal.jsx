@@ -3,6 +3,7 @@ import Button from "../Button/Button";
 import formatContent from "../../utils/formatContent.jsx";
 import "./EventoConfirmModal.css";
 import { useTranslation } from "react-i18next";
+import { getLocalizedField } from "../../utils/localizedFields";
 
 const EventoConfirmModal = ({
   show,
@@ -18,6 +19,8 @@ const EventoConfirmModal = ({
   if (!show || !data) return null;
 
   const resolvedActionLabel = actionLabel ?? t('buttons.confirm');
+  const localizedTitle = getLocalizedField(data?.title, i18n.language);
+  const localizedContent = getLocalizedField(data?.content, i18n.language);
 
   const festivalName = data.festival
     ? festivals.find((f) => f._id === data.festival)?.name || data.festival
@@ -49,7 +52,7 @@ const EventoConfirmModal = ({
   };
 
   const rows = [
-    { label: t('forms.title'), value: data.title },
+    { label: t('forms.title'), value: localizedTitle },
     { label: t('forms.artist'), value: data.artist },
     { label: t('forms.location'), value: data.site },
     { label: t('forms.date'), value: formatDate(data.date_start) },
@@ -63,7 +66,7 @@ const EventoConfirmModal = ({
     data.url ? { label: t('forms.moreInfoLabel'), value: data.url } : null,
     { label: t('forms.featured'), value: data.highlighted ? t('profile.yes') : t('profile.no') },
     { label: t('forms.image'), value: imageCell() },
-    data.content ? { label: t('forms.content'), value: <div className="evento-confirm-content">{formatContent(data.content)}</div> } : null,
+    localizedContent ? { label: t('forms.content'), value: <div className="evento-confirm-content">{formatContent(localizedContent)}</div> } : null,
   ].filter(Boolean);
 
   return (

@@ -5,9 +5,12 @@ import "./EventListModal.css";
 import { setEvento, toggleCalendar } from "../../redux/eventos/eventos.actions";
 import Button from "../Button/Button";
 import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { getLocalizedField } from "../../utils/localizedFields";
 
 const EventListModal = memo(({ events, position, calendarState, action }) => {
   const { top, left } = position;
+  const { i18n } = useTranslation();
   
   const dispatch = useDispatch();
   const getEvento = (id) => {
@@ -50,7 +53,7 @@ const EventListModal = memo(({ events, position, calendarState, action }) => {
           <Link to={`/${evento._id}`}>
             {" "}
             <Button
-              text={truncateTitle(evento.title)}
+              text={truncateTitle(getLocalizedField(evento.title, i18n.language))}
               variant="small evento-calendar"
               onClick={() => getEvento(evento._id)}
             />

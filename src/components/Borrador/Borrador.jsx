@@ -12,6 +12,7 @@ import { FaMusic } from "react-icons/fa";
 import MapComponent from "../MapComponent/MapComponent";
 import EventoEdicion from "../EventoEdicion/EventoEdicion";
 import { useTranslation } from "react-i18next";
+import { getLocalizedField } from "../../utils/localizedFields";
 
 const Borrador = ({ borrador, user }) => {
   const { i18n } = useTranslation();
@@ -22,7 +23,8 @@ const Borrador = ({ borrador, user }) => {
   const handleToggleMap = () => {
     setShowMap((showMap) => !showMap);
   };
-  const isLongTitle = borrador?.title?.length > 10 && !borrador.title.includes(" ");
+  const localizedTitle = getLocalizedField(borrador?.title, i18n.language);
+  const isLongTitle = localizedTitle?.length > 10 && !localizedTitle.includes(" ");
 
   const dateLocale = i18n.language?.startsWith("es") ? es : gl;
 
@@ -55,7 +57,7 @@ const Borrador = ({ borrador, user }) => {
               <>
                 <img
                   src={borrador.image}
-                  alt={borrador.title}
+                  alt={localizedTitle}
                   onError={(e) => {
                     e.target.style.display = "none";
                     e.target.nextSibling.style.display = "block";
@@ -73,7 +75,7 @@ const Borrador = ({ borrador, user }) => {
         </div>
 
         <div className="title-artist_container">
-          <h2 className={isLongTitle ? "long-title" : ""}>{borrador.title}</h2>
+          <h2 className={isLongTitle ? "long-title" : ""}>{localizedTitle}</h2>
           <h3>{borrador.artist}</h3>
         </div>
         <div className="detalles_container">

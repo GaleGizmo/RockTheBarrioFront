@@ -21,7 +21,7 @@ import { useTranslation } from "react-i18next";
 const FormularioCrearEvento = () => {
   const { user } = useSelector((state) => state.usuariosReducer);
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const {
     register,
     handleSubmit,
@@ -82,21 +82,39 @@ const FormularioCrearEvento = () => {
     }
   };
 
-  const onSubmit = (data) => {
+  const buildCreatePayload = (data) => {
     const { day_start, time_start } = data;
-
-    if (data.price > 0) data.payWhatYouWant = false;
-    // Combinar la fecha y la hora en un objeto Date
     const combinedDate = new Date(`${day_start}T${time_start}`);
+    const defaultContent = t("forms.defaultEventInfo");
+    const normalizedContent =
+      data.content && data.content.trim() !== "" ? data.content : defaultContent;
 
-    if (data.content === "" || data.content.trim() == "")
-      data.content = "Non hai información deste evento";
-
-    // Actualizar el valor de "date_start" en los datos a enviar
-    const finalFormData = {
+    const basePayload = {
       ...data,
+      content: normalizedContent,
       date_start: combinedDate,
     };
+
+    // Bridge ready: keep legacy string payload until backend confirms localized create support.
+    const sendLocalizedCreatePayload = false;
+    if (!sendLocalizedCreatePayload) {
+      return basePayload;
+    }
+
+    return {
+      ...basePayload,
+      title: {
+        [i18n.language?.startsWith("es") ? "es" : "gl"]: data.title,
+      },
+      content: {
+        [i18n.language?.startsWith("es") ? "es" : "gl"]: normalizedContent,
+      },
+    };
+  };
+
+  const onSubmit = (data) => {
+    if (data.price > 0) data.payWhatYouWant = false;
+    const finalFormData = buildCreatePayload(data);
 
     setPendingData(finalFormData);
     setShowConfirmModal(true);

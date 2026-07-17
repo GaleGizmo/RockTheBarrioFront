@@ -39,6 +39,7 @@ import { isLongTitle } from "../../utils/textUtils";
 import { handleImageError } from "../../utils/imageHelpers";
 import { goToHome } from "../../utils/navigationHelpers";
 import { useTranslation } from "react-i18next";
+import { getLocalizedField } from "../../utils/localizedFields";
 
 const DetallesEvento = () => {
   const location = useLocation();
@@ -140,6 +141,8 @@ const DetallesEvento = () => {
     new_date: t("forms.statusOptions.newDate"),
   };
   const statusLabel = statusLabelMap[evento?.status] || "";
+  const localizedTitle = getLocalizedField(evento?.title, i18n.language);
+  const localizedContent = getLocalizedField(evento?.content, i18n.language);
 
   useEffect(() => {
     if (location.state?.fromCreate && successMessage) {
@@ -157,7 +160,7 @@ const DetallesEvento = () => {
       <ConfirmModal
         show={showDeleteModal}
         title={t("detalles.deleteTitle")}
-        p1={t("detalles.deleteQuestion", { title: evento?.title })}
+        p1={t("detalles.deleteQuestion", { title: localizedTitle })}
         p2={t("detalles.deleteWarning")}
         buttonText={t("buttons.eliminate")}
         deleteAccount={true}
@@ -175,7 +178,7 @@ const DetallesEvento = () => {
           )}
 
           <Helmet>
-            <title>{`${evento.title} | Concierto en Santiago de Compostela`}</title>
+            <title>{`${localizedTitle} | Concierto en Santiago de Compostela`}</title>
             <meta
               name="description"
               content={`${evento.artist} en ${evento.site.split(",")[0]}. Concierto en Santiago de Compostela.`}
@@ -187,7 +190,7 @@ const DetallesEvento = () => {
 
             {/* Open Graph */}
             <meta property="og:type" content="event" />
-            <meta property="og:title" content={evento.title} />
+            <meta property="og:title" content={localizedTitle} />
             <meta
               property="og:description"
               content={`${evento.artist} en ${evento.site.split(",")[0]}`}
@@ -203,7 +206,7 @@ const DetallesEvento = () => {
               {JSON.stringify({
                 "@context": "https://schema.org",
                 "@type": "MusicEvent",
-                name: evento.title,
+                name: localizedTitle,
                 performer: {
                   "@type": "MusicGroup",
                   name: evento.artist,
@@ -248,7 +251,7 @@ const DetallesEvento = () => {
                 <button
                   className="nav-arrow nav-arrow--left"
                   onClick={() => navegarA(eventoPrevio)}
-                  title={eventoPrevio.title}
+                  title={getLocalizedField(eventoPrevio?.title, i18n.language)}
                 >
                   <AiOutlineLeft />
                 </button>
@@ -257,7 +260,7 @@ const DetallesEvento = () => {
                 <button
                   className="nav-arrow nav-arrow--right"
                   onClick={() => navegarA(eventoSiguiente)}
-                  title={eventoSiguiente.title}
+                  title={getLocalizedField(eventoSiguiente?.title, i18n.language)}
                 >
                   <AiOutlineRight />
                 </button>
@@ -274,8 +277,8 @@ const DetallesEvento = () => {
                 className="close-icon"
                 onClick={() => goToHome(navigate)}
               />
-              <h1 className={isLongTitle(evento.title) ? "long-title" : ""}>
-                {evento.title}
+              <h1 className={isLongTitle(localizedTitle) ? "long-title" : ""}>
+                {localizedTitle}
               </h1>
               <div className="image-and-details-container">
                 {evento.youtubeVideoId ? (
@@ -296,7 +299,7 @@ const DetallesEvento = () => {
                       key={evento._id}
                       className={`${evento.status ? evento.status : ""}`}
                       src={evento.image}
-                      alt={evento.title}
+                      alt={localizedTitle}
                       onClick={openImageModal}
                       onError={(e) => {
                         handleImageError(e);
@@ -431,7 +434,7 @@ const DetallesEvento = () => {
                 </div>
               </div>
               <div className="evento_contenido">
-                {formatContent(evento?.content)}
+                {formatContent(localizedContent)}
               </div>
 
               {evento.url && (

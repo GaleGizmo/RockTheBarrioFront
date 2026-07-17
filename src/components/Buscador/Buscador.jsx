@@ -21,7 +21,7 @@ import { useTranslation } from "react-i18next";
 
 const Buscador = ({ eventos, user }) => {
   const dispatch = useDispatch();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const isAdmin = user && user.role === 2;
 
@@ -67,7 +67,7 @@ const Buscador = ({ eventos, user }) => {
       const response = await API.get("/evento");
       eventosToShow = response.data;
 
-      filteredResults = FilterEvents(eventosToShow, filters, userData);
+      filteredResults = FilterEvents(eventosToShow, filters, userData, i18n.language);
       showFilteredResults();
     } catch (error) {
       console.error("Error al obtener eventos:", error);
@@ -83,7 +83,7 @@ const Buscador = ({ eventos, user }) => {
       });
       eventosToShow = response.data;
 
-      filteredResults = FilterEvents(eventosToShow, filters, userData);
+      filteredResults = FilterEvents(eventosToShow, filters, userData, i18n.language);
       showFilteredResults();
     } catch (error) {
       console.error("Error al obtener eventos:", error);
@@ -189,7 +189,7 @@ const Buscador = ({ eventos, user }) => {
       getEventosEntreFechas(data, user, initialDate, finalDate);
     } else {
       eventosToShow = [...eventos];
-      filteredResults = FilterEvents(eventosToShow, data, user);
+      filteredResults = FilterEvents(eventosToShow, data, user, i18n.language);
 
       showFilteredResults();
     }

@@ -1,4 +1,6 @@
 //convierte los campos de los eventos a minusculas
+import { getLocalizedField } from "../utils/localizedFields";
+
 const propertiesToConvert = ["title", "artist", "site", "genre"];
 const propertiesToConvertExtended = [
   "title",
@@ -7,13 +9,20 @@ const propertiesToConvertExtended = [
   "genre",
   "content",
 ];
-const convertEventosToLowerCase = (eventos) => {
+const convertEventosToLowerCase = (eventos, language) => {
   return eventos.map((evento) => {
     let eventoLowerCase = { ...evento };
     propertiesToConvert.forEach((prop) => {
-      eventoLowerCase[prop] = evento[prop].toLowerCase();
+      const originalValue =
+        prop === "title" || prop === "content"
+          ? getLocalizedField(evento[prop], language)
+          : evento[prop];
+
+      eventoLowerCase[prop] = String(originalValue || "").toLowerCase();
       if (eventoLowerCase[prop] == "varios") {
-        eventoLowerCase.content = evento.content.toLowerCase();
+        eventoLowerCase.content = String(
+          getLocalizedField(evento.content, language) || "",
+        ).toLowerCase();
       }
     });
 
@@ -25,8 +34,8 @@ const dateInRange = (date, start, end) => {
   return date >= start && date <= end;
 };
 
-const FilterEvents = (eventos, filtros, user) => {
-  const eventosLowerCase = convertEventosToLowerCase(eventos);
+const FilterEvents = (eventos, filtros, user, language = "gl") => {
+  const eventosLowerCase = convertEventosToLowerCase(eventos, language);
   const inputLowerCase = filtros.input
     .toLowerCase()
     .trim()

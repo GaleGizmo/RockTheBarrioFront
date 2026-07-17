@@ -23,6 +23,7 @@ import ToolTip from "../ToolTip/ToolTip";
 import { isLongTitle } from "../../utils/textUtils";
 import { handleImageError } from "../../utils/imageHelpers";
 import { useTranslation } from "react-i18next";
+import { getLocalizedField } from "../../utils/localizedFields";
 
 const Evento = ({ evento, user }) => {
   const { t, i18n } = useTranslation();
@@ -82,6 +83,7 @@ const Evento = ({ evento, user }) => {
     new_date: t("forms.statusOptions.newDate"),
   };
   const statusLabel = statusLabelMap[evento?.status] || "";
+  const localizedTitle = getLocalizedField(evento?.title, i18n.language);
 
   const fechaStart = evento?.date_start
     ? format(fechaEvento, "EEE, dd, MMM ", {
@@ -121,7 +123,7 @@ const Evento = ({ evento, user }) => {
             <div className="image-container" onClick={(e) => e.stopPropagation()}>
               <img
                 src={modalImageUrl}
-                alt={evento.title}
+                alt={localizedTitle}
                 className="modal-image"
                 onClick={() => setShowImageModal(false)}
               />
@@ -149,7 +151,7 @@ const Evento = ({ evento, user }) => {
             <>
               <img
                 src={evento.image}
-                alt={evento.title}
+                alt={localizedTitle}
                 onError={(e) => { handleImageError(e); setImageFailed(true); }}
                 onClick={(e) => { e.stopPropagation(); setShowImageModal(true); }}
                 style={{ cursor: "zoom-in" }}
@@ -174,7 +176,7 @@ const Evento = ({ evento, user }) => {
         </div>
 
         <div className="title-artist_container">
-          <h2 className={isLongTitle(evento.title) ? "long-title" : ""}>{evento.title}</h2>
+          <h2 className={isLongTitle(localizedTitle) ? "long-title" : ""}>{localizedTitle}</h2>
 
           <h3>{evento.artist}</h3>
           {user?.role === 2 && (
