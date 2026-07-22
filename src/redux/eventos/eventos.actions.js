@@ -90,20 +90,27 @@ const createFormData = (eventoData) => {
   const formData = new FormData();
 
   try {
-    formData.append("title", eventoData.title);
+    const hasInvalidDateObject =
+      eventoData.date_start instanceof Date &&
+      Number.isNaN(eventoData.date_start.getTime());
+    const safeDateStart = hasInvalidDateObject
+      ? ""
+      : eventoData.date_start || "";
+
+    formData.append("title", eventoData.title || "");
     formData.append("artist", eventoData.artist || "");
     formData.append("site", eventoData.site || "");
     formData.append("location", eventoData.location || "");
     formData.append("price", eventoData.price || 0);
-    formData.append("date_start", eventoData.date_start || "");
+    formData.append("date_start", safeDateStart);
     formData.append("youtubeVideoId", eventoData.youtubeVideoId || "");
     formData.append("status", eventoData.status);
     formData.append("buy_ticket", eventoData.buy_ticket || "");
-    formData.append("payWhatYouWant", eventoData.payWhatYouWant);
+    formData.append("payWhatYouWant", Boolean(eventoData.payWhatYouWant));
     formData.append("genre", eventoData.genre || "");
-    formData.append("content", eventoData.content);
+    formData.append("content", eventoData.content || "");
     formData.append("url", eventoData.url || "");
-    formData.append("highlighted", eventoData.highlighted);
+    formData.append("highlighted", Boolean(eventoData.highlighted));
     if (eventoData.festival && eventoData.festival !== "") {
       formData.append("festival", eventoData.festival);
     }

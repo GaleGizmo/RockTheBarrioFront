@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { addEvento } from "../../redux/eventos/eventos.actions";
@@ -29,7 +29,12 @@ const FormularioCrearEvento = () => {
     formState: { errors },
     clearErrors,
     watch,
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      price: 0,
+      status: "Ok",
+    },
+  });
   const [priceError, setPriceError] = useState(false);
 
   const [showBuyTicketField, setShowBuyTicketField] = useState(false);
@@ -38,6 +43,8 @@ const FormularioCrearEvento = () => {
   const [nextFestivals, setNextFestivals] = useState([]);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [pendingData, setPendingData] = useState(null);
+  const [confirmActionLabel, setConfirmActionLabel] = useState();
+  const submitStatusRef = useRef("Ok");
 
   useEffect(() => {
     const fetchLocations = async () => {
@@ -84,7 +91,10 @@ const FormularioCrearEvento = () => {
 
   const buildCreatePayload = (data) => {
     const { day_start, time_start } = data;
-    const combinedDate = new Date(`${day_start}T${time_start}`);
+    const hasDateParts = Boolean(day_start && time_start);
+    const combinedDate = hasDateParts ? new Date(`${day_start}T${time_start}`) : null;
+    const normalizedDate =
+      combinedDate && !Number.isNaN(combinedDate.getTime()) ? combinedDate : "";
     const defaultContent = t("forms.defaultEventInfo");
     const normalizedContent =
       data.content && data.content.trim() !== "" ? data.content : defaultContent;
@@ -92,7 +102,7 @@ const FormularioCrearEvento = () => {
     const basePayload = {
       ...data,
       content: normalizedContent,
-      date_start: combinedDate,
+      date_start: normalizedDate,
     };
 
     // Bridge ready: keep legacy string payload until backend confirms localized create support.
@@ -112,12 +122,30 @@ const FormularioCrearEvento = () => {
     };
   };
 
-  const onSubmit = (data) => {
+  const validateRequiredUnlessDraft = (value) => {
+    if (submitStatusRef.current === "draft") {
+      return true;
+    }
+
+    return Array.isArray(value) ? value.length > 0 : Boolean(value);
+  };
+
+  const openConfirmModal = (data, status, actionLabel) => {
     if (data.price > 0) data.payWhatYouWant = false;
-    const finalFormData = buildCreatePayload(data);
+    const finalFormData = buildCreatePayload({
+      ...data,
+      status,
+    });
 
     setPendingData(finalFormData);
+    setConfirmActionLabel(actionLabel);
     setShowConfirmModal(true);
+  };
+
+  const submitWithStatus = (status, actionLabel) => {
+    submitStatusRef.current = status;
+
+    return handleSubmit((data) => openConfirmModal(data, status, actionLabel))();
   };
 
   const handleConfirm = () => {
@@ -125,13 +153,11 @@ const FormularioCrearEvento = () => {
     handleFormSubmit(pendingData);
   };
 
-  const status = watch("status");
-  const isDraft = status === "draft";
+  const selectedStatus = watch("status") || "Ok";
   const dispatch = useDispatch();
   const [imageFile, setImageFile] = useState();
   const statusOptions = [
     { label: t('forms.statusOptions.ok'), value: "Ok" },
-    { label: t('forms.statusOptions.draft'), value: "draft" },
     { label: t('forms.statusOptions.cancelled'), value: "cancelled" },
     { label: t('forms.statusOptions.delayed'), value: "delayed" },
     { label: t('forms.statusOptions.newDate'), value: "new_date" },
@@ -149,13 +175,19 @@ const FormularioCrearEvento = () => {
         onConfirm={handleConfirm}
         data={pendingData}
         festivals={nextFestivals}
+        actionLabel={confirmActionLabel}
         imagePreview={imageFile}
         isSubmitting={isSubmitting}
       />
       <div className="cardCrearEvento">
         <AiFillCloseSquare className="close-icon" onClick={handleIcon} />
-        <h1>{t('createEvent.title')}</h1>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <h1>{t('forms.createEventTitle')}</h1>
+        <form
+          onSubmit={(event) => {
+            event.preventDefault();
+            submitWithStatus(selectedStatus, t('buttons.submitEvent'));
+          }}
+        >
           <div className="div-inputCrearEvento">
             <label>{t('forms.title')}</label>
             <input
@@ -170,14 +202,16 @@ const FormularioCrearEvento = () => {
             <label>{t('forms.artist')}</label>
             <input
               className="inputCrearEvento"
-              {...register("artist", { required: !isDraft })}
+              {...register("artist", {
+                validate: validateRequiredUnlessDraft,
+              })}
             />
             {errors.artist && (
               <span className="error-message">{t('forms.artistRequired')}</span>
             )}
           </div>
           <div className="infoCrearEvento">
-            <label>{t('forms.information')}</label>
+            <label>{t('forms.content')}</label>
             <textarea
               {...register("content", { required: false })}
               className="inputCrearEvento"
@@ -199,7 +233,9 @@ const FormularioCrearEvento = () => {
               addLocalizacion={addLocalizacion}
             />
             <input
-              {...register("site", { required: !isDraft })}
+              {...register("site", {
+                validate: validateRequiredUnlessDraft,
+              })}
               tabIndex={-1}
               aria-hidden="true"
               style={{
@@ -220,13 +256,12 @@ const FormularioCrearEvento = () => {
               className="inputCrearEvento"
               type="text"
               {...register("price", {
-                required: !isDraft,
+                validate: validateRequiredUnlessDraft,
                 pattern: {
                   value: /^\d+(\.\d{1,2})?$/,
                   message: t('forms.priceDecimals'),
                 },
               })}
-              defaultValue={0}
               onChange={handlePriceChange}
             />
             {errors.price && (
@@ -255,7 +290,9 @@ const FormularioCrearEvento = () => {
               className="inputCrearEvento"
               type="date"
               defaultValue={new Date().toISOString().split("T")[0]}
-              {...register("day_start", { required: !isDraft })}
+              {...register("day_start", {
+                validate: validateRequiredUnlessDraft,
+              })}
             />
             {errors.day_start && (
               <span className="error-message">{t('forms.dateRequired')}</span>
@@ -268,7 +305,9 @@ const FormularioCrearEvento = () => {
                 hour: "2-digit",
                 minute: "2-digit",
               })}
-              {...register("time_start", { required: !isDraft })}
+              {...register("time_start", {
+                validate: validateRequiredUnlessDraft,
+              })}
             />
             {errors.time_start && (
               <span className="error-message">{t('forms.timeRequired')}</span>
@@ -351,11 +390,17 @@ const FormularioCrearEvento = () => {
               onClick={handleIcon}
             />
             <Button
+              type="button"
+              text={t('buttons.saveDraft')}
+              variant="medium"
+              isSubmitting={isSubmitting}
+              onClick={() => submitWithStatus("draft", t('buttons.saveDraft'))}
+            />
+            <Button
               type="submit"
               text={t('buttons.submitEvent')}
               variant="medium"
               isSubmitting={isSubmitting}
-              onClick={handleSubmit}
             />
           </div>
         </form>

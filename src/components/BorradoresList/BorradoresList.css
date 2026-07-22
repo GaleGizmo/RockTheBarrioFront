@@ -8,7 +8,11 @@
 .titulo-borradores {
   font-size: 24px;
   font-weight: bold;
-  color: white;
+  padding: 10px;
+  background-color: var(--secondary-color);
+  border-bottom: 2px solid var(--primary-color);
+  border-radius: 5px;
+  color: var(--primary-color);
   text-align: center;
   width: fit-content;
   margin: 10px auto;

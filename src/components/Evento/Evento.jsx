@@ -4,7 +4,11 @@ import "./Evento.css";
 import { BiHeart, BiSolidHeart, BiSolidComment } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
 import { BsClockFill } from "react-icons/bs";
-import { esAnterior, esHoy, calcularDiasFaltantes } from "../../shared/formatDate";
+import {
+  esAnterior,
+  esHoy,
+  calcularDiasFaltantes,
+} from "../../shared/formatDate";
 import { format, parseISO } from "date-fns";
 import { gl } from "date-fns/locale";
 import { es } from "date-fns/locale";
@@ -20,6 +24,7 @@ import { useDispatch } from "react-redux";
 import { setEvento } from "../../redux/eventos/eventos.actions";
 import Modal from "../Modal/Modal";
 import ToolTip from "../ToolTip/ToolTip";
+import { toast } from "react-toastify";
 import { isLongTitle } from "../../utils/textUtils";
 import { handleImageError } from "../../utils/imageHelpers";
 import { useTranslation } from "react-i18next";
@@ -33,7 +38,8 @@ const Evento = ({ evento, user }) => {
   const [imageFailed, setImageFailed] = useState(false);
 
   const SVG_FALLBACK = "/assets/rockthebarrio_pegata_azul.svg";
-  const modalImageUrl = !evento.image || imageFailed ? SVG_FALLBACK : evento.image;
+  const modalImageUrl =
+    !evento.image || imageFailed ? SVG_FALLBACK : evento.image;
 
   const [showMap, setShowMap] = useState(false);
   const dispatch = useDispatch();
@@ -41,7 +47,7 @@ const Evento = ({ evento, user }) => {
   const { isFavorite, handleFavorites, showFavorite } = useFavorites(
     user?.favorites?.includes(evento._id) || false,
     evento ? evento._id : null,
-    user ? user._id : null
+    user ? user._id : null,
   );
 
   const handleShareModal = () => {
@@ -50,7 +56,9 @@ const Evento = ({ evento, user }) => {
   const copyIdToClipboard = async () => {
     try {
       await navigator.clipboard.writeText(evento._id);
+      toast.success(t("events.copiedToClipboard"));
     } catch (error) {
+      toast.error(t("events.copyToClipboardError"));
       console.error("Error al copiar el ID al portapapeles:", error);
     }
   };
@@ -100,7 +108,9 @@ const Evento = ({ evento, user }) => {
       data-status-label={statusLabel}
       onClick={getEvento}
     >
-      {evento.highlighted && <div className="highlight-banner">{t('events.featured')}</div>}
+      {evento.highlighted && (
+        <div className="highlight-banner">{t("events.featured")}</div>
+      )}
       {shareModal && (
         <Modal
           show="true"
@@ -108,34 +118,44 @@ const Evento = ({ evento, user }) => {
           handleShareModal={handleShareModal}
         />
       )}
-      {showImageModal && createPortal(
-        <>
-          <div
-            className="modal-backdrop fade show"
-            style={{ zIndex: 1050 }}
-            onClick={(e) => { e.stopPropagation(); setShowImageModal(false); }}
-          />
-          <div
-            className="modal fade show"
-            style={{ display: "flex", zIndex: 1051 }}
-            onClick={(e) => { e.stopPropagation(); setShowImageModal(false); }}
-          >
-            <div className="image-container" onClick={(e) => e.stopPropagation()}>
-              <img
-                src={modalImageUrl}
-                alt={localizedTitle}
-                className="modal-image"
-                onClick={() => setShowImageModal(false)}
-              />
+      {showImageModal &&
+        createPortal(
+          <>
+            <div
+              className="modal-backdrop fade show"
+              style={{ zIndex: 1050 }}
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowImageModal(false);
+              }}
+            />
+            <div
+              className="modal fade show"
+              style={{ display: "flex", zIndex: 1051 }}
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowImageModal(false);
+              }}
+            >
+              <div
+                className="image-container"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <img
+                  src={modalImageUrl}
+                  alt={localizedTitle}
+                  className="modal-image"
+                  onClick={() => setShowImageModal(false)}
+                />
+              </div>
             </div>
-          </div>
-        </>,
-        document.body
-      )}
+          </>,
+          document.body,
+        )}
 
       {esHoy(evento.date_start) ? (
         <div className="data-label_container esHoy">
-          <div className="data-label_esHoy">{t('events.today')}</div>
+          <div className="data-label_esHoy">{t("events.today")}</div>
         </div>
       ) : (
         <div className="data-label_container">
@@ -152,57 +172,93 @@ const Evento = ({ evento, user }) => {
               <img
                 src={evento.image}
                 alt={localizedTitle}
-                onError={(e) => { handleImageError(e); setImageFailed(true); }}
-                onClick={(e) => { e.stopPropagation(); setShowImageModal(true); }}
+                onError={(e) => {
+                  handleImageError(e);
+                  setImageFailed(true);
+                }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowImageModal(true);
+                }}
                 style={{ cursor: "zoom-in" }}
               />
               <div
                 className="background-logo"
                 style={{ display: "none", cursor: "zoom-in" }}
-                onClick={(e) => { e.stopPropagation(); setShowImageModal(true); }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowImageModal(true);
+                }}
               ></div>
               <AiOutlineZoomIn
                 className="card-zoom-icon"
-                onClick={(e) => { e.stopPropagation(); setShowImageModal(true); }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowImageModal(true);
+                }}
               />
             </>
           ) : (
             <div
               className="background-logo"
               style={{ cursor: "zoom-in" }}
-              onClick={(e) => { e.stopPropagation(); setShowImageModal(true); }}
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowImageModal(true);
+              }}
             ></div>
           )}
         </div>
 
         <div className="title-artist_container">
-          <h2 className={isLongTitle(localizedTitle) ? "long-title" : ""}>{localizedTitle}</h2>
+          <h2 className={isLongTitle(localizedTitle) ? "long-title" : ""}>
+            {localizedTitle}
+          </h2>
 
           <h3>{evento.artist}</h3>
           {user?.role === 2 && (
-            <span onClick={(e) => { e.stopPropagation(); copyIdToClipboard(); }} className="copy-to-clipboard">
+            <span
+              onClick={(e) => {
+                e.stopPropagation();
+                copyIdToClipboard();
+              }}
+              className="copy-to-clipboard"
+            >
               <AiOutlineCopy />
             </span>
           )}
         </div>
         <div className="detalles_container">
           {evento.site && evento.site !== "Varios" ? (
-            <p className="detalles-site" onClick={handleToggleMap}
+            <p
+              className="detalles-site"
+              onClick={handleToggleMap}
               onMouseEnter={() => setHovered("site-tooltip")}
               onMouseLeave={() => setHovered("")}
             >
               <MapIcon showMap={showMap} />
-              <span className="detalles-site-text">{evento.site.split(",")[0]}</span>
-              <ToolTip content={evento.site.split(",")[0]} specificClass={hovered === "site-tooltip" ? "site-tooltip" : ""} />
+              <span className="detalles-site-text">
+                {evento.site.split(",")[0]}
+              </span>
+              <ToolTip
+                content={evento.site.split(",")[0]}
+                specificClass={hovered === "site-tooltip" ? "site-tooltip" : ""}
+              />
             </p>
           ) : (
-            <p className="detalles-site"
+            <p
+              className="detalles-site"
               onMouseEnter={() => setHovered("site-tooltip")}
               onMouseLeave={() => setHovered("")}
             >
               <MapIcon />
-              <span className="detalles-site-text">{evento.site?.split(",")[0]}</span>
-              <ToolTip content={evento.site?.split(",")[0]} specificClass={hovered === "site-tooltip" ? "site-tooltip" : ""} />
+              <span className="detalles-site-text">
+                {evento.site?.split(",")[0]}
+              </span>
+              <ToolTip
+                content={evento.site?.split(",")[0]}
+                specificClass={hovered === "site-tooltip" ? "site-tooltip" : ""}
+              />
             </p>
           )}
 
@@ -215,7 +271,9 @@ const Evento = ({ evento, user }) => {
             </div>
           )}
           <p className="dias-faltantes">
-            <span className="dias-faltantes_label">{esAnterior(evento.date_start) ? t('events.ago') : t('events.in')}</span>
+            <span className="dias-faltantes_label">
+              {esAnterior(evento.date_start) ? t("events.ago") : t("events.in")}
+            </span>
             <span className="blue-text"> {diasFaltantes} </span>
           </p>
 
@@ -228,14 +286,19 @@ const Evento = ({ evento, user }) => {
               <p className="evento-genre">
                 <FaMusic className="icon-style icon-price" /> {evento.genre}
               </p>
-              <ToolTip content={evento.genre} specificClass={hovered === "genre-tooltip" ? "genre-tooltip" : ""} />
+              <ToolTip
+                content={evento.genre}
+                specificClass={
+                  hovered === "genre-tooltip" ? "genre-tooltip" : ""
+                }
+              />
             </div>
           ) : (
             <p></p>
           )}
           {evento.price == 0 && evento.payWhatYouWant == false ? (
             <p className="evento-precio">
-              <span className="gratuito">{t('events.free')}</span>
+              <span className="gratuito">{t("events.free")}</span>
             </p>
           ) : evento.price > 0 ? (
             <p className="evento-precio" onClick={buyEvento}>
@@ -244,10 +307,9 @@ const Evento = ({ evento, user }) => {
             </p>
           ) : (
             <p className="evento-precio">
-              <span className="gratuito">{t('events.payWhatYouWant')}</span>
+              <span className="gratuito">{t("events.payWhatYouWant")}</span>
             </p>
           )}
-
 
           <div className="div_relleno"></div>
           <div className="icon-container">
@@ -265,16 +327,20 @@ const Evento = ({ evento, user }) => {
                   <>
                     <BiSolidHeart className="favorito" />
                     <ToolTip
-                      content={t('events.removeFavorite')}
-                      specificClass={hovered === "favorito-tooltip" ? "favorito-tooltip" : ""}
+                      content={t("events.removeFavorite")}
+                      specificClass={
+                        hovered === "favorito-tooltip" ? "favorito-tooltip" : ""
+                      }
                     />
                   </>
                 ) : (
                   <>
                     <BiHeart className="favorito" />
                     <ToolTip
-                      content={t('events.addFavorite')}
-                      specificClass={hovered === "favorito-tooltip" ? "favorito-tooltip" : ""}
+                      content={t("events.addFavorite")}
+                      specificClass={
+                        hovered === "favorito-tooltip" ? "favorito-tooltip" : ""
+                      }
                     />
                   </>
                 )}
@@ -284,12 +350,21 @@ const Evento = ({ evento, user }) => {
                 <BiHeart className="favorito unavailiable" />
               </div>
             )}
-            <span onClick={(e) => { e.stopPropagation(); handleShareModal(); }}>
+            <span
+              onClick={(e) => {
+                e.stopPropagation();
+                handleShareModal();
+              }}
+            >
               <BsFillShareFill className="mas-info" />{" "}
             </span>
             <Link
               to={{ pathname: `/${evento._id}` }}
-              onClick={(e) => { e.stopPropagation(); sessionStorage.setItem("scrollPosition", window.scrollY); dispatch(setEvento(evento._id)); }}
+              onClick={(e) => {
+                e.stopPropagation();
+                sessionStorage.setItem("scrollPosition", window.scrollY);
+                dispatch(setEvento(evento._id));
+              }}
             >
               <BsInfoCircleFill className="mas-info" />
             </Link>
@@ -305,7 +380,12 @@ const Evento = ({ evento, user }) => {
         </div>
       </div>
 
-      {showMap && <MapComponent location={evento.location} onClose={() => setShowMap(false)} />}
+      {showMap && (
+        <MapComponent
+          location={evento.location}
+          onClose={() => setShowMap(false)}
+        />
+      )}
     </div>
   );
 };

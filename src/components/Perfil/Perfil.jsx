@@ -42,7 +42,7 @@ const Perfil = ({ userData, onEditClick }) => {
     setShowDeleteModal(false);
   };
   const { error, successMessage } = useSelector(
-    (state) => state.eventosReducer
+    (state) => state.eventosReducer,
   );
 
   const handleCorreccionClick = () => {
@@ -55,7 +55,6 @@ const Perfil = ({ userData, onEditClick }) => {
   const sendDiarios = async () => {
     setIsSubimitting(true);
     dispatch(sendEventosDiarios());
-  
   };
 
   useEffect(() => {
@@ -94,10 +93,12 @@ const Perfil = ({ userData, onEditClick }) => {
   return (
     <div>
       <p>
-        {t('profile.email')}: <span className="perfil__user-data">{userData.email}</span>
+        {t("profile.email")}:{" "}
+        <span className="perfil__user-data">{userData.email}</span>
       </p>
       <p>
-        {t('profile.username')}: <span className="perfil__user-data">{userData.username}</span>{" "}
+        {t("profile.username")}:{" "}
+        <span className="perfil__user-data">{userData.username}</span>{" "}
       </p>
       {userData.avatar && (
         <div className="perfil-avatar">
@@ -105,54 +106,72 @@ const Perfil = ({ userData, onEditClick }) => {
         </div>
       )}
       <p>
-        {t('profile.newEventEmail')}:{" "}
+        {t("profile.newEventEmail")}:{" "}
         {userData.newevent ? (
-          <span className="perfil__user-data green">{t('profile.yes')}</span>
+          <span className="perfil__user-data green">{t("profile.yes")}</span>
         ) : (
-          <span className="perfil__user-data red">{t('profile.no')}</span>
+          <span className="perfil__user-data red">{t("profile.no")}</span>
         )}
       </p>
 
       <p>
-        {t('profile.newsletterEmail')}:{" "}
+        {t("profile.newsletterEmail")}:{" "}
         {userData.newsletter ? (
-          <span className="perfil__user-data green">{t('profile.yes')}</span>
+          <span className="perfil__user-data green">{t("profile.yes")}</span>
         ) : (
-          <span className="perfil__user-data red">{t('profile.no')}</span>
+          <span className="perfil__user-data red">{t("profile.no")}</span>
         )}
       </p>
-      <div>
+    
         {userData && userData.role === 2 && (
           <div className="botones-eventos">
-            <Button text={t('buttons.createEvent')} variant="small" onClick={() => navigate('/crear-evento')} />
-            <Button text={t('buttons.createFestival')} variant="small" onClick={() => navigate('/crear-festival')} />
+          <p className="admin-text">{t("profile.adminButtons")}</p>
             <Button
-              text={t('buttons.sendDaily')}
+              text={t("buttons.createEvent")}
+              variant="small"
+              onClick={() => navigate("/crear-evento")}
+            />
+            <Button
+              text={t("buttons.createFestival")}
+              variant="small"
+              onClick={() => navigate("/crear-festival")}
+            />
+            <Button
+              text={t("buttons.editDrafts")}
+              variant="small"
+              onClick={() => navigate("/borradores")}
+            />
+            <Button
+              text={t("buttons.sendDaily")}
               variant="small"
               isSubmitting={isSubmitting}
               onClick={sendDiarios}
             />
             <Button
-              text={t('buttons.correction')}
+              text={t("buttons.correction")}
               variant="small"
               onClick={handleCorreccionClick}
             />
           </div>
         )}
-      </div>
+      
       <div className="margin-botonReg">
-        <Button text={t('buttons.editData')} variant="small" onClick={onEditClick} />
         <Button
-          text={t('buttons.deleteAccount')}
+          text={t("buttons.editData")}
+          variant="small"
+          onClick={onEditClick}
+        />
+        <Button
+          text={t("buttons.deleteAccount")}
           variant="small delete-account-button"
           onClick={handleDeleteUser}
         />
       </div>
       <ConfirmModal
-        title={t('profile.deleteTitle')}
-        p1={t('profile.deleteQuestion')}
-        p2={t('profile.deleteWarning')}
-        buttonText={t('profile.deleteButton')}
+        title={t("profile.deleteTitle")}
+        p1={t("profile.deleteQuestion")}
+        p2={t("profile.deleteWarning")}
+        buttonText={t("profile.deleteButton")}
         show={showDeleteModal}
         onCancel={handleDeleteCancelled}
         onConfirm={handleDeleteConfirmed}

@@ -9,6 +9,12 @@
     border-radius: 50%;
     overflow: hidden;
 }
+.admin-text{
+    font-weight: 600;
+    color: var(--link-color);
+    margin-bottom: 5px;
+    flex-basis: 100%;
+}
 .green{
     color: green;
 }
@@ -16,8 +22,14 @@
     color: red;
 }
 .botones-eventos{
+    width: 100%;
+    padding: 0 5px 10px 5px;
+    background-color: var(--primary-color);
     display: flex;
-    gap: 10px;
+    flex-wrap: wrap;
+    border-radius: 5px;
+    border: 1px solid var(--secondary-color);
+    gap: 5px;
     justify-content: center;
 }
 @media (min-width: 421px) and (max-width: 992px){

@@ -62,5 +62,6 @@
   .medium {
     width: 100px;
     font-size: medium;
+    height: auto;
   }
 }
