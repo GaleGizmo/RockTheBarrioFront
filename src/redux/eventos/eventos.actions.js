@@ -165,7 +165,7 @@ const editEvento = (id, eventoData, navigate) => {
       
       let resultado;
       if (eventoData.status === "draft") {
-        resultado = await editBorrador(id, eventoData);
+        resultado = await editBorrador(id, formData);
         dispatch({
           type: "EDIT_BORRADOR",
           contenido: { id: id, datos: resultado.data },

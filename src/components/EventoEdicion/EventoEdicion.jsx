@@ -151,6 +151,10 @@ const EventoEdicion = ({ evento, navigate }) => {
     data.title = updateLocalizedField(evento.title, data.title, i18n.language);
     data.content = updateLocalizedField(evento.content, data.content, i18n.language);
 
+    delete data.day_start;
+    delete data.time_start;
+    delete data.publish;
+
     const editedEvento = {
       ...evento,
       ...data,

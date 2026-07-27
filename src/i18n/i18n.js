@@ -33,7 +33,7 @@ i18n
     fallbackLng: 'gl',
     supportedLngs: ['gl', 'es'],
     detection: {
-      order: ['localStorage', 'navigator'],
+      order: ['localStorage'],
       caches: ['localStorage'],
       lookupLocalStorage: 'rtb_lang',
     },
