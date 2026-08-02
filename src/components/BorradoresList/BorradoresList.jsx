@@ -14,7 +14,7 @@ const BorradoresList = () => {
   const { borradores, loading } = useSelector((state) => state.eventosReducer);
 
   useEffect(() => {
-    dispatch(getBorradoresAction()); 
+    dispatch(getBorradoresAction());
   }, [dispatch]);
 
   return (
@@ -26,8 +26,10 @@ const BorradoresList = () => {
           content="Lista de borradores de eventos que aún no se han publicado en ROCK THE BARRIO."
         />
       </Helmet>
-      <h2 className="titulo-borradores">{t('borradores.title')}</h2>
-      <div className="borradores">
+      <div className="listado-container">
+        <h1 className="listado-text">{t("borradores.title")}</h1>
+      </div>
+      <div className="eventos">
         {loading ? (
           <Loader />
         ) : borradores && borradores.length > 0 ? (
@@ -35,7 +37,7 @@ const BorradoresList = () => {
             <Borrador user={user} borrador={borrador} key={borrador._id} />
           ))
         ) : (
-          <p>{t('borradores.empty')}</p>
+          <p>{t("borradores.empty")}</p>
         )}
       </div>
     </div>

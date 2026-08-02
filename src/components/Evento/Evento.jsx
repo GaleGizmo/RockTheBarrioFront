@@ -167,7 +167,7 @@ const Evento = ({ evento, user }) => {
 
       <div className="border-card">
         <div className="div-image">
-          {evento.image ? (
+          {evento.image && !imageFailed ? (
             <>
               <img
                 src={evento.image}
@@ -182,14 +182,6 @@ const Evento = ({ evento, user }) => {
                 }}
                 style={{ cursor: "zoom-in" }}
               />
-              <div
-                className="background-logo"
-                style={{ display: "none", cursor: "zoom-in" }}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setShowImageModal(true);
-                }}
-              ></div>
               <AiOutlineZoomIn
                 className="card-zoom-icon"
                 onClick={(e) => {

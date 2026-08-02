@@ -1,49 +1,49 @@
 import React, { useState } from "react";
 import "../Evento/Evento.css";
-import "./Borrador.css";
 import { useNavigate } from "react-router-dom";
 import { BsClockFill } from "react-icons/bs";
 import { format, parseISO } from "date-fns";
 import { gl } from "date-fns/locale";
 import { es } from "date-fns/locale";
 import MapIcon from "../MapIcon/MapIcon";
+import ToolTip from "../ToolTip/ToolTip";
+import { isLongTitle } from "../../utils/textUtils";
 import { AiFillEuroCircle } from "react-icons/ai";
 import { FaMusic } from "react-icons/fa";
 import MapComponent from "../MapComponent/MapComponent";
 import EventoEdicion from "../EventoEdicion/EventoEdicion";
+import { handleImageError } from "../../utils/imageHelpers";
 import { useTranslation } from "react-i18next";
 import { getLocalizedField } from "../../utils/localizedFields";
 
 const Borrador = ({ borrador, user }) => {
   const { i18n } = useTranslation();
   const [showMap, setShowMap] = useState(false);
-  
+  const [hovered, setHovered] = useState("");
+  const [imageFailed, setImageFailed] = useState(false);
+
   const navigate = useNavigate();
 
   const handleToggleMap = () => {
     setShowMap((showMap) => !showMap);
   };
   const localizedTitle = getLocalizedField(borrador?.title, i18n.language);
-  const isLongTitle = localizedTitle?.length > 10 && !localizedTitle.includes(" ");
 
   const dateLocale = i18n.language?.startsWith("es") ? es : gl;
 
-  const fechaEvento = borrador?.date_start ? parseISO(borrador.date_start) : null;
+  const fechaEvento = borrador?.date_start
+    ? parseISO(borrador.date_start)
+    : null;
   const fechaStart = borrador?.date_start
     ? format(fechaEvento, "EEE, dd, MMM ", { locale: dateLocale })
     : null;
   const horaStart = borrador?.date_start ? format(fechaEvento, "HH:mm") : null;
-
- const editarBorrador = () => {
+  const editarBorrador = () => {
     navigate(`/editar-borrador/${borrador._id}`);
-   
-    }
+  };
 
   return (
-    <div
-      className={`borrador`}
-      onClick={editarBorrador}
-    >
+    <div className={`card`} onClick={editarBorrador}>
       <div className="data-label_container">
         <div className="data-label_weekday">{fechaStart?.split(",")[0]}</div>
         <div className="data-label_day">{fechaStart?.split(",")[1]}</div>
@@ -52,42 +52,57 @@ const Borrador = ({ borrador, user }) => {
 
       <div className="border-card">
         <div className="div-image">
-         
-            {borrador.image ? (
-              <>
-                <img
-                  src={borrador.image}
-                  alt={localizedTitle}
-                  onError={(e) => {
-                    e.target.style.display = "none";
-                    e.target.nextSibling.style.display = "block";
-                  }}
-                />
-                <div
-                  className="background-logo"
-                  style={{ display: "none" }}
-                ></div>
-              </>
-            ) : (
-              <div className="background-logo"></div>
-            )}
-          
+          {borrador.image && !imageFailed ? (
+            <img
+              src={borrador.image}
+              alt={localizedTitle}
+              onError={(e) => {
+                handleImageError(e);
+                setImageFailed(true);
+              }}
+            />
+          ) : (
+            <div className="background-logo"></div>
+          )}
         </div>
 
         <div className="title-artist_container">
-          <h2 className={isLongTitle ? "long-title" : ""}>{localizedTitle}</h2>
+          <h2 className={isLongTitle(localizedTitle) ? "long-title" : ""}>
+            {localizedTitle}
+          </h2>
           <h3>{borrador.artist}</h3>
         </div>
         <div className="detalles_container">
           {borrador.site && borrador.site !== "Varios" ? (
-            <p className="detalles-site">
-              <MapIcon showMap={showMap} onClick={handleToggleMap} />
-              {borrador.site.split(",")[0]}
+            <p
+              className="detalles-site"
+              onClick={handleToggleMap}
+              onMouseEnter={() => setHovered("site-tooltip")}
+              onMouseLeave={() => setHovered("")}
+            >
+              <MapIcon showMap={showMap} />
+              <span className="detalles-site-text">
+                {borrador.site.split(",")[0]}
+              </span>
+              <ToolTip
+                content={borrador.site.split(",")[0]}
+                specificClass={hovered === "site-tooltip" ? "site-tooltip" : ""}
+              />
             </p>
           ) : (
-            <p className="detalles-site">
+            <p
+              className="detalles-site"
+              onMouseEnter={() => setHovered("site-tooltip")}
+              onMouseLeave={() => setHovered("")}
+            >
               <MapIcon />
-              {borrador.site?.split(",")[0]}
+              <span className="detalles-site-text">
+                {borrador.site?.split(",")[0]}
+              </span>
+              <ToolTip
+                content={borrador.site?.split(",")[0]}
+                specificClass={hovered === "site-tooltip" ? "site-tooltip" : ""}
+              />
             </p>
           )}
 
@@ -105,7 +120,8 @@ const Borrador = ({ borrador, user }) => {
             </p>
           ) : borrador.price > 0 ? (
             <p className="evento-precio">
-              <AiFillEuroCircle className="icon-style icon-price" /> {borrador.price}€
+              <AiFillEuroCircle className="icon-style icon-price" />{" "}
+              {borrador.price}€
             </p>
           ) : (
             <p className="evento-precio">
@@ -121,7 +137,6 @@ const Borrador = ({ borrador, user }) => {
           )}
 
           <div className="div_relleno"></div>
-         
         </div>
       </div>
 

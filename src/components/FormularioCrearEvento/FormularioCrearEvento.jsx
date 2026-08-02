@@ -31,7 +31,7 @@ const FormularioCrearEvento = () => {
     watch,
   } = useForm({
     defaultValues: {
-      price: 0,
+      price: "0",
       status: "Ok",
     },
   });
@@ -92,12 +92,16 @@ const FormularioCrearEvento = () => {
   const buildCreatePayload = (data) => {
     const { day_start, time_start } = data;
     const hasDateParts = Boolean(day_start && time_start);
-    const combinedDate = hasDateParts ? new Date(`${day_start}T${time_start}`) : null;
+    const combinedDate = hasDateParts
+      ? new Date(`${day_start}T${time_start}`)
+      : null;
     const normalizedDate =
       combinedDate && !Number.isNaN(combinedDate.getTime()) ? combinedDate : "";
     const defaultContent = t("forms.defaultEventInfo");
     const normalizedContent =
-      data.content && data.content.trim() !== "" ? data.content : defaultContent;
+      data.content && data.content.trim() !== ""
+        ? data.content
+        : defaultContent;
 
     const basePayload = {
       ...data,
@@ -127,7 +131,8 @@ const FormularioCrearEvento = () => {
       return true;
     }
 
-    return Array.isArray(value) ? value.length > 0 : Boolean(value);
+    if (Array.isArray(value)) return value.length > 0;
+    return value !== null && value !== undefined && String(value).trim() !== "";
   };
 
   const openConfirmModal = (data, status, actionLabel) => {
@@ -145,7 +150,9 @@ const FormularioCrearEvento = () => {
   const submitWithStatus = (status, actionLabel) => {
     submitStatusRef.current = status;
 
-    return handleSubmit((data) => openConfirmModal(data, status, actionLabel))();
+    return handleSubmit((data) =>
+      openConfirmModal(data, status, actionLabel),
+    )();
   };
 
   const handleConfirm = () => {
@@ -157,11 +164,11 @@ const FormularioCrearEvento = () => {
   const dispatch = useDispatch();
   const [imageFile, setImageFile] = useState();
   const statusOptions = [
-    { label: t('forms.statusOptions.ok'), value: "Ok" },
-    { label: t('forms.statusOptions.cancelled'), value: "cancelled" },
-    { label: t('forms.statusOptions.delayed'), value: "delayed" },
-    { label: t('forms.statusOptions.newDate'), value: "new_date" },
-    { label: t('forms.statusOptions.soldout'), value: "soldout" },
+    { label: t("forms.statusOptions.ok"), value: "Ok" },
+    { label: t("forms.statusOptions.cancelled"), value: "cancelled" },
+    { label: t("forms.statusOptions.delayed"), value: "delayed" },
+    { label: t("forms.statusOptions.newDate"), value: "new_date" },
+    { label: t("forms.statusOptions.soldout"), value: "soldout" },
   ];
   const handleIcon = () => {
     navigate(-1);
@@ -181,25 +188,25 @@ const FormularioCrearEvento = () => {
       />
       <div className="cardCrearEvento">
         <AiFillCloseSquare className="close-icon" onClick={handleIcon} />
-        <h1>{t('forms.createEventTitle')}</h1>
+        <h1>{t("forms.createEventTitle")}</h1>
         <form
           onSubmit={(event) => {
             event.preventDefault();
-            submitWithStatus(selectedStatus, t('buttons.submitEvent'));
+            submitWithStatus(selectedStatus, t("buttons.submitEvent"));
           }}
         >
           <div className="div-inputCrearEvento">
-            <label>{t('forms.title')}</label>
+            <label>{t("forms.title")}</label>
             <input
               className="inputCrearEvento"
               {...register("title", { required: true })}
             />
             {errors.title && (
-              <span className="error-message">{t('forms.titleRequired')}</span>
+              <span className="error-message">{t("forms.titleRequired")}</span>
             )}
           </div>
           <div className="div-inputCrearEvento">
-            <label>{t('forms.artist')}</label>
+            <label>{t("forms.artist")}</label>
             <input
               className="inputCrearEvento"
               {...register("artist", {
@@ -207,18 +214,18 @@ const FormularioCrearEvento = () => {
               })}
             />
             {errors.artist && (
-              <span className="error-message">{t('forms.artistRequired')}</span>
+              <span className="error-message">{t("forms.artistRequired")}</span>
             )}
           </div>
           <div className="infoCrearEvento">
-            <label>{t('forms.content')}</label>
+            <label>{t("forms.content")}</label>
             <textarea
               {...register("content", { required: false })}
               className="inputCrearEvento"
             />
 
             <div className="previewWrapper">
-              <strong>{t('forms.previewLabel')}</strong>
+              <strong>{t("forms.previewLabel")}</strong>
               <div className="previewContent">
                 {formatContent(watch("content"))}
               </div>
@@ -247,11 +254,13 @@ const FormularioCrearEvento = () => {
               }}
             />
             {errors.site && (
-              <span className="error-message">{t('forms.locationRequired')}</span>
+              <span className="error-message">
+                {t("forms.locationRequired")}
+              </span>
             )}
           </div>
           <div className="div-inputCrearEvento">
-            <label>{t('forms.price')}</label>
+            <label>{t("forms.price")}</label>
             <input
               className="inputCrearEvento"
               type="text"
@@ -259,7 +268,7 @@ const FormularioCrearEvento = () => {
                 validate: validateRequiredUnlessDraft,
                 pattern: {
                   value: /^\d+(\.\d{1,2})?$/,
-                  message: t('forms.priceDecimals'),
+                  message: t("forms.priceDecimals"),
                 },
               })}
               onChange={handlePriceChange}
@@ -268,24 +277,22 @@ const FormularioCrearEvento = () => {
               <span className="error-message">{errors.price.message}</span>
             )}
             {priceError && (
-              <span className="error-message">
-                {t('forms.priceInvalid')}
-              </span>
+              <span className="error-message">{t("forms.priceInvalid")}</span>
             )}
           </div>
           {showBuyTicketField ? (
             <div className="div-inputCrearEvento">
-              <label>{t('forms.buyUrl')}</label>
+              <label>{t("forms.buyUrl")}</label>
               <input className="inputCrearEvento" {...register("buy_ticket")} />
             </div>
           ) : (
             <div className="div-checkbox">
-              <label>{t('forms.reverseTicket')}</label>
+              <label>{t("forms.reverseTicket")}</label>
               <input type="checkbox" {...register("payWhatYouWant")} />{" "}
             </div>
           )}
           <div className="fechaCrearEvento">
-            <label>{t('forms.date')}</label>
+            <label>{t("forms.date")}</label>
             <input
               className="inputCrearEvento"
               type="date"
@@ -295,9 +302,9 @@ const FormularioCrearEvento = () => {
               })}
             />
             {errors.day_start && (
-              <span className="error-message">{t('forms.dateRequired')}</span>
+              <span className="error-message">{t("forms.dateRequired")}</span>
             )}
-            <label>{t('forms.time')}</label>
+            <label>{t("forms.time")}</label>
             <input
               className="inputCrearEvento"
               type="time"
@@ -310,17 +317,17 @@ const FormularioCrearEvento = () => {
               })}
             />
             {errors.time_start && (
-              <span className="error-message">{t('forms.timeRequired')}</span>
+              <span className="error-message">{t("forms.timeRequired")}</span>
             )}
           </div>
           <div className="div-inputCrearEvento">
-            <label>{t('forms.festival')}</label>
+            <label>{t("forms.festival")}</label>
             <select
               className="inputCrearEvento"
               name="festival"
               {...register("festival")}
             >
-              <option value="">{t('forms.none')}</option>
+              <option value="">{t("forms.none")}</option>
               {nextFestivals.map((festival) => (
                 <option key={festival._id} value={festival._id}>
                   {festival.name}
@@ -330,22 +337,22 @@ const FormularioCrearEvento = () => {
           </div>
 
           <div className="div-inputCrearEvento">
-            <label>{t('forms.genre')}</label>
+            <label>{t("forms.genre")}</label>
             <input className="inputCrearEvento" {...register("genre")} />
           </div>
           <div className="div-inputCrearEvento">
-            <label>{t('forms.youtubeId')}</label>
+            <label>{t("forms.youtubeId")}</label>
             <input
               className="inputCrearEvento"
               {...register("youtubeVideoId")}
             />
           </div>
           <div className="div-inputCrearEvento">
-            <label>{t('forms.moreInfoLabel')}</label>
+            <label>{t("forms.moreInfoLabel")}</label>
             <input className="inputCrearEvento" {...register("url")} />
           </div>
           <div className="div-inputCrearEvento">
-            <label>{t('forms.featuredEvent')}</label>
+            <label>{t("forms.featuredEvent")}</label>
             <input
               className="inputCrearEvento"
               type="checkbox"
@@ -353,7 +360,7 @@ const FormularioCrearEvento = () => {
             />{" "}
           </div>
           <div className="div-inputCrearEvento">
-            <label>{t('forms.statusLabel')}</label>
+            <label>{t("forms.statusLabel")}</label>
             <select
               className="inputCrearEvento"
               name="status"
@@ -367,7 +374,7 @@ const FormularioCrearEvento = () => {
             </select>
           </div>
           <div className="div-inputCrearEvento">
-            <label>{t('forms.image')}</label>
+            <label>{t("forms.image")}</label>
 
             <SubirImagen
               register={register}
@@ -385,20 +392,20 @@ const FormularioCrearEvento = () => {
           <div className="margin-boton">
             <Button
               type="button"
-              text={t('buttons.cancel')}
+              text={t("buttons.cancel")}
               variant="medium"
               onClick={handleIcon}
             />
             <Button
               type="button"
-              text={t('buttons.saveDraft')}
+              text={t("buttons.saveDraft")}
               variant="medium"
               isSubmitting={isSubmitting}
-              onClick={() => submitWithStatus("draft", t('buttons.saveDraft'))}
+              onClick={() => submitWithStatus("draft", t("buttons.saveDraft"))}
             />
             <Button
               type="submit"
-              text={t('buttons.submitEvent')}
+              text={t("buttons.submitEvent")}
               variant="medium"
               isSubmitting={isSubmitting}
             />
