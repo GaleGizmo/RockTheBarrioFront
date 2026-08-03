@@ -28,7 +28,9 @@ const EventoEdicion = ({ evento, navigate }) => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [pendingData, setPendingData] = useState(null);
   const [pendingAction, setPendingAction] = useState(null);
+  const [pendingShouldPublish, setPendingShouldPublish] = useState(false);
   const isDraft = evento.status === "draft";
+  const shouldRequirePublishedFields = !isDraft || doPublish;
   const {
     register,
     handleSubmit,
@@ -101,9 +103,18 @@ const EventoEdicion = ({ evento, navigate }) => {
   };
 
   const handleSave = (data) => {
+    const shouldPublish = Boolean(data.publish);
+    if (shouldPublish) {
+      data.status = "Ok";
+      const contentText = typeof data.content === "string" ? data.content.trim() : "";
+      if (!contentText) {
+        data.content = t("forms.defaultEventInfo");
+      }
+    }
     const editedEvento = prepareData(data, evento);
     setPendingData(editedEvento);
     setPendingAction("save");
+    setPendingShouldPublish(shouldPublish);
     setShowConfirmModal(true);
   };
   const handleClone = (data) => {
@@ -113,12 +124,13 @@ const EventoEdicion = ({ evento, navigate }) => {
     const editedEvento = prepareData(data, evento);
     setPendingData(editedEvento);
     setPendingAction("clone");
+    setPendingShouldPublish(false);
     setShowConfirmModal(true);
   };
   const handleConfirm = () => {
     setShowConfirmModal(false);
     setIsSubmitting(true);
-    if (pendingAction === "clone" || pendingData.publish) {
+    if (pendingAction === "clone" || pendingShouldPublish) {
       dispatch(addEvento(pendingData, navigate, { user: evento.user_creator }));
     } else {
       dispatch(editEvento(evento._id, pendingData, navigate));
@@ -205,7 +217,7 @@ const EventoEdicion = ({ evento, navigate }) => {
             name="artist"
             defaultValue={evento.artist}
             onChange={handleInputChange}
-            {...register("artist", { required: !isDraft })}
+            {...register("artist", { required: shouldRequirePublishedFields })}
           />
           {errors.artist && <span>{t('forms.artistRequired')}</span>}
         </div>
@@ -218,7 +230,7 @@ const EventoEdicion = ({ evento, navigate }) => {
             addLocalizacion={addLocalizacion}
           />
           <input
-            {...register("site", { required: !isDraft })}
+            {...register("site", { required: shouldRequirePublishedFields })}
             tabIndex={-1}
             aria-hidden="true"
             style={{ opacity: 0, height: 0, width: 0, position: "absolute", pointerEvents: "none" }}
@@ -255,7 +267,7 @@ const EventoEdicion = ({ evento, navigate }) => {
             min="0"
             step="any"
             onChange={handleInputChange}
-            {...register("price", { required: !isDraft })}
+            {...register("price", { required: shouldRequirePublishedFields })}
           />
           {errors.price && <span>{t('forms.priceRequired')}</span>}
         </div>
@@ -289,7 +301,7 @@ const EventoEdicion = ({ evento, navigate }) => {
             name="day_start"
             defaultValue={evento.date_start.slice(0, 10)}
             onChange={handleInputChange}
-            {...register("day_start", { required: !isDraft })}
+            {...register("day_start", { required: shouldRequirePublishedFields })}
           />
           {errors.date_start && <span>{t('forms.dateRequired')}</span>}
         </div>
@@ -301,7 +313,7 @@ const EventoEdicion = ({ evento, navigate }) => {
             name="time_start"
             defaultValue={adjustTime(evento.date_start)}
             onChange={handleInputChange}
-            {...register("time_start", { required: !isDraft })}
+            {...register("time_start", { required: shouldRequirePublishedFields })}
           />
           {errors.time_start && <span>{t('forms.timeRequired')}</span>}
         </div>
@@ -391,8 +403,25 @@ const EventoEdicion = ({ evento, navigate }) => {
               type="checkbox"
               name="publish"
               defaultChecked={doPublish}
-              onChange={() => setDoPublish(!doPublish)}
-              {...register("publish")}
+              {...register("publish", {
+                onChange: (e) => {
+                  const checked = e.target.checked;
+                  setDoPublish(checked);
+                  if (checked) {
+                    setValue("status", "Ok", {
+                      shouldValidate: true,
+                      shouldDirty: true,
+                      shouldTouch: true,
+                    });
+                  } else {
+                    setValue("status", "draft", {
+                      shouldValidate: true,
+                      shouldDirty: true,
+                      shouldTouch: true,
+                    });
+                  }
+                },
+              })}
             />
           </div>
         )}

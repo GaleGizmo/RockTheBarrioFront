@@ -141,7 +141,6 @@ const addEvento = (eventoData, navigate, userId) => async (dispatch) => {
       navigate("/");
       return Promise.resolve(addedDraft);
     } else {
-      
       const resultado = await APIIMAGES.post("/evento", formData, getToken());
 
       dispatch({ type: "ADD_EVENTO", contenido: resultado.data });
@@ -159,10 +158,10 @@ const addEvento = (eventoData, navigate, userId) => async (dispatch) => {
 const editEvento = (id, eventoData, navigate) => {
   return async (dispatch) => {
     dispatch({ type: "LOADING_EVENTOS" });
-    
+
     try {
       const formData = createFormData(eventoData);
-      
+
       let resultado;
       if (eventoData.status === "draft") {
         resultado = await editBorrador(id, formData);
