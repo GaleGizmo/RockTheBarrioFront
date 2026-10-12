@@ -32,7 +32,6 @@ const sendEventosDiarios = () => async (dispatch) => {
   try {
     clearMensajes();
     const response = await sendDiarios();
-    console.log("sendEventosDiarios response", response);
     dispatch({ type: "EVENTOS_ENVIADOS", contenido: response.data.message });
   } catch (error) {
     dispatch({ type: "ERROR_EVENTO", contenido: error.response.message });
@@ -71,6 +70,17 @@ const getBorradoresAction = () => async (dispatch) => {
   try {
     const resultado = await getBorradores();
     dispatch({ type: "GET_BORRADORES", contenido: resultado });
+  } catch (error) {
+    dispatch({ type: "ERROR_EVENTO", contenido: error.message });
+  }
+};
+const deleteBorradorAction = (eventoId, navigate) => async (dispatch) => {
+  dispatch({ type: "LOADING_EVENTOS" });
+  console.log("eliminar borrador "+eventoId)
+  try {
+    await API.delete(`/borrador/${eventoId}`, getToken());
+    dispatch({ type: "DELETE_BORRADOR", contenido: eventoId });
+    navigate("/");
   } catch (error) {
     dispatch({ type: "ERROR_EVENTO", contenido: error.message });
   }
@@ -249,4 +259,5 @@ export {
   setFiltroActivo,
   setFiltradosFromCalendar,
   getBorradorById,
+  deleteBorradorAction,
 };

@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import "../Evento/Evento.css";
+import "./Borrador.css";
 import { useNavigate } from "react-router-dom";
 import { BsClockFill } from "react-icons/bs";
+import { useDispatch } from "react-redux";
 import { format, parseISO } from "date-fns";
 import { gl } from "date-fns/locale";
 import { es } from "date-fns/locale";
@@ -11,17 +13,19 @@ import { isLongTitle } from "../../utils/textUtils";
 import { AiFillEuroCircle } from "react-icons/ai";
 import { FaMusic } from "react-icons/fa";
 import MapComponent from "../MapComponent/MapComponent";
-import EventoEdicion from "../EventoEdicion/EventoEdicion";
 import { handleImageError } from "../../utils/imageHelpers";
 import { useTranslation } from "react-i18next";
 import { getLocalizedField } from "../../utils/localizedFields";
+import Button from "../Button/Button";
+import { deleteBorradorAction } from "../../redux/eventos/eventos.actions";
+import ConfirmModal from "../ConfirmModal/ConfirmModal";
 
 const Borrador = ({ borrador, user }) => {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [showMap, setShowMap] = useState(false);
   const [hovered, setHovered] = useState("");
   const [imageFailed, setImageFailed] = useState(false);
-
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleToggleMap = () => {
@@ -41,9 +45,29 @@ const Borrador = ({ borrador, user }) => {
   const editarBorrador = () => {
     navigate(`/editar-borrador/${borrador._id}`);
   };
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+  const eliminarEvento = (e) => {
+    e.stopPropagation();
+    setShowDeleteModal(true);
+  };
+  const handleDeleteConfirmed = (e) => {
+     e.stopPropagation();
+    dispatch(deleteBorradorAction(borrador._id, navigate));
+  };
 
   return (
     <div className={`card`} onClick={editarBorrador}>
+      <ConfirmModal
+        show={showDeleteModal}
+        title={t("detalles.deleteTitle")}
+        p1={t("detalles.deleteQuestion", { title: localizedTitle })}
+        p2={t("detalles.deleteWarning")}
+        buttonText={t("buttons.eliminate")}
+        deleteAccount={true}
+        onCancel={() => setShowDeleteModal(false)}
+        onConfirm={handleDeleteConfirmed}
+      />
       <div className="data-label_container">
         <div className="data-label_weekday">{fechaStart?.split(",")[0]}</div>
         <div className="data-label_day">{fechaStart?.split(",")[1]}</div>
@@ -116,7 +140,7 @@ const Borrador = ({ borrador, user }) => {
 
           {borrador.price == 0 && borrador.payWhatYouWant == false ? (
             <p className="evento-precio">
-              <span className="gratuito">GRATUITO</span>
+              <span className="gratuito">{t("events.free")}</span>
             </p>
           ) : borrador.price > 0 ? (
             <p className="evento-precio">
@@ -124,9 +148,11 @@ const Borrador = ({ borrador, user }) => {
               {borrador.price}€
             </p>
           ) : (
-            <p className="evento-precio">
-              <span className="gratuito">ENTRADA INVERSA</span>
-            </p>
+            -(
+              <p className="evento-precio">
+                <span className="gratuito"> {t("events.payWhatYouWant")}</span>
+              </p>
+            )
           )}
           {borrador.genre ? (
             <p className="evento-genre">
@@ -139,7 +165,13 @@ const Borrador = ({ borrador, user }) => {
           <div className="div_relleno"></div>
         </div>
       </div>
-
+      <div className="delete_button">
+        <Button
+          variant="medium delete-evento-button"
+          onClick={eliminarEvento}
+          text={t("buttons.eliminate")}
+        />
+      </div>
       {showMap && <MapComponent direccion={borrador.site} />}
     </div>
   );

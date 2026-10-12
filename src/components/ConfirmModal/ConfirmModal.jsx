@@ -3,10 +3,21 @@ import Button from "../../components/Button/Button";
 import "./ConfirmModal.css";
 import { useTranslation } from "react-i18next";
 
-const ConfirmModal = ({ show, onCancel, onConfirm, title, p1, p2,buttonText, deleteAccount }) => {
+const ConfirmModal = ({
+  show,
+  onCancel,
+  onConfirm,
+  title,
+  p1,
+  p2,
+  buttonText,
+  deleteAccount,
+}) => {
   const { t } = useTranslation();
-  let buttonClass=""
-  deleteAccount ? buttonClass="medium delete-account-button":buttonClass="medium"
+  let buttonClass = "";
+  deleteAccount
+    ? (buttonClass = "medium delete-account-button")
+    : (buttonClass = "medium");
   return (
     <>
       {show && (
@@ -18,17 +29,26 @@ const ConfirmModal = ({ show, onCancel, onConfirm, title, p1, p2,buttonText, del
       >
         <div className="modal-dialog modal-dialog-centered ">
           <div className="modal-content estilo-modal">
-            <div className="modal-header custom-header" >
-              <h5 className="modal-title" >{title}</h5>
-             
+            <div className="modal-header custom-header">
+              <h5 className="modal-title">{title}</h5>
             </div>
             <div className="modal-body text-center">
-             <p> {p1}</p>
-             <p> {p2}</p>
+              <p> {p1}</p>
+              <p> {p2}</p>
             </div>
             <div className="modal-footer justify-content-center">
-              {onCancel && <Button text={t('buttons.cancel')} variant="medium" onClick={onCancel} />}
-              <Button text={buttonText} variant={buttonClass} onClick={onConfirm} />
+              {onCancel && (
+                <Button
+                  text={t("buttons.cancel")}
+                  variant="medium"
+                  onClick={onCancel}
+                />
+              )}
+              <Button
+                text={buttonText}
+                variant={buttonClass}
+                onClick={onConfirm}
+              />
             </div>
           </div>
         </div>
