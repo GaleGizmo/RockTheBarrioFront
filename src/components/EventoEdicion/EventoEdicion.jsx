@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addEvento, editEvento } from "../../redux/eventos/eventos.actions";
 import SubirImagen from "../SubirImagen/SubirImagen";
 import Button from "../Button/Button";
@@ -20,6 +20,7 @@ import { useTranslation } from "react-i18next";
 import { getLocalizedField, updateLocalizedField } from "../../utils/localizedFields";
 
 const EventoEdicion = ({ evento, navigate }) => {
+  const { user } = useSelector((state) => state.usuariosReducer);
   const dispatch = useDispatch();
   const { t, i18n } = useTranslation();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -131,7 +132,7 @@ const EventoEdicion = ({ evento, navigate }) => {
     setShowConfirmModal(false);
     setIsSubmitting(true);
     if (pendingAction === "clone" || pendingShouldPublish) {
-      dispatch(addEvento(pendingData, navigate, { user: evento.user_creator }));
+      dispatch(addEvento(pendingData, navigate, { user: user._id }));
     } else {
       dispatch(editEvento(evento._id, pendingData, navigate));
     }
